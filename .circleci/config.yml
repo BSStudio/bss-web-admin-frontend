@@ -1,0 +1,115 @@
+version: 2
+jobs:
+  lint:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:16
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v2-dependencies-
+      - run:
+          name: Install local dependencies
+          command: npm install
+      - save_cache:
+          key: v2-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Lint project
+          command: npm run lint
+  build:
+    working_directory: ~/project
+    docker:
+      - image: docker:20.10.12-git
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=app -t app .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
+  test:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:16-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v3-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v3-dependencies-
+      - run:
+          name: Install local dependencies
+          command: npm install
+      - save_cache:
+          key: v3-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Testing
+          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --reporters=junit,coverage
+      - store_test_results:
+          name: Store test results
+          path: ~/project/reports
+      - store_artifacts:
+          name: Store covarage report
+          path: ~/project/coverage/bss-web
+  e2e:
+    working_directory: ~/project
+    docker:
+      - image: mcr.microsoft.com/playwright:focal
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v5-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v5-dependencies-
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: v5-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Install browsers
+          command: npx playwright install
+      - run:
+          name: Run e2e test
+          command: npm run test --workspace=e2e -- --reporter=junit,html
+          environment:
+            PLAYWRIGHT_JUNIT_OUTPUT_NAME: reports/results.xml
+      - store_test_results:
+          name: Store test results
+          path: ~/project/e2e/reports
+      - store_artifacts:
+          path: ~/project/e2e/playwright-report
+workflows:
+  version: 2
+  all:
+    jobs:
+      - lint
+      - build
+      - test

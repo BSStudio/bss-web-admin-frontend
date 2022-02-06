@@ -9,6 +9,7 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
+      require('karma-junit-reporter'),
       require('karma-coverage'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
@@ -24,8 +25,13 @@ module.exports = function (config) {
     jasmineHtmlReporter: {
       suppressAll: true // removes the duplicated traces
     },
+    junitReporter: {
+      outputDir: 'reports',
+      outputFile: 'junit.xml',
+      useBrowserName: false,
+    },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/bss-web-admin-frontend'),
+      dir: require('path').join(__dirname, './coverage/bss-web'),
       subdir: '.',
       reporters: [
         { type: 'html' },
@@ -38,6 +44,12 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeHeadlessCI: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     singleRun: false,
     restartOnFileChange: true
   });
