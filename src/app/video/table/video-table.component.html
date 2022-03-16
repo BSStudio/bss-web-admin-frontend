@@ -1,0 +1,27 @@
+<ibm-table-container>
+  <ibm-table-header>
+    <h3>Videók</h3>
+  </ibm-table-header>
+  <ibm-table-toolbar size="md" [model]="model">
+    <ibm-table-toolbar-actions>
+      <button ibmButton="primary" (click)="changeVisibilityTo(false)">Hide</button>
+      <button ibmButton="primary" (click)="changeVisibilityTo(true)">Unhide</button>
+    </ibm-table-toolbar-actions>
+    <ibm-table-toolbar-content>
+      <button ibmButton="primary">
+        Add new video
+        <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+      </button>
+    </ibm-table-toolbar-content>
+  </ibm-table-toolbar>
+  <ibm-table
+    [model]="model"
+    [sortable]="true"
+    size="sh"
+    [showSelectionColumn]="true"
+    [striped]="false"
+    (rowClick)="onRowClick($event)"
+  ></ibm-table>
+  <ng-template></ng-template>
+  <ibm-pagination [model]="model" (selectPage)="onPageSelect($event)"></ibm-pagination>
+</ibm-table-container>

@@ -1,0 +1,10 @@
+<ibm-modal [open]="visible">
+  <ibm-modal-header>
+    <h3 ibmModalHeaderHeading>{{ addVideoText }}</h3>
+  </ibm-modal-header>
+  <section ibmModalContent [hasForm]="true">
+    <ibm-label>Cím <input ibmText [(ngModel)]="title" /></ibm-label>
+    <ibm-label>Url <input ibmText [(ngModel)]="url" /></ibm-label>
+  </section>
+  <ibm-modal-footer> <button ibmButton="primary" (click)="create()">Létrehozás</button> </ibm-modal-footer>
+</ibm-modal>

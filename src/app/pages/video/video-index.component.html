@@ -1,20 +1,2 @@
-<ibm-table-container>
-  <ibm-table-header>
-    <h3>Videók</h3>
-  </ibm-table-header>
-  <ibm-table-toolbar size="md">
-    <ibm-table-toolbar-content>
-      <button ibmButton="primary">
-        Add new video
-        <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
-      </button>
-    </ibm-table-toolbar-content>
-  </ibm-table-toolbar>
-  <ibm-table
-    [model]="model"
-    [showSelectionColumn]="false"
-    [sortable]="false"
-    [stickyHeader]="true"
-    [striped]="false"
-  ></ibm-table>
-</ibm-table-container>
+<app-video-table></app-video-table>
+<app-create-video-modal></app-create-video-modal>

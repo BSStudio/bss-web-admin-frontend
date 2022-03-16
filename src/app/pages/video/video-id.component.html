@@ -1,1 +1,36 @@
-{{ videoId | async }}
+<h1>Update video</h1>
+<button ibmButton="danger">
+  Remove
+  <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+</button>
+<form [formGroup]="videoForm">
+  <ibm-label>
+    Url:
+    <input ibmText formControlName="url" />
+  </ibm-label>
+  <ibm-label>
+    Title:
+    <input ibmText />
+  </ibm-label>
+  <ibm-label>
+    Description:
+    <input ibmText />
+  </ibm-label>
+  <ibm-label>
+    Video URL:
+    <input ibmText />
+  </ibm-label>
+  <ibm-label>
+    Thumbnail URL:
+    <input ibmText />
+  </ibm-label>
+  <ibm-label>
+    Uploaded at:
+    <input ibmText />
+  </ibm-label>
+  <ibm-label>
+    Visible:
+    <ibm-toggle></ibm-toggle>
+  </ibm-label>
+  <button ibmButton="primary" type="submit">Submit</button>
+</form>
