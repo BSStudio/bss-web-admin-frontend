@@ -75,7 +75,8 @@
               "browserTarget": "bss-web-admin-frontend:build:production"
             },
             "development": {
-              "browserTarget": "bss-web-admin-frontend:build:development"
+              "browserTarget": "bss-web-admin-frontend:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
