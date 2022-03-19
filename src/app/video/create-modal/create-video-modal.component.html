@@ -1,10 +1,19 @@
-<ibm-modal [open]="visible">
-  <ibm-modal-header>
-    <h3 ibmModalHeaderHeading>{{ addVideoText }}</h3>
+<ibm-modal [open]="open" (overlaySelected)="closeModal()">
+  <ibm-modal-header (closeSelect)="closeModal()">
+    <h3 ibmModalHeaderHeading>{{ text.header }}</h3>
   </ibm-modal-header>
-  <section ibmModalContent [hasForm]="true">
-    <ibm-label>Cím <input ibmText [(ngModel)]="title" /></ibm-label>
-    <ibm-label>Url <input ibmText [(ngModel)]="url" /></ibm-label>
-  </section>
-  <ibm-modal-footer> <button ibmButton="primary" (click)="create()">Létrehozás</button> </ibm-modal-footer>
+  <form ibmModalContent [hasForm]="true" [formGroup]="createVideoForm">
+    <ibm-label [invalid]="createVideoForm.controls['title'].invalid">
+      {{ text.form.title.label }}
+      <input ibmText [placeholder]="text.form.title.placeholder" formControlName="title" />
+    </ibm-label>
+    <ibm-label [invalid]="createVideoForm.controls['url'].invalid" [helperText]="text.form.url.helper">
+      {{ text.form.url.label }}
+      <input ibmText [placeholder]="text.form.url.placeholder" formControlName="url" />
+    </ibm-label>
+  </form>
+  <ibm-modal-footer>
+    <button ibmButton="secondary" (click)="closeModal()">{{ text.cancelButton }}</button>
+    <button ibmButton="primary" (click)="onSubmit()">{{ text.addButton }}</button>
+  </ibm-modal-footer>
 </ibm-modal>

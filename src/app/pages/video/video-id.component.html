@@ -1,36 +1,36 @@
-<h1>Update video</h1>
-<button ibmButton="danger">
-  Remove
-  <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
-</button>
-<form [formGroup]="videoForm">
+<section class="top-section">
+  <h1>Update video</h1>
+  <button ibmButton="danger" size="sm" (click)="removeVideo()">
+    Remove
+    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+  </button>
+</section>
+<ibm-placeholder></ibm-placeholder>
+<form [formGroup]="videoForm" (ngSubmit)="updateVideo()">
   <ibm-label>
     Url:
     <input ibmText formControlName="url" />
   </ibm-label>
   <ibm-label>
     Title:
-    <input ibmText />
+    <input ibmText formControlName="title" />
   </ibm-label>
   <ibm-label>
     Description:
-    <input ibmText />
+    <input ibmTextArea formControlName="description" />
   </ibm-label>
   <ibm-label>
     Video URL:
-    <input ibmText />
+    <input ibmText formControlName="videoUrl" />
   </ibm-label>
   <ibm-label>
     Thumbnail URL:
-    <input ibmText />
+    <input ibmText formControlName="thumbnailUrl" />
   </ibm-label>
-  <ibm-label>
-    Uploaded at:
-    <input ibmText />
-  </ibm-label>
+  <ibm-date-picker-input label="Uploaded at:" formControlName="uploadedAt" type="single"> </ibm-date-picker-input>
   <ibm-label>
     Visible:
-    <ibm-toggle></ibm-toggle>
+    <ibm-toggle formControlName="visible"></ibm-toggle>
   </ibm-label>
   <button ibmButton="primary" type="submit">Submit</button>
 </form>

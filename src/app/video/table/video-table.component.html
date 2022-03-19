@@ -2,13 +2,23 @@
   <ibm-table-header>
     <h3>Videók</h3>
   </ibm-table-header>
-  <ibm-table-toolbar size="md" [model]="model">
+  <ibm-table-toolbar size="md" [model]="model" [cancelText]="{ CANCEL: text.cancel }">
     <ibm-table-toolbar-actions>
-      <button ibmButton="primary" (click)="changeVisibilityTo(false)">Hide</button>
-      <button ibmButton="primary" (click)="changeVisibilityTo(true)">Unhide</button>
+      <button ibmButton="primary" (click)="changeVisibilityTo(true)">
+        {{ text.unHideButton }}
+        <svg ibmIcon="view" size="16" class="bx--btn__icon"></svg>
+      </button>
+      <button ibmButton="primary" (click)="changeVisibilityTo(false)">
+        {{ text.hideButton }}
+        <svg ibmIcon="view--off--filled" size="16" class="bx--btn__icon"></svg>
+      </button>
     </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content>
-      <button ibmButton="primary">
+      <button ibmButton="secondary" [iconOnly]="true">
+        <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getVideos()"></svg>
+        <span class="bx--assistive-text">Refresh</span>
+      </button>
+      <button ibmButton="primary" (click)="showAddModal()">
         Add new video
         <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
       </button>
@@ -25,3 +35,4 @@
   <ng-template></ng-template>
   <ibm-pagination [model]="model" (selectPage)="onPageSelect($event)"></ibm-pagination>
 </ibm-table-container>
+<ibm-placeholder (close)="close()"></ibm-placeholder>

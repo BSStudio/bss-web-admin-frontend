@@ -8,6 +8,10 @@ const routes: Routes = [
     component: DefaultShellComponent,
     children: [
       {
+        path: '',
+        loadChildren: () => import('./pages/home/home.module').then(({ HomeModule }) => HomeModule),
+      },
+      {
         path: 'video',
         loadChildren: () => import('./pages/video/video.module').then(({ VideoModule }) => VideoModule),
       },

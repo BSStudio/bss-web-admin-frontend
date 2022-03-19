@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Video, VideoService } from '../service/video.service';
-import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
+import { VideoService } from '../service/video.service';
+import { IconService, ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Router } from '@angular/router';
+import { Video } from '../service/video.model';
+// @ts-ignore
+import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
+import { CreateVideoModalComponent } from '../create-modal/create-video-modal.component';
 
 export interface Pagination {
   page: number;
@@ -14,12 +18,25 @@ export interface Pagination {
   styleUrls: ['./video-table.component.scss'],
 })
 export class VideoTableComponent implements OnInit {
+  readonly text = {
+    hideButton: 'Kijelöltek elrejtése',
+    unHideButton: 'Kijelöltek megjelenítése',
+    cancel: 'Mégse',
+  };
   readonly model = new TableModel();
   private videos = new Array<Video>();
 
-  constructor(private service: VideoService, private router: Router) {}
+  constructor(
+    private service: VideoService,
+    private router: Router,
+    private iconService: IconService,
+    private modalService: ModalService
+  ) {}
 
   ngOnInit(): void {
+    this.iconService.register(Renew16);
+    this.iconService.register(View16);
+    this.iconService.register(ViewOffFilled16);
     this.model.header = [
       new TableHeaderItem({ data: 'Cím' }),
       new TableHeaderItem({ data: 'URL' }),
@@ -59,5 +76,13 @@ export class VideoTableComponent implements OnInit {
     this.service.changeVisibility(selected, visible).subscribe({
       next: () => this.getVideos(),
     });
+  }
+
+  showAddModal() {
+    this.modalService.create({ component: CreateVideoModalComponent });
+  }
+
+  close() {
+    console.log('closed');
   }
 }
