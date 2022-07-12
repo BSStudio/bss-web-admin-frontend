@@ -1,7 +1,7 @@
 import { VideoService } from '../service/video.service';
 import { Component, Input } from '@angular/core';
 import { BaseModal } from 'carbon-components-angular';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CreateVideo } from '../service/video.model';
 import { Router } from '@angular/router';
 
@@ -26,13 +26,13 @@ export class CreateVideoModalComponent extends BaseModal {
     cancelButton: 'Mégse',
     addButton: 'Létrehozás',
   };
-  readonly createVideoForm: FormGroup;
+  readonly createVideoForm: UntypedFormGroup;
 
   constructor(private videoService: VideoService, private router: Router) {
     super();
-    this.createVideoForm = new FormGroup({
-      title: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
-      url: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
+    this.createVideoForm = new UntypedFormGroup({
+      title: new UntypedFormControl('', { validators: [Validators.required], updateOn: 'blur' }),
+      url: new UntypedFormControl('', { validators: [Validators.required], updateOn: 'blur' }),
     });
   }
 

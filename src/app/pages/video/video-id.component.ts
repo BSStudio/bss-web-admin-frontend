@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../video/service/video.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { DetailedVideo } from '../../video/service/video.model';
 import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular';
 
@@ -26,7 +26,7 @@ export class VideoIdComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private service: VideoService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private modalService: ModalService
   ) {
     this.video = <DetailedVideo>this.route.snapshot.data['video'];
