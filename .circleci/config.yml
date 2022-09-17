@@ -23,7 +23,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: docker:20.10.17-git
+      - image: docker:20.10.18-git
     steps:
       - checkout
       - setup_remote_docker:
