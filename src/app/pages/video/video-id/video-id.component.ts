@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VideoService } from '../../../data/video/service/video.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertModalData, AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular';
 import { DetailedVideo, UpdateVideo } from '../../../data/video/model';
 
 @Component({
