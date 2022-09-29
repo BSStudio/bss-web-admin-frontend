@@ -1,19 +1,19 @@
 <ibm-modal [open]="open" (overlaySelected)="closeModal()">
   <ibm-modal-header (closeSelect)="closeModal()">
-    <h3 ibmModalHeaderHeading>{{ text.header }}</h3>
+    <h3 ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
   <form ibmModalContent [hasForm]="true" [formGroup]="createVideoForm">
-    <ibm-label [invalid]="createVideoForm.controls['title'].invalid">
-      {{ text.form.title.label }}
-      <input ibmText [placeholder]="text.form.title.placeholder" formControlName="title" />
+    <ibm-label>
+      Title
+      <input ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
     </ibm-label>
-    <ibm-label [invalid]="createVideoForm.controls['url'].invalid" [helperText]="text.form.url.helper">
-      {{ text.form.url.label }}
-      <input ibmText [placeholder]="text.form.url.placeholder" formControlName="url" />
+    <ibm-label helperText="The video will have the following url: https://bsstudio/video/dorm-interview-series-cats">
+      Url
+      <input ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button ibmButton="secondary" (click)="closeModal()">{{ text.cancelButton }}</button>
-    <button ibmButton="primary" (click)="onSubmit()">{{ text.addButton }}</button>
+    <button ibmButton="secondary" (click)="closeModal()">Cancel</button>
+    <button ibmButton="primary" (click)="onSubmit()">Add video</button>
   </ibm-modal-footer>
 </ibm-modal>

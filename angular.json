@@ -5,6 +5,12 @@
   "projects": {
     "bss-web-admin-frontend": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-UK",
+        "locales": {
+          "hu-HU": "src/locale/messages.hu.xlf"
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"

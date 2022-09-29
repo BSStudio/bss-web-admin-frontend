@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShellModule } from './shell/shell.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { IconModule, PlaceholderModule } from 'carbon-components-angular';
+import { httpInterceptorProviders } from './interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ShellModule, HttpClientModule],
+  providers: [httpInterceptorProviders],
+  imports: [BrowserModule, AppRoutingModule, ShellModule, HttpClientModule, IconModule, PlaceholderModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

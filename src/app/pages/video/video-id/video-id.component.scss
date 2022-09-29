@@ -1,0 +1,31 @@
+@import "@carbon/elements/scss/layout";
+
+:host {
+  display: grid;
+  margin: $layout-01 $fluid-spacing-02;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    button {
+      display: inline;
+    }
+  }
+
+  form {
+    display: grid;
+    grid-gap: $spacing-04;
+    grid-template-columns: repeat(2, minmax(min-content, 300px));
+    place-content: center;
+    margin-top: $layout-02;
+    .wide {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    button {
+      justify-self: end;
+      align-self: end;
+    }
+  }
+}

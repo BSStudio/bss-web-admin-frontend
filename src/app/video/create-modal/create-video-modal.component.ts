@@ -1,51 +1,41 @@
-import { VideoService } from '../service/video.service';
-import { Component, Input } from '@angular/core';
+import { VideoService } from '../../data/video/service/video.service';
+import { Component } from '@angular/core';
 import { BaseModal } from 'carbon-components-angular';
-import { FormBuilder, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { CreateVideo } from '../service/video.model';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CreateVideo } from '../../data/video/model';
 
 @Component({
   selector: 'app-create-video-modal',
   templateUrl: './create-video-modal.component.html',
 })
 export class CreateVideoModalComponent extends BaseModal {
-  readonly text = {
-    header: 'Videó létrehozása',
-    form: {
-      title: {
-        label: 'Videó címe',
-        placeholder: 'Szobakommandó',
-      },
-      url: {
-        helper: 'Ezen az url-en keresztül lesz elérhető a videó. Pl: https://bsstudio.hu/video/szobakommando-bss',
-        label: 'Leíró URL',
-        placeholder: 'szobakommando-bss',
-      },
-    },
-    cancelButton: 'Mégse',
-    addButton: 'Létrehozás',
-  };
-  readonly createVideoForm: UntypedFormGroup;
+  public readonly createVideoForm: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>;
 
-  constructor(private videoService: VideoService, private router: Router) {
+  constructor(private videoService: VideoService, private router: Router, private fb: FormBuilder) {
     super();
-    this.createVideoForm = new UntypedFormGroup({
-      title: new UntypedFormControl('', { validators: [Validators.required], updateOn: 'blur' }),
-      url: new UntypedFormControl('', { validators: [Validators.required], updateOn: 'blur' }),
+    this.createVideoForm = fb.nonNullable.group<CreateVideo>({
+      title: '',
+      url: '',
     });
   }
 
   onSubmit() {
-    if (this.createVideoForm.valid) {
-      this.createVideo();
+    const { url, title } = this.createVideoForm.value;
+    if (this.createVideoForm.valid && url && title) {
+      this.createVideo({ url, title });
     }
   }
 
-  private createVideo() {
-    const createVideo = this.createVideoForm.getRawValue() as CreateVideo;
-    this.videoService.createVideo(createVideo).subscribe({
-      next: ({ id }) => this.router.navigate(['/video', id]),
-    });
+  private createVideo(createVideo: CreateVideo) {
+    this.videoService
+      .createVideo(createVideo) //
+      .subscribe({
+        next: async ({ id }) => {
+          this.close.emit(true);
+          await this.router.navigate(['/video', id]);
+        },
+        error: (err) => console.error(err),
+      });
   }
 }

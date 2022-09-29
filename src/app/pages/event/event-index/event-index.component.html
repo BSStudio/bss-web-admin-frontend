@@ -1,0 +1,1 @@
+<h1>Event manager</h1>

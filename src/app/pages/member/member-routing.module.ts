@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
-import { MemberIndexComponent } from './member-index.component';
-import { MemberIdComponent } from './member-id.component';
+import { MemberIndexComponent } from './member-index/member-index.component';
+import { MemberIdComponent } from './member-id/member-id.component';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [

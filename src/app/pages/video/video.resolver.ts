@@ -1,8 +1,8 @@
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { DetailedVideo } from '../../video/service/video.model';
-import { VideoService } from '../../video/service/video.service';
+import { VideoService } from '../../data/video/service/video.service';
 import { throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { DetailedVideo } from '../../data/video/model';
 
 @Injectable({
   providedIn: 'root',

@@ -7,12 +7,11 @@ import { NavigationItem } from 'carbon-components-angular';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  title = 'web-admin';
   hasHamburger = false;
   navigationItems: NavigationItem[] = [
-    { content: 'Videók', type: 'item', route: ['video'] },
-    { content: 'Események', type: 'item', route: ['event'] },
-    { content: 'Tagok', type: 'item', route: ['member'] },
+    { content: $localize`Videos`, type: 'item', route: ['video'] },
+    { content: $localize`Events`, type: 'item', route: ['event'] },
+    { content: $localize`Members`, type: 'item', route: ['member'] },
   ];
 
   public toggleHamburger() {

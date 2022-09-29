@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoService } from '../service/video.service';
-import { IconService, ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
+import { VideoService } from '../../data/video/service/video.service';
+import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Router } from '@angular/router';
-import { Video } from '../service/video.model';
-// @ts-ignore
-import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
 import { CreateVideoModalComponent } from '../create-modal/create-video-modal.component';
+import { Video } from '../../data/video/model';
 
 export interface Pagination {
   page: number;
@@ -18,30 +16,17 @@ export interface Pagination {
   styleUrls: ['./video-table.component.scss'],
 })
 export class VideoTableComponent implements OnInit {
-  readonly text = {
-    hideButton: 'Kijelöltek elrejtése',
-    unHideButton: 'Kijelöltek megjelenítése',
-    cancel: 'Mégse',
-  };
   readonly model = new TableModel();
   private videos = new Array<Video>();
 
-  constructor(
-    private service: VideoService,
-    private router: Router,
-    private iconService: IconService,
-    private modalService: ModalService
-  ) {}
+  constructor(private service: VideoService, private router: Router, private modalService: ModalService) {}
 
   ngOnInit(): void {
-    this.iconService.register(Renew16);
-    this.iconService.register(View16);
-    this.iconService.register(ViewOffFilled16);
     this.model.header = [
-      new TableHeaderItem({ data: 'Cím' }),
+      new TableHeaderItem({ data: 'Title' }),
       new TableHeaderItem({ data: 'URL' }),
-      new TableHeaderItem({ data: 'Feltöltés dátuma' }),
-      new TableHeaderItem({ data: 'Látható' }),
+      new TableHeaderItem({ data: 'Upload date' }),
+      new TableHeaderItem({ data: 'Visible' }),
     ];
     this.getVideos();
   }
@@ -59,12 +44,12 @@ export class VideoTableComponent implements OnInit {
   getVideos() {
     return this.service.getVideos(this.model.currentPage - 1, this.model.pageLength).subscribe({
       next: (res) => {
-        this.videos = res.data;
-        this.model.data = res.data.map((video) => [
+        this.videos = res.content;
+        this.model.data = this.videos.map((video) => [
           new TableItem({ data: video.title }),
           new TableItem({ data: video.url }),
           new TableItem({ data: video.uploadedAt }),
-          new TableItem({ data: video.visible ? 'igen' : 'nem' }),
+          new TableItem({ data: video.visible }),
         ]);
         this.model.totalDataLength = res.totalElements;
       },

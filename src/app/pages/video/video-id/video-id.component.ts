@@ -1,45 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VideoService } from '../../video/service/video.service';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
-import { DetailedVideo } from '../../video/service/video.model';
-import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular';
+import { VideoService } from '../../../data/video/service/video.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertModalData, AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular';
+import { DetailedVideo, UpdateVideo } from '../../../data/video/model';
 
 @Component({
   selector: 'app-video-id',
   templateUrl: './video-id.component.html',
   styleUrls: ['./video-id.component.scss'],
 })
-export class VideoIdComponent implements OnInit {
+export class VideoIdComponent {
   public video: DetailedVideo;
-  public videoForm = this.fb.group({
-    url: ['', Validators.required],
-    title: ['', Validators.required],
-    description: [''],
-    videoUrl: [''],
-    thumbnailUrl: [''],
-    uploadedAt: ['', Validators.required],
-    visible: ['', Validators.required],
-  });
+  public videoForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private service: VideoService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private modalService: ModalService
   ) {
     this.video = <DetailedVideo>this.route.snapshot.data['video'];
-  }
-
-  ngOnInit(): void {
-    const { id, crew, ...rest } = this.video;
-    this.videoForm.setValue(rest);
+    const { id, crew, ...modifiableValues } = this.video;
+    this.videoForm = this.fb.group<UpdateVideo>(modifiableValues);
   }
 
   public updateVideo() {
-    if (!this.video) return;
-    this.service.updateVideo(this.video.id, this.videoForm.getRawValue()).subscribe();
+    const { url, videoUrl, title, thumbnailUrl, visible, uploadedAt, description } = this.videoForm.value;
+    if (!this.videoForm.valid) {
+      return;
+    }
+    this.service
+      .updateVideo(this.video.id, { url, videoUrl, title, thumbnailUrl, visible, uploadedAt, description })
+      .subscribe();
   }
 
   public removeVideo() {

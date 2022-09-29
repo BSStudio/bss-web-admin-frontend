@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
-import { VideoIndexComponent } from './video-index.component';
-import { VideoIdComponent } from './video-id.component';
+import { VideoIndexComponent } from './video-index/video-index.component';
+import { VideoIdComponent } from './video-id/video-id.component';
 import { NgModule } from '@angular/core';
 import { VideoResolver } from './video.resolver';
 
