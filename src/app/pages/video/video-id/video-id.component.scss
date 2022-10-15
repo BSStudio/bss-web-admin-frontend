@@ -1,7 +1,7 @@
 @import "@carbon/elements/scss/layout";
 
 :host {
-  display: grid;
+  display: block;
   margin: $layout-01 $fluid-spacing-02;
 
   section {
@@ -17,7 +17,6 @@
     display: grid;
     grid-gap: $spacing-04;
     grid-template-columns: repeat(2, minmax(min-content, 300px));
-    place-content: center;
     margin-top: $layout-02;
     .wide {
       grid-column-start: 1;
