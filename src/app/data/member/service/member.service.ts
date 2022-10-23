@@ -1,6 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CreateMember, Member, UpdateMember } from '../model/update-member.model';
+import { HttpClient } from '@angular/common/http';
+import { Member } from '../model/member.model';
+import { CreateMember } from '../model/create-member.model';
+import { UpdateMember } from '../model/update-member.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class MemberService {
   constructor(private http: HttpClient) {}
 

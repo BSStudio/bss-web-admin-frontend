@@ -2,6 +2,20 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="8510110714273600559" datatype="html">
+        <source>true</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/@shared/boolean-pipe.pipe.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1444040760165348386" datatype="html">
+        <source>false</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/@shared/boolean-pipe.pipe.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6297950127540572260" datatype="html">
         <source>Member</source>
         <context-group purpose="location">
@@ -56,7 +70,11 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.ts</context>
-          <context context-type="linenumber">59</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1731594811396701423" datatype="html">
@@ -113,7 +131,7 @@
         <source>Refresh</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.html</context>
-          <context context-type="linenumber">7</context>
+          <context context-type="linenumber">7,8</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/video/table/video-table.component.html</context>
@@ -124,28 +142,44 @@
         <source>URL</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.ts</context>
-          <context context-type="linenumber">60</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5611592591303869712" datatype="html">
         <source>Status</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.ts</context>
-          <context context-type="linenumber">61</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="4145496584631696119" datatype="html">
         <source>Role</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.ts</context>
-          <context context-type="linenumber">62</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1562584780596394495" datatype="html">
         <source>Archived</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/member/table/member-table.component.ts</context>
-          <context context-type="linenumber">63</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8936704404804793618" datatype="html">
@@ -177,6 +211,10 @@
           <context context-type="linenumber">11</context>
         </context-group>
         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
           <context context-type="sourcefile">src/app/shell/header/header.component.ts</context>
           <context context-type="linenumber">14</context>
         </context-group>
@@ -193,6 +231,94 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/home/home.component.html</context>
           <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3594562357459792252" datatype="html">
+        <source>Update member</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8485665425556786941" datatype="html">
+        <source>Profile picture URL</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2807800733729323332" datatype="html">
+        <source>Yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1829779471067775299" datatype="html">
+        <source>Profile updated</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5568565942121403841" datatype="html">
+        <source>Changes were saved</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5312920202255242319" datatype="html">
+        <source>Remove member</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7306118999544619776" datatype="html">
+        <source>Are you sure you want to remove this member?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.ts</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3713504010399348091" datatype="html">
+        <source>Error removing member <x id="PH" equiv-text="this.member.name"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/member/member-id/member-id.component.ts</context>
+          <context context-type="linenumber">79</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2777623198411668878" datatype="html">
@@ -231,67 +357,60 @@
           <context context-type="linenumber">2,3</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4814285799071780083" datatype="html">
-        <source>Remove</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-      </trans-unit>
       <trans-unit id="2517309683610083249" datatype="html">
         <source>Title:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">11</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8598886608217248074" datatype="html">
         <source>URL:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit>
       <trans-unit id="754458703925559980" datatype="html">
         <source>Video URL:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">19</context>
+          <context context-type="linenumber">18</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2297593363061209805" datatype="html">
         <source>Thumbnail URL:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3475972414706488563" datatype="html">
         <source>Visible:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="linenumber">26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6996799422725544865" datatype="html">
         <source>Description:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">31</context>
+          <context context-type="linenumber">30</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7820305354448076575" datatype="html">
         <source>Uploaded at:</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">35,36</context>
+          <context context-type="linenumber">34,35</context>
         </context-group>
       </trans-unit>
       <trans-unit id="935187492052582731" datatype="html">
         <source>Submit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/video/video-id/video-id.component.html</context>
-          <context context-type="linenumber">40,41</context>
+          <context context-type="linenumber">39,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6525031038574946416" datatype="html">

@@ -6,9 +6,9 @@
     "bss-web-admin-frontend": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "en-UK",
+        "sourceLocale": "en",
         "locales": {
-          "hu-HU": "src/locale/messages.hu.xlf"
+          "hu": "src/locale/messages.hu.xlf"
         }
       },
       "schematics": {
@@ -39,6 +39,10 @@
             "styles": [
               "src/styles.scss"
             ],
+            "localize": [
+              "en",
+              "hu"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -64,6 +68,7 @@
               "outputHashing": "all"
             },
             "development": {
+              "localize": ["hu"],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,

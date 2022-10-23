@@ -2,10 +2,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MemberIndexComponent } from './member-index/member-index.component';
 import { MemberIdComponent } from './member-id/member-id.component';
 import { NgModule } from '@angular/core';
+import { MemberResolver } from './member.resolver';
 
 const routes: Routes = [
   { path: '', component: MemberIndexComponent },
-  { path: ':memberId', component: MemberIdComponent },
+  { path: ':memberId', resolve: { member: MemberResolver }, component: MemberIdComponent },
 ];
 
 @NgModule({

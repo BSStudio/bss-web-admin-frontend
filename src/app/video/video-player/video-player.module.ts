@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { VideoPlayerComponent } from './video-player.component';
+import { VideoPlayerDirective } from './video-player.directive';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [VideoPlayerComponent],
-  exports: [VideoPlayerComponent],
+  declarations: [VideoPlayerDirective],
+  exports: [VideoPlayerDirective],
 })
 export class VideoPlayerModule {}

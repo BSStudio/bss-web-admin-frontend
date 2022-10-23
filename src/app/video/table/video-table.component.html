@@ -2,21 +2,21 @@
   <ibm-table-toolbar size="md" [model]="model">
     <ibm-table-toolbar-actions>
       <button ibmButton="primary" (click)="changeVisibilityTo(true)">
-        Reveal selected
+        <ng-container i18n>Reveal selected</ng-container>
         <svg ibmIcon="view" size="16" class="bx--btn__icon"></svg>
       </button>
       <button ibmButton="primary" (click)="changeVisibilityTo(false)">
-        Hide selected
+        <ng-container i18n>Hide selected</ng-container>
         <svg ibmIcon="view--off--filled" size="16" class="bx--btn__icon"></svg>
       </button>
     </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content>
       <button ibmButton="secondary" [iconOnly]="true">
         <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getVideos()"></svg>
-        <span class="bx--assistive-text">Refresh</span>
+        <span i18n class="bx--assistive-text">Refresh</span>
       </button>
       <button ibmButton="primary" (click)="showAddModal()">
-        Add new video
+        <ng-container i18n>Add new video</ng-container>
         <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
       </button>
     </ibm-table-toolbar-content>
@@ -29,6 +29,5 @@
     [striped]="false"
     (rowClick)="onRowClick($event)"
   ></ibm-table>
-  <ng-template></ng-template>
   <ibm-pagination [model]="model" (selectPage)="onPageSelect($event)"></ibm-pagination>
 </ibm-table-container>

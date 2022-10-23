@@ -4,7 +4,7 @@ import { VideoRoutingModule } from './video-routing.module';
 import { VideoIdComponent } from './video-id/video-id.component';
 import { CreateVideoModalModule } from '../../video/create-modal/create-video-modal.module';
 import { VideoTableModule } from '../../video/table/video-table.module';
-import { DatePickerInputModule, NFormsModule, PlaceholderModule } from 'carbon-components-angular';
+import { DatePickerInputModule, IconModule, NFormsModule } from 'carbon-components-angular';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     VideoTableModule,
     NFormsModule,
     ReactiveFormsModule,
-    PlaceholderModule,
     DatePickerInputModule,
+    IconModule,
   ],
   declarations: [VideoIndexComponent, VideoIdComponent],
 })

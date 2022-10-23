@@ -1,19 +1,22 @@
 <ibm-modal [open]="open" (overlaySelected)="closeModal()">
   <ibm-modal-header (closeSelect)="closeModal()">
-    <h3 ibmModalHeaderHeading>Add new video</h3>
+    <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
   <form ibmModalContent [hasForm]="true" [formGroup]="createVideoForm">
     <ibm-label>
-      Title
-      <input ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
+      <ng-container i18n>Title</ng-container>
+      <input i18n-placeholder ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
     </ibm-label>
-    <ibm-label helperText="The video will have the following url: https://bsstudio/video/dorm-interview-series-cats">
-      Url
-      <input ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
+    <ibm-label
+      i18n-helperText
+      helperText="The video will have the following url: https://bsstudio/video/dorm-interview-series-cats"
+    >
+      <ng-container i18n>Url</ng-container>
+      <input i18n-placeholder ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button ibmButton="secondary" (click)="closeModal()">Cancel</button>
-    <button ibmButton="primary" (click)="onSubmit()">Add video</button>
+    <button i18n ibmButton="secondary" (click)="closeModal()">Cancel</button>
+    <button i18n ibmButton="primary" (click)="onSubmit()">Add video</button>
   </ibm-modal-footer>
 </ibm-modal>

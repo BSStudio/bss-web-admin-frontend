@@ -1,0 +1,11 @@
+@import "@carbon/elements/scss/layout";
+
+:host {
+  display: block;
+  margin: $layout-01 $fluid-spacing-02;
+
+  form {
+    display: grid;
+    gap: $spacing-04;
+  }
+}

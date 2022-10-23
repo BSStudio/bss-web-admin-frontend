@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@carbon/elements/scss/themes';
+@import '@carbon/elements/scss/themes';
 $carbon--theme: $carbon--theme--g100;
-@import "~carbon-components/scss/globals/scss/styles";
+@import "carbon-components/scss/globals/scss/styles";

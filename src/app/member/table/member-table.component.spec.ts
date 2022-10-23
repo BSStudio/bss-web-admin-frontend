@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VideoPlayerComponent } from './video-player.component';
+import { MemberTableComponent } from './member-table.component';
 
-describe('VideoPlayerComponent', () => {
-  let component: VideoPlayerComponent;
-  let fixture: ComponentFixture<VideoPlayerComponent>;
+describe('MemberTableComponent', () => {
+  let component: MemberTableComponent;
+  let fixture: ComponentFixture<MemberTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoPlayerComponent ]
+      declarations: [ MemberTableComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VideoPlayerComponent);
+    fixture = TestBed.createComponent(MemberTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

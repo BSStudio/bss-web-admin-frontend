@@ -1,36 +1,40 @@
 <section>
-  <h1>Update video</h1>
+  <h1 i18n>Update video</h1>
   <button ibmButton="danger" size="field" (click)="removeVideo()">
-    Remove
+    <ng-container i18n>Remove</ng-container>
     <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
   </button>
 </section>
-<ibm-placeholder></ibm-placeholder>
 <form [formGroup]="videoForm" (ngSubmit)="updateVideo()">
-  <ibm-label i18n class="wide">
-    Title:
+  <ibm-label class="wide">
+    <ng-container i18n>Title:</ng-container>
     <input ibmText formControlName="title" />
   </ibm-label>
-  <ibm-label i18n>
-    Url:
+  <ibm-label>
+    <ng-container i18n>URL:</ng-container>
     <input ibmText formControlName="url" />
   </ibm-label>
-  <ibm-label i18n>
-    Video URL:
+  <ibm-label>
+    <ng-container i18n>Video URL:</ng-container>
     <input ibmText formControlName="videoUrl" />
   </ibm-label>
-  <ibm-label i18n>
-    Thumbnail URL:
+  <ibm-label>
+    <ng-container i18n>Thumbnail URL:</ng-container>
     <input ibmText formControlName="thumbnailUrl" />
   </ibm-label>
-  <ibm-date-picker-input label="Uploaded at:" formControlName="uploadedAt" type="single"></ibm-date-picker-input>
-  <ibm-label i18n class="wide">
-    Description:
-    <textarea ibmTextArea [rows]="5" formControlName="description"></textarea>
-  </ibm-label>
   <ibm-label>
-    Visible:
+    <ng-container i18n>Visible:</ng-container>
     <ibm-toggle formControlName="visible"></ibm-toggle>
   </ibm-label>
-  <button ibmButton="primary" type="submit">Submit</button>
+  <ibm-label class="wide">
+    <ng-container i18n>Description:</ng-container>
+    <textarea ibmTextArea [rows]="5" formControlName="description"></textarea>
+  </ibm-label>
+  <ibm-date-picker-input
+    label="Uploaded at:"
+    i18n-label
+    formControlName="uploadedAt"
+    type="single"
+  ></ibm-date-picker-input>
+  <button i18n ibmButton="primary" type="submit">Submit</button>
 </form>
