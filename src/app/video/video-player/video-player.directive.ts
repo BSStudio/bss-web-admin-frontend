@@ -5,7 +5,7 @@ import Hls from 'hls.js';
   selector: 'video[appVideoPlayer]',
 })
 export class VideoPlayerDirective implements OnChanges {
-  private static readonly DEFAULT_POSTER = 'https://picsum.photos/1920/1080';
+  private static readonly DEFAULT_POSTER = '/assets/fallback-poster.png';
   private readonly hls = new Hls();
 
   @Input()

@@ -6,7 +6,7 @@ import { MemberIdComponent } from './member-id/member-id.component';
 import { MemberTableModule } from '../../member/table/member-table.module';
 import { CreateMemberModalModule } from '../../member/create-modal/create-member-modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BreadcrumbModule, CodeSnippetModule, IconModule, NFormsModule, SelectModule } from 'carbon-components-angular';
+import { BreadcrumbModule, IconModule, NFormsModule, SelectModule } from 'carbon-components-angular';
 import { SharedModule } from '../../@shared/shared.module';
 
 @NgModule({
@@ -20,7 +20,6 @@ import { SharedModule } from '../../@shared/shared.module';
     SelectModule,
     SharedModule,
     BreadcrumbModule,
-    CodeSnippetModule,
     IconModule,
   ],
   declarations: [MemberIndexComponent, MemberIdComponent],

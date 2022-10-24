@@ -2,31 +2,21 @@
 
 :host {
   display: block;
-  width: fit-content;
   margin: $layout-01 $fluid-spacing-02;
 
-  section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    button {
-      display: inline;
-    }
-  }
-
-  form {
-    display: grid;
-    grid-gap: $spacing-04;
-    grid-template-columns: repeat(2, fit-content(300px));
-    margin-top: $layout-02;
-    .wide {
-      grid-column-start: 1;
-      grid-column-end: -1;
-    }
-    button {
-      justify-self: end;
-      align-self: end;
-      grid-column-start: -2;
+  section#video-update-metadata {
+    form {
+      display: grid;
+      grid-gap: $spacing-04;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: $layout-02;
+      .wide {
+        grid-column-start: 1;
+        grid-column-end: -1;
+      }
+      button {
+        grid-column-start: 1;
+      }
     }
   }
 }

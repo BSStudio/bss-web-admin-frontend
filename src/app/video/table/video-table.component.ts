@@ -31,10 +31,10 @@ export class VideoTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.model.header = [
-      new TableHeaderItem({ data: 'Title' }),
-      new TableHeaderItem({ data: 'URL' }),
-      new TableHeaderItem({ data: 'Upload date' }),
-      new TableHeaderItem({ data: 'Visible' }),
+      new TableHeaderItem({ data: $localize`Title` }),
+      new TableHeaderItem({ data: $localize`URL` }),
+      new TableHeaderItem({ data: $localize`Upload date` }),
+      new TableHeaderItem({ data: $localize`Visible` }),
     ];
     this.getVideos();
   }

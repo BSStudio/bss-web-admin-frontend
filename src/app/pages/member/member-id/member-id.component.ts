@@ -1,12 +1,23 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from '../../../data/member/model/member.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular';
 import { UpdateMember } from '../../../data/member/model/update-member.model';
 import { MemberStatus } from '../../../data/member/model/member-status.model';
 import { MemberService } from '../../../data/member/service/member.service';
 import { Subject, takeUntil, tap } from 'rxjs';
+
+type MemberFormGroup = FormGroup<{
+  url: FormControl<string>;
+  name: FormControl<string>;
+  description: FormControl<string>;
+  imageUrl: FormControl<string>;
+  joinedAt: FormControl<string>;
+  role: FormControl<string>;
+  status: FormControl<MemberStatus>;
+  archived: FormControl<boolean>;
+}>;
 
 @Component({
   selector: 'app-video-id',
@@ -15,7 +26,7 @@ import { Subject, takeUntil, tap } from 'rxjs';
 })
 export class MemberIdComponent implements OnDestroy {
   public member: Member;
-  public readonly form: FormGroup;
+  public readonly form: MemberFormGroup;
   public readonly statuses = Object.values(MemberStatus);
   private readonly destroy$ = new Subject<boolean>();
   constructor(
@@ -34,13 +45,17 @@ export class MemberIdComponent implements OnDestroy {
   submit() {
     if (this.form.valid) {
       this.service
-        .updateMember(this.member.id, this.form.value)
+        .updateMember(this.member.id, this.form.getRawValue())
         .pipe(
           tap((member) => this.onSuccessToast(member)),
           takeUntil(this.destroy$)
         )
         .subscribe();
     }
+  }
+
+  get imageUrl() {
+    return this.form.controls.imageUrl.value;
   }
 
   onSuccessToast(member: Member) {

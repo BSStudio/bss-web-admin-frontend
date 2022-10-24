@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ShellModule } from './shell/shell.module';
 import { SharedModule } from './@shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
-import { IconService, PlaceholderModule } from 'carbon-components-angular';
+import { IconService, NotificationModule, PlaceholderModule } from 'carbon-components-angular';
 import { httpInterceptorProviders } from './interceptor';
 // @ts-ignore
 import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
@@ -13,7 +13,15 @@ import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
 @NgModule({
   declarations: [AppComponent],
   providers: [httpInterceptorProviders],
-  imports: [BrowserModule, AppRoutingModule, ShellModule, HttpClientModule, PlaceholderModule, SharedModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ShellModule,
+    HttpClientModule,
+    PlaceholderModule,
+    SharedModule,
+    NotificationModule,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

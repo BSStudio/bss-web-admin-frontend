@@ -3,18 +3,19 @@
   <ibm-breadcrumb-item>{{ member.name }}</ibm-breadcrumb-item>
 </ibm-breadcrumb>
 <section>
-  <h1 i18n>Update member</h1>
-  <button ibmButton="danger" size="field" (click)="showRemoveModal()">
-    <ng-container i18n>Remove</ng-container>
-    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
-  </button>
-  <ibm-code-snippet>{{ member.id }}</ibm-code-snippet>
+  <div>
+    <h1 i18n>Update member</h1>
+    <button ibmButton="danger" size="field" (click)="showRemoveModal()">
+      <ng-container i18n>Remove</ng-container>
+      <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+    </button>
+  </div>
   <figure>
     <picture>
-      <source [srcset]="form.controls['imageUrl'].value" />
-      <img [src]="form.controls['imageUrl'].value" alt="{{ member.name }}'s profile picture" />
+      <source [srcset]="imageUrl" />
+      <img #img src="/assets/fallback.jpg" alt="{{ member.name }}'s profile picture" i18n-alt />
     </picture>
-    <figcaption>{{ member.name }}'s profile picture</figcaption>
+    <figcaption>{{ img.alt }}</figcaption>
   </figure>
 </section>
 <form [formGroup]="form" (ngSubmit)="submit()">

@@ -4,8 +4,26 @@
   display: block;
   margin: $layout-01 $fluid-spacing-02;
 
+  section {
+    div {
+      display: flex;
+      justify-content: space-between;
+      button {
+        place-self: end;
+      }
+    }
+  }
+
   form {
     display: grid;
     gap: $spacing-04;
+    grid-template-columns: repeat(3, 1fr);
+    ibm-label {
+      grid-column-start: 1;
+      grid-column-end: -1;
+    }
+    button {
+      place-self: end;
+    }
   }
 }
