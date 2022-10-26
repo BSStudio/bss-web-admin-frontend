@@ -1,10 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { BaseModal, ListItem } from 'carbon-components-angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DetailedEvent } from '../../models';
 import { VideoService } from '../../../video/services/video.service';
-import { tap } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { EventVideoService } from '../../../video/services/event-video.service';
+import { Video } from '../../../video/models';
 
 @Component({
   selector: 'app-event-video-add-modal-component',
@@ -12,44 +13,55 @@ import { EventVideoService } from '../../../video/services/event-video.service';
   styleUrls: ['./event-video-add-modal.component.scss'],
 })
 export class EventVideoAddModalComponent extends BaseModal implements OnInit, OnDestroy {
+  private readonly destroy$ = new Subject<boolean>();
   public readonly form: FormGroup<{
     videoId: FormControl<{ selected: boolean; content: string; id: string }>;
-    eventId: FormControl<string>;
   }>;
   public videos: { selected: boolean; content: string; id: string }[] = [];
 
   constructor(
     private fb: FormBuilder,
-    @Inject('event') public event: DetailedEvent,
     private videoService: VideoService,
-    private eventVideoService: EventVideoService
+    private eventVideoService: EventVideoService,
+    @Inject('event') public event: DetailedEvent,
+    @Inject('update') public update: EventEmitter<DetailedEvent>
   ) {
     super();
     this.form = this.fb.nonNullable.group({
       videoId: this.fb.nonNullable.control({ id: '', selected: false, content: '' }),
-      eventId: event.id,
     });
   }
 
   onSubmit() {
     if (this.form.valid) {
-      const { eventId, videoId } = this.form.getRawValue();
-      this.eventVideoService.addVideoToEvent({ eventId, videoId: videoId.id }).subscribe({
-        next: () => this.closeModal(),
-      });
+      const videoId = this.form.getRawValue().videoId.id;
+      this.eventVideoService
+        .addVideoToEvent({ eventId: this.event.id, videoId })
+        .pipe(
+          tap((event) => this.update.emit(event)),
+          tap(() => this.closeModal()),
+          takeUntil(this.destroy$)
+        )
+        .subscribe();
     }
   }
 
   ngOnInit() {
     this.videoService
-      .getVideos(0, 1000)
+      .getAllVideos()
       .pipe(
-        tap((res) => {
-          this.videos = res.content.map((video) => ({ selected: false, content: video.title, id: video.id }));
-        })
+        tap((videos) => this.updateVideos(videos)),
+        takeUntil(this.destroy$)
       )
       .subscribe();
   }
 
-  ngOnDestroy() {}
+  updateVideos(videos: Video[]) {
+    this.videos = videos.map((video) => ({ selected: false, content: video.title, id: video.id }));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 }

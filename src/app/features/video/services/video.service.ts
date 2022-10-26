@@ -9,27 +9,31 @@ import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models';
 export class VideoService {
   constructor(private http: HttpClient) {}
 
+  getAllVideos() {
+    return this.http.get<Video[]>('/api/v1/video/all');
+  }
+
   getVideos(page: number, size: number) {
-    return this.http.get<PaginatedResponse<Video>>('/api/video', { params: { page, size } });
+    return this.http.get<PaginatedResponse<Video>>('/api/v1/video', { params: { page, size } });
   }
 
   getVideo(videoId: string) {
-    return this.http.get<DetailedVideo>(`/api/video/${videoId}`);
+    return this.http.get<DetailedVideo>(`/api/v1/video/${videoId}`);
   }
 
   createVideo(createVideo: CreateVideo) {
-    return this.http.post<Video>('/api/video', createVideo);
+    return this.http.post<Video>('/api/v1/video', createVideo);
   }
 
   changeVisibility(videoIds: string | string[], visible = false) {
-    return this.http.put<string[]>('/api/video/visible', null, { params: { videoIds, visible } });
+    return this.http.put<string[]>('/api/v1/video/visible', null, { params: { videoIds, visible } });
   }
 
   updateVideo(videoId: string, updateVideo: UpdateVideo) {
-    return this.http.put<DetailedVideo>(`/api/video/${videoId}`, updateVideo);
+    return this.http.put<DetailedVideo>(`/api/v1/video/${videoId}`, updateVideo);
   }
 
   removeVideo(videoId: string) {
-    return this.http.delete(`/api/video/${videoId}`);
+    return this.http.delete(`/api/v1/video/${videoId}`);
   }
 }

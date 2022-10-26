@@ -3,7 +3,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { BaseModal } from 'carbon-components-angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CreateVideo } from '../../models';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-video-create-modal',
@@ -28,7 +28,13 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
   }
 
   private createVideo(createVideo: CreateVideo) {
-    this.videoService.createVideo(createVideo).pipe(takeUntil(this.destroy$)).subscribe();
+    this.videoService
+      .createVideo(createVideo)
+      .pipe(
+        tap(() => this.closeModal()),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {

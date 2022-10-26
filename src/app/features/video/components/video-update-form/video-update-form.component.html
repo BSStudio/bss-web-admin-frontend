@@ -1,0 +1,34 @@
+<form [formGroup]="form" (ngSubmit)="updateVideo()">
+  <ibm-label class="wide">
+    <ng-container i18n>Title:</ng-container>
+    <input ibmText formControlName="title" />
+  </ibm-label>
+  <ibm-label [invalid]="form.controls.url.invalid" [invalidText]="form.controls.url.errors | json">
+    <ng-container i18n>URL:</ng-container>
+    <input ibmText formControlName="url" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Video URL:</ng-container>
+    <input ibmText formControlName="videoUrl" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Thumbnail URL:</ng-container>
+    <input ibmText formControlName="thumbnailUrl" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Visible:</ng-container>
+    <ibm-toggle formControlName="visible"></ibm-toggle>
+  </ibm-label>
+  <ibm-label class="wide">
+    <ng-container i18n>Description:</ng-container>
+    <textarea ibmTextArea [rows]="5" formControlName="description"></textarea>
+  </ibm-label>
+  <ibm-date-picker
+    label="Uploaded at:"
+    i18n-label
+    dateFormat="Y-m-d"
+    placeholder="YYYY-MM-dd"
+    formControlName="uploadedAt"
+  ></ibm-date-picker>
+  <button i18n ibmButton="primary" type="submit">Update</button>
+</form>

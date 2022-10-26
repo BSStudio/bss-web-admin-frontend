@@ -4,6 +4,6 @@
 </ibm-breadcrumb>
 <h1 i18n>Update event</h1>
 <h2>Metadata</h2>
-<app-event-update-form [event]="event" (update)="event = $event"></app-event-update-form>
+<app-event-update-form [event]="event" (update)="setEvent($event)"></app-event-update-form>
 <h2 i18n>Manage event videos</h2>
-<app-event-video-table [event]="event" (update)="refreshPage()"></app-event-video-table>
+<app-event-video-table [event]="event" (update)="setEvent($event)"></app-event-video-table>

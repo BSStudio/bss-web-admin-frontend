@@ -7,6 +7,6 @@ export class MetricsService {
   constructor(private http: HttpClient) {}
 
   getMetrics() {
-    return this.http.get<Metrics>('/api/metrics');
+    return this.http.get<Metrics>('/api/v1/metrics');
   }
 }

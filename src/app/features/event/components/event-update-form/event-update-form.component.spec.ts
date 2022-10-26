@@ -8,9 +8,8 @@ describe('EventUpdateFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventUpdateFormComponent ]
-    })
-    .compileComponents();
+      declarations: [EventUpdateFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EventUpdateFormComponent);
     component = fixture.componentInstance;

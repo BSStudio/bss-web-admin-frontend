@@ -34,6 +34,12 @@ import { EventVideoTableComponent } from './components/event-video-table/event-v
     ModalModule,
     ComboBoxModule,
   ],
-  declarations: [EventIndexComponent, EventIdComponent, EventUpdateFormComponent, EventVideoAddModalComponent, EventVideoTableComponent],
+  declarations: [
+    EventIndexComponent,
+    EventIdComponent,
+    EventUpdateFormComponent,
+    EventVideoAddModalComponent,
+    EventVideoTableComponent,
+  ],
 })
 export class EventModule {}

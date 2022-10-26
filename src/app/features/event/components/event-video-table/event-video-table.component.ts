@@ -34,9 +34,11 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
   @Input()
   public event!: DetailedEvent;
   @Output()
-  public update = new EventEmitter<void>();
-  @ViewChild('removeButton', { static: true })
-  protected removeButton!: TemplateRef<any>;
+  public update = new EventEmitter<DetailedEvent>();
+  @ViewChild('removeButtonCell', { static: true })
+  protected removeButtonCell!: TemplateRef<any>;
+  @ViewChild('navigateCell', { static: true })
+  protected navigateCell!: TemplateRef<any>;
   private readonly destroy$ = new Subject<boolean>();
   public readonly table = new TableModel();
 
@@ -59,18 +61,14 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
     }
   }
 
-  async rowClick(index: number) {
-    const id = this.table.row(index)[0].title;
-    await this.router.navigate(['video', id]);
-  }
-
   showAddModal() {
-    this.modalService
-      .create({ component: EventVideoAddModalComponent, inputs: { event: this.event } })
-      .onDestroy(() => this.update.emit());
+    this.modalService.create({
+      component: EventVideoAddModalComponent,
+      inputs: { event: this.event, update: this.update },
+    });
   }
 
-  showRemoveModal(video: Video) {
+  showRemoveModal(video: { title: string; id: string }) {
     this.modalService.show({
       type: AlertModalType.danger,
       label: video.title,
@@ -87,11 +85,13 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
   removeEventVideo(videoId: string) {
     this.eventVideoService
       .removeVideoFromEvent({ eventId: this.event.id, videoId })
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        tap((event) => this.update.emit(event)),
+        takeUntil(this.destroy$)
+      )
       .subscribe({
         next: () => this.successNotification(),
         error: (err) => this.errorNotification(err),
-        complete: () => this.update.emit(),
       });
   }
 
@@ -114,12 +114,12 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
     this.table.data = this.event.videos.map((video) => this.videoToRow(video));
   }
 
-  private videoToRow(video: Video) {
+  private videoToRow({ title, id, url, uploadedAt }: Video) {
     return [
-      new TableItem({ data: video.title, title: video.id }),
-      new TableItem({ data: video.url }),
-      new TableItem({ data: video.uploadedAt }),
-      new TableItem({ data: video, template: this.removeButton }),
+      new TableItem({ title, data: { id, title }, template: this.navigateCell }),
+      new TableItem({ title, data: url }),
+      new TableItem({ title, data: uploadedAt }),
+      new TableItem({ title, data: { id, title }, template: this.removeButtonCell }),
     ];
   }
 

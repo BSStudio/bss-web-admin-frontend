@@ -5,17 +5,12 @@
       <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
     </button>
   </ibm-table-toolbar-content>
-  <ibm-table
-    [model]="table"
-    [sortable]="false"
-    [striped]="false"
-    [showSelectionColumn]="false"
-    (rowClick)="rowClick($event)"
-    size="sh"
-  >
-  </ibm-table>
+  <ibm-table [model]="table" [sortable]="false" [striped]="false" [showSelectionColumn]="false" size="sh"> </ibm-table>
 </ibm-table-container>
-<ng-template #removeButton let-video="data">
+<ng-template #navigateCell let-video="data">
+  <a [routerLink]="['/video', video.id]">{{ video.title }}</a>
+</ng-template>
+<ng-template #removeButtonCell let-video="data">
   <button
     ibmButton="danger"
     size="field"

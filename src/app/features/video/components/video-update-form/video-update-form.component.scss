@@ -1,0 +1,15 @@
+@import "@carbon/elements/scss/layout/index";
+
+form {
+  display: grid;
+  grid-gap: $spacing-04;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: $layout-02;
+  .wide {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+  button {
+    grid-column-start: 1;
+  }
+}

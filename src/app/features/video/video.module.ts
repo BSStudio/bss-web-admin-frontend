@@ -15,6 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { VideoPlayerDirective } from './directives/video-player/video-player.directive';
 import { BooleanPipe } from '../../shared/pipes/boolean.pipe';
+import { VideoUpdateFormComponent } from './components/video-update-form/video-update-form.component';
+import { VideoRemoveButtonComponent } from './components/video-remove-button/video-remove-button.component';
+import { VideoBreadcrumbComponent } from './components/video-breadcrumb/video-breadcrumb.component';
 
 @NgModule({
   imports: [
@@ -29,7 +32,14 @@ import { BooleanPipe } from '../../shared/pipes/boolean.pipe';
     VideoRoutingModule,
     IconModule,
   ],
-  declarations: [VideoIndexComponent, VideoIdComponent, VideoPlayerDirective],
+  declarations: [
+    VideoIndexComponent,
+    VideoIdComponent,
+    VideoPlayerDirective,
+    VideoUpdateFormComponent,
+    VideoRemoveButtonComponent,
+    VideoBreadcrumbComponent,
+  ],
   providers: [BooleanPipe],
 })
 export class VideoModule {}

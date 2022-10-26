@@ -8,9 +8,8 @@ describe('EventVideoTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventVideoTableComponent ]
-    })
-    .compileComponents();
+      declarations: [EventVideoTableComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EventVideoTableComponent);
     component = fixture.componentInstance;

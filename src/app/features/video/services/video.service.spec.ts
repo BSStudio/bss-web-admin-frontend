@@ -36,7 +36,7 @@ describe('VideoService', () => {
       },
     });
     httpTestingController
-      .expectOne({ method: 'GET', url: `/api/video?page=${page}&size=${size}` }) //
+      .expectOne({ method: 'GET', url: `/api/v1/video?page=${page}&size=${size}` }) //
       .flush(response);
   });
 
