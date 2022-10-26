@@ -1,0 +1,58 @@
+<ibm-breadcrumb [noTrailingSlash]="true">
+  <ibm-breadcrumb-item i18n [route]="['member']" href="/member">Members</ibm-breadcrumb-item>
+  <ibm-breadcrumb-item>{{ member.name }}</ibm-breadcrumb-item>
+</ibm-breadcrumb>
+<section>
+  <div>
+    <h1 i18n>Update member</h1>
+    <button ibmButton="danger" size="field" (click)="showRemoveModal()">
+      <ng-container i18n>Remove</ng-container>
+      <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+    </button>
+  </div>
+  <figure>
+    <picture>
+      <source [srcset]="imageUrl" />
+      <img #img src="/assets/fallback.jpg" alt="{{ member.name }}'s profile picture" i18n-alt />
+    </picture>
+    <figcaption>{{ img.alt }}</figcaption>
+  </figure>
+</section>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <ibm-label>
+    <ng-container i18n>Name</ng-container>
+    <input ibmText formControlName="name" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>URL</ng-container>
+    <input ibmText formControlName="url" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Profile picture URL</ng-container>
+    <input ibmText formControlName="imageUrl" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Role</ng-container>
+    <input ibmText formControlName="role" />
+  </ibm-label>
+  <ibm-label>
+    <ng-container i18n>Description</ng-container>
+    <textarea ibmTextArea formControlName="description"></textarea>
+  </ibm-label>
+  <ibm-select formControlName="status" label="Status" i18n-label>
+    <option *ngFor="let status of statuses" [value]="status">{{ status | memberStatus }}</option>
+  </ibm-select>
+  <ibm-toggle
+    label="Archived"
+    i18n-label
+    formControlName="archived"
+    offText="No"
+    i18n-offText
+    onText="Yes"
+    i18n-onText
+  ></ibm-toggle>
+  <button ibmButton="primary" type="submit">
+    <ng-container i18n>Save</ng-container>
+    <svg ibmIcon="save" size="16" class="bx--btn__icon"></svg>
+  </button>
+</form>

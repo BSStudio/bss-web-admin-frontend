@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DefaultShellComponent } from './shell/default-shell.component';
+import { DefaultShellComponent } from './core/components/shell/default-shell.component';
 
 const routes: Routes = [
   {
@@ -9,19 +9,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./pages/home/home.module').then(({ HomeModule }) => HomeModule),
+        loadChildren: () => import('./features/home/home.module').then(({ HomeModule }) => HomeModule),
       },
       {
         path: 'video',
-        loadChildren: () => import('./pages/video/video.module').then(({ VideoModule }) => VideoModule),
+        loadChildren: () => import('./features/video/video.module').then(({ VideoModule }) => VideoModule),
       },
       {
         path: 'member',
-        loadChildren: () => import('./pages/member/member.module').then(({ MemberModule }) => MemberModule),
+        loadChildren: () => import('./features/member/member.module').then(({ MemberModule }) => MemberModule),
       },
       {
         path: 'event',
-        loadChildren: () => import('./pages/event/event.module').then(({ EventModule }) => EventModule),
+        loadChildren: () => import('./features/event/event.module').then(({ EventModule }) => EventModule),
       },
     ],
   },

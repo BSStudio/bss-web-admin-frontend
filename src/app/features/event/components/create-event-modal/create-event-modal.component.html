@@ -1,0 +1,22 @@
+<ibm-modal [open]="open" (overlaySelected)="closeModal()">
+  <ibm-modal-header (closeSelect)="closeModal()">
+    <h3 ibmModalHeaderHeading i18n>Add new event</h3>
+  </ibm-modal-header>
+  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+    <ibm-label>
+      <ng-container i18n>Title</ng-container>
+      <input ibmText i18n-placeholder formControlName="title" placeholder="Simonyi Conference 2022" />
+    </ibm-label>
+    <ibm-label
+      i18n-helperText
+      helperText="The event will have the following url: https://bsstudio/member/simonyi-conference-2022"
+    >
+      <ng-container i18n>Url</ng-container>
+      <input ibmText i18n-placeholder formControlName="url" placeholder="simonyi-conference-2022" />
+    </ibm-label>
+  </form>
+  <ibm-modal-footer>
+    <button ibmButton="primary" i18n (click)="onSubmit()" style="order: 1">Add event</button>
+    <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
+  </ibm-modal-footer>
+</ibm-modal>

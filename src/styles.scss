@@ -3,3 +3,12 @@
 @import '@carbon/elements/scss/themes';
 $carbon--theme: $carbon--theme--g100;
 @import "carbon-components/scss/globals/scss/styles";
+
+// fix toolbar search globally
+.bx--search--lg .bx--search-magnifier-icon {
+  left: 0;
+}
+
+.bx--toolbar-content .bx--search .bx--search-input {
+  height: 3rem;
+}

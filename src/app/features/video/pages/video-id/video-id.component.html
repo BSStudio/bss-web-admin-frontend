@@ -1,0 +1,66 @@
+<ibm-breadcrumb [noTrailingSlash]="true">
+  <ibm-breadcrumb-item i18n [route]="['video']" href="/video">Videos</ibm-breadcrumb-item>
+  <ibm-breadcrumb-item i18n>{{ video.title }}</ibm-breadcrumb-item>
+</ibm-breadcrumb>
+<h1 i18n>Update video</h1>
+<section id="video-update-inspect">
+  <h2>Inspect video</h2>
+  <video
+    appVideoPlayer
+    src="https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8"
+    width="720px"
+  ></video>
+</section>
+<section id="video-update-metadata">
+  <h2 i18n>Metadata</h2>
+  <form [formGroup]="form" (ngSubmit)="updateVideo()">
+    <ibm-label class="wide">
+      <ng-container i18n>Title:</ng-container>
+      <input ibmText formControlName="title" />
+    </ibm-label>
+    <ibm-label [invalid]="form.controls.url.invalid" [invalidText]="form.controls.url.errors | json">
+      <ng-container i18n>URL:</ng-container>
+      <input ibmText formControlName="url" />
+    </ibm-label>
+    <ibm-label>
+      <ng-container i18n>Video URL:</ng-container>
+      <input ibmText formControlName="videoUrl" />
+    </ibm-label>
+    <ibm-label>
+      <ng-container i18n>Thumbnail URL:</ng-container>
+      <input ibmText formControlName="thumbnailUrl" />
+    </ibm-label>
+    <ibm-label>
+      <ng-container i18n>Visible:</ng-container>
+      <ibm-toggle formControlName="visible"></ibm-toggle>
+    </ibm-label>
+    <ibm-label class="wide">
+      <ng-container i18n>Description:</ng-container>
+      <textarea ibmTextArea [rows]="5" formControlName="description"></textarea>
+    </ibm-label>
+    <ibm-date-picker
+      label="Uploaded at:"
+      i18n-label
+      dateFormat="Y-m-d"
+      placeholder="YYYY-MM-dd"
+      formControlName="uploadedAt"
+    ></ibm-date-picker>
+    <button i18n ibmButton="primary" type="submit">Update</button>
+  </form>
+</section>
+<section id="video-update-preview">
+  <h2>Upload preview</h2>
+  <ibm-file-uploader
+    [drop]="true"
+    [accept]="['.png', 'image/jpeg']"
+    dropText="Upload thumbnail"
+    i18n-dropText
+  ></ibm-file-uploader>
+</section>
+<section id="video-update-remove">
+  <h2 i18n>Remove video</h2>
+  <button ibmButton="danger" (click)="removeVideo()">
+    <ng-container i18n>Remove</ng-container>
+    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+  </button>
+</section>

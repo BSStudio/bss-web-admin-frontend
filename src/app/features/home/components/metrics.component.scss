@@ -1,0 +1,13 @@
+@import "node_modules/@carbon/elements/scss/layout/index";
+
+:host {
+  display: flex;
+  gap: $spacing-03;
+  flex-wrap: wrap;
+  ibm-tile {
+    aspect-ratio: auto 1/1;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+  }
+}

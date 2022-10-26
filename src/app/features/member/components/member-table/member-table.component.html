@@ -1,0 +1,28 @@
+<ibm-table-container>
+  <ibm-table-toolbar>
+    <ibm-table-toolbar-actions></ibm-table-toolbar-actions>
+    <ibm-table-toolbar-content>
+      <ibm-table-toolbar-search
+        [expandable]="true"
+        (valueChange)="filterNodeNames($event)"
+        (clear)="searchValue = ''"
+      ></ibm-table-toolbar-search>
+      <button ibmButton="secondary" [iconOnly]="true">
+        <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getMembers()"></svg>
+        <span i18n class="bx--assistive-text">Refresh</span>
+      </button>
+      <button ibmButton="primary" (click)="showAddModal()">
+        <ng-container i18n>Add new member</ng-container>
+        <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+      </button>
+    </ibm-table-toolbar-content>
+  </ibm-table-toolbar>
+  <ibm-table
+    [model]="table"
+    [sortable]="false"
+    [showSelectionColumn]="false"
+    [striped]="false"
+    (rowClick)="onRowClick($event)"
+    size="sh"
+  ></ibm-table>
+</ibm-table-container>
