@@ -4,14 +4,13 @@ import { MemberService } from '../../services/member.service';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { Member } from '../../models/member.model';
 import { MemberStatusPipe } from '../../pipes/member-status.pipe';
-import { CreateMemberModalComponent } from '../create-member-modal/create-member-modal.component';
+import { MemberCreateModalComponent } from '../member-create-modal/member-create-modal.component';
 import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-member-table',
   templateUrl: './member-table.component.html',
-  styleUrls: ['./member-table.component.scss'],
 })
 export class MemberTableComponent implements OnInit, OnDestroy {
   public readonly table = new TableModel();
@@ -54,7 +53,7 @@ export class MemberTableComponent implements OnInit, OnDestroy {
   showAddModal() {
     this.modalService
       .create({
-        component: CreateMemberModalComponent,
+        component: MemberCreateModalComponent,
       })
       .onDestroy(() => this.getMembers());
   }

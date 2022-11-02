@@ -1,24 +1,23 @@
 <app-video-breadcrumb [title]="video.title"></app-video-breadcrumb>
 <h1 i18n>Update video</h1>
-<section id="video-update-inspect">
-  <h2>Inspect video</h2>
-  <video appVideoPlayer [src]="video.videoUrl" [poster]="video.thumbnailUrl" width="720px"></video>
-</section>
 <section id="video-update-metadata">
   <h2 i18n>Metadata</h2>
-  <app-video-update-form (update)="video = $event"></app-video-update-form>
+  <app-video-update-form [video]="video" (update)="setVideo($event)"></app-video-update-form>
 </section>
-<section id="video-crew"></section>
-<section id="video-update-preview">
-  <h2>Upload preview</h2>
-  <ibm-file-uploader
-    [drop]="true"
-    [accept]="['.png', 'image/jpeg']"
-    dropText="Upload thumbnail"
-    i18n-dropText
-  ></ibm-file-uploader>
+<section id="video-crew">
+  <h2 i18n>Crew</h2>
+  <app-video-crew-table [video]="video" (update)="setVideo($event)"></app-video-crew-table>
+</section>
+<section id="video-update-inspect">
+  <h2>Inspect video</h2>
+  <video
+    appVideoPlayer
+    src="/media/video/{{ video.id }}/main.m3u8"
+    poster="/media/video/{{ video.id }}/poster.jpeg"
+    width="720px"
+  ></video>
 </section>
 <section id="video-update-remove">
   <h2 i18n>Remove video</h2>
-  <app-video-remove-button></app-video-remove-button>
+  <app-video-remove-button [video]="video"></app-video-remove-button>
 </section>

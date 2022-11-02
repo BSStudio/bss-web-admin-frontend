@@ -9,9 +9,9 @@ import { NavigationItem } from 'carbon-components-angular';
 export class HeaderComponent {
   hasHamburger = false;
   navigationItems: NavigationItem[] = [
-    { content: $localize`Videos`, type: 'item', route: ['video'] },
-    { content: $localize`Events`, type: 'item', route: ['event'] },
-    { content: $localize`Members`, type: 'item', route: ['member'] },
+    { content: $localize`Videos`, type: 'item', route: ['video'], href: 'video' },
+    { content: $localize`Events`, type: 'item', route: ['event'], href: 'event' },
+    { content: $localize`Members`, type: 'item', route: ['member'], href: 'member' },
   ];
 
   public toggleHamburger() {

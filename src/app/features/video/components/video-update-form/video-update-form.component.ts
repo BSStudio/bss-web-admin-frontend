@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { catchError, EMPTY, of, Subject, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 import { DetailedVideo, UpdateVideo } from '../../models';
 import { NotificationService } from 'carbon-components-angular';
 import { VideoService } from '../../services/video.service';
@@ -9,8 +9,6 @@ type UpdateVideoForm = FormGroup<{
   url: FormControl<string>;
   title: FormControl<string>;
   description: FormControl<string>;
-  videoUrl: FormControl<string>;
-  thumbnailUrl: FormControl<string>;
   uploadedAt: FormControl<string>;
   visible: FormControl<boolean>;
 }>;
@@ -36,8 +34,6 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       url: this.fb.nonNullable.control('', { validators: [Validators.pattern(/^[\p{Alpha}\p{Number}\-]+$/u)] }),
       title: this.fb.nonNullable.control(''),
       description: this.fb.nonNullable.control(''),
-      videoUrl: this.fb.nonNullable.control(''),
-      thumbnailUrl: this.fb.nonNullable.control(''),
       uploadedAt: this.fb.nonNullable.control('', { validators: [VideoUpdateFormComponent.DateValidator] }),
       visible: this.fb.nonNullable.control(false),
     });
@@ -48,8 +44,6 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       this.video.url,
       this.video.title,
       this.video.description,
-      this.video.videoUrl,
-      this.video.thumbnailUrl,
       this.video.uploadedAt,
       this.video.visible
     );
@@ -57,34 +51,34 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
   }
 
   public updateVideo() {
-    if (this.form.valid) {
-      const { uploadedAt: date, ...rest } = this.form.getRawValue();
-      const uploadedAt = VideoUpdateFormComponent.toLocalDate(date);
-      this.service
-        .updateVideo(this.video.id, { uploadedAt, ...rest })
-        .pipe(
-          tap((video) => this.successNotification(video)),
-          tap((video) => this.update.emit(video)),
-          catchError((err) => {
-            this.errorNotification(err);
-            return EMPTY;
-          })
-          // todo takeUntil(this.destroy$)
-        )
-        .subscribe();
-    }
+    const { uploadedAt: date, ...rest } = this.form.getRawValue();
+    const uploadedAt = VideoUpdateFormComponent.toLocalDate(date);
+    this.service
+      .updateVideo(this.video.id, { uploadedAt, ...rest })
+      .pipe(
+        tap((video) => this.successNotification(video)),
+        tap((video) => this.update.emit(video)),
+        catchError((err) => {
+          this.errorNotification(err);
+          return EMPTY;
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   successNotification(video: DetailedVideo) {
-    this.notificationService.showNotification({
+    this.notificationService.showToast({
       type: 'success',
-      title: 'Success',
+      title: 'Video update',
+      subtitle: video.title,
+      caption: 'Changes were saved',
       duration: 3000,
     });
   }
 
   errorNotification(err: unknown) {
-    this.notificationService.showNotification({
+    this.notificationService.showToast({
       type: 'error',
       title: $localize`Error updating`,
       caption: JSON.stringify(err),

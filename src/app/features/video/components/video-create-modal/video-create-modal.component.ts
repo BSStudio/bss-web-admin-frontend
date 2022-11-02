@@ -13,9 +13,9 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
   public readonly createVideoForm: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>;
   private readonly destroy$ = new Subject<boolean>();
 
-  constructor(private videoService: VideoService, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private videoService: VideoService) {
     super();
-    this.createVideoForm = fb.nonNullable.group<CreateVideo>({
+    this.createVideoForm = this.fb.nonNullable.group<CreateVideo>({
       title: '',
       url: '',
     });

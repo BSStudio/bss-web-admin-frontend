@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Input, OnDestroy, OnInit } from '@angular/core';
-import { BaseModal, ListItem } from 'carbon-components-angular';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit } from '@angular/core';
+import { BaseModal } from 'carbon-components-angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DetailedEvent } from '../../models';
 import { VideoService } from '../../../video/services/video.service';
@@ -10,7 +10,6 @@ import { Video } from '../../../video/models';
 @Component({
   selector: 'app-event-video-add-modal-component',
   templateUrl: './event-video-add-modal.component.html',
-  styleUrls: ['./event-video-add-modal.component.scss'],
 })
 export class EventVideoAddModalComponent extends BaseModal implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<boolean>();

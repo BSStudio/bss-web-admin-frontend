@@ -12,7 +12,6 @@ import { PaginatedResponse } from '../../../../shared/models';
 @Component({
   selector: 'app-video-table',
   templateUrl: './video-table.component.html',
-  styleUrls: ['./video-table.component.scss'],
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
   readonly table = new TableModel();
@@ -45,9 +44,11 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     this.table.isLoading = true;
     return this.service
       .getVideos(this.table.currentPage - 1, this.table.pageLength)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        tap((paginatedVideos) => this.updateTable(paginatedVideos)),
+        takeUntil(this.destroy$)
+      )
       .subscribe({
-        next: (paginatedVideos) => this.updateTable(paginatedVideos),
         complete: () => (this.table.isLoading = false),
       });
   }

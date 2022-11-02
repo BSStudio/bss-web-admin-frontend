@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
 import { Subject, takeUntil, tap } from 'rxjs';
 import { EventService } from '../../services/event.service';
@@ -6,7 +6,7 @@ import { Event } from '../../models';
 import { formatDate } from '@angular/common';
 import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe';
 import { Router } from '@angular/router';
-import { CreateEventModalComponent } from '../create-event-modal/create-event-modal.component';
+import { EventCreateModalComponent } from '../event-create-modal/event-create-modal.component';
 
 @Component({
   selector: 'app-event-table',
@@ -46,7 +46,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
   }
 
   showAddModal() {
-    this.modalService.create({ component: CreateEventModalComponent }).onDestroy(() => this.getEvents());
+    this.modalService.create({ component: EventCreateModalComponent }).onDestroy(() => this.getEvents());
   }
 
   async onRowClick(index: number) {

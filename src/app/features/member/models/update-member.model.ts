@@ -5,7 +5,6 @@ export class UpdateMember {
     public url: string,
     public name: string,
     public description: string,
-    public imageUrl: string,
     public joinedAt: string,
     public role: string,
     public status: MemberStatus,

@@ -6,9 +6,8 @@ import { EventService } from '../../services/event.service';
 import { NotificationService } from 'carbon-components-angular';
 
 @Component({
-  selector: 'app-event-update-form',
+  selector: 'app-event-update-form[event]',
   templateUrl: './event-update-form.component.html',
-  styleUrls: ['./event-update-form.component.scss'],
 })
 export class EventUpdateFormComponent implements OnInit, OnDestroy {
   @Input() event!: Event;

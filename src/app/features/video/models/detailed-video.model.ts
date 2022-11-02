@@ -1,4 +1,4 @@
-import { SimpleCrew } from '../../crew/models/simple-crew.model';
+import { CrewMember } from '../../video-crew/models';
 
 export class DetailedVideo {
   constructor(
@@ -6,10 +6,8 @@ export class DetailedVideo {
     public url: string,
     public title: string,
     public description: string,
-    public videoUrl: string,
-    public thumbnailUrl: string,
     public uploadedAt: string,
     public visible: boolean,
-    public crew: SimpleCrew[]
+    public crew: CrewMember[]
   ) {}
 }

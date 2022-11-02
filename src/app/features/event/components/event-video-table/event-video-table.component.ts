@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -10,7 +11,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DetailedEvent } from '../../models';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 import {
   AlertModalType,
   ModalButtonType,
@@ -23,14 +24,12 @@ import {
 import { Video } from '../../../video/models';
 import { EventVideoAddModalComponent } from '../event-video-add-modal/event-video-add-modal.component';
 import { EventVideoService } from '../../../video/services/event-video.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-video-table',
   templateUrl: './event-video-table.component.html',
-  styleUrls: ['./event-video-table.component.scss'],
 })
-export class EventVideoTableComponent implements OnInit, OnChanges {
+export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   public event!: DetailedEvent;
   @Output()
@@ -45,8 +44,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
   constructor(
     private modalService: ModalService,
     private eventVideoService: EventVideoService,
-    private notificationService: NotificationService,
-    private router: Router
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +53,6 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     if (changes['event']) {
       this.updateTable();
     }
@@ -86,13 +83,15 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
     this.eventVideoService
       .removeVideoFromEvent({ eventId: this.event.id, videoId })
       .pipe(
+        tap(() => this.successNotification()),
         tap((event) => this.update.emit(event)),
+        catchError((err) => {
+          this.errorNotification(err);
+          return EMPTY;
+        }),
         takeUntil(this.destroy$)
       )
-      .subscribe({
-        next: () => this.successNotification(),
-        error: (err) => this.errorNotification(err),
-      });
+      .subscribe();
   }
 
   successNotification() {
@@ -130,5 +129,10 @@ export class EventVideoTableComponent implements OnInit, OnChanges {
       new TableHeaderItem({ data: 'Uploaded at' }),
       new TableHeaderItem({ style: { padding: 0, width: 0 } }),
     ];
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }

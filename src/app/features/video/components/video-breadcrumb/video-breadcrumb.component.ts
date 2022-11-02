@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-video-breadcrumb',
@@ -10,5 +10,5 @@ import { Component, Input, OnInit } from '@angular/core';
   `,
 })
 export class VideoBreadcrumbComponent {
-  @Input() title!: string;
+  @Input() title: string = '';
 }

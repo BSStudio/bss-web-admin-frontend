@@ -1,4 +1,5 @@
-@import "node_modules/@carbon/elements/scss/layout/index";
+@import "@carbon/elements/scss/layout/layout";
+@import "@carbon/elements/scss/themes/themes";
 
 :host {
   height: 100vh;
@@ -6,5 +7,4 @@
 
 main#app {
   padding-top: $carbon--layout-04;
-  height: 100%;
 }

@@ -93,9 +93,14 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "bss-web-admin-frontend:build"
+            "browserTarget": "bss-web-admin-frontend:build",
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "targetFiles": [
+              "messages.hu.xlf"
+            ]
           }
         },
         "test": {
