@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "14.2.9",
     "@angular/router": "14.2.9",
     "@carbon/elements": "10.56.0",
-    "carbon-components": "10.58.3",
+    "carbon-components": "10.58.4",
     "carbon-components-angular": "4.62.1",
     "rxjs": "7.5.7",
     "tslib": "2.4.1",
