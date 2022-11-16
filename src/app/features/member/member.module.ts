@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   BreadcrumbModule,
+  FileUploaderModule,
   GridModule,
   IconModule,
   ModalModule,
@@ -15,11 +16,13 @@ import { MemberRoutingModule } from './pages/member-routing.module';
 import { MemberIdComponent } from './pages/member-id/member-id.component';
 import { MemberStatusPipe } from './pipes/member-status.pipe';
 import { SharedModule } from '../../shared/shared.module';
-import { MemberBreadcrumbComponent } from './components/member-breadcrumb/member-breadcrumb.component';
 import { MemberCreateModalComponent } from './components/member-create-modal/member-create-modal.component';
 import { MemberRemoveButtonComponent } from './components/member-remove-button/member-remove-button.component';
 import { MemberTableComponent } from './components/member-table/member-table.component';
 import { MemberUpdateFormComponent } from './components/member-update-form/member-update-form.component';
+import { MemberProfilePictureComponent } from './components/member-profile-picture/member-profile-picture.component';
+import { MemberIdPictureComponent } from './pages/member-id-picture/member-id-picture.component';
+import { MemberProfilePictureUploadComponent } from './components/member-profile-picture-upload/member-profile-picture-upload.component';
 
 @NgModule({
   imports: [
@@ -34,16 +37,19 @@ import { MemberUpdateFormComponent } from './components/member-update-form/membe
     SelectModule,
     TableModule,
     SharedModule,
+    FileUploaderModule,
   ],
   declarations: [
     MemberIndexComponent,
     MemberIdComponent,
-    MemberBreadcrumbComponent,
     MemberCreateModalComponent,
     MemberRemoveButtonComponent,
     MemberTableComponent,
     MemberUpdateFormComponent,
     MemberStatusPipe,
+    MemberProfilePictureComponent,
+    MemberIdPictureComponent,
+    MemberProfilePictureUploadComponent,
   ],
   providers: [MemberStatusPipe],
 })

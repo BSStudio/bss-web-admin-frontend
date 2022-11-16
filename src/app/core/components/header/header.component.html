@@ -1,9 +1,0 @@
-<ibm-header brand="BSS" name="site-admin" [route]="['']" [useRouter]="true">
-  <ibm-hamburger class="bx--header__menu-toggle__hidden" (selected)="toggleHamburger()"></ibm-hamburger>
-  <ibm-header-navigation [navigationItems]="navigationItems"></ibm-header-navigation>
-  <ibm-sidenav
-    *ngIf="hasHamburger"
-    [navigationItems]="navigationItems"
-    class="bx--header__menu-toggle__hidden"
-  ></ibm-sidenav>
-</ibm-header>

@@ -1,23 +1,17 @@
-<app-member-breadcrumb [name]="member.name"></app-member-breadcrumb>
-<section>
+<app-breadcrumb [title]="member.name" route="member" routeName="Members" i18n-routeName></app-breadcrumb>
+<section class="title">
   <h1 i18n>Update member</h1>
   <app-member-remove-button [member]="member"></app-member-remove-button>
 </section>
-<figure>
-  <picture>
-    <source type="image/avif" srcset="/media/member/{{member.id}}/profile-picture.avif#{{ imgDate }}" />
-    <source type="image/webp" srcset="/media/member/{{member.id}}/profile-picture.webp#{{ imgDate }}" />
-    <source type="image/jpeg" srcset="/media/member/{{member.id}}/profile-picture.jpeg#{{ imgDate }}" />
-    <img
-      #img
-      src="/assets/fallback.jpg"
-      decoding="async"
-      loading="lazy"
-      width="120"
-      alt="{{ member.name }}'s profile picture"
-      i18n-alt
-    />
-  </picture>
-  <figcaption>{{ img.alt }}</figcaption>
-</figure>
-<app-member-update-form [member]="member" (update)="setMember($event)"></app-member-update-form>
+<section class="profile-picture">
+  <h2 i18n>Profile picture</h2>
+  <app-member-profile-picture #picture [member]="member"></app-member-profile-picture>
+  <app-member-profile-picture-upload
+    [memberId]="member.id"
+    (update)="updateImage()"
+  ></app-member-profile-picture-upload>
+</section>
+<section class="details">
+  <h2 i18n>Details</h2>
+  <app-member-update-form [member]="member" (update)="setMember($event)"></app-member-update-form>
+</section>

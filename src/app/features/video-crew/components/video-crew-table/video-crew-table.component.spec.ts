@@ -8,9 +8,8 @@ describe('VideoCrewTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoCrewTableComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoCrewTableComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VideoCrewTableComponent);
     component = fixture.componentInstance;

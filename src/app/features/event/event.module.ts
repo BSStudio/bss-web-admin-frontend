@@ -14,7 +14,6 @@ import {
 import { EventRoutingModule } from './pages/event-routing.module';
 import { EventIndexComponent } from './pages/event-index/event-index.component';
 import { EventIdComponent } from './pages/event-id/event-id.component';
-import { EventBreadcrumbComponent } from './components/event-breadcrumb/event-breadcrumb.component';
 import { EventCreateModalComponent } from './components/event-create-modal/event-create-modal.component';
 import { EventTableComponent } from './components/event-table/event-table.component';
 import { EventUpdateFormComponent } from './components/event-update-form/event-update-form.component';
@@ -40,7 +39,6 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     EventIndexComponent,
     EventIdComponent,
-    EventBreadcrumbComponent,
     EventCreateModalComponent,
     EventTableComponent,
     EventUpdateFormComponent,

@@ -4,20 +4,20 @@
     <h3 ibmModalHeaderHeading i18n>Add crew member to video</h3>
   </ibm-modal-header>
   <form ibmModalContent [hasForm]="true" [formGroup]="form">
-    <ibm-label>
-      <ng-container i18n>Position</ng-container>
-      <input ibmText formControlName="position" list="positions" />
-      <datalist id="positions">
-        <option *ngFor="let position of positions" value="{{ position }}">{{ position }}</option>
-      </datalist>
-    </ibm-label>
-    <ibm-label>
-      <ng-container i18n>Member</ng-container>
-      <input ibmText formControlName="memberId" list="members" />
-      <datalist id="members">
-        <option *ngFor="let member of members" value="{{ member.id }}">{{ member.name }}</option>
-      </datalist>
-    </ibm-label>
+    <ibm-combo-box
+      formControlName="position"
+      type="single"
+      label="Position"
+      i18n-label
+      [items]="positions"
+      (keyup.enter)="addPosition()"
+      (search)="updatePositionSearch($event)"
+    >
+      <ibm-dropdown-list></ibm-dropdown-list>
+    </ibm-combo-box>
+    <ibm-combo-box formControlName="member" type="single" label="Member" i18n-label [items]="members">
+      <ibm-dropdown-list></ibm-dropdown-list>
+    </ibm-combo-box>
   </form>
   <ibm-modal-footer>
     <button ibmButton="primary" i18n (click)="onSubmit()" style="order: 1">Add crew member</button>

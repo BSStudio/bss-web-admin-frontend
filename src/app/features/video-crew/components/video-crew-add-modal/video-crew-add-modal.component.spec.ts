@@ -8,9 +8,8 @@ describe('VideoCrewAddModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VideoCrewAddModalComponent ]
-    })
-    .compileComponents();
+      declarations: [VideoCrewAddModalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(VideoCrewAddModalComponent);
     component = fixture.componentInstance;

@@ -8,9 +8,8 @@ describe('MemberRemoveButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MemberRemoveButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [MemberRemoveButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MemberRemoveButtonComponent);
     component = fixture.componentInstance;

@@ -18,7 +18,7 @@ import { VideoCrewAddModalComponent } from '../video-crew-add-modal/video-crew-a
 import { CrewMember } from '../../models';
 
 @Component({
-  selector: 'app-video-crew-table',
+  selector: 'app-video-crew-table[video]',
   templateUrl: './video-crew-table.component.html',
 })
 export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {

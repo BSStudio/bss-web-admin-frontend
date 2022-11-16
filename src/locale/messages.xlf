@@ -83,8 +83,8 @@
       <trans-unit id="4814285799071780083" datatype="html">
         <source>Remove</source>
       </trans-unit>
-      <trans-unit id="8485665425556786941" datatype="html">
-        <source>Profile picture URL</source>
+      <trans-unit id="4703848376604347254" datatype="html">
+        <source>Profile picture</source>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
@@ -131,15 +131,6 @@
       <trans-unit id="8598886608217248074" datatype="html">
         <source>URL:</source>
       </trans-unit>
-      <trans-unit id="754458703925559980" datatype="html">
-        <source>Video URL:</source>
-      </trans-unit>
-      <trans-unit id="2297593363061209805" datatype="html">
-        <source>Thumbnail URL:</source>
-      </trans-unit>
-      <trans-unit id="3475972414706488563" datatype="html">
-        <source>Visible:</source>
-      </trans-unit>
       <trans-unit id="6996799422725544865" datatype="html">
         <source>Description:</source>
       </trans-unit>
@@ -185,16 +176,11 @@
       <trans-unit id="1286456175280712856" datatype="html">
         <source>Update event</source>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ title }}"/>
-        </source>
-      </trans-unit>
       <trans-unit id="218403386307979629" datatype="html">
         <source>Metadata</source>
       </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
+        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
       </trans-unit>
       <trans-unit id="3595107845551842320" datatype="html">
         <source>Manage event videos</source>
@@ -258,6 +244,12 @@
       </trans-unit>
       <trans-unit id="969237518420234961" datatype="html">
         <source>Add crew member to video</source>
+      </trans-unit>
+      <trans-unit id="1977062148284014024" datatype="html">
+        <source>Drop picture here or click to browse</source>
+      </trans-unit>
+      <trans-unit id="5028777105388019087" datatype="html">
+        <source>Details</source>
       </trans-unit>
     </body>
   </file>

@@ -102,9 +102,9 @@
         <source>Remove</source>
         <target>Eltávolítás</target>
       </trans-unit>
-      <trans-unit id="8485665425556786941" datatype="html">
-        <source>Profile picture URL</source>
-        <target>Profil kép URL</target>
+      <trans-unit id="4703848376604347254" datatype="html">
+        <source>Profile picture</source>
+        <target state="new">Profil kép URL</target>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
@@ -157,18 +157,6 @@
       <trans-unit id="2517309683610083249" datatype="html">
         <source>Title:</source>
         <target>Cím:</target>
-      </trans-unit>
-      <trans-unit id="754458703925559980" datatype="html">
-        <source>Video URL:</source>
-        <target>Videó URL:</target>
-      </trans-unit>
-      <trans-unit id="2297593363061209805" datatype="html">
-        <source>Thumbnail URL:</source>
-        <target>Miniatűr URL:</target>
-      </trans-unit>
-      <trans-unit id="3475972414706488563" datatype="html">
-        <source>Visible:</source>
-        <target>Látható:</target>
       </trans-unit>
       <trans-unit id="6996799422725544865" datatype="html">
         <source>Description:</source>
@@ -287,8 +275,8 @@
         <target state="new">Lorem ipsum</target>
       </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
-        <target><x id="INTERPOLATION" equiv-text="{{ member.name }}"/> profil képe</target>
+        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
+        <target state="new"><x id="INTERPOLATION" equiv-text="{{ member.name }}"/> profil képe</target>
       </trans-unit>
       <trans-unit id="969237518420234961" datatype="html">
         <source>Add crew member to video</source>
@@ -310,21 +298,13 @@
         <source>Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</source>
         <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</target>
       </trans-unit>
-      <trans-unit id="187187500641108332" datatype="html">
-        <source>
-          <x id="INTERPOLATION" equiv-text="{{ title }}"/>
-        </source>
-        <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ title }}"/>
-        </target>
-      </trans-unit>
       <trans-unit id="4674214119910891625" datatype="html">
         <source>No videos</source>
-        <target state="new">No videos</target>
+        <target>Nincsenek videók</target>
       </trans-unit>
       <trans-unit id="4777323515857731788" datatype="html">
         <source>Upload date</source>
-        <target state="new">Upload date</target>
+        <target>Feltöltés dátuma</target>
       </trans-unit>
       <trans-unit id="8598886608217248074" datatype="html">
         <source>URL:</source>
@@ -332,19 +312,27 @@
       </trans-unit>
       <trans-unit id="4021752662928002901" datatype="html">
         <source>Update</source>
-        <target state="new">Update</target>
+        <target>Frissítés</target>
       </trans-unit>
       <trans-unit id="6341579314680269534" datatype="html">
         <source>Error updating</source>
-        <target state="new">Error updating</target>
+        <target>Hiba történt frissítés közben</target>
       </trans-unit>
       <trans-unit id="5384144615229196930" datatype="html">
         <source>Crew</source>
-        <target state="new">Crew</target>
+        <target>Stáb</target>
       </trans-unit>
       <trans-unit id="7033014824731925315" datatype="html">
         <source>Remove video</source>
-        <target state="new">Remove video</target>
+        <target>Videó eltávolítása</target>
+      </trans-unit>
+      <trans-unit id="1977062148284014024" datatype="html">
+        <source>Drop picture here or click to browse</source>
+        <target>Húzd ide a képet vagy kattints a kiválasztáshoz</target>
+      </trans-unit>
+      <trans-unit id="5028777105388019087" datatype="html">
+        <source>Details</source>
+        <target>Részletek</target>
       </trans-unit>
     </body>
   </file>

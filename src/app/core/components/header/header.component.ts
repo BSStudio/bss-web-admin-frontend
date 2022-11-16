@@ -3,15 +3,24 @@ import { NavigationItem } from 'carbon-components-angular';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  template: `
+    <ibm-header brand="BSS" name="site-admin" [route]="['']" [useRouter]="true">
+      <ibm-hamburger class="bx--header__menu-toggle__hidden" (selected)="toggleHamburger()"></ibm-hamburger>
+      <ibm-header-navigation [navigationItems]="navigationItems"></ibm-header-navigation>
+      <ibm-sidenav
+        *ngIf="hasHamburger"
+        [navigationItems]="navigationItems"
+        class="bx--header__menu-toggle__hidden"
+      ></ibm-sidenav>
+    </ibm-header>
+  `,
 })
 export class HeaderComponent {
-  hasHamburger = false;
-  navigationItems: NavigationItem[] = [
-    { content: $localize`Videos`, type: 'item', route: ['video'], href: 'video' },
-    { content: $localize`Events`, type: 'item', route: ['event'], href: 'event' },
-    { content: $localize`Members`, type: 'item', route: ['member'], href: 'member' },
+  public hasHamburger = false;
+  public readonly navigationItems: NavigationItem[] = [
+    { type: 'item', content: $localize`Videos`, route: ['video'], href: 'video' },
+    { type: 'item', content: $localize`Events`, route: ['event'], href: 'event' },
+    { type: 'item', content: $localize`Members`, route: ['member'], href: 'member' },
   ];
 
   public toggleHamburger() {

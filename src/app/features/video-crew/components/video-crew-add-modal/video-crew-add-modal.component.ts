@@ -3,9 +3,13 @@ import { concatMap, from, map, Subject, takeUntil, tap, toArray } from 'rxjs';
 import { VideoCrewService } from '../../services/video-crew.service';
 import { MemberService } from '../../../member/services/member.service';
 import { DetailedVideo } from '../../../video/models';
-import { BaseModal } from 'carbon-components-angular';
+import { BaseModal, ListItem } from 'carbon-components-angular';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CrewMember } from '../../models';
+
+interface MemberListItem extends ListItem {
+  id: string;
+}
 
 @Component({
   selector: 'app-video-crew-add-modal',
@@ -13,9 +17,10 @@ import { CrewMember } from '../../models';
 })
 export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<boolean>();
-  public positions: string[] = [];
-  public members: { name: string; id: string }[] = [];
-  public form: FormGroup<{ memberId: FormControl<string>; position: FormControl<string> }>;
+  public positionSearch = '';
+  public positions: ListItem[] = [];
+  public members: MemberListItem[] = [];
+  public form: FormGroup<{ member: FormControl<MemberListItem | null>; position: FormControl<ListItem | null> }>;
 
   constructor(
     private fb: FormBuilder,
@@ -25,7 +30,10 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     @Inject('update') private update: EventEmitter<DetailedVideo>
   ) {
     super();
-    this.form = this.fb.nonNullable.group({ memberId: '', position: '' });
+    this.form = this.fb.group({
+      member: this.fb.control<MemberListItem | null>(null),
+      position: this.fb.nonNullable.control<ListItem | null>(null),
+    });
   }
 
   ngOnInit() {
@@ -37,6 +45,9 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     this.service
       .getPositions()
       .pipe(
+        concatMap((positions) => from(positions)),
+        map((position): ListItem => ({ content: position, selected: false })),
+        toArray(),
         tap((positions) => (this.positions = positions)),
         takeUntil(this.destroy$)
       )
@@ -48,7 +59,7 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
       .getMembers()
       .pipe(
         concatMap((members) => from(members)),
-        map(({ id, name }) => ({ name, id })),
+        map(({ id, name }): MemberListItem => ({ content: name, id, selected: false })),
         toArray(),
         tap((members) => (this.members = members)),
         takeUntil(this.destroy$)
@@ -57,8 +68,9 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      this.addCrewMember(this.form.getRawValue());
+    const crewMember = this.form.getRawValue();
+    if (this.form.valid && crewMember.member !== null && crewMember.position !== null) {
+      this.addCrewMember(new CrewMember(crewMember.position.content, crewMember.member.id));
     }
   }
 
@@ -71,6 +83,18 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
         takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+
+  addPosition() {
+    const newPosition = { content: this.positionSearch, selected: true };
+    this.positions = [newPosition, ...this.positions.map(({ content }) => ({ content, selected: false }))];
+    this.form.patchValue({
+      position: newPosition,
+    });
+  }
+
+  updatePositionSearch(positionSearch: string) {
+    this.positionSearch = positionSearch;
   }
 
   ngOnDestroy() {

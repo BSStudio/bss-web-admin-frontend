@@ -20,6 +20,7 @@ type MemberFormGroup = FormGroup<{
 @Component({
   selector: 'app-member-update-form[member]',
   templateUrl: './member-update-form.component.html',
+  styleUrls: ['./member-update-form.component.scss'],
 })
 export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
   @Input() public member!: Member;

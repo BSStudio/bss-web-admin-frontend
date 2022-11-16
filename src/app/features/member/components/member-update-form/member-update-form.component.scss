@@ -1,0 +1,9 @@
+@import "@carbon/elements/scss/layout";
+
+form {
+  display: grid;
+  grid-gap: $spacing-03;
+  button {
+    justify-self: end;
+  }
+}

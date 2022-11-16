@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseModal, NotificationService } from 'carbon-components-angular';
 import { EventService } from '../../services/event.service';
 import { CreateEvent } from '../../models';
-import { Subject, takeUntil } from 'rxjs';
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-event-create-modal',
@@ -34,11 +34,15 @@ export class EventCreateModalComponent extends BaseModal implements OnDestroy {
   private createEvent(createEvent: CreateEvent) {
     this.service
       .createEvent(createEvent)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => this.close.emit(true),
-        error: (err) => this.onErrorNotification(err),
-      });
+      .pipe(
+        tap(() => this.close.emit(true)),
+        catchError((err) => {
+          this.onErrorNotification(err);
+          return EMPTY;
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
   }
 
   private onErrorNotification(err: unknown) {
