@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventUpdateFormComponent } from './event-update-form.component';
 
-describe('EventUpdateFormComponent', () => {
+xdescribe('EventUpdateFormComponent', () => {
   let component: EventUpdateFormComponent;
   let fixture: ComponentFixture<EventUpdateFormComponent>;
 

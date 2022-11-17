@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventVideoAddModalComponent } from './event-video-add-modal.component';
 
-describe('EventVideoAddModalComponentComponent', () => {
+xdescribe('EventVideoAddModalComponent', () => {
   let component: EventVideoAddModalComponent;
   let fixture: ComponentFixture<EventVideoAddModalComponent>;
 

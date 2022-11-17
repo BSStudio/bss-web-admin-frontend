@@ -25,6 +25,6 @@ export class EventService {
   }
 
   deleteEvent(eventId: string) {
-    return this.http.delete(`/api/v1/event/${eventId}`);
+    return this.http.delete<void>(`/api/v1/event/${eventId}`);
   }
 }

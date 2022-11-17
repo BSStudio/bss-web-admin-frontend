@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthenticationInterceptor } from './authentication.interceptor';
-import { HttpRequest } from '@angular/common/http';
 
 describe('AuthenticationInterceptor', () => {
-  let interceptor: AuthenticationInterceptor = TestBed.inject(AuthenticationInterceptor);
+  let interceptor: AuthenticationInterceptor;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -15,10 +14,5 @@ describe('AuthenticationInterceptor', () => {
 
   it('should be created', () => {
     expect(interceptor).toBeTruthy();
-  });
-
-  it('should update header', () => {
-    const httpRequest = new HttpRequest('GET', 'test');
-    // todo interceptor.intercept(httpRequest, httpHandler );
   });
 });

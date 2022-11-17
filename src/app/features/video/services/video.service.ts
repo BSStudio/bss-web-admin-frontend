@@ -34,6 +34,6 @@ export class VideoService {
   }
 
   removeVideo(videoId: string) {
-    return this.http.delete(`/api/v1/video/${videoId}`);
+    return this.http.delete<void>(`/api/v1/video/${videoId}`);
   }
 }

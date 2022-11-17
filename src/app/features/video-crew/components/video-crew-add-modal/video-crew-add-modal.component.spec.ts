@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VideoCrewAddModalComponent } from './video-crew-add-modal.component';
 
-describe('VideoCrewAddModalComponent', () => {
+xdescribe('VideoCrewAddModalComponent', () => {
   let component: VideoCrewAddModalComponent;
   let fixture: ComponentFixture<VideoCrewAddModalComponent>;
 

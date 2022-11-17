@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MemberProfilePictureComponent } from './member-profile-picture.component';
 
-describe('MemberProfilePictureComponent', () => {
+xdescribe('MemberProfilePictureComponent', () => {
   let component: MemberProfilePictureComponent;
   let fixture: ComponentFixture<MemberProfilePictureComponent>;
 
