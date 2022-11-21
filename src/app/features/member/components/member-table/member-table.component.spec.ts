@@ -1,22 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MemberTableComponent } from './member-table.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { MemberModule } from '../../member.module';
 
-xdescribe('MemberTableComponent', () => {
-  let component: MemberTableComponent;
-  let fixture: ComponentFixture<MemberTableComponent>;
+describe('MemberTableComponent', () => {
+  beforeEach(() => MockBuilder(MemberTableComponent, MemberModule));
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MemberTableComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(MemberTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  xit('should create', () => {
+    const fixture = MockRender(MemberTableComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { VideoUpdateFormComponent } from './video-update-form.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { VideoModule } from '../../video.module';
+import { DetailedVideo } from '../../models';
+import { FormBuilder } from '@angular/forms';
 
-xdescribe('VideoUpdateFormComponent', () => {
-  let component: VideoUpdateFormComponent;
-  let fixture: ComponentFixture<VideoUpdateFormComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [VideoUpdateFormComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(VideoUpdateFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('VideoUpdateFormComponent', () => {
+  beforeEach(() => MockBuilder([VideoUpdateFormComponent, FormBuilder], VideoModule));
+  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, []);
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = MockRender(VideoUpdateFormComponent, { video: detailedVideo });
+    expect(fixture.componentInstance.video).toEqual(detailedVideo);
   });
 });

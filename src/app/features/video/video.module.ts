@@ -8,6 +8,7 @@ import {
   IconModule,
   ModalModule,
   NFormsModule,
+  NotificationModule,
   PaginationModule,
   TableModule,
 } from 'carbon-components-angular';
@@ -32,6 +33,7 @@ import { SharedModule } from '../../shared/shared.module';
     IconModule,
     ModalModule,
     NFormsModule,
+    NotificationModule,
     PaginationModule,
     TableModule,
     VideoRoutingModule,

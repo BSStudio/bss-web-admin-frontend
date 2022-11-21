@@ -12,7 +12,7 @@ import { Video } from '../../../video/models';
   templateUrl: './event-video-add-modal.component.html',
 })
 export class EventVideoAddModalComponent extends BaseModal implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
   public readonly form: FormGroup<{
     videoId: FormControl<{ selected: boolean; content: string; id: string }>;
   }>;
@@ -60,7 +60,7 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

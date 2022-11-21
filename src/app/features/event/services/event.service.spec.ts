@@ -70,7 +70,10 @@ describe('EventService', () => {
     const service = ngMocks.findInstance(EventService);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    service.deleteEvent(eventId).subscribe({ complete: () => done() });
+    service
+      .deleteEvent(eventId)
+      .pipe(tap(() => expect().nothing()))
+      .subscribe({ complete: () => done() });
 
     httpMock.expectOne((req) => req.method === 'DELETE' && req.url === `/api/v1/event/${eventId}`).flush(null);
     httpMock.verify();

@@ -11,7 +11,7 @@ import { Subject, takeUntil, tap } from 'rxjs';
 })
 export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
   public readonly createVideoForm: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private fb: FormBuilder, private videoService: VideoService) {
     super();
@@ -38,7 +38,7 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

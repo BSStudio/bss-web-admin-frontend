@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class MemberTableComponent implements OnInit, OnDestroy {
   public readonly table = new TableModel();
   public searchValue = '';
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private router: Router,
@@ -97,7 +97,7 @@ export class MemberTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

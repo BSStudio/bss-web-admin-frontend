@@ -11,7 +11,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class MemberCreateModalComponent extends BaseModal implements OnDestroy {
   public form: FormGroup<{ name: FormControl<string>; url: FormControl<string> }>;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private service: MemberService,
@@ -42,7 +42,7 @@ export class MemberCreateModalComponent extends BaseModal implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

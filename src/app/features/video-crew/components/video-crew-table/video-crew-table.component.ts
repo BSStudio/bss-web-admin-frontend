@@ -27,7 +27,7 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('removeCrewMemberCell', { static: true })
   protected removeCrewMemberCell!: TemplateRef<any>;
   public readonly table = new TableModel();
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private service: VideoCrewService, private modalService: ModalService) {}
 
@@ -75,7 +75,7 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

@@ -27,7 +27,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
   @Output() public update = new EventEmitter<Member>();
   public readonly form: MemberFormGroup;
   public readonly statuses: MemberStatus[] = Object.values(MemberStatus);
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -76,7 +76,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

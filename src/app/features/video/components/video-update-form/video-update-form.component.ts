@@ -19,7 +19,7 @@ type UpdateVideoForm = FormGroup<{
   styleUrls: ['./video-update-form.component.scss'],
 })
 export class VideoUpdateFormComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<boolean>();
+  private destroy$ = new Subject<void>();
   public form: UpdateVideoForm;
 
   @Input() public video!: DetailedVideo;
@@ -96,7 +96,7 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

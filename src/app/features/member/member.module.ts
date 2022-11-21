@@ -8,6 +8,7 @@ import {
   IconModule,
   ModalModule,
   NFormsModule,
+  NotificationModule,
   SelectModule,
   TableModule,
 } from 'carbon-components-angular';
@@ -33,6 +34,7 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     GridModule,
     IconModule,
     ModalModule,
+    NotificationModule,
     NFormsModule,
     SelectModule,
     TableModule,

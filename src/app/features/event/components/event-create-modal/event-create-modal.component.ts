@@ -11,7 +11,7 @@ import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
 })
 export class EventCreateModalComponent extends BaseModal implements OnDestroy {
   public readonly form: FormGroup<{ url: FormControl<string>; title: FormControl<string> }>;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private service: EventService,
@@ -50,7 +50,7 @@ export class EventCreateModalComponent extends BaseModal implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

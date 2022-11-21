@@ -11,7 +11,7 @@ import { MemberProfilePictureComponent } from '../../components/member-profile-p
 })
 export class MemberIdComponent implements OnDestroy {
   public member: Member;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
   @ViewChild('picture', { static: true })
   public picture!: MemberProfilePictureComponent;
 
@@ -23,12 +23,12 @@ export class MemberIdComponent implements OnDestroy {
     this.picture.updateImage();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
-
   setMember(member: Member) {
     this.member = member;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.unsubscribe();
   }
 }

@@ -1,22 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MemberProfilePictureUploadComponent } from './member-profile-picture-upload.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { MemberModule } from '../../member.module';
 
-xdescribe('MemberProfilePictureUploadComponent', () => {
-  let component: MemberProfilePictureUploadComponent;
-  let fixture: ComponentFixture<MemberProfilePictureUploadComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MemberProfilePictureUploadComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(MemberProfilePictureUploadComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('MemberProfilePictureUploadComponent', () => {
+  beforeEach(() => MockBuilder(MemberProfilePictureUploadComponent, MemberModule));
+  const memberId = 'memberId';
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = MockRender(MemberProfilePictureUploadComponent, { memberId });
+
+    expect(fixture.componentInstance.memberId).toEqual(memberId);
   });
 });

@@ -15,7 +15,7 @@ import { VideoService } from '../../services/video.service';
   `,
 })
 export class VideoRemoveButtonComponent implements OnDestroy {
-  private destroy$ = new Subject<boolean>();
+  private destroy$ = new Subject<void>();
   @Input() public video!: DetailedVideo;
 
   constructor(private router: Router, private service: VideoService, private modalService: ModalService) {}
@@ -45,7 +45,7 @@ export class VideoRemoveButtonComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

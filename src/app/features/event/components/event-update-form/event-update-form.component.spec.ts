@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventUpdateFormComponent } from './event-update-form.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { EventModule } from '../../event.module';
+import { Event } from '../../models';
+import { FormBuilder } from '@angular/forms';
 
-xdescribe('EventUpdateFormComponent', () => {
-  let component: EventUpdateFormComponent;
-  let fixture: ComponentFixture<EventUpdateFormComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EventUpdateFormComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(EventUpdateFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('EventUpdateFormComponent', () => {
+  beforeEach(() => MockBuilder([EventUpdateFormComponent, FormBuilder], EventModule));
+  const event = new Event('id', 'url', 'title', 'description', 'date', true);
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = MockRender(EventUpdateFormComponent, { event });
+    expect(fixture.componentInstance.event).toEqual(event);
   });
 });

@@ -20,7 +20,7 @@ export class EventUpdateFormComponent implements OnInit, OnDestroy {
     date: FormControl<string>;
     visible: FormControl<boolean>;
   }>;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -76,7 +76,7 @@ export class EventUpdateFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

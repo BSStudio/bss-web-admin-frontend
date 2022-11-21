@@ -15,7 +15,7 @@ import { PaginatedResponse } from '../../../../shared/models';
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
   readonly table = new TableModel();
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private service: VideoService,
@@ -100,7 +100,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

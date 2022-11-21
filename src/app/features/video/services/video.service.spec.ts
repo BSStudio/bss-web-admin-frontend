@@ -108,7 +108,7 @@ describe('VideoService', () => {
         (req) =>
           req.method === 'PUT' &&
           req.urlWithParams ===
-            `/api/v1/video?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${visible}` })}`
+            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${visible}` })}`
       )
       .flush(videoIds);
     httpMock.verify();
@@ -128,7 +128,8 @@ describe('VideoService', () => {
       .expectOne(
         (req) =>
           req.method === 'PUT' &&
-          req.urlWithParams === `/api/v1/video?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${false}` })}`
+          req.urlWithParams ===
+            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${false}` })}`
       )
       .flush(videoIds);
     httpMock.verify();
@@ -149,11 +150,14 @@ describe('VideoService', () => {
     httpMock.verify();
   });
 
-  it('should update a video', (done) => {
+  it('should remove a video', (done) => {
     const service = ngMocks.findInstance(VideoService);
     const httpMock = ngMocks.findInstance(HttpTestingController);
 
-    service.removeVideo(videoId).subscribe({ complete: () => done() });
+    service
+      .removeVideo(videoId)
+      .pipe(tap(() => expect().nothing()))
+      .subscribe({ complete: () => done() });
 
     httpMock
       .expectOne((req) => req.method === 'DELETE' && req.urlWithParams === `/api/v1/video/${videoId}`)

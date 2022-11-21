@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MemberRemoveButtonComponent } from './member-remove-button.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { MemberModule } from '../../member.module';
+import { Member } from '../../models/member.model';
+import { MemberStatus } from '../../models/member-status.model';
 
-xdescribe('MemberRemoveButtonComponent', () => {
-  let component: MemberRemoveButtonComponent;
-  let fixture: ComponentFixture<MemberRemoveButtonComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MemberRemoveButtonComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(MemberRemoveButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('MemberRemoveButtonComponent', () => {
+  beforeEach(() => MockBuilder(MemberRemoveButtonComponent, MemberModule));
+  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false);
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = MockRender(MemberRemoveButtonComponent, { member });
+    expect(fixture.componentInstance.member).toEqual(member);
   });
 });

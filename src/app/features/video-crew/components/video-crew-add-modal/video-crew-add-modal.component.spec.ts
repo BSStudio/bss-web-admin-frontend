@@ -1,22 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { VideoCrewAddModalComponent } from './video-crew-add-modal.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { VideoCrewModule } from '../../video-crew.module';
+import { FormBuilder } from '@angular/forms';
 
-xdescribe('VideoCrewAddModalComponent', () => {
-  let component: VideoCrewAddModalComponent;
-  let fixture: ComponentFixture<VideoCrewAddModalComponent>;
+describe('VideoCrewAddModalComponent', () => {
+  beforeEach(() => MockBuilder([VideoCrewAddModalComponent, FormBuilder], VideoCrewModule));
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [VideoCrewAddModalComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(VideoCrewAddModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  xit('should create', () => {
+    const fixture = MockRender(VideoCrewAddModalComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

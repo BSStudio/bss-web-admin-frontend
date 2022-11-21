@@ -9,6 +9,7 @@ import {
   IconModule,
   ModalModule,
   NFormsModule,
+  NotificationModule,
   TableModule,
 } from 'carbon-components-angular';
 import { EventRoutingModule } from './pages/event-routing.module';
@@ -31,6 +32,7 @@ import { SharedModule } from '../../shared/shared.module';
     DatePickerModule,
     IconModule,
     ModalModule,
+    NotificationModule,
     NFormsModule,
     TableModule,
     EventRoutingModule,

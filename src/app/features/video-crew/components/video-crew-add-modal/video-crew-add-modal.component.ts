@@ -16,7 +16,7 @@ interface MemberListItem extends ListItem {
   templateUrl: './video-crew-add-modal.component.html',
 })
 export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
   public positionSearch = '';
   public positions: ListItem[] = [];
   public members: MemberListItem[] = [];
@@ -98,7 +98,7 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
   `,
 })
 export class MemberRemoveButtonComponent implements OnDestroy {
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
   @Input() member!: Member;
 
   constructor(
@@ -58,7 +58,7 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

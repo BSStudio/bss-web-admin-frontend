@@ -1,22 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MemberIdPictureComponent } from './member-id-picture.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { MemberModule } from '../../member.module';
 
-xdescribe('MemberIdPictureComponent', () => {
-  let component: MemberIdPictureComponent;
-  let fixture: ComponentFixture<MemberIdPictureComponent>;
+describe('MemberIdPictureComponent', () => {
+  beforeEach(() => MockBuilder(MemberIdPictureComponent, MemberModule));
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [MemberIdPictureComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(MemberIdPictureComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  xit('should create', () => {
+    const fixture = MockRender(MemberIdPictureComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

@@ -1,21 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileItem } from 'carbon-components-angular';
-import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { MemberMediaService } from '../../services/member-media.service';
 
 @Component({
   selector: 'app-member-profile-picture-upload',
   templateUrl: './member-profile-picture-upload.component.html',
   styleUrls: ['./member-profile-picture-upload.component.scss'],
 })
-export class MemberProfilePictureUploadComponent implements OnInit {
+export class MemberProfilePictureUploadComponent {
   @Input() memberId: string = '';
   @Output() update = new EventEmitter<void>();
   public files = new Set<FileItem>();
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {}
+  constructor(private mediaService: MemberMediaService) {}
 
   upload() {
     if (this.files.size !== 1) return;
@@ -26,13 +25,10 @@ export class MemberProfilePictureUploadComponent implements OnInit {
         file.invalidText = 'File is bigger than 25MB';
         return;
       }
-      const formData = new FormData();
-      formData.append('file', file.file);
-      const events$ = this.http.post(`/media/api/v1/member/${this.memberId}/image`, formData, {
-        reportProgress: true,
-        observe: 'events',
-      });
-      events$.pipe(tap((event) => this.onHttpEventUpdate(event, file))).subscribe();
+      this.mediaService
+        .uploadPicture(this.memberId, file.file)
+        .pipe(tap((event) => this.onHttpEventUpdate(event, file)))
+        .subscribe();
     });
   }
 

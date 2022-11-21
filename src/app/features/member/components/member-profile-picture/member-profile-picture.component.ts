@@ -30,8 +30,6 @@ export class MemberProfilePictureComponent implements OnInit {
   }
 
   updateImage() {
-    // this.refreshParam = '#' + new Date().getTime();
-    // todo remove
     this.refreshParam = '?' + new URLSearchParams({ t: new Date().getTime().toString() }).toString();
   }
 }

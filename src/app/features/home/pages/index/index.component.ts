@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'carbon-components-angular';
 
 @Component({
   selector: 'app-index',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
     <app-metrics></app-metrics>
   `,
 })
-export class IndexComponent {}
+export class IndexComponent implements OnInit {
+  constructor(private service: NotificationService) {}
+
+  ngOnInit(): void {
+    this.service.showToast({ type: 'alert', title: 'Toast' });
+  }
+}

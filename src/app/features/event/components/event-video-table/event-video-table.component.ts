@@ -38,7 +38,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   protected removeButtonCell!: TemplateRef<any>;
   @ViewChild('navigateCell', { static: true })
   protected navigateCell!: TemplateRef<any>;
-  private readonly destroy$ = new Subject<boolean>();
+  private readonly destroy$ = new Subject<void>();
   public readonly table = new TableModel();
 
   constructor(
@@ -132,7 +132,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
+    this.destroy$.next();
     this.destroy$.unsubscribe();
   }
 }

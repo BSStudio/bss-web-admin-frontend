@@ -1,22 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { VideoCrewTableComponent } from './video-crew-table.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { VideoCrewModule } from '../../video-crew.module';
+import { DetailedVideo } from '../../../video/models';
 
-xdescribe('VideoCrewTableComponent', () => {
-  let component: VideoCrewTableComponent;
-  let fixture: ComponentFixture<VideoCrewTableComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [VideoCrewTableComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(VideoCrewTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('VideoCrewTableComponent', () => {
+  beforeEach(() => MockBuilder(VideoCrewTableComponent, VideoCrewModule));
+  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, []);
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = MockRender(VideoCrewTableComponent, { detailedVideo });
+
+    expect(fixture.componentInstance.detailedVideo).toEqual(detailedVideo);
   });
 });
