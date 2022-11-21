@@ -5,14 +5,14 @@
   <form ibmModalContent [hasForm]="true" [formGroup]="form">
     <ibm-label>
       <ng-container i18n>Title</ng-container>
-      <input ibmText i18n-placeholder formControlName="title" placeholder="Simonyi Conference 2022" />
+      <input ibmText formControlName="title" placeholder="Simonyi Conference 2022" i18n-placeholder />
     </ibm-label>
     <ibm-label
-      i18n-helperText
       helperText="The event will have the following url: https://bsstudio/member/simonyi-conference-2022"
+      i18n-helperText
     >
-      <ng-container i18n>Url</ng-container>
-      <input ibmText i18n-placeholder formControlName="url" placeholder="simonyi-conference-2022" />
+      <ng-container i18n>URL</ng-container>
+      <input ibmText formControlName="url" placeholder="simonyi-conference-2022" i18n-placeholder />
     </ibm-label>
   </form>
   <ibm-modal-footer>

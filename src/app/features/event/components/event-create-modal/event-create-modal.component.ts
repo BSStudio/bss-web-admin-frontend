@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BaseModal, NotificationService } from 'carbon-components-angular';
 import { EventService } from '../../services/event.service';
 import { CreateEvent } from '../../models';
@@ -19,9 +19,9 @@ export class EventCreateModalComponent extends BaseModal implements OnDestroy {
     private notificationService: NotificationService
   ) {
     super();
-    this.form = this.fb.nonNullable.group<CreateEvent>({
-      url: '',
-      title: '',
+    this.form = this.fb.nonNullable.group({
+      url: this.fb.nonNullable.control('', Validators.required),
+      title: this.fb.nonNullable.control('', Validators.required),
     });
   }
 
@@ -46,7 +46,11 @@ export class EventCreateModalComponent extends BaseModal implements OnDestroy {
   }
 
   private onErrorNotification(err: unknown) {
-    this.notificationService.showToast({ message: JSON.stringify(err), type: 'error', title: 'Error' });
+    this.notificationService.showToast({
+      type: 'error',
+      title: $localize`Error creating event`,
+      message: JSON.stringify(err),
+    });
   }
 
   ngOnDestroy() {
