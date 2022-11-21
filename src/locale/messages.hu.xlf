@@ -334,6 +334,38 @@
         <source>Details</source>
         <target>Részletek</target>
       </trans-unit>
+      <trans-unit id="6127056449999067052" datatype="html">
+        <source>Event created</source>
+        <target state="new">Event created</target>
+      </trans-unit>
+      <trans-unit id="2096235085899065051" datatype="html">
+        <source>Error creating event</source>
+        <target state="new">Error creating event</target>
+      </trans-unit>
+      <trans-unit id="7806458199320279074" datatype="html">
+        <source>Remove video from event</source>
+        <target state="new">Remove video from event</target>
+      </trans-unit>
+      <trans-unit id="5858752999282328934" datatype="html">
+        <source>Are you sure you want to remove this video?</source>
+        <target state="new">Are you sure you want to remove this video?</target>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+      </trans-unit>
+      <trans-unit id="4416290763660062288" datatype="html">
+        <source/>
+        <target state="new"/>
+      </trans-unit>
+      <trans-unit id="1293054139849691764" datatype="html">
+        <source>Error removing video</source>
+        <target state="new">Error removing video</target>
+      </trans-unit>
+      <trans-unit id="2375149812897946334" datatype="html">
+        <source>Uploaded at</source>
+        <target state="new">Uploaded at</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

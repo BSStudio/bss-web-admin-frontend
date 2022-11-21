@@ -5,7 +5,12 @@ import { DetailedEvent } from '../../models';
 @Component({
   selector: 'app-video-id',
   template: `
-    <app-breadcrumb [title]="event.title" parentRoute="event" parentTitle="Events" i18n-parentTitle></app-breadcrumb>
+    <app-breadcrumb
+      [title]="event.title"
+      [parentRoute]="['event']"
+      parentTitle="Events"
+      i18n-parentTitle
+    ></app-breadcrumb>
     <h1 i18n>Update event</h1>
     <h2 i18n>Metadata</h2>
     <app-event-update-form [event]="event" (update)="setEvent($event)"></app-event-update-form>
