@@ -69,12 +69,12 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
     this.modalService.show({
       type: AlertModalType.danger,
       label: video.title,
-      title: 'Remove video from event',
+      title: $localize`Remove video from event`,
       size: 'xs',
-      content: 'Are you sure you want to remove this video?',
+      content: $localize`Are you sure you want to remove this video?`,
       buttons: [
-        { type: ModalButtonType.secondary, text: 'Close' },
-        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeEventVideo(video.id) },
+        { type: ModalButtonType.secondary, text: $localize`Close` },
+        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeEventVideo(video.id) },
       ],
     });
   }
@@ -83,8 +83,10 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
     this.eventVideoService
       .removeVideoFromEvent({ eventId: this.event.id, videoId })
       .pipe(
-        tap(() => this.successNotification()),
-        tap((event) => this.update.emit(event)),
+        tap((event) => {
+          this.successNotification(event);
+          this.update.emit(event);
+        }),
         catchError((err) => {
           this.errorNotification(err);
           return EMPTY;
@@ -94,17 +96,17 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
       .subscribe();
   }
 
-  successNotification() {
+  successNotification(event: DetailedEvent) {
     this.notificationService.showToast({
       type: 'success',
-      title: '',
+      title: $localize``,
     });
   }
 
   errorNotification(error: unknown) {
     this.notificationService.showToast({
       type: 'error',
-      title: 'Error removing video',
+      title: $localize`Error removing video`,
       content: JSON.stringify(error),
     });
   }
@@ -124,9 +126,9 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
 
   private initHeaders() {
     this.table.header = [
-      new TableHeaderItem({ data: 'Title' }),
-      new TableHeaderItem({ data: 'Url' }),
-      new TableHeaderItem({ data: 'Uploaded at' }),
+      new TableHeaderItem({ data: $localize`Title` }),
+      new TableHeaderItem({ data: $localize`Url` }),
+      new TableHeaderItem({ data: $localize`Uploaded at` }),
       new TableHeaderItem({ style: { padding: 0, width: 0 } }),
     ];
   }
