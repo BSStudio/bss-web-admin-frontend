@@ -10,7 +10,7 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     MockRender(AppComponent);
-    expect(ngMocks.find(RouterOutlet)).not.toBeUndefined();
-    expect(ngMocks.find(Placeholder)).not.toBeUndefined();
+    ngMocks.findInstance(RouterOutlet);
+    ngMocks.findInstance(Placeholder);
   });
 });
