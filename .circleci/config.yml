@@ -55,6 +55,7 @@ jobs:
     docker:
       - image: cimg/node:18.12.1-browsers
     steps:
+      - browser-tools/install-browser-tools
       - checkout
       - restore_cache:
           keys:
@@ -70,8 +71,8 @@ jobs:
       - run:
           name: Testing
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --reporters=junit,coverage
-          environment:
-            CHROME_BIN: /usr/bin/google-chrome
+#          environment:
+#            CHROME_BIN: /usr/bin/google-chrome
       - store_test_results:
           name: Store test results
           path: ~/project/reports
