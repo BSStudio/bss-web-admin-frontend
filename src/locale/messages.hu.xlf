@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="plaintext" original="ng2.template" source-language="en" target-language="hu">
+    <body>
+      <trans-unit id="8510110714273600559" datatype="html">
+        <source>true</source>
+        <target>igen</target>
+      </trans-unit>
+      <trans-unit id="1444040760165348386" datatype="html">
+        <source>false</source>
+        <target>nem</target>
+      </trans-unit>
+      <trans-unit id="6297950127540572260" datatype="html">
+        <source>Member</source>
+        <target>Stúdiós</target>
+      </trans-unit>
+      <trans-unit id="149733690329136272" datatype="html">
+        <source>Active alumni</source>
+        <target>Aktív öregtag</target>
+      </trans-unit>
+      <trans-unit id="2251118715901833276" datatype="html">
+        <source>Member candidate</source>
+        <target>Stúdiós jelölt</target>
+      </trans-unit>
+      <trans-unit id="4394443303288920493" datatype="html">
+        <source>Alumni</source>
+        <target>Öregtag</target>
+      </trans-unit>
+      <trans-unit id="213952357168627830" datatype="html">
+        <source>Member candidate candidate</source>
+        <target>Stúdiós jelölt-jelölt</target>
+      </trans-unit>
+      <trans-unit id="8835074085114565960" datatype="html">
+        <source>Add new member</source>
+        <target>Tag hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <target>Név</target>
+      </trans-unit>
+      <trans-unit id="1731594811396701423" datatype="html">
+        <source>John Doe</source>
+        <target>Kiss János</target>
+      </trans-unit>
+      <trans-unit id="1246023011356978969" datatype="html">
+        <source>The member will have the following url: https://bsstudio/member/johnny-d</source>
+        <target>A tag a következő url-en lesz elérhető: https://bsstudio/member/kiss-j</target>
+      </trans-unit>
+      <trans-unit id="8716821888418632612" datatype="html">
+        <source>johnny-d</source>
+        <target>kiss-j</target>
+      </trans-unit>
+      <trans-unit id="2159130950882492111" datatype="html">
+        <source>Cancel</source>
+        <target>Mégse</target>
+      </trans-unit>
+      <trans-unit id="718742434092230008" datatype="html">
+        <source>Add member</source>
+        <target>Tag hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="1102717806459547726" datatype="html">
+        <source>Refresh</source>
+        <target>Frissítés</target>
+      </trans-unit>
+      <trans-unit id="5611592591303869712" datatype="html">
+        <source>Status</source>
+        <target>Stúdiós státusz</target>
+      </trans-unit>
+      <trans-unit id="4145496584631696119" datatype="html">
+        <source>Role</source>
+        <target>Szerep</target>
+      </trans-unit>
+      <trans-unit id="1562584780596394495" datatype="html">
+        <source>Archived</source>
+        <target>Archivált</target>
+      </trans-unit>
+      <trans-unit id="8936704404804793618" datatype="html">
+        <source>Videos</source>
+        <target>Videók</target>
+      </trans-unit>
+      <trans-unit id="5729418620241283277" datatype="html">
+        <source>Events</source>
+        <target>Események</target>
+      </trans-unit>
+      <trans-unit id="4691887509600985309" datatype="html">
+        <source>Members</source>
+        <target>Tagok</target>
+      </trans-unit>
+      <trans-unit id="2863735877862480129" datatype="html">
+        <source>Event manager</source>
+        <target>Esemény kezelő</target>
+      </trans-unit>
+      <trans-unit id="290877652838190938" datatype="html">
+        <source>Welcome to the BSS video admin site!</source>
+        <target>Üdv a BSS videó kezelő oldalon!</target>
+      </trans-unit>
+      <trans-unit id="3594562357459792252" datatype="html">
+        <source>Update member</source>
+        <target>Stúdiós adatainak módosítása</target>
+      </trans-unit>
+      <trans-unit id="4814285799071780083" datatype="html">
+        <source>Remove</source>
+        <target>Eltávolítás</target>
+      </trans-unit>
+      <trans-unit id="4703848376604347254" datatype="html">
+        <source>Profile picture</source>
+        <target state="new">Profil kép URL</target>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <target>Leírás</target>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <target>Nem</target>
+      </trans-unit>
+      <trans-unit id="2807800733729323332" datatype="html">
+        <source>Yes</source>
+        <target>Igen</target>
+      </trans-unit>
+      <trans-unit id="3768927257183755959" datatype="html">
+        <source>Save</source>
+        <target>Mentés</target>
+      </trans-unit>
+      <trans-unit id="1829779471067775299" datatype="html">
+        <source>Profile updated</source>
+        <target>Profil frissítve</target>
+      </trans-unit>
+      <trans-unit id="5568565942121403841" datatype="html">
+        <source>Changes were saved</source>
+        <target>Változtatások elmentve</target>
+      </trans-unit>
+      <trans-unit id="5312920202255242319" datatype="html">
+        <source>Remove member</source>
+        <target>Tag eltávolítása</target>
+      </trans-unit>
+      <trans-unit id="7306118999544619776" datatype="html">
+        <source>Are you sure you want to remove this member?</source>
+        <target>Biztosan törölni szeretnéd őt?</target>
+      </trans-unit>
+      <trans-unit id="3713504010399348091" datatype="html">
+        <source>Error removing member <x id="PH" equiv-text="this.member.name"/></source>
+        <target>Hiba történt <x id="PH" equiv-text="this.member.name"/> törlése közben</target>
+      </trans-unit>
+      <trans-unit id="2777623198411668878" datatype="html">
+        <source>Member manager</source>
+        <target>Tag kezelő</target>
+      </trans-unit>
+      <trans-unit id="3863898267470745518" datatype="html">
+        <source>A short description will be added here</source>
+        <target>Egy rövid leírás lesz majd itt</target>
+      </trans-unit>
+      <trans-unit id="1891104643962082116" datatype="html">
+        <source>Update video</source>
+        <target>Videó frissítése</target>
+      </trans-unit>
+      <trans-unit id="2517309683610083249" datatype="html">
+        <source>Title:</source>
+        <target>Cím:</target>
+      </trans-unit>
+      <trans-unit id="6996799422725544865" datatype="html">
+        <source>Description:</source>
+        <target>Leírás:</target>
+      </trans-unit>
+      <trans-unit id="7820305354448076575" datatype="html">
+        <source>Uploaded at:</source>
+        <target>Feltöltve:</target>
+      </trans-unit>
+      <trans-unit id="6525031038574946416" datatype="html">
+        <source>Video manager</source>
+        <target>Videó kezelő</target>
+      </trans-unit>
+      <trans-unit id="9137044181919156971" datatype="html">
+        <source>Add new video</source>
+        <target>Videó hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="5701618810648052610" datatype="html">
+        <source>Title</source>
+        <target>Cím</target>
+      </trans-unit>
+      <trans-unit id="5498133127606647122" datatype="html">
+        <source>Dorm interview series - Cats</source>
+        <target>Szobakommandó - Cicák</target>
+      </trans-unit>
+      <trans-unit id="5118348163556993736" datatype="html">
+        <source>The video will have the following url: https://bsstudio/video/dorm-interview-series-cats</source>
+        <target>A videó a következő URL-en fog megjelenni: https://bsstudio/video/szobakommando-cicak</target>
+      </trans-unit>
+      <trans-unit id="1723757384684824664" datatype="html">
+        <source>dorm-interview-series-cats</source>
+        <target>szobakommando-cicak</target>
+      </trans-unit>
+      <trans-unit id="3306948482607717769" datatype="html">
+        <source>Add video</source>
+        <target>Videó hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="1068546742336594896" datatype="html">
+        <source>Reveal selected</source>
+        <target>Kijelöltek publikálása</target>
+      </trans-unit>
+      <trans-unit id="5400556587003801551" datatype="html">
+        <source>Hide selected</source>
+        <target>Kijelöltek elrejtése</target>
+      </trans-unit>
+      <trans-unit id="7854965140974776241" datatype="html">
+        <source>Add new event</source>
+        <target>Új esemény létrehozása</target>
+      </trans-unit>
+      <trans-unit id="8049462487259928762" datatype="html">
+        <source>Simonyi Conference 2022</source>
+        <target>Simonyi Konferencia 2022</target>
+      </trans-unit>
+      <trans-unit id="7033513850018265669" datatype="html">
+        <source>The event will have the following url: https://bsstudio/member/simonyi-conference-2022</source>
+        <target>Az esemény a következő URL-en lesz elérhető: https://bsstudio/member/simonyi-konferencia-2022</target>
+      </trans-unit>
+      <trans-unit id="8308045076391224954" datatype="html">
+        <source>Url</source>
+        <target>Url</target>
+      </trans-unit>
+      <trans-unit id="5966471040474361086" datatype="html">
+        <source>simonyi-conference-2022</source>
+        <target>simonyi-konferencia-2022</target>
+      </trans-unit>
+      <trans-unit id="1040754989546421230" datatype="html">
+        <source>Add event</source>
+        <target>Esemény hozzáadása</target>
+      </trans-unit>
+      <trans-unit id="2375260419993138758" datatype="html">
+        <source>URL</source>
+        <target>URL</target>
+      </trans-unit>
+      <trans-unit id="3973931101896534797" datatype="html">
+        <source>Date</source>
+        <target>Dátum</target>
+      </trans-unit>
+      <trans-unit id="3712758505200425308" datatype="html">
+        <source>Visible</source>
+        <target>Látható</target>
+      </trans-unit>
+      <trans-unit id="6899410641137821757" datatype="html">
+        <source>Date:</source>
+        <target>Dátum:</target>
+      </trans-unit>
+      <trans-unit id="7179329981579178391" datatype="html">
+        <source>Event updated</source>
+        <target>Esemény frissítve</target>
+      </trans-unit>
+      <trans-unit id="4930010726944575382" datatype="html">
+        <source>Error updating event</source>
+        <target state="new">Error updating event</target>
+      </trans-unit>
+      <trans-unit id="630732744892969365" datatype="html">
+        <source>Add video to event</source>
+        <target state="new">Add video to event</target>
+      </trans-unit>
+      <trans-unit id="4425253027739928982" datatype="html">
+        <source>Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</source>
+        <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</target>
+      </trans-unit>
+      <trans-unit id="1286456175280712856" datatype="html">
+        <source>Update event</source>
+        <target state="new">Update event</target>
+      </trans-unit>
+      <trans-unit id="218403386307979629" datatype="html">
+        <source>Metadata</source>
+        <target>Meta adatok</target>
+      </trans-unit>
+      <trans-unit id="3595107845551842320" datatype="html">
+        <source>Manage event videos</source>
+        <target state="new">Manage event videos</target>
+      </trans-unit>
+      <trans-unit id="3919953312898646404" datatype="html">
+        <source>Lorem ipsum</source>
+        <target state="new">Lorem ipsum</target>
+      </trans-unit>
+      <trans-unit id="3344087724968207557" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
+        <target state="new"><x id="INTERPOLATION" equiv-text="{{ member.name }}"/> profil képe</target>
+      </trans-unit>
+      <trans-unit id="969237518420234961" datatype="html">
+        <source>Add crew member to video</source>
+        <target state="new">Add crew member to video</target>
+      </trans-unit>
+      <trans-unit id="1172866303261737245" datatype="html">
+        <source>Position</source>
+        <target state="new">Position</target>
+      </trans-unit>
+      <trans-unit id="7950142186229964867" datatype="html">
+        <source>Add crew member</source>
+        <target state="new">Add crew member</target>
+      </trans-unit>
+      <trans-unit id="1053173058581960289" datatype="html">
+        <source>Add new crew member</source>
+        <target state="new">Add new crew member</target>
+      </trans-unit>
+      <trans-unit id="5152944817268935045" datatype="html">
+        <source>Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</source>
+        <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</target>
+      </trans-unit>
+      <trans-unit id="4674214119910891625" datatype="html">
+        <source>No videos</source>
+        <target>Nincsenek videók</target>
+      </trans-unit>
+      <trans-unit id="4777323515857731788" datatype="html">
+        <source>Upload date</source>
+        <target>Feltöltés dátuma</target>
+      </trans-unit>
+      <trans-unit id="8598886608217248074" datatype="html">
+        <source>URL:</source>
+        <target>URL:</target>
+      </trans-unit>
+      <trans-unit id="4021752662928002901" datatype="html">
+        <source>Update</source>
+        <target>Frissítés</target>
+      </trans-unit>
+      <trans-unit id="6341579314680269534" datatype="html">
+        <source>Error updating</source>
+        <target>Hiba történt frissítés közben</target>
+      </trans-unit>
+      <trans-unit id="5384144615229196930" datatype="html">
+        <source>Crew</source>
+        <target>Stáb</target>
+      </trans-unit>
+      <trans-unit id="7033014824731925315" datatype="html">
+        <source>Remove video</source>
+        <target>Videó eltávolítása</target>
+      </trans-unit>
+      <trans-unit id="1977062148284014024" datatype="html">
+        <source>Drop picture here or click to browse</source>
+        <target>Húzd ide a képet vagy kattints a kiválasztáshoz</target>
+      </trans-unit>
+      <trans-unit id="5028777105388019087" datatype="html">
+        <source>Details</source>
+        <target>Részletek</target>
+      </trans-unit>
+      <trans-unit id="6127056449999067052" datatype="html">
+        <source>Event created</source>
+        <target state="new">Event created</target>
+      </trans-unit>
+      <trans-unit id="2096235085899065051" datatype="html">
+        <source>Error creating event</source>
+        <target state="new">Error creating event</target>
+      </trans-unit>
+      <trans-unit id="7806458199320279074" datatype="html">
+        <source>Remove video from event</source>
+        <target state="new">Remove video from event</target>
+      </trans-unit>
+      <trans-unit id="5858752999282328934" datatype="html">
+        <source>Are you sure you want to remove this video?</source>
+        <target state="new">Are you sure you want to remove this video?</target>
+      </trans-unit>
+      <trans-unit id="7819314041543176992" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+      </trans-unit>
+      <trans-unit id="4416290763660062288" datatype="html">
+        <source/>
+        <target state="new"/>
+      </trans-unit>
+      <trans-unit id="1293054139849691764" datatype="html">
+        <source>Error removing video</source>
+        <target state="new">Error removing video</target>
+      </trans-unit>
+      <trans-unit id="2375149812897946334" datatype="html">
+        <source>Uploaded at</source>
+        <target state="new">Uploaded at</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

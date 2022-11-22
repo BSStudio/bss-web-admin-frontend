@@ -1,4 +1,4 @@
-FROM node:16-alpine as build
+FROM node:16.18.0-alpine3.16 as build
 
 USER node:node
 RUN mkdir /home/node/app
@@ -12,6 +12,5 @@ RUN npm clean-install $INSTALL_ARGS
 COPY --chown=node ./ ./
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:1.23.2-alpine
 COPY --from=build /home/node/app/dist/bss-web-admin-frontend /usr/share/nginx/html
-

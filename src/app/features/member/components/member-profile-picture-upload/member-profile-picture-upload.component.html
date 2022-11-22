@@ -1,0 +1,12 @@
+<ibm-file-uploader
+  [drop]="true"
+  [accept]="['image/*']"
+  [(files)]="files"
+  [multiple]="false"
+  dropText="Drop picture here or click to browse"
+  i18n-dropText
+  title="Profile picture"
+  buttonText="Upload"
+  buttonType="primary"
+></ibm-file-uploader>
+<button ibmButton="primary" [disabled]="!hasFile" (click)="upload()">Upload</button>

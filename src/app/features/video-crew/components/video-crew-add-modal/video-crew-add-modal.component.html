@@ -1,0 +1,26 @@
+<ibm-modal [open]="open" (overlaySelected)="closeModal()">
+  <ibm-modal-header (closeSelect)="closeModal()">
+    <h3 ibmModalHeaderLabel>{{ video.title }}</h3>
+    <h3 ibmModalHeaderHeading i18n>Add crew member to video</h3>
+  </ibm-modal-header>
+  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+    <ibm-combo-box
+      formControlName="position"
+      type="single"
+      label="Position"
+      i18n-label
+      [items]="positions"
+      (keyup.enter)="addPosition()"
+      (search)="updatePositionSearch($event)"
+    >
+      <ibm-dropdown-list></ibm-dropdown-list>
+    </ibm-combo-box>
+    <ibm-combo-box formControlName="member" type="single" label="Member" i18n-label [items]="members">
+      <ibm-dropdown-list></ibm-dropdown-list>
+    </ibm-combo-box>
+  </form>
+  <ibm-modal-footer>
+    <button ibmButton="primary" i18n (click)="onSubmit()" style="order: 1">Add crew member</button>
+    <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
+  </ibm-modal-footer>
+</ibm-modal>

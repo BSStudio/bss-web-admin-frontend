@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@carbon/elements/scss/themes';
+@import '@carbon/elements/scss/themes';
+@import '@carbon/elements/scss/layout';
 $carbon--theme: $carbon--theme--g100;
-@import "~carbon-components/scss/globals/scss/styles";
+@import "carbon-components/scss/globals/scss/styles";
+
+// fix toolbar search globally
+.bx--search--lg .bx--search-magnifier-icon {
+  left: 0;
+}
+
+.bx--toolbar-content .bx--search .bx--search-input {
+  height: 3rem;
+}
+
+.notification-overlay {
+  position: fixed;
+  left: $layout-03;
+  bottom: $layout-01;
+}

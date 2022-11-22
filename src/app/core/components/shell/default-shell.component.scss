@@ -1,0 +1,10 @@
+@import "@carbon/elements/scss/layout/layout";
+
+:host {
+  height: 100vh;
+}
+
+main#app {
+  margin-top: $layout-04;
+  padding-top: $layout-01;
+}

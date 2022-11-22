@@ -1,0 +1,12 @@
+@import "@carbon/elements/scss/layout/layout";
+
+:host {
+  display: flex;
+  gap: $spacing-03;
+  flex-wrap: wrap;
+  ibm-tile {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+  }
+}

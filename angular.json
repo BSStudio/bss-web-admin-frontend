@@ -5,6 +5,12 @@
   "projects": {
     "bss-web-admin-frontend": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en",
+        "locales": {
+          "hu": "src/locale/messages.hu.xlf"
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -33,6 +39,10 @@
             "styles": [
               "src/styles.scss"
             ],
+            "localize": [
+              "en",
+              "hu"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -58,6 +68,7 @@
               "outputHashing": "all"
             },
             "development": {
+              "localize": ["hu"],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -82,9 +93,14 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "ng-extract-i18n-merge:ng-extract-i18n-merge",
           "options": {
-            "browserTarget": "bss-web-admin-frontend:build"
+            "browserTarget": "bss-web-admin-frontend:build",
+            "format": "xlf",
+            "outputPath": "src/locale",
+            "targetFiles": [
+              "messages.hu.xlf"
+            ]
           }
         },
         "test": {
