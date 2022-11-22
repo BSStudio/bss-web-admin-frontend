@@ -74,8 +74,6 @@ jobs:
       - run:
           name: Testing
           command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --reporters=junit,coverage
-#          environment:
-#            CHROME_BIN: /usr/bin/google-chrome
       - store_test_results:
           name: Store test results
           path: ~/project/reports
