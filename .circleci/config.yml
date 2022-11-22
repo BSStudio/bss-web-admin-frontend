@@ -58,7 +58,6 @@ jobs:
       - image: cimg/node:18.12.1-browsers
     steps:
       - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
       - checkout
       - restore_cache:
           keys:
