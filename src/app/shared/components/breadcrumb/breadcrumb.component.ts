@@ -10,6 +10,9 @@ export class BreadcrumbComponent {
   @Input() parentRoute: unknown[] = [];
   @Input() parentTitle = '';
   get items(): BreadcrumbItem[] {
-    return [{ route: this.parentRoute, href: `/${this.parentRoute}`, content: this.parentTitle }, { content: this.title, current: true }];
+    return [
+      { route: this.parentRoute, href: `/${this.parentRoute}`, content: this.parentTitle },
+      { content: this.title, current: true },
+    ];
   }
 }

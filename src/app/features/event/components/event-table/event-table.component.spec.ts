@@ -1,22 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventTableComponent } from './event-table.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { EventModule } from '../../event.module';
 
-xdescribe('EventTableComponent', () => {
-  let component: EventTableComponent;
-  let fixture: ComponentFixture<EventTableComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EventTableComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(EventTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('EventTableComponent', () => {
+  beforeEach(() => MockBuilder(EventTableComponent, EventModule));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    MockRender(EventTableComponent);
   });
 });

@@ -1,22 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EventVideoAddModalComponent } from './event-video-add-modal.component';
+import { MockBuilder, MockRender } from 'ng-mocks';
+import { EventModule } from '../../event.module';
 
-xdescribe('EventVideoAddModalComponent', () => {
-  let component: EventVideoAddModalComponent;
-  let fixture: ComponentFixture<EventVideoAddModalComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EventVideoAddModalComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(EventVideoAddModalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+describe('EventVideoAddModalComponent', () => {
+  beforeEach(() => MockBuilder(EventVideoAddModalComponent, EventModule));
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    MockRender(EventVideoAddModalComponent);
   });
 });
