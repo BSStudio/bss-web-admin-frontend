@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { BreadcrumbItem } from 'carbon-components-angular';
+import { BreadcrumbItem, BreadcrumbModule } from 'carbon-components-angular';
 
 @Component({
   selector: 'app-breadcrumb',
+  standalone: true,
   template: ` <ibm-breadcrumb [noTrailingSlash]="true" [items]="items"></ibm-breadcrumb> `,
+  imports: [BreadcrumbModule],
 })
 export class BreadcrumbComponent {
   @Input() title = '';

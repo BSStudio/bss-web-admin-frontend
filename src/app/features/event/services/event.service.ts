@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CreateEvent, DetailedEvent, Event, UpdateEvent } from '../models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class EventService {
   constructor(private http: HttpClient) {}
 

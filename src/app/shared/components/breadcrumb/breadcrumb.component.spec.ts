@@ -1,11 +1,10 @@
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-import { SharedModule } from '../../shared.module';
-import { Breadcrumb, BreadcrumbModule } from 'carbon-components-angular';
+import { Breadcrumb } from 'carbon-components-angular';
 
 describe('BreadcrumbComponent', () => {
   beforeEach(() => {
-    return MockBuilder([BreadcrumbComponent, BreadcrumbModule], SharedModule);
+    return MockBuilder(BreadcrumbComponent);
   });
 
   it('should create', () => {

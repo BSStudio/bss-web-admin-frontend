@@ -6,8 +6,8 @@ import { CreateEvent, DetailedEvent, Event, UpdateEvent } from '../models';
 
 describe('EventService', () => {
   ngMocks.faster();
-
   beforeAll(() => MockBuilder([EventService, HttpClientTestingModule]));
+
   const eventId = 'eventId';
   const createEvent = new CreateEvent('url', 'title');
   const updateEvent = new UpdateEvent('url', 'title', 'description', 'date', true);

@@ -1,10 +1,10 @@
 <ibm-table-container>
   <ibm-table-toolbar>
     <ibm-table-toolbar-content>
-      <ibm-table-toolbar-search [expandable]="true" (valueChange)="filterNodeNames($event)" (clear)="searchValue = ''">
+      <ibm-table-toolbar-search [expandable]="true" (valueChange)="filterRows($event)" (clear)="searchValue = ''">
       </ibm-table-toolbar-search>
-      <button ibmButton="secondary" [iconOnly]="true">
-        <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getEvents()"></svg>
+      <button ibmButton="secondary" [iconOnly]="true" [hasAssistiveText]="true" (click)="getEvents()">
+        <svg ibmIcon="renew" size="16" class="bx--btn__icon"></svg>
         <span i18n class="bx--assistive-text">Refresh</span>
       </button>
       <button ibmButton="primary" (click)="showAddModal()">

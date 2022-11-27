@@ -4,9 +4,7 @@ import { throwError } from 'rxjs';
 import { MemberService } from '../services/member.service';
 import { Member } from '../models/member.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class MemberResolver implements Resolve<Member> {
   constructor(private service: MemberService) {}
 

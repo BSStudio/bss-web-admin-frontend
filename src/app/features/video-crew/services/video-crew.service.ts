@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DetailedCrewMember } from '../models';
 import { DetailedVideo } from '../../video/models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class VideoCrewService {
   constructor(private http: HttpClient) {}
 

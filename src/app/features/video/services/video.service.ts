@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PaginatedResponse } from '../../../shared/models';
 import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class VideoService {
   constructor(private http: HttpClient) {}
 

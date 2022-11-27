@@ -8,12 +8,12 @@ describe('BooleanPipe', () => {
     const fixture = MockRender(BooleanPipe, {
       $implicit: true,
     });
-    expect(fixture.nativeElement.innerHTML).toEqual('true');
+    expect(ngMocks.formatText(fixture)).toEqual('true');
   });
   it('returns string false', () => {
     const fixture = MockRender(BooleanPipe, {
       $implicit: false,
     });
-    expect(fixture.nativeElement.innerHTML).toEqual('false');
+    expect(ngMocks.formatText(fixture)).toEqual('false');
   });
 });

@@ -1,10 +1,9 @@
+import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
+import { Subject } from 'rxjs';
 import { MetricsComponent } from './metrics.component';
-import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks';
-import { HomeModule } from '../home.module';
 import { ClickableTile } from 'carbon-components-angular';
 import { Metrics } from '../models/metrics.model';
 import { MetricsService } from '../services/metrics.service';
-import { of, Subject } from 'rxjs';
 
 describe('MetricsComponent', () => {
   const videoCount = 1;
@@ -14,7 +13,7 @@ describe('MetricsComponent', () => {
   let metrics$: Subject<Metrics>;
   beforeEach(() => {
     metrics$ = new Subject<Metrics>();
-    return MockBuilder(MetricsComponent, HomeModule).mock(MetricsService, {
+    return MockBuilder(MetricsComponent).mock(MetricsService, {
       getMetrics: () => metrics$,
     });
   });

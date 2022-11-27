@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DetailedEvent } from '../../event/models';
 import { EventVideo } from '../models/event-video.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class EventVideoService {
   constructor(private http: HttpClient) {}
 

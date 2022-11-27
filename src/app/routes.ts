@@ -1,15 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { DefaultShellComponent } from './core/components/shell/default-shell.component';
 
-const routes: Routes = [
+export const ROUTES: Routes = [
   {
     path: '',
     component: DefaultShellComponent,
     children: [
       {
         path: '',
-        loadChildren: () => import('./features/home/home.module').then(({ HomeModule }) => HomeModule),
+        loadChildren: () => import('./features/home/routing').then((m) => m.ROUTES),
       },
       {
         path: 'video',
@@ -26,9 +25,3 @@ const routes: Routes = [
     ],
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

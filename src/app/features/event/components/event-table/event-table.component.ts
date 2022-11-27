@@ -41,7 +41,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  filterNodeNames(searchString: string) {
+  filterRows(searchString: string) {
     this.searchValue = searchString;
   }
 
@@ -60,9 +60,9 @@ export class EventTableComponent implements OnInit, OnDestroy {
 
   private eventToRow(event: Event): TableItem[] {
     return [
-      new TableItem({ title: event.id, data: event.title }),
+      new TableItem({ data: event.title, title: event.id }),
       new TableItem({ data: event.url }),
-      new TableItem({ data: formatDate(event.date, 'YYYY-MM-dd', this.locale) }),
+      new TableItem({ data: formatDate(event.date, 'yyyy-MM-dd', this.locale) }),
       new TableItem({ data: this.booleanPipe.transform(event.visible) }),
     ];
   }

@@ -4,9 +4,7 @@ import { CreateMember } from '../models/create-member.model';
 import { UpdateMember } from '../models/update-member.model';
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class MemberService {
   constructor(private http: HttpClient) {}
 

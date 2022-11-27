@@ -1,16 +1,14 @@
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { throwError } from 'rxjs';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { DetailedEvent } from '../models';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class EventResolver implements Resolve<DetailedEvent> {
   constructor(private service: EventService) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(route: ActivatedRouteSnapshot): Observable<DetailedEvent> {
     const eventId = route.paramMap.get('eventId');
     if (!eventId) return throwError(() => 'eventId is null');
     return this.service.getEvent(eventId);
