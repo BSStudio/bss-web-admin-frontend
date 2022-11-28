@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   selector: 'app-member-remove-button[member]',
   template: `
     <button ibmButton="danger" size="field" (click)="showRemoveModal()">
-      <ng-container i18n>Remove</ng-container>
+      <span i18n>Remove</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     </button>
   `,

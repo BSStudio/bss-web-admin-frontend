@@ -18,6 +18,7 @@ import { of, throwError } from 'rxjs';
 import { Event } from '../../models';
 
 describe('EventCreateModalComponent', () => {
+  MockInstance.scope();
   const close = jasmine.createSpy('close');
   beforeEach(() => MockBuilder([EventCreateModalComponent, FormBuilder, ReactiveFormsModule], EventModule));
 

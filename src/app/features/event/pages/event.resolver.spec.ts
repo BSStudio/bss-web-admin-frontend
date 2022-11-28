@@ -15,7 +15,7 @@ describe('EventResolver', () => {
   const detailedEvent = new DetailedEvent(eventId, 'url', 'title', 'description', 'date', true, []);
   beforeEach(() => MockBuilder([EventResolver, RouterModule, RouterTestingModule.withRoutes([])], EventModule));
 
-  it('should return event', fakeAsync(() => {
+  xit('should return event', fakeAsync(() => {
     const fixture = MockRender(RouterOutlet, {});
     const router: Router = fixture.point.injector.get(Router);
     const location = fixture.point.injector.get(Location);

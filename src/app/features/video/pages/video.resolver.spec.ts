@@ -15,6 +15,7 @@ describe('VideoResolver', () => {
   beforeEach(() =>
     MockBuilder([VideoResolver, RouterModule, RouterTestingModule.withRoutes([]), FormBuilder], VideoModule)
   );
+
   xit('should return video', fakeAsync(() => {
     const fixture = MockRender(RouterOutlet, {});
     const router: Router = fixture.point.injector.get(Router);

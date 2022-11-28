@@ -9,6 +9,7 @@ import { EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 describe('EventVideoAddModalComponent', () => {
+  MockInstance.scope();
   const detailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, []);
   const updateEmitter = new EventEmitter<DetailedEvent>();
   beforeEach(() =>
@@ -23,6 +24,8 @@ describe('EventVideoAddModalComponent', () => {
         getAllVideos: () => EMPTY,
       })
     );
-    MockRender(EventVideoAddModalComponent);
+    const fixture = MockRender(EventVideoAddModalComponent);
+    expect(fixture.point.componentInstance.event).toBe(detailedEvent);
+    expect(fixture.point.componentInstance.update).toBe(updateEmitter);
   });
 });
