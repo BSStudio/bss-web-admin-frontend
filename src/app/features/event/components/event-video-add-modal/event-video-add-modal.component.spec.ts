@@ -9,7 +9,6 @@ import { EventEmitter } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 describe('EventVideoAddModalComponent', () => {
-  MockInstance.scope();
   const detailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, []);
   const updateEmitter = new EventEmitter<DetailedEvent>();
   beforeEach(() =>

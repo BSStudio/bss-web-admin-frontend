@@ -21,7 +21,6 @@ import { EventCreateModalComponent } from '../event-create-modal/event-create-mo
 import { Router } from '@angular/router';
 
 describe('EventTableComponent', () => {
-  MockInstance.scope();
   const event = new Event('0', 'url', 'title', 'description', '2022-01-01', true);
   beforeEach(() =>
     MockBuilder([EventTableComponent, BooleanPipe], EventModule).mock(EventService, {

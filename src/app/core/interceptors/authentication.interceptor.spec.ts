@@ -1,19 +1,29 @@
 import { AuthenticationInterceptor } from './authentication.interceptor';
-import { MockBuilder, MockRender } from 'ng-mocks';
-import { HttpRequest } from '@angular/common/http';
+import { MockBuilder, MockRender, NG_MOCKS_INTERCEPTORS, ngMocks } from 'ng-mocks';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '../core.module';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('AuthenticationInterceptor', () => {
-  beforeEach(() => MockBuilder(AuthenticationInterceptor));
+  beforeEach(() =>
+    MockBuilder(AuthenticationInterceptor, [CoreModule, HttpClientModule])
+      .exclude(NG_MOCKS_INTERCEPTORS)
+      .keep(HTTP_INTERCEPTORS)
+      .replace(HttpClientModule, HttpClientTestingModule)
+  );
 
   it('should be created', () => {
-    const fixture = MockRender(AuthenticationInterceptor);
-    const updatedRequest = {};
-    const handle = jasmine.createSpy('handle');
-    const clone = jasmine.createSpy('clone').and.returnValue(updatedRequest);
-    fixture.point.componentInstance.intercept({ clone } as unknown as HttpRequest<unknown>, { handle });
-    expect(clone).toHaveBeenCalledOnceWith({
-      setHeaders: { 'application-secret': 'appSecret' },
-    });
-    expect(handle).toHaveBeenCalledWith(updatedRequest);
+    MockRender();
+
+    const client = ngMocks.findInstance(HttpClient);
+    const httpMock = ngMocks.findInstance(HttpTestingController);
+
+    client.get('/target').subscribe();
+
+    const req = httpMock.expectOne('/target');
+    req.flush('');
+    httpMock.verify();
+
+    expect(req.request.headers.get('application-secret')).toEqual('appSecret');
   });
 });

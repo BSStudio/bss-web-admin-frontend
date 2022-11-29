@@ -1,34 +1,24 @@
-import { MockBuilder, MockRender, ngMocks } from 'ng-mocks';
-import { Subject } from 'rxjs';
+import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks';
+import { EMPTY, of } from 'rxjs';
 import { MetricsComponent } from './metrics.component';
 import { ClickableTile } from 'carbon-components-angular';
 import { Metrics } from '../models/metrics.model';
 import { MetricsService } from '../services/metrics.service';
 
 describe('MetricsComponent', () => {
-  const videoCount = 1;
-  const eventCount = 2;
-  const memberCount = 3;
-  const metrics = new Metrics(videoCount, eventCount, memberCount);
-  let metrics$: Subject<Metrics>;
-  beforeEach(() => {
-    metrics$ = new Subject<Metrics>();
-    return MockBuilder(MetricsComponent).mock(MetricsService, {
-      getMetrics: () => metrics$,
-    });
-  });
+  const metrics = new Metrics(1, 2, 3);
+  beforeEach(() => MockBuilder(MetricsComponent));
 
   it('should have no tiles', () => {
+    MockInstance(MetricsService, (instance) => ngMocks.stub(instance, { getMetrics: () => EMPTY }));
     MockRender(MetricsComponent);
     const tiles = ngMocks.findAll(ClickableTile);
     expect(tiles.length).toBe(0);
   });
 
   it('should render tiles after service resolved', () => {
+    MockInstance(MetricsService, (instance) => ngMocks.stub(instance, { getMetrics: () => of(metrics) }));
     const fixture = MockRender(MetricsComponent);
-
-    metrics$.next(metrics);
-    fixture.detectChanges();
 
     const tiles = ngMocks.findAll(ClickableTile);
     expect(tiles.length).toBe(3);
@@ -36,17 +26,23 @@ describe('MetricsComponent', () => {
 
     expect(videoTile.componentInstance.route).toEqual(['video']);
     expect(videoTile.componentInstance.href).toBe('video');
-    expect(ngMocks.find<HTMLLabelElement>(videoTile, 'label').nativeElement.innerHTML).toBe('Videos');
-    expect(ngMocks.find<HTMLHeadingElement>(videoTile, 'h1').nativeElement.innerHTML).toBe(`${videoCount}`);
+    const videoLabel = ngMocks.find(videoTile, 'label');
+    expect(ngMocks.formatText(videoLabel)).toBe('Videos');
+    const videoCountHeader = ngMocks.find(videoTile, 'h1');
+    expect(ngMocks.formatText(videoCountHeader)).toBe(`${metrics.videoCount}`);
 
     expect(eventTile.componentInstance.route).toEqual(['event']);
     expect(eventTile.componentInstance.href).toBe('event');
-    expect(ngMocks.find<HTMLLabelElement>(eventTile, 'label').nativeElement.innerHTML).toBe('Events');
-    expect(ngMocks.find<HTMLHeadingElement>(eventTile, 'h1').nativeElement.innerHTML).toBe(`${eventCount}`);
+    const eventLabel = ngMocks.find(eventTile, 'label');
+    expect(ngMocks.formatText(eventLabel)).toBe('Events');
+    const eventCountHeader = ngMocks.find(eventTile, 'h1');
+    expect(ngMocks.formatText(eventCountHeader)).toBe(`${metrics.eventCount}`);
 
     expect(memberTile.componentInstance.route).toEqual(['member']);
     expect(memberTile.componentInstance.href).toBe('member');
-    expect(ngMocks.find<HTMLLabelElement>(memberTile, 'label').nativeElement.innerHTML).toBe('Members');
-    expect(ngMocks.find<HTMLHeadingElement>(memberTile, 'h1').nativeElement.innerHTML).toBe(`${memberCount}`);
+    const memberLabel = ngMocks.find(memberTile, 'label');
+    expect(ngMocks.formatText(memberLabel)).toBe('Members');
+    const memberCountHeader = ngMocks.find(memberTile, 'h1');
+    expect(ngMocks.formatText(memberCountHeader)).toBe(`${metrics.memberCount}`);
   });
 });
