@@ -18,7 +18,7 @@ import { of, throwError } from 'rxjs';
 import { Event } from '../../models';
 
 describe('EventCreateModalComponent', () => {
-  const close = jasmine.createSpy('close');
+  const close = { emit: jasmine.createSpy('emit') };
   beforeEach(() => MockBuilder([EventCreateModalComponent, FormBuilder, ReactiveFormsModule], EventModule));
 
   describe('render', () => {
@@ -117,7 +117,7 @@ describe('EventCreateModalComponent', () => {
       title: 'Event created',
       message: title,
     });
-    expect(close).toHaveBeenCalledWith(true);
+    expect(close.emit).toHaveBeenCalledWith(true);
   });
 
   it('should not submit if title is empty', () => {
@@ -179,7 +179,7 @@ describe('EventCreateModalComponent', () => {
     const closeButton = buttons[1];
 
     ngMocks.click(closeButton);
-    expect(close).toHaveBeenCalledWith(true);
+    expect(close.emit).toHaveBeenCalledWith(true);
   });
 
   it('should close on x', () => {
@@ -188,7 +188,7 @@ describe('EventCreateModalComponent', () => {
     const heading = ngMocks.find(ModalHeaderHeading);
 
     ngMocks.trigger(heading, 'closeSelect');
-    expect(close).toHaveBeenCalledWith(true);
+    expect(close.emit).toHaveBeenCalledWith(true);
   });
 
   it('should close on clicking out', () => {
@@ -197,6 +197,6 @@ describe('EventCreateModalComponent', () => {
     const modal = ngMocks.find(Modal);
 
     ngMocks.trigger(modal, 'overlaySelected');
-    expect(close).toHaveBeenCalledWith(true);
+    expect(close.emit).toHaveBeenCalledWith(true);
   });
 });
