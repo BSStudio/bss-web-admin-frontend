@@ -1,78 +1,32 @@
 version: 2.1
 orbs:
+  node: circleci/node@5.0.3
   browser-tools: circleci/browser-tools@1.4.0
 jobs:
   lint:
+    docker:
+      - image: cimg/node:18.12.1
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run lint
+  build:
     working_directory: ~/project
     docker:
       - image: cimg/node:18.12.1
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v2-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v2-dependencies-
-      - run:
-          name: Install local dependencies
-          command: npm install
-      - save_cache:
-          key: v2-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Lint project
-          command: npm run lint
-  build:
-    working_directory: ~/project
-    docker:
-      - image: docker:20.10.21-git
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 20.10.11
-          docker_layer_caching: true
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
-      - run:
-          name: Build application Docker image
-          command: |
-            docker build --cache-from=app -t app .
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar app
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
+      - node/install-packages
+      - run: npm run build
   test:
     working_directory: ~/project
     docker:
       - image: cimg/node:18.12.1-browsers
     steps:
-      - browser-tools/install-chrome
       - checkout
-      - restore_cache:
-          keys:
-            - v3-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v3-dependencies-
-      - run:
-          name: Install local dependencies
-          command: npm install
-      - save_cache:
-          key: v3-dependencies-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Testing
-          command: npm run test -- --no-watch --no-progress --reporters=junit,coverage
+      - browser-tools/install-chrome
+      - node/install-packages
+      - run: npm run test -- --no-watch --no-progress --reporters=junit,coverage
       - store_test_results:
           name: Store test results
           path: ~/project/reports
