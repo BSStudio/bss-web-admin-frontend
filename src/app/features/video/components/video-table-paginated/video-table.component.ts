@@ -1,21 +1,21 @@
-import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
-import { VideoService } from '../../services/video.service';
-import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular';
-import { Router } from '@angular/router';
-import { VideoCreateModalComponent } from '../video-create-modal/video-create-modal.component';
-import { Video } from '../../models';
-import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe';
-import { formatDate } from '@angular/common';
-import { Subject, takeUntil, tap } from 'rxjs';
-import { PaginatedResponse } from '../../../../shared/models';
+import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core'
+import { VideoService } from '../../services/video.service'
+import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
+import { Router } from '@angular/router'
+import { VideoCreateModalComponent } from '../video-create-modal/video-create-modal.component'
+import { Video } from '../../models'
+import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
+import { formatDate } from '@angular/common'
+import { Subject, takeUntil, tap } from 'rxjs'
+import { PaginatedResponse } from '../../../../shared/models'
 
 @Component({
   selector: 'app-video-table',
   templateUrl: './video-table.component.html',
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
-  readonly table = new TableModel();
-  private readonly destroy$ = new Subject<void>();
+  readonly table = new TableModel()
+  private readonly destroy$ = new Subject<void>()
 
   constructor(
     private service: VideoService,
@@ -26,22 +26,22 @@ export class VideoTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.initHeaders();
-    this.getVideos();
+    this.initHeaders()
+    this.getVideos()
   }
 
   onPageSelect(page: number) {
-    this.table.currentPage = page;
-    this.getVideos();
+    this.table.currentPage = page
+    this.getVideos()
   }
 
   async onRowClick(index: number) {
-    const id = this.table.row(index)[0].title;
-    await this.router.navigate(['video', id]);
+    const id = this.table.row(index)[0].title
+    await this.router.navigate(['video', id])
   }
 
   getVideos() {
-    this.table.isLoading = true;
+    this.table.isLoading = true
     return this.service
       .getVideos(this.table.currentPage - 1, this.table.pageLength)
       .pipe(
@@ -50,12 +50,12 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         complete: () => (this.table.isLoading = false),
-      });
+      })
   }
 
   private updateTable(paginatedVideos: PaginatedResponse<Video>) {
-    this.table.data = paginatedVideos.content.map((video) => this.videoToRow(video));
-    this.table.totalDataLength = paginatedVideos.totalElements;
+    this.table.data = paginatedVideos.content.map((video) => this.videoToRow(video))
+    this.table.totalDataLength = paginatedVideos.totalElements
   }
 
   private videoToRow(video: Video) {
@@ -64,18 +64,18 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       new TableItem({ data: video.url }),
       new TableItem({ data: formatDate(video.uploadedAt, 'YYYY-MM-dd', this.locale) }),
       new TableItem({ data: this.booleanPipe.transform(video.visible) }),
-    ];
+    ]
   }
 
   changeVisibilityTo(visible: boolean) {
-    const selected = this.selectedIds;
+    const selected = this.selectedIds
     this.service
       .changeVisibility(selected, visible)
       .pipe(
         tap(() => this.getVideos()),
         takeUntil(this.destroy$)
       )
-      .subscribe();
+      .subscribe()
   }
 
   get selectedIds() {
@@ -83,11 +83,11 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       .map((selected, index) => ({ selected, index }))
       .filter(({ selected }) => selected)
       .map(({ index }) => index)
-      .map((index) => this.table.row(index)[0].title);
+      .map((index) => this.table.row(index)[0].title)
   }
 
   showAddModal() {
-    this.modalService.create({ component: VideoCreateModalComponent }).onDestroy(() => this.getVideos());
+    this.modalService.create({ component: VideoCreateModalComponent }).onDestroy(() => this.getVideos())
   }
 
   private initHeaders() {
@@ -96,11 +96,11 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       new TableHeaderItem({ data: $localize`URL` }),
       new TableHeaderItem({ data: $localize`Upload date` }),
       new TableHeaderItem({ data: $localize`Visible` }),
-    ];
+    ]
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
+    this.destroy$.next()
+    this.destroy$.unsubscribe()
   }
 }

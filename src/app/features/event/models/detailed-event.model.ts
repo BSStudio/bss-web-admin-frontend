@@ -1,4 +1,4 @@
-import { Video } from '../../video/models';
+import { Video } from '../../video/models'
 
 export class DetailedEvent {
   constructor(

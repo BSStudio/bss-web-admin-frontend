@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { DetailedEvent } from '../../models';
+import { Component } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { DetailedEvent } from '../../models'
 
 @Component({
   selector: 'app-video-id',
@@ -19,13 +19,13 @@ import { DetailedEvent } from '../../models';
   `,
 })
 export class EventIdComponent {
-  public event: DetailedEvent;
+  public event: DetailedEvent
 
   constructor(private route: ActivatedRoute) {
-    this.event = <DetailedEvent>this.route.snapshot.data['event'];
+    this.event = <DetailedEvent>this.route.snapshot.data['event']
   }
 
   setEvent(event: DetailedEvent) {
-    this.event = event;
+    this.event = event
   }
 }

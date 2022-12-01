@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { MetricsService } from '../services/metrics.service';
-import { TilesModule } from 'carbon-components-angular';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core'
+import { MetricsService } from '../services/metrics.service'
+import { TilesModule } from 'carbon-components-angular'
+import { CommonModule } from '@angular/common'
 
 @Component({
   selector: 'app-metrics',
@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, TilesModule],
 })
 export class MetricsComponent {
-  public readonly metrics$ = this.service.getMetrics();
+  public readonly metrics$ = this.service.getMetrics()
 
   constructor(private service: MetricsService) {}
 }

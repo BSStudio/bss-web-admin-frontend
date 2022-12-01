@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavigationItem } from 'carbon-components-angular';
+import { Component } from '@angular/core'
+import { NavigationItem } from 'carbon-components-angular'
 
 @Component({
   selector: 'app-header',
@@ -16,14 +16,14 @@ import { NavigationItem } from 'carbon-components-angular';
   `,
 })
 export class HeaderComponent {
-  public hasHamburger = false;
+  public hasHamburger = false
   public readonly navigationItems: NavigationItem[] = [
     { type: 'item', content: $localize`Videos`, route: ['video'], href: 'video' },
     { type: 'item', content: $localize`Events`, route: ['event'], href: 'event' },
     { type: 'item', content: $localize`Members`, route: ['member'], href: 'member' },
-  ];
+  ]
 
   public toggleHamburger() {
-    this.hasHamburger = !this.hasHamburger;
+    this.hasHamburger = !this.hasHamburger
   }
 }
