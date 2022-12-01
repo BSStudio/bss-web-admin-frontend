@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   BreadcrumbModule,
@@ -22,7 +22,6 @@ import { MemberRemoveButtonComponent } from './components/member-remove-button/m
 import { MemberTableComponent } from './components/member-table/member-table.component';
 import { MemberUpdateFormComponent } from './components/member-update-form/member-update-form.component';
 import { MemberProfilePictureComponent } from './components/member-profile-picture/member-profile-picture.component';
-import { MemberIdPictureComponent } from './pages/member-id-picture/member-id-picture.component';
 import { MemberProfilePictureUploadComponent } from './components/member-profile-picture-upload/member-profile-picture-upload.component';
 
 @NgModule({
@@ -40,6 +39,7 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     TableModule,
     SharedModule,
     FileUploaderModule,
+    NgOptimizedImage,
   ],
   declarations: [
     MemberIndexComponent,
@@ -50,7 +50,6 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     MemberUpdateFormComponent,
     MemberStatusPipe,
     MemberProfilePictureComponent,
-    MemberIdPictureComponent,
     MemberProfilePictureUploadComponent,
   ],
   providers: [MemberStatusPipe],

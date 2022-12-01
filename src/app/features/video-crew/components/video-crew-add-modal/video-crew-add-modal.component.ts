@@ -27,12 +27,12 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     private service: VideoCrewService,
     private memberService: MemberService,
     @Inject('video') public video: DetailedVideo,
-    @Inject('update') private update: EventEmitter<DetailedVideo>
+    @Inject('update') protected update: EventEmitter<DetailedVideo>
   ) {
     super();
     this.form = this.fb.group({
       member: this.fb.control<MemberListItem | null>(null),
-      position: this.fb.nonNullable.control<ListItem | null>(null),
+      position: this.fb.control<ListItem | null>(null),
     });
   }
 
@@ -78,8 +78,10 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     this.service
       .addVideoCrewMember({ videoId: this.video.id, ...crewMember })
       .pipe(
-        tap((video) => this.update.emit(video)),
-        tap(() => this.closeModal()),
+        tap((video) => {
+          this.update.emit(video);
+          this.closeModal();
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();

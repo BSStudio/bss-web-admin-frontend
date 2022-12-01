@@ -6,9 +6,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { GridModule, I18n, IconService, UIShellModule } from 'carbon-components-angular';
 // @ts-ignore
 import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
+import { httpInterceptorProviders } from './interceptors';
 
 @NgModule({
   imports: [CommonModule, RouterModule, UIShellModule, GridModule],
+  providers: [httpInterceptorProviders],
   declarations: [DefaultShellComponent, HeaderComponent],
 })
 export class CoreModule {

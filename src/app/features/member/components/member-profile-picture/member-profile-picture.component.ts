@@ -3,12 +3,26 @@ import { Member } from '../../models/member.model';
 
 interface SourceSet {
   type: string;
+  media: string;
   srcset: string;
 }
 
 @Component({
   selector: 'app-member-profile-picture[member]',
-  templateUrl: './member-profile-picture.component.html',
+  template: `
+    <figure>
+      <picture>
+        <source
+          *ngFor="let image of sources"
+          [type]="image.type"
+          [media]="image.media"
+          [srcset]="image.srcset + refreshParam"
+        />
+        <img #img ngSrc="/assets/fallback.jpg" fill alt="{{ member.name }}'s profile picture" i18n-alt />
+      </picture>
+      <figcaption>{{ img.alt }}</figcaption>
+    </figure>
+  `,
 })
 export class MemberProfilePictureComponent implements OnInit {
   private static FORMATS = ['avif', 'webp', 'jpeg'];
@@ -24,12 +38,14 @@ export class MemberProfilePictureComponent implements OnInit {
     this.sources = SIZES.flatMap((size) =>
       FORMATS.map((format) => ({
         type: `image/${format}`,
+        media: '',
         srcset: `${basePath}/${size}.${format}`,
       }))
     );
   }
 
   updateImage() {
-    this.refreshParam = '?' + new URLSearchParams({ t: new Date().getTime().toString() }).toString();
+    const time = new Date().getTime().toString();
+    this.refreshParam = `?${new URLSearchParams({ time })}`;
   }
 }

@@ -72,7 +72,7 @@ jobs:
             - node_modules
       - run:
           name: Testing
-          command: npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI --reporters=junit,coverage
+          command: npm run test -- --no-watch --no-progress --reporters=junit,coverage
       - store_test_results:
           name: Store test results
           path: ~/project/reports
