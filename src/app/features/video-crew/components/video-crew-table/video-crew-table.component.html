@@ -12,11 +12,12 @@
     ibmButton="danger"
     size="field"
     [iconOnly]="true"
-    assistiveTextPlacement="left"
     assistiveTextAlignment="end"
+    assistiveTextPlacement="left"
+    class="row-button"
     (click)="removeCrewMember(crewMember)"
   >
-    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     <span i18n class="bx--assistive-text">Remove {{ crewMember.memberId }} {{ crewMember.position }} from event</span>
+    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
   </button>
 </ng-template>
