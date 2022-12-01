@@ -13,7 +13,6 @@ import {
 } from 'carbon-components-angular';
 import { DetailedVideo } from '../../models';
 import { VideoService } from '../../services/video.service';
-import Calls = jasmine.Calls;
 
 describe('VideoRemoveButtonComponent', () => {
   beforeEach(() => MockBuilder(VideoRemoveButtonComponent, [VideoModule, IconModule]));
@@ -62,6 +61,7 @@ describe('VideoRemoveButtonComponent', () => {
     expect(modalService.show).toHaveBeenCalledOnceWith(modalData);
     expect(videoService.removeVideo).not.toHaveBeenCalled();
   });
+
   xit('should press remove', () => {
     const videoService = ngMocks.findInstance(VideoService);
     expect(videoService.removeVideo).toHaveBeenCalledOnceWith(detailedVideo.id);

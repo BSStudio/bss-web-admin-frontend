@@ -5,6 +5,7 @@ import { VideoTableComponent } from '../../components/video-table-paginated/vide
 
 describe('VideoIndexComponent', () => {
   beforeEach(() => MockBuilder(VideoIndexComponent, VideoModule));
+
   it('should render', () => {
     const fixture = MockRender(VideoIndexComponent);
 
