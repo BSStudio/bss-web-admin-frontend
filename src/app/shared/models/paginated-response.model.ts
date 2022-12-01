@@ -1,5 +1,5 @@
-import { Sort } from './sort.model';
-import { Pageable } from './pageable.model';
+import { Sort } from './sort.model'
+import { Pageable } from './pageable.model'
 
 export class PaginatedResponse<T> {
   constructor(

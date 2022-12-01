@@ -1,4 +1,4 @@
-import { MemberStatus } from './member-status.model';
+import { MemberStatus } from './member-status.model'
 
 export class UpdateMember {
   constructor(

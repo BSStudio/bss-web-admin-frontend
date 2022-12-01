@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
-import { DetailedVideo, UpdateVideo } from '../../models';
-import { NotificationService } from 'carbon-components-angular';
-import { VideoService } from '../../services/video.service';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
+import { DetailedVideo, UpdateVideo } from '../../models'
+import { NotificationService } from 'carbon-components-angular'
+import { VideoService } from '../../services/video.service'
 
 type UpdateVideoForm = FormGroup<{
-  url: FormControl<string>;
-  title: FormControl<string>;
-  description: FormControl<string>;
-  uploadedAt: FormControl<string>;
-  visible: FormControl<boolean>;
-}>;
+  url: FormControl<string>
+  title: FormControl<string>
+  description: FormControl<string>
+  uploadedAt: FormControl<string>
+  visible: FormControl<boolean>
+}>
 
 @Component({
   selector: 'app-video-update-form',
@@ -19,11 +19,11 @@ type UpdateVideoForm = FormGroup<{
   styleUrls: ['./video-update-form.component.scss'],
 })
 export class VideoUpdateFormComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-  public form: UpdateVideoForm;
+  private destroy$ = new Subject<void>()
+  public form: UpdateVideoForm
 
-  @Input() public video!: DetailedVideo;
-  @Output() public update = new EventEmitter<DetailedVideo>();
+  @Input() public video!: DetailedVideo
+  @Output() public update = new EventEmitter<DetailedVideo>()
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,7 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       description: this.fb.nonNullable.control(''),
       uploadedAt: this.fb.nonNullable.control('', { validators: [VideoUpdateFormComponent.DateValidator] }),
       visible: this.fb.nonNullable.control(false),
-    });
+    })
   }
 
   ngOnInit(): void {
@@ -46,25 +46,25 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       this.video.description,
       this.video.uploadedAt,
       this.video.visible
-    );
-    this.form.patchValue(video);
+    )
+    this.form.patchValue(video)
   }
 
   public updateVideo() {
-    const { uploadedAt: date, ...rest } = this.form.getRawValue();
-    const uploadedAt = VideoUpdateFormComponent.toLocalDate(date);
+    const { uploadedAt: date, ...rest } = this.form.getRawValue()
+    const uploadedAt = VideoUpdateFormComponent.toLocalDate(date)
     this.service
       .updateVideo(this.video.id, { uploadedAt, ...rest })
       .pipe(
         tap((video) => this.successNotification(video)),
         tap((video) => this.update.emit(video)),
         catchError((err) => {
-          this.errorNotification(err);
-          return EMPTY;
+          this.errorNotification(err)
+          return EMPTY
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe();
+      .subscribe()
   }
 
   successNotification(video: DetailedVideo) {
@@ -74,7 +74,7 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       subtitle: video.title,
       caption: 'Changes were saved',
       duration: 3000,
-    });
+    })
   }
 
   errorNotification(err: unknown) {
@@ -83,20 +83,20 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
       title: $localize`Error updating`,
       caption: JSON.stringify(err),
       duration: 3000,
-    });
+    })
   }
 
   private static DateValidator: ValidatorFn = (control) => {
-    if (control.value instanceof Date) return null;
-    else return { date: false };
-  };
+    if (control.value instanceof Date) return null
+    else return { date: false }
+  }
 
   private static toLocalDate(date: string | Date) {
-    return new Date(date).toISOString().split('T')[0];
+    return new Date(date).toISOString().split('T')[0]
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
+    this.destroy$.next()
+    this.destroy$.unsubscribe()
   }
 }

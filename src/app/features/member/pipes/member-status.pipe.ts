@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { MemberStatus } from '../models/member-status.model';
+import { Pipe, PipeTransform } from '@angular/core'
+import { MemberStatus } from '../models/member-status.model'
 
 @Pipe({
   name: 'memberStatus',
@@ -11,9 +11,9 @@ export class MemberStatusPipe implements PipeTransform {
     MEMBER_CANDIDATE: $localize`Member candidate`,
     ALUMNI: $localize`Alumni`,
     MEMBER_CANDIDATE_CANDIDATE: $localize`Member candidate candidate`,
-  };
+  }
 
   transform(value: MemberStatus): string {
-    return MemberStatusPipe.MAP[value];
+    return MemberStatusPipe.MAP[value]
   }
 }

@@ -1,33 +1,33 @@
-import { Component, OnDestroy } from '@angular/core';
-import { BaseModal, NotificationService } from 'carbon-components-angular';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { CreateMember } from '../../models/create-member.model';
-import { MemberService } from '../../services/member.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core'
+import { BaseModal, NotificationService } from 'carbon-components-angular'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { CreateMember } from '../../models/create-member.model'
+import { MemberService } from '../../services/member.service'
+import { Subject, takeUntil } from 'rxjs'
 
 @Component({
   selector: 'app-member-create-modal',
   templateUrl: './member-create-modal.component.html',
 })
 export class MemberCreateModalComponent extends BaseModal implements OnDestroy {
-  public form: FormGroup<{ name: FormControl<string>; url: FormControl<string> }>;
-  private readonly destroy$ = new Subject<void>();
+  public form: FormGroup<{ name: FormControl<string>; url: FormControl<string> }>
+  private readonly destroy$ = new Subject<void>()
 
   constructor(
     private service: MemberService,
     private fb: FormBuilder,
     private notificationService: NotificationService
   ) {
-    super();
+    super()
     this.form = this.fb.nonNullable.group<CreateMember>({
       name: '',
       url: '',
-    });
+    })
   }
 
   onSubmit() {
     if (this.form.valid) {
-      this.createMember(this.form.getRawValue());
+      this.createMember(this.form.getRawValue())
     }
   }
 
@@ -38,11 +38,11 @@ export class MemberCreateModalComponent extends BaseModal implements OnDestroy {
       .subscribe({
         next: () => this.close.emit(true),
         error: (err) => this.notificationService.showNotification({ message: err, type: 'error', title: 'Error' }),
-      });
+      })
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
+    this.destroy$.next()
+    this.destroy$.unsubscribe()
   }
 }

@@ -1,9 +1,9 @@
-import { Component, Input, OnDestroy } from '@angular/core';
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular';
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs';
-import { Member } from '../../models/member.model';
-import { MemberService } from '../../services/member.service';
-import { Router } from '@angular/router';
+import { Component, Input, OnDestroy } from '@angular/core'
+import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
+import { Member } from '../../models/member.model'
+import { MemberService } from '../../services/member.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-member-remove-button[member]',
@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
   `,
 })
 export class MemberRemoveButtonComponent implements OnDestroy {
-  private readonly destroy$ = new Subject<void>();
-  @Input() member!: Member;
+  private readonly destroy$ = new Subject<void>()
+  @Input() member!: Member
 
   constructor(
     private service: MemberService,
@@ -36,7 +36,7 @@ export class MemberRemoveButtonComponent implements OnDestroy {
         { type: ModalButtonType.secondary, text: 'Close' },
         { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeMember() },
       ],
-    });
+    })
   }
 
   removeMember() {
@@ -49,16 +49,16 @@ export class MemberRemoveButtonComponent implements OnDestroy {
             type: 'error',
             title: $localize`Error removing member ${this.member.name}`,
             caption: error.toString(),
-          });
-          return EMPTY;
+          })
+          return EMPTY
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe();
+      .subscribe()
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.unsubscribe();
+    this.destroy$.next()
+    this.destroy$.unsubscribe()
   }
 }

@@ -1,4 +1,4 @@
-import { CrewMember } from '../../video-crew/models';
+import { CrewMember } from '../../video-crew/models'
 
 export class DetailedVideo {
   constructor(

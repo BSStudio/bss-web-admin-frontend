@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DefaultShellComponent } from './components/shell/default-shell.component';
-import { HeaderComponent } from './components/header/header.component';
-import { GridModule, I18n, IconService, UIShellModule } from 'carbon-components-angular';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { RouterModule } from '@angular/router'
+import { DefaultShellComponent } from './components/shell/default-shell.component'
+import { HeaderComponent } from './components/header/header.component'
+import { GridModule, I18n, IconService, UIShellModule } from 'carbon-components-angular'
 // @ts-ignore
-import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons';
-import { httpInterceptorProviders } from './interceptors';
+import { Renew16, View16, ViewOffFilled16 } from '@carbon/icons'
+import { httpInterceptorProviders } from './interceptors'
 
 @NgModule({
   imports: [CommonModule, RouterModule, UIShellModule, GridModule],
@@ -14,7 +14,7 @@ import { httpInterceptorProviders } from './interceptors';
   declarations: [DefaultShellComponent, HeaderComponent],
 })
 export class CoreModule {
-  private static readonly icons = [Renew16, View16, ViewOffFilled16];
+  private static readonly icons = [Renew16, View16, ViewOffFilled16]
   private static readonly translations = {
     'CALENDAR.MONTHS.JANUARY': 'Január',
     'CALENDAR.MONTHS.FEBRUARY': 'Február',
@@ -35,10 +35,10 @@ export class CoreModule {
     'CALENDAR.SHORTWEEKDAYS.FRIDAY': 'P',
     'CALENDAR.SHORTWEEKDAYS.SATURDAY': 'Szo',
     'CALENDAR.SHORTWEEKDAYS.SUNDAY': 'V',
-  };
+  }
 
   constructor(private iconService: IconService, private i18nService: I18n) {
-    CoreModule.icons.forEach((icon) => this.iconService.register(icon));
-    this.i18nService.setLocale('hu', CoreModule.translations);
+    CoreModule.icons.forEach((icon) => this.iconService.register(icon))
+    this.i18nService.setLocale('hu', CoreModule.translations)
   }
 }

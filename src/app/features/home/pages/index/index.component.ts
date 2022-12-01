@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MetricsComponent } from '../../components/metrics.component';
+import { Component } from '@angular/core'
+import { MetricsComponent } from '../../components/metrics.component'
 
 @Component({
   selector: 'app-index',

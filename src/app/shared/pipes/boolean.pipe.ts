@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   standalone: true,
@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class BooleanPipe implements PipeTransform {
   transform(value: boolean): string {
-    return value ? $localize`true` : $localize`false`;
+    return value ? $localize`true` : $localize`false`
   }
 }
