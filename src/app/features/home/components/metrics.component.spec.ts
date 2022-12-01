@@ -18,7 +18,7 @@ describe('MetricsComponent', () => {
 
   it('should render tiles after service resolved', () => {
     MockInstance(MetricsService, (instance) => ngMocks.stub(instance, { getMetrics: () => of(metrics) }));
-    const fixture = MockRender(MetricsComponent);
+    MockRender(MetricsComponent);
 
     const tiles = ngMocks.findAll(ClickableTile);
     expect(tiles.length).toBe(3);
