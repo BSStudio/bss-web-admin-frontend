@@ -18,8 +18,12 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "es2020",
+    "types": [
+      "jasmine",
+      "@angular/localize"
+    ],
     "lib": [
-      "es2020",
+      "ES2021",
       "dom"
     ],
     "useDefineForClassFields": false
