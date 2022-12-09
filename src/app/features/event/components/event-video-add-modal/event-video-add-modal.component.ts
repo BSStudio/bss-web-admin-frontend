@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core'
 import { BaseModal } from 'carbon-components-angular'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { DetailedEvent } from '../../models'
@@ -12,6 +12,8 @@ import { Video } from '../../../video/models'
   templateUrl: './event-video-add-modal.component.html',
 })
 export class EventVideoAddModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @Output()
+  public update = new EventEmitter<DetailedEvent>()
   private readonly destroy$ = new Subject<void>()
   public readonly form: FormGroup<{
     videoId: FormControl<{ selected: boolean; content: string; id: string }>
@@ -22,8 +24,7 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
     private fb: FormBuilder,
     private videoService: VideoService,
     private eventVideoService: EventVideoService,
-    @Inject('event') public event: DetailedEvent,
-    @Inject('update') public update: EventEmitter<DetailedEvent>
+    @Inject('event') public event: DetailedEvent
   ) {
     super()
     this.form = this.fb.nonNullable.group({

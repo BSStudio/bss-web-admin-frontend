@@ -5,6 +5,7 @@
   </ibm-modal-header>
   <form ibmModalContent [hasForm]="true" [formGroup]="form">
     <ibm-combo-box
+      #positionComboBox
       formControlName="position"
       type="single"
       label="Position"

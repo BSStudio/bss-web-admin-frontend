@@ -18,6 +18,8 @@
     placeholder="YYYY-MM-dd"
     formControlName="uploadedAt"
   ></ibm-date-picker>
+  {{ form.controls.uploadedAt.getRawValue() }}
+  {{ toLocalDate(form.controls.uploadedAt.getRawValue()) }}
   <ibm-toggle label="Visible" i18n-label formControlName="visible"></ibm-toggle>
   <button i18n ibmButton="primary" type="submit">Update</button>
 </form>

@@ -17,11 +17,12 @@ import { VideoCrewAddModalComponent } from '../video-crew-add-modal/video-crew-a
 import { CrewMember } from '../../models'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { of } from 'rxjs'
+import { VideoCrewRemoveButtonComponent } from '../video-crew-remove-button/video-crew-remove-button.component'
 
 describe('VideoCrewTableComponent', () => {
   beforeEach(() => MockBuilder([VideoCrewTableComponent, TableModule], VideoCrewModule))
-  const crew: CrewMember[] = [{ memberId: 'memberId', position: 'position' }]
-  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, crew)
+  const crewMember = new CrewMember('memberId', 'position')
+  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
 
   it('should create', () => {
     const fixture = MockRender(VideoCrewTableComponent, { video: detailedVideo })
@@ -35,9 +36,9 @@ describe('VideoCrewTableComponent', () => {
     expect(fixture.point.componentInstance.table.data).toEqual([
       [
         new TableItem({ data: detailedVideo.crew[0].position }),
-        new TableItem({ data: crew[0].memberId }),
+        new TableItem({ data: crewMember.memberId }),
         new TableItem({
-          data: { ...crew[0], videoId: detailedVideo.id },
+          data: { ...crewMember, videoId: detailedVideo.id },
           template: fixture.point.componentInstance['removeCrewMemberCell'],
         }),
       ],
@@ -76,7 +77,7 @@ describe('VideoCrewTableComponent', () => {
   })
 
   it('should render a modal on add', () => {
-    const fixture = MockRender(VideoCrewTableComponent, { video: detailedVideo })
+    MockRender(VideoCrewTableComponent, { video: detailedVideo })
 
     const tableContainer = ngMocks.find(TableContainer)
     const tableToolbarContent = ngMocks.find(tableContainer, TableToolbarContent)
@@ -88,39 +89,22 @@ describe('VideoCrewTableComponent', () => {
 
     expect(modalService.create).toHaveBeenCalledOnceWith({
       component: VideoCrewAddModalComponent,
-      inputs: { video: detailedVideo, update: fixture.point.componentInstance.update },
+      inputs: { video: detailedVideo },
     })
   })
 
   it('should have rows', () => {
-    const fixture = MockRender(VideoCrewTableComponent, { video: detailedVideo })
-    fixture.detectChanges()
+    MockRender(VideoCrewTableComponent, { video: detailedVideo })
 
-    const button = ngMocks.find('button.row-button')
-
-    expect(ngMocks.formatText(button)).toBe(`Remove ${crew[0].memberId} ${crew[0].position} from event`)
-    const buttonDirective = ngMocks.findInstance(button, Button)
-
-    expect(buttonDirective.ibmButton).toBe('danger')
-    expect(buttonDirective.size).toBe('field')
-    expect(buttonDirective.iconOnly).toBeTrue()
-    expect(buttonDirective.assistiveTextAlignment).toBe('end')
-    expect(buttonDirective.assistiveTextPlacement).toBe('left')
-    const svg = ngMocks.find(button, 'svg.bx--btn__icon')
-    const icon = ngMocks.findInstance(svg, IconDirective)
-
-    expect(icon.ibmIcon).toBe('delete')
-    expect(icon.size).toBe('16')
+    const removeButton = ngMocks.findInstance(VideoCrewRemoveButtonComponent)
+    expect(removeButton.crewMember).toEqual({ ...crewMember, videoId: detailedVideo.id })
   })
 
   it('should remove crewMember on button click', () => {
     MockInstance(VideoCrewService, 'removeVideoCrewMember', () => of(detailedVideo))
-    const emit = jasmine.createSpy('emit')
-    MockRender(VideoCrewTableComponent, { video: detailedVideo, update: { emit } })
+    MockRender(VideoCrewTableComponent, { video: detailedVideo })
 
-    const button = ngMocks.find('button.row-button')
+    const button = ngMocks.find(VideoCrewRemoveButtonComponent)
     ngMocks.click(button)
-
-    expect(emit).toHaveBeenCalledOnceWith(detailedVideo)
   })
 })

@@ -12,9 +12,10 @@ import {
 import { RouterModule } from '@angular/router'
 import { VideoCrewAddModalComponent } from './components/video-crew-add-modal/video-crew-add-modal.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { VideoCrewRemoveButtonComponent } from './components/video-crew-remove-button/video-crew-remove-button.component'
 
 @NgModule({
-  declarations: [VideoCrewTableComponent, VideoCrewAddModalComponent],
+  declarations: [VideoCrewTableComponent, VideoCrewAddModalComponent, VideoCrewRemoveButtonComponent],
   imports: [
     CommonModule,
     TableModule,

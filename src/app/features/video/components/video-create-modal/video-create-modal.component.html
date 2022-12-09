@@ -2,15 +2,12 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="createVideoForm">
-    <ibm-label>
+  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+    <ibm-label [invalid]="form.controls.title.invalid" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
       <input i18n-placeholder ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
     </ibm-label>
-    <ibm-label
-      i18n-helperText
-      helperText="The video will have the following url: https://bsstudio/video/dorm-interview-series-cats"
-    >
+    <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
       <input i18n-placeholder ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
     </ibm-label>

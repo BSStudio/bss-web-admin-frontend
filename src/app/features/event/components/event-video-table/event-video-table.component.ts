@@ -1,5 +1,6 @@
 import {
   Component,
+  ComponentRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -11,22 +12,13 @@ import {
   ViewChild,
 } from '@angular/core'
 import { DetailedEvent } from '../../models'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
-import {
-  AlertModalType,
-  ModalButtonType,
-  ModalService,
-  NotificationService,
-  TableHeaderItem,
-  TableItem,
-  TableModel,
-} from 'carbon-components-angular'
+import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Video } from '../../../video/models'
 import { EventVideoAddModalComponent } from '../event-video-add-modal/event-video-add-modal.component'
-import { EventVideoService } from '../../../video/services/event-video.service'
+import { Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
-  selector: 'app-event-video-table',
+  selector: 'app-event-video-table[event]',
   templateUrl: './event-video-table.component.html',
 })
 export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
@@ -35,17 +27,13 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   @Output()
   public update = new EventEmitter<DetailedEvent>()
   @ViewChild('removeButtonCell', { static: true })
-  protected removeButtonCell!: TemplateRef<any>
+  public removeButtonCell!: TemplateRef<any>
   @ViewChild('navigateCell', { static: true })
-  protected navigateCell!: TemplateRef<any>
+  public navigateCell!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
   public readonly table = new TableModel()
 
-  constructor(
-    private modalService: ModalService,
-    private eventVideoService: EventVideoService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.initHeaders()
@@ -53,74 +41,39 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['event']) {
+    if (changes['event'] && !changes['event'].firstChange) {
       this.updateTable()
     }
   }
 
   showAddModal() {
-    this.modalService.create({
+    const componentRef: ComponentRef<EventVideoAddModalComponent> = this.modalService.create({
       component: EventVideoAddModalComponent,
-      inputs: { event: this.event, update: this.update },
+      inputs: { event: this.event },
     })
-  }
-
-  showRemoveModal(video: { title: string; id: string }) {
-    this.modalService.show({
-      type: AlertModalType.danger,
-      label: video.title,
-      title: $localize`Remove video from event`,
-      size: 'xs',
-      content: $localize`Are you sure you want to remove this video?`,
-      buttons: [
-        { type: ModalButtonType.secondary, text: $localize`Close` },
-        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeEventVideo(video.id) },
-      ],
-    })
-  }
-
-  removeEventVideo(videoId: string) {
-    this.eventVideoService
-      .removeVideoFromEvent({ eventId: this.event.id, videoId })
+    componentRef.instance.update
       .pipe(
-        tap((event) => {
-          this.successNotification(event)
-          this.update.emit(event)
-        }),
-        catchError((err) => {
-          this.errorNotification(err)
-          return EMPTY
-        }),
+        tap((event) => this.updateEvent(event)),
         takeUntil(this.destroy$)
       )
       .subscribe()
   }
 
-  successNotification(event: DetailedEvent) {
-    this.notificationService.showToast({
-      type: 'success',
-      title: $localize``,
-    })
-  }
-
-  errorNotification(error: unknown) {
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error removing video`,
-      content: JSON.stringify(error),
-    })
+  updateEvent(event: DetailedEvent) {
+    this.event = event
+    this.update.emit(event)
   }
 
   private updateTable() {
     this.table.data = this.event.videos.map((video) => this.videoToRow(video))
   }
 
-  private videoToRow({ title, id, url, uploadedAt }: Video) {
+  private videoToRow(video: Video) {
     return [
-      new TableItem({ title, data: { id, title }, template: this.navigateCell }),
-      new TableItem({ title, data: url }),
-      new TableItem({ title, data: uploadedAt }),
-      new TableItem({ title, data: { id, title }, template: this.removeButtonCell }),
+      new TableItem({ title: video.title, data: video, template: this.navigateCell }),
+      new TableItem({ title: video.title, data: video.url }),
+      new TableItem({ title: video.title, data: video.uploadedAt }),
+      new TableItem({ title: video.title, data: video, template: this.removeButtonCell }),
     ]
   }
 

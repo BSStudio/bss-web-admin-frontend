@@ -1,5 +1,6 @@
 import {
   Component,
+  ComponentRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -15,7 +16,6 @@ import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-com
 import { Subject, takeUntil, tap } from 'rxjs'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { VideoCrewAddModalComponent } from '../video-crew-add-modal/video-crew-add-modal.component'
-import { CrewMember } from '../../models'
 
 @Component({
   selector: 'app-video-crew-table[video]',
@@ -33,29 +33,31 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit() {
     this.initHeaders()
+    this.updateTable()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['video']) {
+    if (changes['video'] && !changes['video'].firstChange) {
       this.updateTable()
     }
   }
 
   showAddModal() {
-    this.modalService.create({
+    const componentRef: ComponentRef<VideoCrewAddModalComponent> = this.modalService.create({
       component: VideoCrewAddModalComponent,
-      inputs: { video: this.video, update: this.update },
+      inputs: { video: this.video },
     })
-  }
-
-  removeCrewMember(crewMember: CrewMember) {
-    this.service
-      .removeVideoCrewMember({ videoId: this.video.id, ...crewMember })
+    componentRef.instance.update
       .pipe(
-        tap((video) => this.update.emit(video)),
+        tap((video) => this.updateVideo(video)),
         takeUntil(this.destroy$)
       )
       .subscribe()
+  }
+
+  updateVideo(video: DetailedVideo) {
+    this.video = video
+    this.update.emit(video)
   }
 
   private updateTable() {

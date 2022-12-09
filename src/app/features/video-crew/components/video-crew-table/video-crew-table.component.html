@@ -8,16 +8,5 @@
   <ibm-table [model]="table" [sortable]="false" [striped]="false" [showSelectionColumn]="false" size="sh"> </ibm-table>
 </ibm-table-container>
 <ng-template #removeCrewMemberCell let-crewMember="data">
-  <button
-    ibmButton="danger"
-    size="field"
-    [iconOnly]="true"
-    assistiveTextAlignment="end"
-    assistiveTextPlacement="left"
-    class="row-button"
-    (click)="removeCrewMember(crewMember)"
-  >
-    <span i18n class="bx--assistive-text">Remove {{ crewMember.memberId }} {{ crewMember.position }} from event</span>
-    <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
-  </button>
+  <app-video-crew-remove-button [crewMember]="crewMember" (update)="updateVideo($event)"></app-video-crew-remove-button>
 </ng-template>

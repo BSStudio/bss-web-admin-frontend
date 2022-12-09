@@ -21,6 +21,7 @@ import { EventUpdateFormComponent } from './components/event-update-form/event-u
 import { EventVideoAddModalComponent } from './components/event-video-add-modal/event-video-add-modal.component'
 import { EventVideoTableComponent } from './components/event-video-table/event-video-table.component'
 import { SharedModule } from '../../shared/shared.module'
+import { EventVideoRemoveButtonComponent } from './components/event-video-remove-button/event-video-remove-button.component'
 
 @NgModule({
   imports: [
@@ -46,6 +47,7 @@ import { SharedModule } from '../../shared/shared.module'
     EventUpdateFormComponent,
     EventVideoAddModalComponent,
     EventVideoTableComponent,
+    EventVideoRemoveButtonComponent,
   ],
 })
 export class EventModule {}

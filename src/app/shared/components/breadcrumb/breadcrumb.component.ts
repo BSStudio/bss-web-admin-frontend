@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { BreadcrumbItem, BreadcrumbModule } from 'carbon-components-angular'
 
 @Component({
@@ -7,13 +7,15 @@ import { BreadcrumbItem, BreadcrumbModule } from 'carbon-components-angular'
   template: ` <ibm-breadcrumb [noTrailingSlash]="true" [items]="items"></ibm-breadcrumb> `,
   imports: [BreadcrumbModule],
 })
-export class BreadcrumbComponent {
+export class BreadcrumbComponent implements OnInit {
   @Input() title = ''
-  @Input() parentRoute: unknown[] = []
+  @Input() parentRoute = ''
   @Input() parentTitle = ''
-  get items(): BreadcrumbItem[] {
-    return [
-      { route: this.parentRoute, href: `/${this.parentRoute}`, content: this.parentTitle },
+  public items: BreadcrumbItem[] = []
+
+  ngOnInit(): void {
+    this.items = [
+      { route: [this.parentRoute], href: `/${this.parentRoute}`, content: this.parentTitle },
       { content: this.title, current: true },
     ]
   }

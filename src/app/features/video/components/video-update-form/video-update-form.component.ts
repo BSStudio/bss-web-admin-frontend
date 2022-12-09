@@ -21,6 +21,7 @@ type UpdateVideoForm = FormGroup<{
 export class VideoUpdateFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>()
   public form: UpdateVideoForm
+  public date: any
 
   @Input() public video!: DetailedVideo
   @Output() public update = new EventEmitter<DetailedVideo>()
@@ -52,7 +53,7 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
 
   public updateVideo() {
     const { uploadedAt: date, ...rest } = this.form.getRawValue()
-    const uploadedAt = VideoUpdateFormComponent.toLocalDate(date)
+    const uploadedAt = this.toLocalDate(date)
     this.service
       .updateVideo(this.video.id, { uploadedAt, ...rest })
       .pipe(
@@ -91,7 +92,7 @@ export class VideoUpdateFormComponent implements OnInit, OnDestroy {
     else return { date: false }
   }
 
-  private static toLocalDate(date: string | Date) {
+  public toLocalDate(date: string | Date) {
     return new Date(date).toISOString().split('T')[0]
   }
 

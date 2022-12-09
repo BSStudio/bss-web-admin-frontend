@@ -18,7 +18,7 @@ interface SourceSet {
           [media]="image.media"
           [srcset]="image.srcset + refreshParam"
         />
-        <img #img ngSrc="/assets/fallback.jpg" fill alt="{{ member.name }}'s profile picture" i18n-alt />
+        <img #img ngSrc="/assets/fallback.jpg" width="360" alt="{{ member.name }}'s profile picture" i18n-alt />
       </picture>
       <figcaption>{{ img.alt }}</figcaption>
     </figure>

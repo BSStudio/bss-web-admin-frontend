@@ -19,7 +19,7 @@ describe('BreadcrumbComponent', () => {
     const breadcrumb = ngMocks.findInstance(Breadcrumb)
     expect(breadcrumb.noTrailingSlash).toBeTrue()
     expect(breadcrumb.items).toEqual([
-      { route: parentRoute, href: `/${parentRoute}`, content: parentTitle },
+      { route: [parentRoute], href: `/${parentRoute}`, content: parentTitle },
       { content: title, current: true },
     ])
   })
@@ -29,7 +29,7 @@ describe('BreadcrumbComponent', () => {
     const breadcrumb = ngMocks.findInstance(Breadcrumb)
     expect(breadcrumb.noTrailingSlash).toBeTrue()
     expect(breadcrumb.items).toEqual([
-      { route: [], href: `/`, content: '' },
+      { route: [''], href: `/`, content: '' },
       { content: '', current: true },
     ])
   })

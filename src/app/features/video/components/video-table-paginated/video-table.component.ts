@@ -15,6 +15,7 @@ import { PaginatedResponse } from '../../../../shared/models'
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
   readonly table = new TableModel()
+  public loading = true
   private readonly destroy$ = new Subject<void>()
 
   constructor(
@@ -41,7 +42,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
   }
 
   getVideos() {
-    this.table.isLoading = true
+    this.loading = true
     return this.service
       .getVideos(this.table.currentPage - 1, this.table.pageLength)
       .pipe(
@@ -49,7 +50,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$)
       )
       .subscribe({
-        complete: () => (this.table.isLoading = false),
+        complete: () => (this.loading = false),
       })
   }
 

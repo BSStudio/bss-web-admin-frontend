@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit } from '@angular/core'
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core'
 import { concatMap, from, map, Subject, takeUntil, tap, toArray } from 'rxjs'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { MemberService } from '../../../member/services/member.service'
 import { DetailedVideo } from '../../../video/models'
-import { BaseModal, ListItem } from 'carbon-components-angular'
+import { BaseModal, ComboBox, ListItem } from 'carbon-components-angular'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { CrewMember } from '../../models'
+import { DetailedCrewMember } from '../../models'
 
 interface MemberListItem extends ListItem {
   id: string
@@ -16,18 +16,21 @@ interface MemberListItem extends ListItem {
   templateUrl: './video-crew-add-modal.component.html',
 })
 export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @Output()
+  public update = new EventEmitter<DetailedVideo>()
   private readonly destroy$ = new Subject<void>()
   public positionSearch = ''
   public positions: ListItem[] = []
   public members: MemberListItem[] = []
   public form: FormGroup<{ member: FormControl<MemberListItem | null>; position: FormControl<ListItem | null> }>
+  @ViewChild('positionComboBox', { static: true })
+  protected comboBox!: ComboBox
 
   constructor(
     private fb: FormBuilder,
     private service: VideoCrewService,
     private memberService: MemberService,
-    @Inject('video') public video: DetailedVideo,
-    @Inject('update') protected update: EventEmitter<DetailedVideo>
+    @Inject('video') public video: DetailedVideo
   ) {
     super()
     this.form = this.fb.group({
@@ -70,13 +73,13 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
   onSubmit() {
     const crewMember = this.form.getRawValue()
     if (this.form.valid && crewMember.member !== null && crewMember.position !== null) {
-      this.addCrewMember(new CrewMember(crewMember.position.content, crewMember.member.id))
+      this.addCrewMember(new DetailedCrewMember(this.video.id, crewMember.position.content, crewMember.member.id))
     }
   }
 
-  private addCrewMember(crewMember: CrewMember) {
+  private addCrewMember(crewMember: DetailedCrewMember) {
     this.service
-      .addVideoCrewMember({ videoId: this.video.id, ...crewMember })
+      .addVideoCrewMember(crewMember)
       .pipe(
         tap((video) => {
           this.update.emit(video)
@@ -89,7 +92,13 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
 
   addPosition() {
     const newPosition = { content: this.positionSearch, selected: true }
-    this.positions = [newPosition, ...this.positions.map(({ content }) => ({ content, selected: false }))]
+    this.positions = [
+      newPosition,
+      ...this.positions
+        .filter(({ content }) => content === this.positionSearch)
+        .map(({ content }) => ({ content, selected: false })),
+    ]
+    this.comboBox.closeDropdown()
     this.form.patchValue({
       position: newPosition,
     })
