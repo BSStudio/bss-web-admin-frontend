@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
 import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
-import { DetailedEvent, Event } from '../../models'
+import { DetailedEvent } from '../../models'
 import { EventVideoService } from '../../../video/services/event-video.service'
 import { Video } from '../../../video/models'
 

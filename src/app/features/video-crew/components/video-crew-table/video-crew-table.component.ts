@@ -14,7 +14,6 @@ import {
 import { DetailedVideo } from '../../../video/models'
 import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { VideoCrewService } from '../../services/video-crew.service'
 import { VideoCrewAddModalComponent } from '../video-crew-add-modal/video-crew-add-modal.component'
 
 @Component({
@@ -29,7 +28,7 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
   public readonly table = new TableModel()
   private readonly destroy$ = new Subject<void>()
 
-  constructor(private service: VideoCrewService, private modalService: ModalService) {}
+  constructor(private modalService: ModalService) {}
 
   ngOnInit() {
     this.initHeaders()

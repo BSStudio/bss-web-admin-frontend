@@ -7,6 +7,7 @@ import {
   IconModule,
   ModalModule,
   NFormsModule,
+  NotificationModule,
   TableModule,
 } from 'carbon-components-angular'
 import { RouterModule } from '@angular/router'
@@ -23,6 +24,7 @@ import { VideoCrewRemoveButtonComponent } from './components/video-crew-remove-b
     RouterModule,
     IconModule,
     ModalModule,
+    NotificationModule,
     ReactiveFormsModule,
     NFormsModule,
     ComboBoxModule,
