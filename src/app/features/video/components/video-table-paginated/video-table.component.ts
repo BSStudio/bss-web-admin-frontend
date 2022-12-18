@@ -41,9 +41,9 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     await this.router.navigate(['video', id])
   }
 
-  getVideos() {
+  getVideos(): void {
     this.loading = true
-    return this.service
+    this.service
       .getVideos(this.table.currentPage - 1, this.table.pageLength)
       .pipe(
         tap((paginatedVideos) => this.updateTable(paginatedVideos)),

@@ -7,7 +7,7 @@
         (valueChange)="filterNodeNames($event)"
         (clear)="searchValue = ''"
       ></ibm-table-toolbar-search>
-      <button ibmButton="secondary" [iconOnly]="true">
+      <button ibmButton="secondary" [iconOnly]="true" [hasAssistiveText]="true">
         <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getMembers()"></svg>
         <span i18n class="bx--assistive-text">Refresh</span>
       </button>

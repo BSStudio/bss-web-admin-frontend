@@ -84,12 +84,17 @@ describe('MemberService', () => {
 
     service
       .deleteMember(id)
-      .pipe(tap((actual) => expect(actual).toEqual(member)))
-      .subscribe({ complete: () => done() })
+      .pipe(
+        tap(() => {
+          expect().nothing()
+          done()
+        })
+      )
+      .subscribe()
 
     const req = httpMock.expectOne(`/api/v1/member/${id}`)
     expect(req.request.method).toBe('DELETE')
-    req.flush(member)
+    req.flush(null)
     httpMock.verify()
   })
 })

@@ -182,10 +182,6 @@
         <source>Dorm interview series - Cats</source>
         <target>Szobakommandó - Cicák</target>
       </trans-unit>
-      <trans-unit id="5118348163556993736" datatype="html">
-        <source>The video will have the following url: https://bsstudio/video/dorm-interview-series-cats</source>
-        <target>A videó a következő URL-en fog megjelenni: https://bsstudio/video/szobakommando-cicak</target>
-      </trans-unit>
       <trans-unit id="1723757384684824664" datatype="html">
         <source>dorm-interview-series-cats</source>
         <target>szobakommando-cicak</target>
@@ -270,12 +266,8 @@
         <source>Manage event videos</source>
         <target state="new">Manage event videos</target>
       </trans-unit>
-      <trans-unit id="3919953312898646404" datatype="html">
-        <source>Lorem ipsum</source>
-        <target state="new">Lorem ipsum</target>
-      </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
+        <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
         <target state="new"><x id="INTERPOLATION" equiv-text="{{ member.name }}"/> profil képe</target>
       </trans-unit>
       <trans-unit id="969237518420234961" datatype="html">
@@ -297,10 +289,6 @@
       <trans-unit id="5152944817268935045" datatype="html">
         <source>Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</source>
         <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</target>
-      </trans-unit>
-      <trans-unit id="4674214119910891625" datatype="html">
-        <source>No videos</source>
-        <target>Nincsenek videók</target>
       </trans-unit>
       <trans-unit id="4777323515857731788" datatype="html">
         <source>Upload date</source>
@@ -365,6 +353,34 @@
       <trans-unit id="2375149812897946334" datatype="html">
         <source>Uploaded at</source>
         <target state="new">Uploaded at</target>
+      </trans-unit>
+      <trans-unit id="4388030633941684230" datatype="html">
+        <source><x id="PH" equiv-text="videoTitle"/> was removed from <x id="PH_1" equiv-text="event.title"/></source>
+        <target state="new"><x id="PH" equiv-text="videoTitle"/> was removed from <x id="PH_1" equiv-text="event.title"/></target>
+      </trans-unit>
+      <trans-unit id="1928503252421516797" datatype="html">
+        <source>Add videos to this event</source>
+        <target state="new">Add videos to this event</target>
+      </trans-unit>
+      <trans-unit id="1698161918406246823" datatype="html">
+        <source>Remove member from video</source>
+        <target state="new">Remove member from video</target>
+      </trans-unit>
+      <trans-unit id="8064511866515846686" datatype="html">
+        <source>Are you sure you want to remove this member from the crew?</source>
+        <target state="new">Are you sure you want to remove this member from the crew?</target>
+      </trans-unit>
+      <trans-unit id="7045123878111147511" datatype="html">
+        <source>Required</source>
+        <target state="new">Required</target>
+      </trans-unit>
+      <trans-unit id="7058184791033246035" datatype="html">
+        <source>The video will have the following url: https://bsstudio/video/<x id="PH" equiv-text="renderedUrl"/></source>
+        <target state="new">The video will have the following url: https://bsstudio/video/<x id="PH" equiv-text="renderedUrl"/></target>
+      </trans-unit>
+      <trans-unit id="7619560701830330401" datatype="html">
+        <source>Loading</source>
+        <target state="new">Loading</target>
       </trans-unit>
     </body>
   </file>

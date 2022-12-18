@@ -12,6 +12,7 @@ import { Video } from '../../../video/models'
       ibmButton="danger"
       size="field"
       [iconOnly]="true"
+      [hasAssistiveText]="true"
       assistiveTextAlignment="end"
       assistiveTextPlacement="left"
       (click)="showRemoveModal(video)"

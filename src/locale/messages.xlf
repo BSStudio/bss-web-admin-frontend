@@ -119,9 +119,6 @@
       <trans-unit id="3863898267470745518" datatype="html">
         <source>A short description will be added here</source>
       </trans-unit>
-      <trans-unit id="3919953312898646404" datatype="html">
-        <source>Lorem ipsum</source>
-      </trans-unit>
       <trans-unit id="1891104643962082116" datatype="html">
         <source>Update video</source>
       </trans-unit>
@@ -148,9 +145,6 @@
       </trans-unit>
       <trans-unit id="5498133127606647122" datatype="html">
         <source>Dorm interview series - Cats</source>
-      </trans-unit>
-      <trans-unit id="5118348163556993736" datatype="html">
-        <source>The video will have the following url: https://bsstudio/video/dorm-interview-series-cats</source>
       </trans-unit>
       <trans-unit id="1723757384684824664" datatype="html">
         <source>dorm-interview-series-cats</source>
@@ -180,7 +174,7 @@
         <source>Metadata</source>
       </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
+        <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
       </trans-unit>
       <trans-unit id="3595107845551842320" datatype="html">
         <source>Manage event videos</source>
@@ -196,9 +190,6 @@
       </trans-unit>
       <trans-unit id="4425253027739928982" datatype="html">
         <source>Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</source>
-      </trans-unit>
-      <trans-unit id="4674214119910891625" datatype="html">
-        <source>No videos</source>
       </trans-unit>
       <trans-unit id="4777323515857731788" datatype="html">
         <source>Upload date</source>
@@ -274,6 +265,27 @@
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
+      </trans-unit>
+      <trans-unit id="1698161918406246823" datatype="html">
+        <source>Remove member from video</source>
+      </trans-unit>
+      <trans-unit id="1928503252421516797" datatype="html">
+        <source>Add videos to this event</source>
+      </trans-unit>
+      <trans-unit id="4388030633941684230" datatype="html">
+        <source><x id="PH" equiv-text="videoTitle"/> was removed from <x id="PH_1" equiv-text="event.title"/></source>
+      </trans-unit>
+      <trans-unit id="7045123878111147511" datatype="html">
+        <source>Required</source>
+      </trans-unit>
+      <trans-unit id="7058184791033246035" datatype="html">
+        <source>The video will have the following url: https://bsstudio/video/<x id="PH" equiv-text="renderedUrl"/></source>
+      </trans-unit>
+      <trans-unit id="7619560701830330401" datatype="html">
+        <source>Loading</source>
+      </trans-unit>
+      <trans-unit id="8064511866515846686" datatype="html">
+        <source>Are you sure you want to remove this member from the crew?</source>
       </trans-unit>
     </body>
   </file>

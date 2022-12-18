@@ -62,8 +62,8 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
   private updateTable() {
     this.table.data = this.video.crew.map((crewMember) => [
       new TableItem({ data: crewMember.position }),
-      new TableItem({ data: crewMember.memberId }),
-      new TableItem({ data: { ...crewMember, videoId: this.video.id }, template: this.removeCrewMemberCell }),
+      new TableItem({ data: crewMember.member.name }),
+      new TableItem({ data: crewMember, template: this.removeCrewMemberCell }),
     ])
   }
 

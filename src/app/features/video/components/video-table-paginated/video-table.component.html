@@ -11,7 +11,7 @@
       </button>
     </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content>
-      <button ibmButton="secondary" [disabled]="loading" [iconOnly]="true">
+      <button ibmButton="secondary" [disabled]="loading" [iconOnly]="true" [hasAssistiveText]="true">
         <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getVideos()"></svg>
         <span i18n class="bx--assistive-text">Refresh</span>
       </button>

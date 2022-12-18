@@ -10,7 +10,9 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     MockRender(AppComponent)
-    expect(() => ngMocks.findInstance(RouterOutlet)).not.toThrow()
-    expect(() => ngMocks.findInstance(Placeholder)).not.toThrow()
+    expect(() => {
+      ngMocks.findInstance(Placeholder)
+      ngMocks.findInstance(RouterOutlet)
+    }).not.toThrow()
   })
 })

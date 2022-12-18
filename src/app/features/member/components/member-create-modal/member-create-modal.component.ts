@@ -3,7 +3,7 @@ import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { CreateMember } from '../../models/create-member.model'
 import { MemberService } from '../../services/member.service'
-import { Subject, takeUntil } from 'rxjs'
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-member-create-modal',
@@ -34,11 +34,15 @@ export class MemberCreateModalComponent extends BaseModal implements OnDestroy {
   private createMember(createMember: CreateMember) {
     this.service
       .createMember(createMember)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: () => this.close.emit(true),
-        error: (err) => this.notificationService.showNotification({ message: err, type: 'error', title: 'Error' }),
-      })
+      .pipe(
+        tap(() => this.close.emit(true)),
+        catchError((err) => {
+          this.notificationService.showNotification({ message: err, type: 'error', title: 'Error' })
+          return EMPTY
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
   }
 
   ngOnDestroy() {

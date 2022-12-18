@@ -43,18 +43,32 @@ export class MemberRemoveButtonComponent implements OnDestroy {
     this.service
       .deleteMember(this.member.id)
       .pipe(
-        tap(async () => await this.router.navigate(['member'])),
+        tap(async () => {
+          this.successNotification()
+          await this.router.navigate(['member'])
+        }),
         catchError((error) => {
-          this.notificationService.showNotification({
-            type: 'error',
-            title: $localize`Error removing member ${this.member.name}`,
-            caption: error.toString(),
-          })
+          this.errorNotification(error)
           return EMPTY
         }),
         takeUntil(this.destroy$)
       )
       .subscribe()
+  }
+
+  private successNotification() {
+    this.notificationService.showNotification({
+      type: 'success',
+      title: $localize``,
+    })
+  }
+
+  private errorNotification(error: unknown) {
+    this.notificationService.showNotification({
+      type: 'error',
+      title: $localize`Error removing member ${this.member.name}`,
+      caption: JSON.stringify(error),
+    })
   }
 
   ngOnDestroy(): void {

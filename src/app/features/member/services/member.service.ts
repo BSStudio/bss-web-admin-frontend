@@ -25,6 +25,6 @@ export class MemberService {
   }
 
   deleteMember(memberId: string) {
-    return this.http.delete(`/api/v1/member/${memberId}`)
+    return this.http.delete<void>(`/api/v1/member/${memberId}`)
   }
 }

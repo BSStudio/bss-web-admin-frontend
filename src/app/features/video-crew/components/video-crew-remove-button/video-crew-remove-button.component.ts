@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
-import { DetailedCrewMember } from '../../models'
+import { CrewMember } from '../../models'
 import { Subject, takeUntil, tap, catchError, EMPTY } from 'rxjs'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { DetailedVideo } from '../../../video/models'
@@ -12,18 +12,21 @@ import { AlertModalType, ModalButtonType, ModalService, NotificationService } fr
       ibmButton="danger"
       size="field"
       [iconOnly]="true"
+      [hasAssistiveText]="true"
       assistiveTextAlignment="end"
       assistiveTextPlacement="left"
       (click)="showConfirm()"
     >
-      <span i18n class="bx--assistive-text">Remove {{ crewMember.memberId }} {{ crewMember.position }} from event</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+      <span i18n class="bx--assistive-text"
+        >Remove {{ crewMember.member.name }}'s {{ crewMember.position }} from event</span
+      >
     </button>
   `,
 })
 export class VideoCrewRemoveButtonComponent implements OnDestroy {
   @Input()
-  public crewMember!: DetailedCrewMember
+  public crewMember!: CrewMember
   @Output()
   public update = new EventEmitter<DetailedVideo>()
   private readonly destroy$ = new Subject<void>()
@@ -37,7 +40,7 @@ export class VideoCrewRemoveButtonComponent implements OnDestroy {
   showConfirm() {
     this.modalService.show({
       type: AlertModalType.danger,
-      label: `${this.crewMember.memberId} | ${this.crewMember.position}`,
+      label: `${this.crewMember.member.name} | ${this.crewMember.position}`,
       title: $localize`Remove member from video`,
       size: 'xs',
       content: $localize`Are you sure you want to remove this member from the crew?`,
@@ -53,8 +56,9 @@ export class VideoCrewRemoveButtonComponent implements OnDestroy {
   }
 
   removeCrewMember() {
+    const { videoId, position, member } = this.crewMember
     this.service
-      .removeVideoCrewMember(this.crewMember)
+      .removeVideoCrewMember({ videoId, position, memberId: member.id })
       .pipe(
         tap((video) => {
           this.successNotification(video)

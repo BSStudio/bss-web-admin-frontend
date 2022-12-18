@@ -1,4 +1,4 @@
-import { MockBuilder, MockRender, NG_MOCKS_GUARDS, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks'
+import { MockBuilder, MockRender, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks'
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
 import { Location } from '@angular/common'
@@ -8,10 +8,8 @@ import { of } from 'rxjs'
 import { DetailedVideo } from '../models'
 import { fakeAsync, tick } from '@angular/core/testing'
 import { VideoIdComponent } from './video-id/video-id.component'
-import { FormBuilder } from '@angular/forms'
 import { VideoModule } from '../video.module'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import {VideoRoutingModule} from "./video-routing.module";
 
 describe('VideoResolver', () => {
   beforeEach(() =>
