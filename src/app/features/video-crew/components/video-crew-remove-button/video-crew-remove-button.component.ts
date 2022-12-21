@@ -6,7 +6,7 @@ import { DetailedVideo } from '../../../video/models'
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
 
 @Component({
-  selector: 'app-video-crew-remove-button',
+  selector: 'app-video-crew-remove-button[crewMember]',
   template: `
     <button
       ibmButton="danger"
@@ -74,11 +74,15 @@ export class VideoCrewRemoveButtonComponent implements OnDestroy {
   }
 
   successNotification(video: DetailedVideo) {
-    this.notificationService.showToast({ type: 'success', title: '' })
+    this.notificationService.showToast({ type: 'success', title: `${this.crewMember.member.name}` })
   }
 
   errorNotification(error: unknown) {
-    this.notificationService.showToast({ type: 'error', title: '' })
+    this.notificationService.showToast({
+      type: 'error',
+      title: $localize`Error removing crew member`,
+      message: JSON.stringify(error),
+    })
   }
 
   ngOnDestroy() {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { ReactiveFormsModule } from '@angular/forms'
 import {
-  BreadcrumbModule,
   FileUploaderModule,
   GridModule,
   IconModule,
@@ -29,7 +28,6 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     CommonModule,
     ReactiveFormsModule,
     MemberRoutingModule,
-    BreadcrumbModule,
     GridModule,
     IconModule,
     ModalModule,

@@ -5,15 +5,28 @@
   <form ibmModalContent [hasForm]="true" [formGroup]="form">
     <ibm-label [invalid]="form.controls.title.invalid" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
-      <input i18n-placeholder ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
+      <input
+        [attr.modal-primary-focus]="true"
+        i18n-placeholder
+        ibmText
+        formControlName="title"
+        placeholder="Dorm interview series - Cats"
+        (keyup.enter)="onSubmit()"
+      />
     </ibm-label>
     <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
-      <input i18n-placeholder ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
+      <input
+        i18n-placeholder
+        ibmText
+        formControlName="url"
+        placeholder="dorm-interview-series-cats"
+        (keyup.enter)="onSubmit()"
+      />
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button i18n ibmButton="primary" (click)="onSubmit()" style="order: 1">Add video</button>
+    <button i18n ibmButton="primary" (click)="onSubmit()">Add video</button>
     <button i18n ibmButton="secondary" (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>

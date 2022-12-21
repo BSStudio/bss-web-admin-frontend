@@ -18,9 +18,10 @@ describe('VideoCrewAddModalComponent', () => {
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
   const eventEmitter = new EventEmitter<DetailedVideo>()
   beforeEach(() =>
-    MockBuilder([VideoCrewAddModalComponent, FormBuilder], VideoCrewModule)
-      .provide({ provide: 'video', useFactory: () => detailedVideo })
-      .provide({ provide: 'update', useFactory: () => eventEmitter })
+    MockBuilder([VideoCrewAddModalComponent, FormBuilder], VideoCrewModule).provide({
+      provide: 'video',
+      useFactory: () => detailedVideo,
+    })
   )
 
   it('should create', () => {

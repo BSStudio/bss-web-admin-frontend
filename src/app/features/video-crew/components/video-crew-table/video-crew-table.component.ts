@@ -42,11 +42,11 @@ export class VideoCrewTableComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   showAddModal() {
-    const componentRef: ComponentRef<VideoCrewAddModalComponent> = this.modalService.create({
+    const { instance }: ComponentRef<VideoCrewAddModalComponent> = this.modalService.create({
       component: VideoCrewAddModalComponent,
       inputs: { video: this.video },
     })
-    componentRef.instance.update
+    instance.update
       .pipe(
         tap((video) => this.updateVideo(video)),
         takeUntil(this.destroy$)

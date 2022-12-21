@@ -1,16 +1,16 @@
 import { VideoService } from '../../services/video.service'
-import { Component, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { BaseModal } from 'carbon-components-angular'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { CreateVideo } from '../../models'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-video-create-modal',
   templateUrl: './video-create-modal.component.html',
   styleUrls: ['./video-create-modal.component.scss'],
 })
-export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
+export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
   public readonly form: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>
   private readonly destroy$ = new Subject<void>()
 
@@ -18,15 +18,31 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
     super()
     this.form = this.fb.nonNullable.group({
       title: this.fb.nonNullable.control('', [Validators.required]),
-      url: this.fb.nonNullable.control('', [Validators.required]),
+      url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\w+(-\w+)*$/)]),
     })
+  }
+
+  ngOnInit(): void {
+    this.initAutomaticUrlGenerator()
+  }
+
+  private initAutomaticUrlGenerator() {
+    this.form.controls.title.valueChanges
+      .pipe(
+        tap((title) => {
+          const url = title.toLowerCase().split(/\W+/).join('-')
+          this.form.controls.url.setValue(url)
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
   }
 
   get titleInvalidText(): string {
     const { title } = this.form.controls
     if (title.touched && title.errors) {
       if (title.errors['required']) {
-        return $localize`Required`
+        return $localize`Field required`
       }
       return JSON.stringify(title.errors)
     } else return ''
@@ -36,7 +52,10 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
     const { url } = this.form.controls
     if (url.touched && url.errors) {
       if (url.errors['required']) {
-        return $localize`Required`
+        return $localize`Field required`
+      }
+      if (url.errors['pattern']) {
+        return $localize`Does not match url pattern: ${url.errors['pattern'].requiredPattern}`
       }
       return JSON.stringify(url.errors)
     } else return ''
@@ -60,6 +79,10 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
       .createVideo(createVideo)
       .pipe(
         tap(() => this.closeModal()),
+        catchError(() => {
+          window.alert($localize`Server error. Try a different title/url`)
+          return EMPTY
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe()

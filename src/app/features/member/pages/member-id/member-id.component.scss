@@ -13,17 +13,17 @@
     grid-area: breadcrumb
   }
 
-  section.title {
+  section#title {
     grid-area: title;
     display: flex;
     justify-content: space-between;
   }
 
-  section.profile-picture {
+  section#profile-picture {
     grid-area: picture;
   }
 
-  section.details {
+  section#details {
     grid-area: details;
   }
 }

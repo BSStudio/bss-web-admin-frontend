@@ -18,10 +18,14 @@ import { CrewMember } from '../../models'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { of } from 'rxjs'
 import { VideoCrewRemoveButtonComponent } from '../video-crew-remove-button/video-crew-remove-button.component'
+import { SimpleMember } from '../../../member/models/simple-member.model'
+import { ComponentRef } from '@angular/core'
+import { ComponentFixture } from '@angular/core/testing'
 
 describe('VideoCrewTableComponent', () => {
   beforeEach(() => MockBuilder([VideoCrewTableComponent, TableModule], VideoCrewModule))
-  const crewMember = new CrewMember('memberId', 'position')
+  const member = new SimpleMember('id', 'name')
+  const crewMember = new CrewMember('memberId', 'position', member)
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
 
   it('should create', () => {
@@ -35,10 +39,10 @@ describe('VideoCrewTableComponent', () => {
     ])
     expect(fixture.point.componentInstance.table.data).toEqual([
       [
-        new TableItem({ data: detailedVideo.crew[0].position }),
-        new TableItem({ data: crewMember.memberId }),
+        new TableItem({ data: crewMember.position }),
+        new TableItem({ data: crewMember.member.name }),
         new TableItem({
-          data: { ...crewMember, videoId: detailedVideo.id },
+          data: crewMember,
           template: fixture.point.componentInstance['removeCrewMemberCell'],
         }),
       ],
@@ -97,7 +101,7 @@ describe('VideoCrewTableComponent', () => {
     MockRender(VideoCrewTableComponent, { video: detailedVideo })
 
     const removeButton = ngMocks.findInstance(VideoCrewRemoveButtonComponent)
-    expect(removeButton.crewMember).toEqual({ ...crewMember, videoId: detailedVideo.id })
+    expect(removeButton.crewMember).toEqual(crewMember)
   })
 
   it('should remove crewMember on button click', () => {

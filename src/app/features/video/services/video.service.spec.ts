@@ -5,6 +5,7 @@ import { tap } from 'rxjs'
 import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models'
 import { Pageable, PaginatedResponse, Sort } from '../../../shared/models'
 import { CrewMember } from '../../video-crew/models'
+import { SimpleMember } from '../../member/models/simple-member.model'
 
 describe('VideoService', () => {
   ngMocks.faster()
@@ -14,7 +15,8 @@ describe('VideoService', () => {
   const createVideo = new CreateVideo('url', 'title')
   const video = new Video(videoId, 'url', 'title', 'uploadedAt', true)
   const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
-  const crewMember = new CrewMember('position', 'memberId')
+  const member = new SimpleMember('id', 'name')
+  const crewMember = new CrewMember('position', 'memberId', member)
   const detailedVideo = new DetailedVideo(videoId, 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
   const sort = new Sort(false, false, true)
   const pageable = new Pageable(sort, 3, 2, 10, true, false)

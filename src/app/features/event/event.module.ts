@@ -22,13 +22,14 @@ import { EventVideoAddModalComponent } from './components/event-video-add-modal/
 import { EventVideoTableComponent } from './components/event-video-table/event-video-table.component'
 import { SharedModule } from '../../shared/shared.module'
 import { EventVideoRemoveButtonComponent } from './components/event-video-remove-button/event-video-remove-button.component'
+import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component'
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    BreadcrumbModule,
+    BreadcrumbComponent,
     ComboBoxModule,
     DatePickerModule,
     IconModule,
