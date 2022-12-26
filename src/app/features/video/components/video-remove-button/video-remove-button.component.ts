@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
+import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { DetailedVideo } from '../../models'
 import { Router } from '@angular/router'
@@ -18,7 +18,12 @@ export class VideoRemoveButtonComponent implements OnDestroy {
   private destroy$ = new Subject<void>()
   @Input() public video!: DetailedVideo
 
-  constructor(private router: Router, private service: VideoService, private modalService: ModalService) {}
+  constructor(
+    private router: Router,
+    private service: VideoService,
+    private modalService: ModalService,
+    private notificationService: NotificationService
+  ) {}
 
   public showConfirmModal() {
     this.modalService.show({
@@ -38,10 +43,25 @@ export class VideoRemoveButtonComponent implements OnDestroy {
     this.service
       .removeVideo(this.video.id)
       .pipe(
-        tap(async () => await this.router.navigate(['video'])),
+        tap({
+          next: () => {
+            this.successNotification()
+            this.router.navigate(['video']).then()
+          },
+          error: () => window.alert(),
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe()
+  }
+
+  private successNotification() {
+    this.notificationService.showNotification({
+      type: 'success',
+      title: $localize`Video was removed`,
+      message: this.video.title,
+      smart: true,
+    })
   }
 
   ngOnDestroy() {

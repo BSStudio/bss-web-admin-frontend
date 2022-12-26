@@ -42,14 +42,6 @@
         <source>John Doe</source>
         <target>Kiss János</target>
       </trans-unit>
-      <trans-unit id="1246023011356978969" datatype="html">
-        <source>The member will have the following url: https://bsstudio/member/johnny-d</source>
-        <target>A tag a következő url-en lesz elérhető: https://bsstudio/member/kiss-j</target>
-      </trans-unit>
-      <trans-unit id="8716821888418632612" datatype="html">
-        <source>johnny-d</source>
-        <target>kiss-j</target>
-      </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
         <target>Mégse</target>
@@ -206,10 +198,6 @@
         <source>Simonyi Conference 2022</source>
         <target>Simonyi Konferencia 2022</target>
       </trans-unit>
-      <trans-unit id="7033513850018265669" datatype="html">
-        <source>The event will have the following url: https://bsstudio/member/simonyi-conference-2022</source>
-        <target>Az esemény a következő URL-en lesz elérhető: https://bsstudio/member/simonyi-konferencia-2022</target>
-      </trans-unit>
       <trans-unit id="8308045076391224954" datatype="html">
         <source>Url</source>
         <target>Url</target>
@@ -286,9 +274,9 @@
         <source>Add new crew member</source>
         <target state="new">Add new crew member</target>
       </trans-unit>
-      <trans-unit id="5152944817268935045" datatype="html">
-        <source>Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</source>
-        <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</target>
+      <trans-unit id="8029725364859660359" datatype="html">
+        <source> Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.member.name }}"/>&apos;s <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> position from the video </source>
+        <target state="new"> Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.member.name }}"/>&apos;s <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> position from the video </target>
       </trans-unit>
       <trans-unit id="4777323515857731788" datatype="html">
         <source>Upload date</source>
@@ -326,10 +314,6 @@
         <source>Event created</source>
         <target state="new">Event created</target>
       </trans-unit>
-      <trans-unit id="2096235085899065051" datatype="html">
-        <source>Error creating event</source>
-        <target state="new">Error creating event</target>
-      </trans-unit>
       <trans-unit id="7806458199320279074" datatype="html">
         <source>Remove video from event</source>
         <target state="new">Remove video from event</target>
@@ -354,25 +338,13 @@
         <source>Uploaded at</source>
         <target state="new">Uploaded at</target>
       </trans-unit>
-      <trans-unit id="4388030633941684230" datatype="html">
-        <source><x id="PH" equiv-text="videoTitle"/> was removed from <x id="PH_1" equiv-text="event.title"/></source>
-        <target state="new"><x id="PH" equiv-text="videoTitle"/> was removed from <x id="PH_1" equiv-text="event.title"/></target>
-      </trans-unit>
       <trans-unit id="1928503252421516797" datatype="html">
         <source>Add videos to this event</source>
         <target state="new">Add videos to this event</target>
       </trans-unit>
-      <trans-unit id="1698161918406246823" datatype="html">
-        <source>Remove member from video</source>
-        <target state="new">Remove member from video</target>
-      </trans-unit>
-      <trans-unit id="8064511866515846686" datatype="html">
-        <source>Are you sure you want to remove this member from the crew?</source>
-        <target state="new">Are you sure you want to remove this member from the crew?</target>
-      </trans-unit>
-      <trans-unit id="7045123878111147511" datatype="html">
-        <source>Required</source>
-        <target state="new">Required</target>
+      <trans-unit id="8150334626126059435" datatype="html">
+        <source>Are you sure you want to remove this member&apos;s position from the crew?</source>
+        <target state="new">Are you sure you want to remove this member&apos;s position from the crew?</target>
       </trans-unit>
       <trans-unit id="7058184791033246035" datatype="html">
         <source>The video will have the following url: https://bsstudio/video/<x id="PH" equiv-text="renderedUrl"/></source>
@@ -381,6 +353,122 @@
       <trans-unit id="7619560701830330401" datatype="html">
         <source>Loading</source>
         <target state="new">Loading</target>
+      </trans-unit>
+      <trans-unit id="7897553137344337439" datatype="html">
+        <source>Field required</source>
+        <target state="new">Field required</target>
+      </trans-unit>
+      <trans-unit id="1910655336974126682" datatype="html">
+        <source>Does not match url pattern: <x id="PH" equiv-text="url.errors[&apos;pattern&apos;].requiredPattern"/></source>
+        <target state="new">Does not match url pattern: <x id="PH" equiv-text="url.errors[&apos;pattern&apos;].requiredPattern"/></target>
+      </trans-unit>
+      <trans-unit id="5406591600792037085" datatype="html">
+        <source>The video will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></source>
+        <target state="new">The video will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></target>
+      </trans-unit>
+      <trans-unit id="2539690595291689195" datatype="html">
+        <source>Server error: title and url must be unique</source>
+        <target state="new">Server error: title and url must be unique</target>
+      </trans-unit>
+      <trans-unit id="8481819929327920451" datatype="html">
+        <source>Remove event</source>
+        <target state="new">Remove event</target>
+      </trans-unit>
+      <trans-unit id="4237645155961022288" datatype="html">
+        <source>Are you sure you want to remove this event?</source>
+        <target state="new">Are you sure you want to remove this event?</target>
+      </trans-unit>
+      <trans-unit id="2823619143649206462" datatype="html">
+        <source>jdoe</source>
+        <target state="new">jdoe</target>
+      </trans-unit>
+      <trans-unit id="7562874364108683655" datatype="html">
+        <source>The member will have the following url: https://bsstudio/member/<x id="PH" equiv-text="renderedUrl"/></source>
+        <target state="new">The member will have the following url: https://bsstudio/member/<x id="PH" equiv-text="renderedUrl"/></target>
+      </trans-unit>
+      <trans-unit id="7472858286664394350" datatype="html">
+        <source>Server error: name and url must be unique</source>
+        <target state="new">Server error: name and url must be unique</target>
+      </trans-unit>
+      <trans-unit id="1373570771048277574" datatype="html">
+        <source>Error removing crew member</source>
+        <target state="new">Error removing crew member</target>
+      </trans-unit>
+      <trans-unit id="4747507986183232926" datatype="html">
+        <source>Server error. Try a different title/url</source>
+        <target state="new">Server error. Try a different title/url</target>
+      </trans-unit>
+      <trans-unit id="8791525131422494700" datatype="html">
+        <source>Video remain published</source>
+        <target state="new">Video remain published</target>
+      </trans-unit>
+      <trans-unit id="81280081139439099" datatype="html">
+        <source>Video was removed from event</source>
+        <target state="new">Video was removed from event</target>
+      </trans-unit>
+      <trans-unit id="8725036248932725431" datatype="html">
+        <source>Add videos to the event, update the details and publish it</source>
+        <target state="new">Add videos to the event, update the details and publish it</target>
+      </trans-unit>
+      <trans-unit id="3086690256287604039" datatype="html">
+        <source>Event was removed</source>
+        <target state="new">Event was removed</target>
+      </trans-unit>
+      <trans-unit id="6597693743876820216" datatype="html">
+        <source>Make sure videos are removed from the event</source>
+        <target state="new">Make sure videos are removed from the event</target>
+      </trans-unit>
+      <trans-unit id="6058410738022694540" datatype="html">
+        <source>Error removing event</source>
+        <target state="new">Error removing event</target>
+      </trans-unit>
+      <trans-unit id="2740008066039678046" datatype="html">
+        <source>Make sure title/url is unique</source>
+        <target state="new">Make sure title/url is unique</target>
+      </trans-unit>
+      <trans-unit id="593456483576089262" datatype="html">
+        <source>To add a new position to the list enter the name of the new position, then press enter</source>
+        <target state="new">To add a new position to the list enter the name of the new position, then press enter</target>
+      </trans-unit>
+      <trans-unit id="3944193087956808215" datatype="html">
+        <source>Remove crew member position from video</source>
+        <target state="new">Remove crew member position from video</target>
+      </trans-unit>
+      <trans-unit id="4360888701290170782" datatype="html">
+        <source>Crew member position was successfully removed</source>
+        <target state="new">Crew member position was successfully removed</target>
+      </trans-unit>
+      <trans-unit id="4393305291386389644" datatype="html">
+        <source><x id="PH" equiv-text="this.crewMember.member.name"/>&apos;s <x id="PH_1" equiv-text="this.crewMember.position"/> position</source>
+        <target state="new"><x id="PH" equiv-text="this.crewMember.member.name"/>&apos;s <x id="PH_1" equiv-text="this.crewMember.position"/> position</target>
+      </trans-unit>
+      <trans-unit id="1565037529819880344" datatype="html">
+        <source>Couldn&apos;t remove crew member position. Try refreshing the page</source>
+        <target state="new">Couldn&apos;t remove crew member position. Try refreshing the page</target>
+      </trans-unit>
+      <trans-unit id="1978588651572222759" datatype="html">
+        <source>Update video details and publish it</source>
+        <target state="new">Update video details and publish it</target>
+      </trans-unit>
+      <trans-unit id="6703307117952124334" datatype="html">
+        <source>Video created</source>
+        <target state="new">Video created</target>
+      </trans-unit>
+      <trans-unit id="2664969881959342172" datatype="html">
+        <source>Video was removed</source>
+        <target state="new">Video was removed</target>
+      </trans-unit>
+      <trans-unit id="8024915414207118910" datatype="html">
+        <source>Video updated</source>
+        <target state="new">Video updated</target>
+      </trans-unit>
+      <trans-unit id="1911148809726157840" datatype="html">
+        <source>Make sure everything is well formatted, and there are no duplicate ids</source>
+        <target state="new">Make sure everything is well formatted, and there are no duplicate ids</target>
+      </trans-unit>
+      <trans-unit id="7644661590696525657" datatype="html">
+        <source>Inspect video</source>
+        <target state="new">Inspect video</target>
       </trans-unit>
     </body>
   </file>

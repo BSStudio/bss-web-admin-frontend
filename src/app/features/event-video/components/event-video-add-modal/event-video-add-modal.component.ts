@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core'
 import { BaseModal } from 'carbon-components-angular'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { DetailedEvent } from '../../models'
+import { DetailedEvent } from '../../../event/models'
 import { VideoService } from '../../../video/services/video.service'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { EventVideoService } from '../../../video/services/event-video.service'
+import { EventVideoService } from '../../services/event-video.service'
 import { Video } from '../../../video/models'
 
 @Component({
@@ -57,7 +57,9 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
   }
 
   updateVideos(videos: Video[]) {
-    this.videos = videos.map((video) => ({ selected: false, content: video.title, id: video.id }))
+    this.videos = videos
+      .filter(({ id }) => !this.event.videos.some((video) => video.id === id))
+      .map((video) => ({ selected: false, content: video.title, id: video.id }))
   }
 
   ngOnDestroy() {

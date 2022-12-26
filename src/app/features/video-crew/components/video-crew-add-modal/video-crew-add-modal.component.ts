@@ -4,7 +4,7 @@ import { VideoCrewService } from '../../services/video-crew.service'
 import { MemberService } from '../../../member/services/member.service'
 import { DetailedVideo } from '../../../video/models'
 import { BaseModal, ComboBox, ListItem } from 'carbon-components-angular'
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { DetailedCrewMember } from '../../models'
 
 interface MemberListItem extends ListItem {
@@ -18,13 +18,19 @@ interface MemberListItem extends ListItem {
 export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
   @Output()
   public update = new EventEmitter<DetailedVideo>()
+  @ViewChild('positionComboBox', { static: true })
+  protected comboBox!: ComboBox
+
   private readonly destroy$ = new Subject<void>()
+
   public positionSearch = ''
   public positions: ListItem[] = []
   public members: MemberListItem[] = []
-  public form: FormGroup<{ member: FormControl<MemberListItem | null>; position: FormControl<ListItem | null> }>
-  @ViewChild('positionComboBox', { static: true })
-  protected comboBox!: ComboBox
+
+  public form = this.fb.group({
+    member: this.fb.control<MemberListItem | null>(null),
+    position: this.fb.control<ListItem | null>(null),
+  })
 
   constructor(
     private fb: FormBuilder,
@@ -33,10 +39,6 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     @Inject('video') public video: DetailedVideo
   ) {
     super()
-    this.form = this.fb.group({
-      member: this.fb.control<MemberListItem | null>(null),
-      position: this.fb.control<ListItem | null>(null),
-    })
   }
 
   ngOnInit() {

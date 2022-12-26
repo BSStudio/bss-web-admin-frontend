@@ -1,7 +1,6 @@
 import { EventVideoTableComponent } from './event-video-table.component'
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
-import { EventModule } from '../../event.module'
-import { DetailedEvent } from '../../models'
+import { DetailedEvent } from '../../../event/models'
 import {
   Button,
   Table,
@@ -14,9 +13,10 @@ import {
 import { Video } from '../../../video/models'
 import { RouterLink } from '@angular/router'
 import { EventVideoRemoveButtonComponent } from '../event-video-remove-button/event-video-remove-button.component'
+import { EventVideoModule } from '../../event-video.module'
 
 describe('EventVideoTableComponent', () => {
-  beforeEach(() => MockBuilder([EventVideoTableComponent, TableModule], EventModule))
+  beforeEach(() => MockBuilder([EventVideoTableComponent, TableModule], EventVideoModule))
   const detailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, [])
   const video = new Video('id', 'url', 'title', 'uploadedAt', true)
   const detailedEventWithVideo: DetailedEvent = { ...detailedEvent, videos: [video] }

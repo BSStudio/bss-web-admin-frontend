@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { PaginatedResponse } from '../../../shared/models'
 import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models'
+import { PageableRequest } from '../../../shared/models/pageable-request.model'
 
 @Injectable({ providedIn: 'root' })
 export class VideoService {
@@ -11,8 +12,15 @@ export class VideoService {
     return this.http.get<Video[]>('/api/v1/video/all')
   }
 
-  getVideos(page: number, size: number) {
-    return this.http.get<PaginatedResponse<Video>>('/api/v1/video', { params: { page, size } })
+  getVideos({ page, size, sort }: PageableRequest<Video>) {
+    const params = {
+      ...(page === undefined ? {} : { page }), // spread empty object if page is undefined
+      ...(size === undefined ? {} : { size }), // spread empty object if page is undefined
+      ...(sort === undefined
+        ? {}
+        : { sort: sort.map(({ property, direction }) => property + (direction ? `,${direction}` : '')) }),
+    }
+    return this.http.get<PaginatedResponse<Video>>('/api/v1/video', { params })
   }
 
   getVideo(videoId: string) {

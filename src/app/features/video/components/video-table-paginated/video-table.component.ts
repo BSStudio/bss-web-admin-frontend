@@ -8,6 +8,7 @@ import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
 import { formatDate } from '@angular/common'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { PaginatedResponse } from '../../../../shared/models'
+import { SortRequest } from '../../../../shared/models/sort-request.model'
 
 @Component({
   selector: 'app-video-table',
@@ -31,6 +32,14 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     this.getVideos()
   }
 
+  sort(index: number) {
+    if (this.table.header[index].sorted) {
+      this.table.header[index].ascending = this.table.header[index].descending
+    }
+    this.table.sort(index)
+    this.getVideos()
+  }
+
   onPageSelect(page: number) {
     this.table.currentPage = page
     this.getVideos()
@@ -44,14 +53,21 @@ export class VideoTableComponent implements OnInit, OnDestroy {
   getVideos(): void {
     this.loading = true
     this.service
-      .getVideos(this.table.currentPage - 1, this.table.pageLength)
+      .getVideos({ page: this.table.currentPage - 1, size: this.table.pageLength, sort: this.sortRequest })
       .pipe(
-        tap((paginatedVideos) => this.updateTable(paginatedVideos)),
+        tap({
+          next: (paginatedVideos) => this.updateTable(paginatedVideos),
+          complete: () => (this.loading = false),
+        }),
         takeUntil(this.destroy$)
       )
-      .subscribe({
-        complete: () => (this.loading = false),
-      })
+      .subscribe()
+  }
+
+  private get sortRequest(): SortRequest<Video>[] {
+    return this.table.header
+      .filter(({ sorted }) => sorted)
+      .map(({ metadata, ascending }) => ({ property: metadata, direction: ascending ? 'asc' : 'desc' }))
   }
 
   private updateTable(paginatedVideos: PaginatedResponse<Video>) {
@@ -93,10 +109,10 @@ export class VideoTableComponent implements OnInit, OnDestroy {
 
   private initHeaders() {
     this.table.header = [
-      new TableHeaderItem({ data: $localize`Title` }),
-      new TableHeaderItem({ data: $localize`URL` }),
-      new TableHeaderItem({ data: $localize`Upload date` }),
-      new TableHeaderItem({ data: $localize`Visible` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'title', data: $localize`Title` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'url', data: $localize`URL` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'uploadedAt', data: $localize`Upload date` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'visible', data: $localize`Visible` }),
     ]
   }
 

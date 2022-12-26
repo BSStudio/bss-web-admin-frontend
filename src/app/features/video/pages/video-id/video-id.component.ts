@@ -7,11 +7,9 @@ import { DetailedVideo } from '../../models'
   templateUrl: './video-id.component.html',
 })
 export class VideoIdComponent {
-  public video: DetailedVideo
+  public video = <DetailedVideo>this.route.snapshot.data['video']
 
-  constructor(private route: ActivatedRoute) {
-    this.video = <DetailedVideo>this.route.snapshot.data['video']
-  }
+  constructor(private route: ActivatedRoute) {}
 
   setVideo(video: DetailedVideo) {
     this.video = video

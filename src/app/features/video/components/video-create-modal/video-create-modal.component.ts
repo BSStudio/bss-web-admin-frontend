@@ -1,9 +1,9 @@
 import { VideoService } from '../../services/video.service'
 import { Component, OnDestroy, OnInit } from '@angular/core'
-import { BaseModal } from 'carbon-components-angular'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { CreateVideo } from '../../models'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
+import { BaseModal, NotificationService } from 'carbon-components-angular'
+import { FormBuilder, Validators } from '@angular/forms'
+import { CreateVideo, Video } from '../../models'
+import { Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-video-create-modal',
@@ -11,22 +11,25 @@ import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
   styleUrls: ['./video-create-modal.component.scss'],
 })
 export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
-  public readonly form: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>
   private readonly destroy$ = new Subject<void>()
+  public readonly form = this.fb.nonNullable.group({
+    title: this.fb.nonNullable.control('', [Validators.required]),
+    url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\w+(-\w+)*$/)]),
+  })
 
-  constructor(private fb: FormBuilder, private videoService: VideoService) {
+  constructor(
+    private fb: FormBuilder,
+    private videoService: VideoService,
+    private notificationService: NotificationService
+  ) {
     super()
-    this.form = this.fb.nonNullable.group({
-      title: this.fb.nonNullable.control('', [Validators.required]),
-      url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\w+(-\w+)*$/)]),
-    })
   }
 
   ngOnInit(): void {
     this.initAutomaticUrlGenerator()
   }
 
-  private initAutomaticUrlGenerator() {
+  private initAutomaticUrlGenerator(): void {
     this.form.controls.title.valueChanges
       .pipe(
         tap((title) => {
@@ -78,14 +81,33 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
     this.videoService
       .createVideo(createVideo)
       .pipe(
-        tap(() => this.closeModal()),
-        catchError(() => {
-          window.alert($localize`Server error. Try a different title/url`)
-          return EMPTY
+        tap({
+          next: (video) => {
+            this.closeModal()
+            this.onSuccessNotification(video)
+          },
+          error: () => window.alert($localize`Server error. Try a different title/url`),
         }),
         takeUntil(this.destroy$)
       )
       .subscribe()
+  }
+
+  private onSuccessNotification(video: Video) {
+    const caption = $localize`Update video details and publish it`
+    this.notificationService.showToast({
+      type: 'success',
+      title: $localize`Video created`,
+      caption,
+      message: caption,
+      smart: true,
+      links: [
+        {
+          text: video.title,
+          href: `/video/${video.id}`,
+        },
+      ],
+    })
   }
 
   ngOnDestroy(): void {

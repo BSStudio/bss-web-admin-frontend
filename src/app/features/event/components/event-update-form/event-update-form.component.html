@@ -1,25 +1,26 @@
-<form [formGroup]="form" (ngSubmit)="updateEvent()">
-  <ibm-label>
-    <ng-container i18n>URL</ng-container>
-    <input ibmText formControlName="url" />
-  </ibm-label>
-  <ibm-label>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <ibm-label class="title">
     <ng-container i18n>Title</ng-container>
     <input ibmText formControlName="title" />
   </ibm-label>
-  <ibm-label>
+  <ibm-label class="url">
+    <ng-container i18n>URL</ng-container>
+    <input ibmText formControlName="url" />
+  </ibm-label>
+  <ibm-label class="description">
     <ng-container i18n>Description</ng-container>
     <textarea ibmTextArea formControlName="description"></textarea>
   </ibm-label>
-  <ibm-toggle formControlName="visible" label="Visible" i18n-label></ibm-toggle>
   <ibm-date-picker
     label="Date:"
     i18n-label
     dateFormat="Y-m-d"
     placeholder="YYYY-MM-dd"
     formControlName="date"
+    [flatpickrOptions]="flatpickrOptions"
   ></ibm-date-picker>
-  <button ibmButton="primary" type="submit">
+  <ibm-toggle formControlName="visible" label="Visible" i18n-label></ibm-toggle>
+  <button ibmButton="primary" type="submit" [disabled]="form.pristine">
     <ng-container i18n>Save</ng-container>
     <svg ibmIcon="save" size="16" class="bx--btn__icon"></svg>
   </button>

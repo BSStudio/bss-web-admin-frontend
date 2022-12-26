@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 import { ReactiveFormsModule } from '@angular/forms'
 import {
-  BreadcrumbModule,
-  ComboBoxModule,
   DatePickerModule,
   IconModule,
   ModalModule,
@@ -18,11 +16,10 @@ import { EventIdComponent } from './pages/event-id/event-id.component'
 import { EventCreateModalComponent } from './components/event-create-modal/event-create-modal.component'
 import { EventTableComponent } from './components/event-table/event-table.component'
 import { EventUpdateFormComponent } from './components/event-update-form/event-update-form.component'
-import { EventVideoAddModalComponent } from './components/event-video-add-modal/event-video-add-modal.component'
-import { EventVideoTableComponent } from './components/event-video-table/event-video-table.component'
 import { SharedModule } from '../../shared/shared.module'
-import { EventVideoRemoveButtonComponent } from './components/event-video-remove-button/event-video-remove-button.component'
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component'
+import { EventRemoveButtonComponent } from './components/event-remove-button/event-remove-button.component'
+import { EventVideoModule } from '../event-video/event-video.module'
 
 @NgModule({
   imports: [
@@ -30,7 +27,6 @@ import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcru
     RouterModule,
     ReactiveFormsModule,
     BreadcrumbComponent,
-    ComboBoxModule,
     DatePickerModule,
     IconModule,
     ModalModule,
@@ -39,6 +35,7 @@ import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcru
     TableModule,
     EventRoutingModule,
     SharedModule,
+    EventVideoModule,
   ],
   declarations: [
     EventIndexComponent,
@@ -46,9 +43,7 @@ import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcru
     EventCreateModalComponent,
     EventTableComponent,
     EventUpdateFormComponent,
-    EventVideoAddModalComponent,
-    EventVideoTableComponent,
-    EventVideoRemoveButtonComponent,
+    EventRemoveButtonComponent,
   ],
 })
 export class EventModule {}

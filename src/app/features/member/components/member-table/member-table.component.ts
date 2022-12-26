@@ -88,11 +88,11 @@ export class MemberTableComponent implements OnInit, OnDestroy {
     const status: string = this.table.row(index)[2].data
     const role: string = this.table.row(index)[3].data
     const searchValue = this.searchValue.toLowerCase()
-    return (
-      !name.toLowerCase().includes(searchValue) ||
-      !url.toLowerCase().includes(searchValue) ||
-      !status.toLowerCase().includes(searchValue) ||
-      !role.toLowerCase().includes(searchValue)
+    return !(
+      name.toLowerCase().includes(searchValue) ||
+      url.toLowerCase().includes(searchValue) ||
+      status.toLowerCase().includes(searchValue) ||
+      role.toLowerCase().includes(searchValue)
     )
   }
 

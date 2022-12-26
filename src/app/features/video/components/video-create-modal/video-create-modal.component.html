@@ -3,7 +3,7 @@
     <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
   <form ibmModalContent [hasForm]="true" [formGroup]="form">
-    <ibm-label [invalid]="form.controls.title.invalid" [invalidText]="titleInvalidText">
+    <ibm-label [invalid]="!!titleInvalidText" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
       <input
         [attr.modal-primary-focus]="true"

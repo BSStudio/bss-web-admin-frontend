@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { DetailedEvent } from '../../event/models'
-import { EventVideo } from '../models/event-video.model'
+import { EventVideo } from '../../video/models/event-video.model'
 
 @Injectable({ providedIn: 'root' })
 export class EventVideoService {

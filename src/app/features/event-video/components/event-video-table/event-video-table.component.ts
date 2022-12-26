@@ -11,11 +11,12 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core'
-import { DetailedEvent } from '../../models'
+import { DetailedEvent } from '../../../event/models'
 import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Video } from '../../../video/models'
 import { EventVideoAddModalComponent } from '../event-video-add-modal/event-video-add-modal.component'
 import { Subject, takeUntil, tap } from 'rxjs'
+import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
 
 @Component({
   selector: 'app-event-video-table[event]',
@@ -33,15 +34,14 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   private readonly destroy$ = new Subject<void>()
   public readonly table = new TableModel()
 
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService, private booleanPipe: BooleanPipe) {}
 
   ngOnInit(): void {
     this.initHeaders()
-    this.updateTable()
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['event'] && !changes['event'].firstChange) {
+    if (changes['event']) {
       this.updateTable()
     }
   }
@@ -73,6 +73,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
       new TableItem({ title: video.title, data: video, template: this.navigateCell }),
       new TableItem({ title: video.title, data: video.url }),
       new TableItem({ title: video.title, data: video.uploadedAt }),
+      new TableItem({ title: video.title, data: this.booleanPipe.transform(video.visible) }),
       new TableItem({ title: video.title, data: video, template: this.removeButtonCell }),
     ]
   }
@@ -82,6 +83,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
       new TableHeaderItem({ data: $localize`Title` }),
       new TableHeaderItem({ data: $localize`Url` }),
       new TableHeaderItem({ data: $localize`Uploaded at` }),
+      new TableHeaderItem({ data: $localize`Visible` }),
       new TableHeaderItem({ style: { padding: 0, width: 0 } }),
     ]
   }

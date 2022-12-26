@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
-import { DetailedEvent } from '../../models'
-import { EventVideoService } from '../../../video/services/event-video.service'
+import { Subject, takeUntil, tap } from 'rxjs'
+import { DetailedEvent } from '../../../event/models'
+import { EventVideoService } from '../../services/event-video.service'
 import { Video } from '../../../video/models'
 
 @Component({
@@ -15,7 +15,7 @@ import { Video } from '../../../video/models'
       [hasAssistiveText]="true"
       assistiveTextAlignment="end"
       assistiveTextPlacement="left"
-      (click)="showRemoveModal(video)"
+      (click)="showRemoveModal()"
     >
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
       <span i18n class="bx--assistive-text">Remove {{ video.title }} from event</span>
@@ -37,10 +37,10 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
     private notificationService: NotificationService
   ) {}
 
-  showRemoveModal(video: { title: string; id: string }) {
+  showRemoveModal() {
     this.modalService.show({
       type: AlertModalType.danger,
-      label: video.title,
+      label: this.video.title,
       title: $localize`Remove video from event`,
       size: 'xs',
       content: $localize`Are you sure you want to remove this video?`,
@@ -49,33 +49,37 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
         {
           type: ModalButtonType.danger,
           text: $localize`Remove`,
-          click: () => this.removeEventVideo(video.id, video.title),
+          click: () => this.removeEventVideo(),
         },
       ],
     })
   }
 
-  removeEventVideo(videoId: string, videoTitle: string) {
+  removeEventVideo() {
     this.eventVideoService
-      .removeVideoFromEvent({ eventId: this.event.id, videoId })
+      .removeVideoFromEvent({ eventId: this.event.id, videoId: this.video.id })
       .pipe(
-        tap((event) => {
-          this.successNotification(event, videoTitle)
-          this.update.emit(event)
-        }),
-        catchError((err) => {
-          this.errorNotification(err)
-          return EMPTY
+        tap({
+          next: (event) => {
+            this.successNotification(event)
+            this.update.emit(event)
+          },
+          error: (err) => this.errorNotification(err),
         }),
         takeUntil(this.destroy$)
       )
       .subscribe()
   }
 
-  successNotification(event: DetailedEvent, videoTitle: string) {
+  successNotification(event: DetailedEvent) {
+    const caption = $localize`Video remain published`
     this.notificationService.showToast({
       type: 'success',
-      title: $localize`${videoTitle} was removed from ${event.title}`,
+      title: $localize`Video was removed from event`,
+      subtitle: this.video.title,
+      caption,
+      message: caption,
+      smart: true,
     })
   }
 

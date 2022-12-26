@@ -1,15 +1,15 @@
 import { EventVideoAddModalComponent } from './event-video-add-modal.component'
 import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks'
-import { EventModule } from '../../event.module'
 import { EMPTY } from 'rxjs'
 import { VideoService } from '../../../video/services/video.service'
-import { DetailedEvent } from '../../models'
+import { DetailedEvent } from '../../../event/models'
 import { FormBuilder } from '@angular/forms'
+import { EventVideoModule } from '../../event-video.module'
 
 describe('EventVideoAddModalComponent', () => {
   const detailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, [])
   beforeEach(() =>
-    MockBuilder([EventVideoAddModalComponent, FormBuilder], EventModule).provide({
+    MockBuilder([EventVideoAddModalComponent, FormBuilder], EventVideoModule).provide({
       provide: 'event',
       useFactory: () => detailedEvent,
     })

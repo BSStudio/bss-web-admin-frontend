@@ -10,13 +10,23 @@
       type="single"
       label="Position"
       i18n-label
+      [appendInline]="true"
       [items]="positions"
+      helperText="To add a new position to the list enter the name of the new position, then press enter"
+      i18n-helperText
       (keyup.enter)="addPosition()"
       (search)="updatePositionSearch($event)"
     >
       <ibm-dropdown-list></ibm-dropdown-list>
     </ibm-combo-box>
-    <ibm-combo-box formControlName="member" type="single" label="Member" i18n-label [items]="members">
+    <ibm-combo-box
+      formControlName="member"
+      type="single"
+      label="Member"
+      i18n-label
+      [items]="members"
+      [appendInline]="true"
+    >
       <ibm-dropdown-list></ibm-dropdown-list>
     </ibm-combo-box>
   </form>

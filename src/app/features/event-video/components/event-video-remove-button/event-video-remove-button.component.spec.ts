@@ -1,9 +1,9 @@
 import { EventVideoRemoveButtonComponent } from './event-video-remove-button.component'
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
-import { EventModule } from '../../event.module'
 import { Button, IconDirective } from 'carbon-components-angular'
-import { DetailedEvent } from '../../models'
+import { DetailedEvent } from '../../../event/models'
 import { Video } from '../../../video/models'
+import { EventVideoModule } from '../../event-video.module'
 
 describe('EventVideoRemoveButtonComponent', () => {
   const video = new Video('id', 'url', 'title', 'uploadedAt', true)
@@ -17,7 +17,7 @@ describe('EventVideoRemoveButtonComponent', () => {
     videos: [video],
   }
 
-  beforeEach(() => MockBuilder(EventVideoRemoveButtonComponent, EventModule))
+  beforeEach(() => MockBuilder(EventVideoRemoveButtonComponent, EventVideoModule))
 
   it('should render', () => {
     MockRender(EventVideoRemoveButtonComponent, { video: video, event: detailedEventWithVideo })

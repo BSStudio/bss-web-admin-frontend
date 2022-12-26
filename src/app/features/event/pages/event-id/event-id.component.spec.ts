@@ -6,7 +6,7 @@ import { DetailedEvent } from '../../models'
 import { BreadcrumbComponent } from '../../../../shared/components/breadcrumb/breadcrumb.component'
 import { EventModule } from '../../event.module'
 import { EventUpdateFormComponent } from '../../components/event-update-form/event-update-form.component'
-import { EventVideoTableComponent } from '../../components/event-video-table/event-video-table.component'
+import { EventVideoTableComponent } from '../../../event-video/components/event-video-table/event-video-table.component'
 import { EventEmitter } from '@angular/core'
 
 describe('EventIdComponent', () => {

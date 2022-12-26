@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { Member } from '../../models/member.model'
-import { MemberService } from '../../services/member.service'
 import { Router } from '@angular/router'
+import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
+import { EventService } from '../../services/event.service'
+import { Event } from '../../models'
 
 @Component({
-  selector: 'app-member-remove-button[member]',
+  selector: 'app-event-remove-button[event]',
   template: `
     <button ibmButton="danger" size="field" (click)="showRemoveModal()">
       <span i18n>Remove</span>
@@ -14,12 +14,12 @@ import { Router } from '@angular/router'
     </button>
   `,
 })
-export class MemberRemoveButtonComponent implements OnDestroy {
+export class EventRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
-  @Input() member!: Member
+  @Input() event!: Event
 
   constructor(
-    private service: MemberService,
+    private service: EventService,
     private router: Router,
     private modalService: ModalService,
     private notificationService: NotificationService
@@ -28,25 +28,25 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   showRemoveModal() {
     this.modalService.show({
       type: AlertModalType.danger,
-      label: this.member.name,
-      title: $localize`Remove member`,
+      label: this.event.title,
+      title: $localize`Remove event`,
       size: 'xs',
-      content: $localize`Are you sure you want to remove this member?`,
+      content: $localize`Are you sure you want to remove this event?`,
       buttons: [
+        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeEvent() },
         { type: ModalButtonType.secondary, text: 'Close' },
-        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeMember() },
       ],
     })
   }
 
-  removeMember() {
+  removeEvent() {
     this.service
-      .deleteMember(this.member.id)
+      .deleteEvent(this.event.id)
       .pipe(
         tap({
-          next: async () => {
+          next: () => {
             this.successNotification()
-            await this.router.navigate(['member'])
+            this.router.navigate(['event']).then()
           },
           error: (error) => this.errorNotification(error),
         }),
@@ -58,15 +58,21 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   private successNotification() {
     this.notificationService.showNotification({
       type: 'success',
-      title: $localize``,
+      title: $localize`Event was removed`,
+      message: this.event.title,
+      smart: true,
     })
   }
 
   private errorNotification(error: unknown) {
-    this.notificationService.showNotification({
+    const caption = $localize`Make sure videos are removed from the event`
+    this.notificationService.showToast({
       type: 'error',
-      title: $localize`Error removing member ${this.member.name}`,
-      caption: JSON.stringify(error),
+      title: $localize`Error removing event`,
+      subtitle: this.event.title,
+      caption: caption,
+      message: caption,
+      smart: true,
     })
   }
 

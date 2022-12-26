@@ -1,87 +1,108 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core'
 import { DetailedEvent, Event, UpdateEvent } from '../../models'
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
+import { FormBuilder, Validators } from '@angular/forms'
+import { Subject, takeUntil, tap } from 'rxjs'
 import { EventService } from '../../services/event.service'
 import { NotificationService } from 'carbon-components-angular'
-
-type UpdateEventForm = FormGroup<{
-  url: FormControl<string>
-  title: FormControl<string>
-  description: FormControl<string>
-  date: FormControl<string>
-  visible: FormControl<boolean>
-}>
 
 @Component({
   selector: 'app-event-update-form[event]',
   templateUrl: './event-update-form.component.html',
+  styleUrls: ['./event-update-form.component.scss'],
 })
-export class EventUpdateFormComponent implements OnInit, OnDestroy {
-  @Input() event!: Event
+export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() event!: DetailedEvent
   @Output() update = new EventEmitter<DetailedEvent>()
 
-  public readonly form: UpdateEventForm
   private readonly destroy$ = new Subject<void>()
+  public readonly form = this.fb.group({
+    url: this.fb.nonNullable.control('', [Validators.required]),
+    title: this.fb.nonNullable.control('', [Validators.required]),
+    description: this.fb.nonNullable.control(''),
+    date: this.fb.nonNullable.control('', [Validators.required]),
+    visible: this.fb.nonNullable.control(false, [Validators.required]),
+  })
+  public flatpickrOptions = {
+    disableMobile: true,
+    formatDate: (date: Date): string => {
+      const d = new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
+      return d.toISOString().split('T')[0]
+    },
+    parseDate: (string: string): Date => {
+      const date = new Date(string)
+      return new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
+    },
+  }
 
   constructor(
     private fb: FormBuilder,
     private service: EventService,
     private notificationService: NotificationService
-  ) {
-    this.form = this.fb.nonNullable.group<UpdateEvent>({
-      url: '',
-      title: '',
-      description: '',
-      date: '',
-      visible: false,
-    })
+  ) {}
+
+  ngOnInit(): void {
+    this.update.pipe(
+      tap((event) => (this.event = event)),
+      takeUntil(this.destroy$)
+    )
   }
 
-  ngOnInit() {
-    this.form.patchValue(this.event)
-  }
-
-  updateEvent() {
-    if (this.form.valid) {
-      const { date, ...updateEvent } = this.form.getRawValue()
-      const dateTime = new Date(date).toISOString().split('T')[0]
-      this.updateEventCall({ date: dateTime, ...updateEvent })
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['event']) {
+      this.form.patchValue(this.event)
+      this.form.markAsPristine()
     }
   }
 
-  updateEventCall(updateEvent: UpdateEvent) {
+  submit() {
+    if (this.form.pristine) {
+      return
+    }
+    this.form.markAllAsTouched()
+    if (this.form.valid) {
+      const { date, ...updateEvent } = this.form.getRawValue()
+      const dateTime = new Date(date).toISOString().split('T')[0] // todo fix parsing
+      this.updateEvent({ date: dateTime, ...updateEvent })
+    }
+  }
+
+  private updateEvent(updateEvent: UpdateEvent) {
     this.service
       .updateEvent(this.event.id, updateEvent)
       .pipe(
-        tap((event) => {
-          this.successNotification(event)
-          this.update.emit(event)
-        }),
-        catchError((err) => {
-          this.errorNotification(err)
-          return EMPTY
+        tap({
+          next: (event) => {
+            this.successNotification(event)
+            this.update.emit(event)
+          },
+          error: (err) => this.errorNotification(err),
         }),
         takeUntil(this.destroy$)
       )
       .subscribe()
   }
 
-  successNotification(event: Event) {
+  private successNotification(event: Event) {
+    const caption = $localize`Changes were saved`
     this.notificationService.showToast({
       type: 'success',
       title: $localize`Event updated`,
       subtitle: event.title,
-      caption: $localize`Changes were saved`,
+      caption,
+      message: caption,
+      smart: true,
     })
   }
 
-  errorNotification(err: unknown) {
+  private errorNotification(err: unknown) {
+    const caption = $localize`Make sure title/url is unique`
     this.notificationService.showToast({
       type: 'error',
       title: $localize`Error updating event`,
       subtitle: this.event.title,
-      caption: JSON.stringify(err),
+      caption,
+      message: caption,
+      smart: true,
     })
   }
 

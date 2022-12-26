@@ -80,7 +80,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
     const title: string = this.table.row(index)[0].data
     const url: string = this.table.row(index)[1].data
     const searchValue = this.searchValue.toLowerCase()
-    return !title.toLowerCase().includes(searchValue) || !url.toLowerCase().includes(searchValue)
+    return !(title.toLowerCase().includes(searchValue) || url.toLowerCase().includes(searchValue))
   }
 
   ngOnDestroy(): void {
