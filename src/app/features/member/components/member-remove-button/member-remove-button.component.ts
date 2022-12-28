@@ -58,15 +58,21 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   private successNotification() {
     this.notificationService.showNotification({
       type: 'success',
-      title: $localize``,
+      title: $localize`Member removed`,
+      message: this.member.name,
+      smart: true,
     })
   }
 
   private errorNotification(error: unknown) {
+    const caption = $localize`Member is associated with one or more videos. Try archiving or remove positions`
     this.notificationService.showNotification({
       type: 'error',
-      title: $localize`Error removing member ${this.member.name}`,
-      caption: JSON.stringify(error),
+      title: $localize`Error removing member`,
+      subtitle: this.member.name,
+      caption: caption,
+      message: caption,
+      smart: true,
     })
   }
 

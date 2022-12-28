@@ -1,6 +1,6 @@
 @import "@carbon/elements/scss/layout";
 
-section#title {
+div#video-title {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -8,4 +8,10 @@ section#title {
 
 section {
   margin-bottom: $layout-02;
+
+  &#video-inspect {
+    video {
+      max-width: 100%;
+    }
+  }
 }

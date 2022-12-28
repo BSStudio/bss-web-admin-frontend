@@ -2,8 +2,34 @@
 
 form {
   display: grid;
-  grid-gap: $spacing-03;
-  button {
-    justify-self: end;
+  grid-gap: $spacing-04;
+  @media (min-width: 672px) {
+    grid-template-areas:
+      "name url"
+      "role status"
+      "description description"
+      "toggles toggles";
+    ibm-label.name {
+      grid-area: name;
+    }
+    ibm-label.url {
+      grid-area: url;
+    }
+    ibm-select {
+      grid-area: status;
+    }
+    ibm-label.description {
+      grid-area: description;
+    }
+    ibm-toggle {
+      grid-area: archived;
+    }
+    div {
+      grid-area: toggles;
+    }
+  }
+  div {
+    display: flex;
+    align-items: flex-end;
   }
 }

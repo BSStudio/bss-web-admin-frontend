@@ -5,6 +5,7 @@ import { DetailedVideo } from '../../models'
 @Component({
   selector: 'app-video-id',
   templateUrl: './video-id.component.html',
+  styleUrls: ['./video-id.component.scss'],
 })
 export class VideoIdComponent {
   public video = <DetailedVideo>this.route.snapshot.data['video']

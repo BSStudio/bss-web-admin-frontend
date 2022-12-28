@@ -8,6 +8,7 @@ import { Subject, takeUntil, tap } from 'rxjs'
 @Component({
   selector: 'app-event-create-modal',
   templateUrl: './event-create-modal.component.html',
+  styleUrls: ['./event-create-modal.component.scss'],
 })
 export class EventCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>()

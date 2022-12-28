@@ -1,23 +1,22 @@
 import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core'
-import { VideoService } from '../../services/video.service'
-import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Router } from '@angular/router'
+import { formatDate } from '@angular/common'
+import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
+import { Subject, takeUntil, tap } from 'rxjs'
+import { VideoService } from '../../services/video.service'
 import { VideoCreateModalComponent } from '../video-create-modal/video-create-modal.component'
 import { Video } from '../../models'
 import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
-import { formatDate } from '@angular/common'
-import { Subject, takeUntil, tap } from 'rxjs'
-import { PaginatedResponse } from '../../../../shared/models'
-import { SortRequest } from '../../../../shared/models/sort-request.model'
+import { PaginatedResponse, SortRequest } from '../../../../shared/models'
 
 @Component({
   selector: 'app-video-table',
   templateUrl: './video-table.component.html',
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
-  readonly table = new TableModel()
-  public loading = true
   private readonly destroy$ = new Subject<void>()
+  public readonly table = new TableModel()
+  public loading = true
 
   constructor(
     private service: VideoService,
@@ -29,6 +28,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initHeaders()
+    this.table.pageLength = 50
     this.getVideos()
   }
 
@@ -111,7 +111,13 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     this.table.header = [
       new TableHeaderItem({ compare: () => 0, metadata: 'title', data: $localize`Title` }),
       new TableHeaderItem({ compare: () => 0, metadata: 'url', data: $localize`URL` }),
-      new TableHeaderItem({ compare: () => 0, metadata: 'uploadedAt', data: $localize`Upload date` }),
+      new TableHeaderItem({
+        compare: () => 0,
+        metadata: 'uploadedAt',
+        data: $localize`Upload date`,
+        sorted: true,
+        descending: true,
+      }),
       new TableHeaderItem({ compare: () => 0, metadata: 'visible', data: $localize`Visible` }),
     ]
   }

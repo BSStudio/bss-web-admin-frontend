@@ -15,7 +15,7 @@ export class VideoService {
   getVideos({ page, size, sort }: PageableRequest<Video>) {
     const params = {
       ...(page === undefined ? {} : { page }), // spread empty object if page is undefined
-      ...(size === undefined ? {} : { size }), // spread empty object if page is undefined
+      ...(size === undefined ? {} : { size }), // spread empty object if size is undefined
       ...(sort === undefined
         ? {}
         : { sort: sort.map(({ property, direction }) => property + (direction ? `,${direction}` : '')) }),

@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core'
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core'
 import { concatMap, from, map, Subject, takeUntil, tap, toArray } from 'rxjs'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { MemberService } from '../../../member/services/member.service'
 import { DetailedVideo } from '../../../video/models'
-import { BaseModal, ComboBox, ListItem } from 'carbon-components-angular'
-import { FormBuilder } from '@angular/forms'
+import { BaseModal, ListItem } from 'carbon-components-angular'
+import { FormBuilder, Validators } from '@angular/forms'
 import { DetailedCrewMember } from '../../models'
 
 interface MemberListItem extends ListItem {
@@ -14,22 +14,19 @@ interface MemberListItem extends ListItem {
 @Component({
   selector: 'app-video-crew-add-modal',
   templateUrl: './video-crew-add-modal.component.html',
+  styleUrls: ['./video-crew-add-modal.component.scss'],
 })
 export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
   @Output()
   public update = new EventEmitter<DetailedVideo>()
-  @ViewChild('positionComboBox', { static: true })
-  protected comboBox!: ComboBox
 
   private readonly destroy$ = new Subject<void>()
-
-  public positionSearch = ''
-  public positions: ListItem[] = []
+  public positions: string[] = []
   public members: MemberListItem[] = []
 
   public form = this.fb.group({
-    member: this.fb.control<MemberListItem | null>(null),
-    position: this.fb.control<ListItem | null>(null),
+    position: this.fb.nonNullable.control('', [Validators.required]),
+    member: this.fb.control<MemberListItem | null>(null, [Validators.required]),
   })
 
   constructor(
@@ -46,20 +43,25 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     this.updateMembers()
   }
 
-  updatePositions() {
+  get positionInvalidText(): string {
+    const { position } = this.form.controls
+    if (position.touched && position.errors && position.errors['required']) {
+      return $localize`Required field`
+    }
+    return ''
+  }
+
+  private updatePositions() {
     this.service
       .getPositions()
       .pipe(
-        concatMap((positions) => from(positions)),
-        map((position): ListItem => ({ content: position, selected: false })),
-        toArray(),
         tap((positions) => (this.positions = positions)),
         takeUntil(this.destroy$)
       )
       .subscribe()
   }
 
-  updateMembers() {
+  private updateMembers() {
     this.memberService
       .getMembers()
       .pipe(
@@ -73,9 +75,10 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
   }
 
   onSubmit() {
+    this.form.markAllAsTouched()
     const crewMember = this.form.getRawValue()
-    if (this.form.valid && crewMember.member !== null && crewMember.position !== null) {
-      this.addCrewMember(new DetailedCrewMember(this.video.id, crewMember.position.content, crewMember.member.id))
+    if (this.form.valid && crewMember.member !== null) {
+      this.addCrewMember(new DetailedCrewMember(this.video.id, crewMember.position, crewMember.member.id))
     }
   }
 
@@ -90,24 +93,6 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  addPosition() {
-    const newPosition = { content: this.positionSearch, selected: true }
-    this.positions = [
-      newPosition,
-      ...this.positions
-        .filter(({ content }) => content === this.positionSearch)
-        .map(({ content }) => ({ content, selected: false })),
-    ]
-    this.comboBox.closeDropdown()
-    this.form.patchValue({
-      position: newPosition,
-    })
-  }
-
-  updatePositionSearch(positionSearch: string) {
-    this.positionSearch = positionSearch
   }
 
   ngOnDestroy() {

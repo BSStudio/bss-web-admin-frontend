@@ -2,10 +2,11 @@
 
 ibm-modal {
   form {
-    ibm-label {
+    ibm-combo-box {
       margin-bottom: $spacing-04;
     }
   }
+
   ibm-modal-footer {
     button:first-of-type {
       order: 1;

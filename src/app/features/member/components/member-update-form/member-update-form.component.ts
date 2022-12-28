@@ -49,10 +49,12 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
     if (changes['member']) {
       const { id, ...modifiableValues } = this.member
       this.form.patchValue(modifiableValues)
+      this.form.markAsPristine()
     }
   }
 
   submit() {
+    this.form.markAllAsTouched()
     if (this.form.valid) {
       this.service
         .updateMember(this.member.id, this.form.getRawValue())

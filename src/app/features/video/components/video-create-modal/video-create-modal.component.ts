@@ -98,15 +98,15 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
     this.notificationService.showToast({
       type: 'success',
       title: $localize`Video created`,
-      caption,
-      message: caption,
-      smart: true,
       links: [
         {
           text: video.title,
           href: `/video/${video.id}`,
         },
       ],
+      caption,
+      message: caption,
+      smart: true,
     })
   }
 

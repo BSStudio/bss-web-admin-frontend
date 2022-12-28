@@ -4,6 +4,7 @@ import { Subject, takeUntil, tap } from 'rxjs'
 import { DetailedVideo } from '../../models'
 import { NotificationService } from 'carbon-components-angular'
 import { VideoService } from '../../services/video.service'
+import { flatpickrOptions } from '../../../../core/util/flatpickr-options'
 
 @Component({
   selector: 'app-video-update-form',
@@ -15,6 +16,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
   @Output() public update = new EventEmitter<DetailedVideo>()
 
   private destroy$ = new Subject<void>()
+  public flatpickrOptions = flatpickrOptions
   public form = this.fb.nonNullable.group({
     url: this.fb.nonNullable.control('', { validators: [Validators.pattern(/^[\p{Alpha}\p{Number}\-]+$/u)] }),
     title: this.fb.nonNullable.control(''),
@@ -22,18 +24,6 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
     uploadedAt: this.fb.nonNullable.control(''),
     visible: this.fb.nonNullable.control(false),
   })
-
-  public flatpickrOptions = {
-    disableMobile: true,
-    formatDate: (date: Date): string => {
-      const d = new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
-      return d.toISOString().split('T')[0]
-    },
-    parseDate: (string: string): Date => {
-      const date = new Date(string)
-      return new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
-    },
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -44,6 +34,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['video']) {
       this.form.patchValue(this.video)
+      this.form.markAsPristine()
     }
   }
 

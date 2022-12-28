@@ -3,7 +3,7 @@
 form {
   display: grid;
   grid-gap: $spacing-04;
-  @media (min-width: 768px) {
+  @media (min-width: 672px) {
     grid-template-areas:
     "title url"
     "description description"

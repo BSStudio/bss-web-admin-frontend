@@ -22,6 +22,7 @@ import { MemberTableComponent } from './components/member-table/member-table.com
 import { MemberUpdateFormComponent } from './components/member-update-form/member-update-form.component'
 import { MemberProfilePictureComponent } from './components/member-profile-picture/member-profile-picture.component'
 import { MemberProfilePictureUploadComponent } from './components/member-profile-picture-upload/member-profile-picture-upload.component'
+import { DefaultImageDirective } from './directives/default-image.directive'
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     MemberStatusPipe,
     MemberProfilePictureComponent,
     MemberProfilePictureUploadComponent,
+    DefaultImageDirective,
   ],
   providers: [MemberStatusPipe],
 })

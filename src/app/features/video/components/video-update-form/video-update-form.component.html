@@ -19,7 +19,6 @@
     placeholder="YYYY-MM-dd"
     formControlName="uploadedAt"
   ></ibm-date-picker>
-  {{ form.controls.uploadedAt.getRawValue() | json }}
   <ibm-toggle label="Visible" i18n-label formControlName="visible"></ibm-toggle>
-  <button i18n ibmButton="primary" type="submit" [disabled]="form.pristine">Update</button>
+  <button i18n ibmButton="primary" type="submit" [disabled]="form.pristine">Save</button>
 </form>

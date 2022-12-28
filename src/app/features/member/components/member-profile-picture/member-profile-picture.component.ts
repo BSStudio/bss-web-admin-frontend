@@ -18,9 +18,9 @@ interface SourceSet {
           [media]="image.media"
           [srcset]="image.srcset + refreshParam"
         />
-        <img #img ngSrc="/assets/fallback.jpg" width="360" alt="{{ member.name }}'s profile picture" i18n-alt />
+        <img #img appDefaultImage src="/assets/fallback.jpg" alt="{{ member.name }}'s profile picture" i18n-alt />
       </picture>
-      <figcaption>{{ img.alt }}</figcaption>
+      <figcaption *ngIf="showCaption">{{ img.alt }}</figcaption>
     </figure>
   `,
 })
@@ -31,6 +31,7 @@ export class MemberProfilePictureComponent implements OnInit {
   public refreshParam = ''
 
   @Input() member!: Member
+  @Input() showCaption = false
 
   ngOnInit() {
     const basePath = `/media/assets/m/${this.member.id}`

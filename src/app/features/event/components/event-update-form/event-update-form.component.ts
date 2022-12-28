@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core'
 import { DetailedEvent, Event, UpdateEvent } from '../../models'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { EventService } from '../../services/event.service'
 import { NotificationService } from 'carbon-components-angular'
+import { flatpickrOptions } from 'src/app/core/util/flatpickr-options'
 
 @Component({
   selector: 'app-event-update-form[event]',
@@ -15,6 +16,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() update = new EventEmitter<DetailedEvent>()
 
   private readonly destroy$ = new Subject<void>()
+  public flatpickrOptions = flatpickrOptions
   public readonly form = this.fb.group({
     url: this.fb.nonNullable.control('', [Validators.required]),
     title: this.fb.nonNullable.control('', [Validators.required]),
@@ -22,17 +24,6 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     date: this.fb.nonNullable.control('', [Validators.required]),
     visible: this.fb.nonNullable.control(false, [Validators.required]),
   })
-  public flatpickrOptions = {
-    disableMobile: true,
-    formatDate: (date: Date): string => {
-      const d = new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
-      return d.toISOString().split('T')[0]
-    },
-    parseDate: (string: string): Date => {
-      const date = new Date(string)
-      return new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
-    },
-  }
 
   constructor(
     private fb: FormBuilder,

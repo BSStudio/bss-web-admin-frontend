@@ -9,6 +9,7 @@ import { Member } from '../../models/member.model'
 @Component({
   selector: 'app-member-create-modal',
   templateUrl: './member-create-modal.component.html',
+  styleUrls: ['./member-create-modal.component.scss'],
 })
 export class MemberCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>()
@@ -97,7 +98,20 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
   }
 
   private successNotification(member: Member) {
-    this.notificationService.showToast({ type: 'success', title: member.name })
+    const caption = $localize`Add a description, and upload a profile picture`
+    this.notificationService.showToast({
+      type: 'success',
+      title: $localize`Member created`,
+      links: [
+        {
+          text: member.name,
+          href: `/member/${member.id}`,
+        },
+      ],
+      caption,
+      message: caption,
+      smart: true,
+    })
   }
 
   ngOnDestroy() {

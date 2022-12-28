@@ -48,7 +48,7 @@ export class VideoRemoveButtonComponent implements OnDestroy {
             this.successNotification()
             this.router.navigate(['video']).then()
           },
-          error: () => window.alert(),
+          error: (err) => this.errorNotification(err),
         }),
         takeUntil(this.destroy$)
       )
@@ -60,6 +60,18 @@ export class VideoRemoveButtonComponent implements OnDestroy {
       type: 'success',
       title: $localize`Video was removed`,
       message: this.video.title,
+      smart: true,
+    })
+  }
+
+  private errorNotification(error: unknown) {
+    const caption = $localize`Remove crew members first`
+    this.notificationService.showToast({
+      type: 'error',
+      title: $localize`Error removing`,
+      subtitle: this.video.title,
+      caption,
+      message: caption,
       smart: true,
     })
   }

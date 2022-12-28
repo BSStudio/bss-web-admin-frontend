@@ -54,7 +54,7 @@ describe('VideoService', () => {
     const size = 10
 
     service
-      .getVideos(page, size)
+      .getVideos({ page, size })
       .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
       .subscribe({ complete: () => done() })
 
