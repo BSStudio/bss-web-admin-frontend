@@ -18,7 +18,7 @@ interface SourceSet {
           [media]="image.media"
           [srcset]="image.srcset + refreshParam"
         />
-        <img #img appDefaultImage src="/assets/fallback.jpg" alt="{{ member.name }}'s profile picture" i18n-alt />
+        <img #img [src]="fallback" alt="{{ member.name }}'s profile picture" i18n-alt (error)="onError($event)" />
       </picture>
       <figcaption *ngIf="showCaption">{{ img.alt }}</figcaption>
     </figure>
@@ -27,6 +27,7 @@ interface SourceSet {
 export class MemberProfilePictureComponent implements OnInit {
   private static FORMATS = ['avif', 'webp', 'jpeg']
   private static SIZES = ['xl', 'lg', 'md', 'sm']
+  public readonly fallback = '/assets/fallback.jpg'
   public sources: SourceSet[] = []
   public refreshParam = ''
 
@@ -43,6 +44,10 @@ export class MemberProfilePictureComponent implements OnInit {
         srcset: `${basePath}/${size}.${format}`,
       }))
     )
+  }
+
+  onError(event: ErrorEvent) {
+    this.sources[0].srcset = this.fallback
   }
 
   updateImage() {

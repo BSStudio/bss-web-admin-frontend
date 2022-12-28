@@ -43,8 +43,7 @@ describe('MemberProfilePictureComponent', () => {
 
     const img = ngMocks.find('figure > picture > img')
     expect(img.nativeElement.alt).toEqual(`${member.name}'s profile picture`)
-    const optimizedImage = ngMocks.findInstance(NgOptimizedImage)
-    expect(optimizedImage.ngSrc).toBe('/assets/fallback.jpg')
+    expect(img.nativeElement.src).toBe('/assets/fallback.jpg')
     const figcaption = ngMocks.find('figure > figcaption')
     expect(ngMocks.formatText(figcaption)).toBe(`${member.name}'s profile picture`)
   })

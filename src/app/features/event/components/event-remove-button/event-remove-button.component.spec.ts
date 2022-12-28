@@ -1,22 +1,12 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
-
 import { EventRemoveButtonComponent } from './event-remove-button.component'
+import { MockBuilder, MockRender } from 'ng-mocks'
+import { EventModule } from '../../event.module'
 
 describe('EventRemoveButtonComponent', () => {
-  let component: EventRemoveButtonComponent
-  let fixture: ComponentFixture<EventRemoveButtonComponent>
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [EventRemoveButtonComponent],
-    }).compileComponents()
-
-    fixture = TestBed.createComponent(EventRemoveButtonComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
+  beforeEach(() => MockBuilder(EventRemoveButtonComponent, EventModule))
 
   it('should create', () => {
-    expect(component).toBeTruthy()
+    const fixture = MockRender(EventRemoveButtonComponent)
+    expect(fixture).toBeTruthy()
   })
 })
