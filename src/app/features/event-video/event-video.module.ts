@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { EventVideoAddModalComponent } from './components/event-video-add-modal/event-video-add-modal.component'
 import { EventVideoTableComponent } from './components/event-video-table/event-video-table.component'
 import { EventVideoRemoveButtonComponent } from './components/event-video-remove-button/event-video-remove-button.component'
-import {ComboBoxModule, IconModule, ModalModule, NFormsModule, TableModule} from 'carbon-components-angular'
+import { ComboBoxModule, IconModule, ModalModule, NFormsModule, TableModule } from 'carbon-components-angular'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 
