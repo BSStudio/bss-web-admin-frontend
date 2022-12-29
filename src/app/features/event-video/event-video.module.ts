@@ -13,6 +13,7 @@ import {
 } from 'carbon-components-angular'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { SharedModule } from '../../shared/shared.module'
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { RouterModule } from '@angular/router'
     TableModule,
     RouterModule,
     ComboBoxModule,
+    SharedModule,
   ],
   declarations: [EventVideoAddModalComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
   exports: [EventVideoAddModalComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
