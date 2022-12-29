@@ -114,7 +114,10 @@ describe('EventCreateModalComponent', () => {
     expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledWith({
       type: 'success',
       title: 'Event created',
-      message: title,
+      links: [{ text: event.title, href: `/event/${event.id}` }],
+      caption: 'Add videos to the event, update the details and publish it',
+      message: 'Add videos to the event, update the details and publish it',
+      smart: true,
     })
     expect(close.emit).toHaveBeenCalledWith(true)
   })

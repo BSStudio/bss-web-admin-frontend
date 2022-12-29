@@ -30,6 +30,7 @@ describe('EventVideoTableComponent', () => {
       new TableHeaderItem({ data: 'Title' }),
       new TableHeaderItem({ data: 'Url' }),
       new TableHeaderItem({ data: 'Uploaded at' }),
+      new TableHeaderItem({ data: 'Visible' }),
       new TableHeaderItem({ style: { padding: 0, width: 0 } }),
     ])
   })
