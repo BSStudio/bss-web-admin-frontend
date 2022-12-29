@@ -86,7 +86,6 @@ describe('EventCreateModalComponent', () => {
 
       const [addButton, closeButton] = buttons
       expect(ngMocks.formatText(addButton)).toBe('Add event')
-      expect(addButton.nativeElement.style.order).toBe('1')
       const addButtonDirective = ngMocks.findInstance(addButton, Button)
       expect(addButtonDirective.ibmButton).toEqual('primary')
       expect(ngMocks.formatText(closeButton)).toBe('Cancel')

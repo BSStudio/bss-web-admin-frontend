@@ -27,7 +27,9 @@ describe('VideoCrewRemoveButtonComponent', () => {
     expect(fixture.point.componentInstance.crewMember).toEqual(crewMember)
 
     const button = ngMocks.find('button')
-    expect(ngMocks.formatText(button)).toBe(`Remove ${crewMember.member.name}'s ${crewMember.position} from event`)
+    expect(ngMocks.formatText(button)).toBe(
+      `Remove ${crewMember.member.name}'s ${crewMember.position} position from the video`
+    )
     const buttonDirective = ngMocks.findInstance(button, Button)
 
     expect(buttonDirective.ibmButton).toBe('danger')
@@ -53,9 +55,9 @@ describe('VideoCrewRemoveButtonComponent', () => {
     expect(modalService.show).toHaveBeenCalledOnceWith({
       type: AlertModalType.danger,
       label: `${crewMember.member.name} | ${crewMember.position}`,
-      title: 'Remove member from video',
+      title: 'Remove crew member position from video',
       size: 'xs',
-      content: 'Are you sure you want to remove this member from the crew?',
+      content: "Are you sure you want to remove this member's position from the crew?",
       buttons: [
         { type: ModalButtonType.secondary, text: 'Close' },
         {

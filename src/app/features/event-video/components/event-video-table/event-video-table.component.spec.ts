@@ -14,9 +14,10 @@ import { Video } from '../../../video/models'
 import { RouterLink } from '@angular/router'
 import { EventVideoRemoveButtonComponent } from '../event-video-remove-button/event-video-remove-button.component'
 import { EventVideoModule } from '../../event-video.module'
+import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
 
 describe('EventVideoTableComponent', () => {
-  beforeEach(() => MockBuilder([EventVideoTableComponent, TableModule], EventVideoModule))
+  beforeEach(() => MockBuilder([EventVideoTableComponent, TableModule, BooleanPipe], EventVideoModule))
   const detailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, [])
   const video = new Video('id', 'url', 'title', 'uploadedAt', true)
   const detailedEventWithVideo: DetailedEvent = { ...detailedEvent, videos: [video] }

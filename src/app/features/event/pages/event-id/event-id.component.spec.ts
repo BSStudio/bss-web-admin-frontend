@@ -59,6 +59,8 @@ describe('EventIdComponent', () => {
       expect(fixture.point.componentInstance.event).toEqual(detailedEvent)
 
       update.emit(updatedDetailedEvent)
+      fixture.detectChanges()
+
       expect(fixture.point.componentInstance.event).toEqual(updatedDetailedEvent)
       expect(form.event).toEqual(updatedDetailedEvent)
     })
@@ -68,7 +70,7 @@ describe('EventIdComponent', () => {
     it('should render', () => {
       MockRender(EventIdComponent)
 
-      const section = ngMocks.find('section#metadata')
+      const section = ngMocks.find('section#event-videos')
 
       const h2 = ngMocks.find(section, 'h2')
       expect(ngMocks.formatText(h2)).toBe('Manage event videos')
@@ -81,15 +83,10 @@ describe('EventIdComponent', () => {
       MockInstance(EventVideoTableComponent, (instance) => ngMocks.stub(instance, { update }))
       const fixture = MockRender(EventIdComponent)
 
-      const section = ngMocks.find('section#metadata')
-
-      const videoTable = ngMocks.findInstance(section, EventVideoTableComponent)
-      expect(videoTable.event).toEqual(detailedEvent)
       expect(fixture.point.componentInstance.event).toEqual(detailedEvent)
-
       update.emit(updatedDetailedEvent)
+      fixture.detectChanges()
       expect(fixture.point.componentInstance.event).toEqual(updatedDetailedEvent)
-      expect(videoTable.event).toEqual(updatedDetailedEvent)
     })
   })
 })

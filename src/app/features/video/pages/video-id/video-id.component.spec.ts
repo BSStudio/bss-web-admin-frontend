@@ -38,9 +38,12 @@ describe('VideoIdComponent', () => {
 
   it('should have a header', () => {
     MockRender(VideoIdComponent)
-    const h1 = ngMocks.find('h1')
+    const div = ngMocks.find('div#video-title')
+    const h1 = ngMocks.find(div, 'h1')
 
     expect(ngMocks.formatText(h1)).toEqual('Update video')
+    const videoRemoveButton = ngMocks.findInstance(div, VideoRemoveButtonComponent)
+    expect(videoRemoveButton.video).toEqual(detailedVideo)
   })
 
   describe('metadata section', () => {
@@ -129,19 +132,6 @@ describe('VideoIdComponent', () => {
       expect(videoPlayerDirective.src).toBe(
         'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8'
       )
-    })
-  })
-
-  describe('video remove section', () => {
-    it('should render', () => {
-      MockRender(VideoIdComponent)
-
-      const section = ngMocks.find('section#video-update-remove')
-
-      const h2 = ngMocks.find(section, 'h2')
-      expect(ngMocks.formatText(h2)).toEqual('Remove video')
-      const videoRemoveButton = ngMocks.findInstance(VideoRemoveButtonComponent)
-      expect(videoRemoveButton.video).toEqual(detailedVideo)
     })
   })
 })

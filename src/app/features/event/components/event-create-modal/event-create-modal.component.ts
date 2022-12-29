@@ -67,7 +67,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
   get urlHelperText(): string {
     const { url } = this.form.getRawValue()
     const renderedUrl = url ? url : $localize`simonyi-conference-2022`
-    return $localize`The video will have the following url: https://bsstudio/event/${renderedUrl}`
+    return $localize`The event will have the following url: https://bsstudio/event/${renderedUrl}`
   }
 
   onSubmit() {

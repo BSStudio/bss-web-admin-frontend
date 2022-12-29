@@ -18,6 +18,7 @@ describe('MemberProfilePictureComponent', () => {
   it('should create', () => {
     const fixture = MockRender(MemberProfilePictureComponent, {
       member,
+      showCaption: true,
     })
     expect(fixture.componentInstance.member).toEqual(member)
 
@@ -43,7 +44,7 @@ describe('MemberProfilePictureComponent', () => {
 
     const img = ngMocks.find('figure > picture > img')
     expect(img.nativeElement.alt).toEqual(`${member.name}'s profile picture`)
-    expect(img.nativeElement.src).toBe('/assets/fallback.jpg')
+    expect(img.nativeElement.src).toMatch(/\/assets\/fallback\.jpg$/)
     const figcaption = ngMocks.find('figure > figcaption')
     expect(ngMocks.formatText(figcaption)).toBe(`${member.name}'s profile picture`)
   })
