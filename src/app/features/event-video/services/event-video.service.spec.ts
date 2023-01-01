@@ -1,7 +1,7 @@
 import { EventVideoService } from './event-video.service'
 import { MockBuilder, ngMocks } from 'ng-mocks'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
-import { EventVideo } from '../../video/models/event-video.model'
+import { EventVideo } from '../models'
 import { tap } from 'rxjs'
 import { DetailedEvent } from '../../event/models'
 

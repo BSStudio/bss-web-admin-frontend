@@ -2,10 +2,7 @@ import { MockBuilder, ngMocks } from 'ng-mocks'
 import { MemberService } from './member.service'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { tap } from 'rxjs'
-import { Member } from '../models/member.model'
-import { MemberStatus } from '../models/member-status.model'
-import { CreateMember } from '../models/create-member.model'
-import { UpdateMember } from '../models/update-member.model'
+import { CreateMember, Member, MemberStatus, UpdateMember } from '../models'
 
 describe('MemberService', () => {
   ngMocks.faster()

@@ -19,8 +19,6 @@ import { VideoCrewService } from '../../services/video-crew.service'
 import { of } from 'rxjs'
 import { VideoCrewRemoveButtonComponent } from '../video-crew-remove-button/video-crew-remove-button.component'
 import { SimpleMember } from '../../../member/models/simple-member.model'
-import { ComponentRef } from '@angular/core'
-import { ComponentFixture } from '@angular/core/testing'
 
 describe('VideoCrewTableComponent', () => {
   beforeEach(() => MockBuilder([VideoCrewTableComponent, TableModule], VideoCrewModule))

@@ -1,9 +1,7 @@
 import { MemberProfilePictureComponent } from './member-profile-picture.component'
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
 import { MemberModule } from '../../member.module'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
-import { NgOptimizedImage } from '@angular/common'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberProfilePictureComponent', () => {
   const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true)

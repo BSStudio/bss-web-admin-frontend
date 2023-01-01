@@ -2,7 +2,7 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+  <form ibmModalContent [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!titleInvalidText" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
       <input
@@ -11,18 +11,11 @@
         ibmText
         formControlName="title"
         placeholder="Dorm interview series - Cats"
-        (keyup.enter)="onSubmit()"
       />
     </ibm-label>
     <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
-      <input
-        i18n-placeholder
-        ibmText
-        formControlName="url"
-        placeholder="dorm-interview-series-cats"
-        (keyup.enter)="onSubmit()"
-      />
+      <input i18n-placeholder ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
     </ibm-label>
   </form>
   <ibm-modal-footer>

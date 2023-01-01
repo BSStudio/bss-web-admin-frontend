@@ -7,7 +7,7 @@ describe('VideoIndexComponent', () => {
   beforeEach(() => MockBuilder(VideoIndexComponent, VideoModule))
 
   it('should render', () => {
-    const fixture = MockRender(VideoIndexComponent)
+    MockRender(VideoIndexComponent)
 
     expect(ngMocks.find('h1').nativeElement.innerHTML).toBe('Video manager')
     expect(ngMocks.find('article > p').nativeElement.innerHTML).toBe('A short description will be added here')

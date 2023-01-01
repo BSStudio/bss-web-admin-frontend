@@ -8,9 +8,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { MemberResolver } from './member.resolver'
 import { MemberModule } from '../member.module'
 import { MemberService } from '../services/member.service'
-import { Member } from '../models/member.model'
-import { MemberStatus } from '../models/member-status.model'
 import { MemberIdComponent } from './member-id/member-id.component'
+import { Member, MemberStatus } from '../models'
 
 describe('EventResolver', () => {
   beforeEach(() =>

@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { FormBuilder, Validators } from '@angular/forms'
 import { CreateVideo, Video } from '../../models'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { map, Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-video-create-modal',
@@ -32,6 +32,8 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
   private initAutomaticUrlGenerator(): void {
     this.form.controls.title.valueChanges
       .pipe(
+        // remove tildes
+        map((title) => title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')),
         tap((title) => {
           const url = title.toLowerCase().split(/\W+/).join('-')
           this.form.controls.url.setValue(url)

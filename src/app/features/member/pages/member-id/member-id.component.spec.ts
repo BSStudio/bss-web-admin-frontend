@@ -1,8 +1,6 @@
 import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks'
 import { MemberIdComponent } from './member-id.component'
 import { MemberModule } from '../../member.module'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
 import { BreadcrumbComponent } from '../../../../shared/components/breadcrumb/breadcrumb.component'
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
@@ -11,6 +9,7 @@ import { MemberProfilePictureComponent } from '../../components/member-profile-p
 import { MemberProfilePictureUploadComponent } from '../../components/member-profile-picture-upload/member-profile-picture-upload.component'
 import { EventEmitter } from '@angular/core'
 import { MemberUpdateFormComponent } from '../../components/member-update-form/member-update-form.component'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberIdComponent', () => {
   const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
@@ -49,46 +48,6 @@ describe('MemberIdComponent', () => {
 
     const memberRemoveButton = ngMocks.findInstance(section, MemberRemoveButtonComponent)
     expect(memberRemoveButton.member).toEqual(member)
-  })
-
-  describe('picture section', () => {
-    it('should render', () => {
-      MockRender(MemberIdComponent)
-
-      const section = ngMocks.find('section#profile-picture')
-
-      const h2 = ngMocks.find(section, 'h2')
-      expect(ngMocks.formatText(h2)).toBe('Profile picture')
-
-      const profilePicture = ngMocks.findInstance(section, MemberProfilePictureComponent)
-      expect(profilePicture.member).toEqual(member)
-
-      const pictureUpload = ngMocks.findInstance(section, MemberProfilePictureUploadComponent)
-      expect(pictureUpload.memberId).toBe(member.id)
-    })
-
-    it('should update picture', () => {
-      const update = new EventEmitter<void>()
-      MockInstance(MemberProfilePictureUploadComponent, (instance) => ngMocks.stub(instance, { update }))
-      const fixture = MockRender(MemberIdComponent)
-
-      const section = ngMocks.find('section#profile-picture')
-
-      const h2 = ngMocks.find(section, 'h2')
-      expect(ngMocks.formatText(h2)).toBe('Profile picture')
-
-      const profilePicture = ngMocks.findInstance(section, MemberProfilePictureComponent)
-      expect(profilePicture.member).toEqual(member)
-      expect(profilePicture.updateImage).not.toHaveBeenCalled()
-
-      const pictureUpload = ngMocks.findInstance(section, MemberProfilePictureUploadComponent)
-      expect(pictureUpload.memberId).toBe(member.id)
-
-      update.emit()
-      fixture.detectChanges()
-
-      expect(profilePicture.updateImage).toHaveBeenCalledOnceWith()
-    })
   })
 
   describe('should have a details section', () => {
@@ -132,6 +91,50 @@ describe('MemberIdComponent', () => {
 
       expect(updateForm.member).toEqual(updatedMember)
       expect(fixture.point.componentInstance.member).toEqual(updatedMember)
+    })
+  })
+
+  it('should have a profile picture header', () => {
+    MockRender(MemberIdComponent)
+
+    const h2 = ngMocks.find('h2')
+    expect(ngMocks.formatText(h2)).toBe('Profile picture upload')
+  })
+
+  describe('picture section', () => {
+    it('should render', () => {
+      MockRender(MemberIdComponent)
+
+      const section = ngMocks.find('section#picture')
+
+      const profilePicture = ngMocks.findInstance(section, MemberProfilePictureComponent)
+      expect(profilePicture.member).toEqual(member)
+
+      const pictureUpload = ngMocks.findInstance(section, MemberProfilePictureUploadComponent)
+      expect(pictureUpload.memberId).toBe(member.id)
+    })
+
+    it('should update picture', () => {
+      const update = new EventEmitter<void>()
+      MockInstance(MemberProfilePictureUploadComponent, (instance) => ngMocks.stub(instance, { update }))
+      const fixture = MockRender(MemberIdComponent)
+
+      const section = ngMocks.find('section#profile-picture')
+
+      const h2 = ngMocks.find(section, 'h2')
+      expect(ngMocks.formatText(h2)).toBe('Profile picture')
+
+      const profilePicture = ngMocks.findInstance(section, MemberProfilePictureComponent)
+      expect(profilePicture.member).toEqual(member)
+      expect(profilePicture.updateImage).not.toHaveBeenCalled()
+
+      const pictureUpload = ngMocks.findInstance(section, MemberProfilePictureUploadComponent)
+      expect(pictureUpload.memberId).toBe(member.id)
+
+      update.emit()
+      fixture.detectChanges()
+
+      expect(profilePicture.updateImage).toHaveBeenCalledOnceWith()
     })
   })
 })

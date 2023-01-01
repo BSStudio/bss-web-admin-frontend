@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Member } from '../../models/member.model'
+import { Member } from '../../models'
 
 interface SourceSet {
   type: string

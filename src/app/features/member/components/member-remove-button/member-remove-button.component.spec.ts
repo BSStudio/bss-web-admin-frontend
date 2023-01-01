@@ -1,9 +1,8 @@
 import { MemberRemoveButtonComponent } from './member-remove-button.component'
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
 import { MemberModule } from '../../member.module'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
 import { Button, IconDirective } from 'carbon-components-angular'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberRemoveButtonComponent', () => {
   beforeEach(() => MockBuilder(MemberRemoveButtonComponent, MemberModule))

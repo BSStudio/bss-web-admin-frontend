@@ -17,7 +17,7 @@ export class VideoService {
       ...(page === undefined ? {} : { page }), // spread empty object if page is undefined
       ...(size === undefined ? {} : { size }), // spread empty object if size is undefined
       ...(sort === undefined
-        ? {}
+        ? {} // spread empty object if sort is undefined
         : { sort: sort.map(({ property, direction }) => property + (direction ? `,${direction}` : '')) }),
     }
     return this.http.get<PaginatedResponse<Video>>('/api/v1/video', { params })

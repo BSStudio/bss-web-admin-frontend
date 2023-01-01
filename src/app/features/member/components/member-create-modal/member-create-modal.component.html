@@ -2,21 +2,14 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 ibmModalHeaderHeading i18n>Add new member</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+  <form ibmModalContent [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!nameInvalidText" [invalidText]="nameInvalidText">
       <ng-container i18n>Name</ng-container>
-      <input
-        ibmText
-        formControlName="name"
-        i18n-placeholder
-        placeholder="John Doe"
-        [attr.modal-primary-focus]="true"
-        (keyup.enter)="onSubmit()"
-      />
+      <input ibmText formControlName="name" i18n-placeholder placeholder="John Doe" [attr.modal-primary-focus]="true" />
     </ibm-label>
     <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
-      <input ibmText formControlName="url" i18n-placeholder placeholder="jdoe" (keyup.enter)="onSubmit()" />
+      <input ibmText formControlName="url" i18n-placeholder placeholder="jdoe" />
     </ibm-label>
   </form>
   <ibm-modal-footer>

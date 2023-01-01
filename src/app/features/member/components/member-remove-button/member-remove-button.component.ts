@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy } from '@angular/core'
+import { Router } from '@angular/router'
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { Member } from '../../models/member.model'
+import { Member } from '../../models'
 import { MemberService } from '../../services/member.service'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-member-remove-button[member]',

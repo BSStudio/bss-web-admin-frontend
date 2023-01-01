@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http'
-import { Member } from '../models/member.model'
-import { CreateMember } from '../models/create-member.model'
-import { UpdateMember } from '../models/update-member.model'
 import { Injectable } from '@angular/core'
+import { CreateMember, Member, UpdateMember } from '../models'
 
 @Injectable({ providedIn: 'root' })
 export class MemberService {

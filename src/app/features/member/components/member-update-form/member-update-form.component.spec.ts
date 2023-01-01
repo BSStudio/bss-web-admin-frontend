@@ -1,9 +1,8 @@
 import { MemberUpdateFormComponent } from './member-update-form.component'
 import { MockBuilder, MockRender } from 'ng-mocks'
 import { MemberModule } from '../../member.module'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
 import { FormBuilder } from '@angular/forms'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberUpdateFormComponent', () => {
   beforeEach(() => MockBuilder([MemberUpdateFormComponent, FormBuilder], MemberModule))

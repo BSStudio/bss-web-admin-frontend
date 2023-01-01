@@ -25,10 +25,9 @@ import { AlertModalType, ModalButtonType, ModalService, NotificationService } fr
   `,
 })
 export class VideoCrewRemoveButtonComponent implements OnDestroy {
-  @Input()
-  public crewMember!: CrewMember
-  @Output()
-  public update = new EventEmitter<DetailedVideo>()
+  @Input() public crewMember!: CrewMember
+  @Output() public update = new EventEmitter<DetailedVideo>()
+
   private readonly destroy$ = new Subject<void>()
 
   constructor(

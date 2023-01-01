@@ -1,20 +1,17 @@
-import { VideoCrewAddModalComponent } from './video-crew-add-modal.component'
-import { MockBuilder, MockInstance, MockRender } from 'ng-mocks'
-import { VideoCrewModule } from '../../video-crew.module'
-import { FormBuilder } from '@angular/forms'
 import { EventEmitter } from '@angular/core'
+import { FormBuilder } from '@angular/forms'
+import { MockBuilder, MockInstance, MockRender } from 'ng-mocks'
+import { of } from 'rxjs'
+import { VideoCrewAddModalComponent } from './video-crew-add-modal.component'
+import { VideoCrewModule } from '../../video-crew.module'
 import { DetailedVideo } from '../../../video/models'
 import { VideoCrewService } from '../../services/video-crew.service'
-import { of } from 'rxjs'
 import { MemberService } from '../../../member/services/member.service'
-import { Member } from '../../../member/models/member.model'
-import { MemberStatus } from '../../../member/models/member-status.model'
+import { Member, MemberStatus } from '../../../member/models'
 
 describe('VideoCrewAddModalComponent', () => {
   const positions = ['position']
-  const members: Member[] = [
-    new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true),
-  ]
+  const members = [new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true)]
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
   const eventEmitter = new EventEmitter<DetailedVideo>()
   beforeEach(() =>

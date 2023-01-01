@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { EventService } from '../../services/event.service'
 import { CreateEvent, Event } from '../../models'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { map, Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-event-create-modal',
@@ -14,7 +14,10 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
   private readonly destroy$ = new Subject<void>()
   public readonly form = this.fb.group({
     title: this.fb.nonNullable.control('', [Validators.required]),
-    url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\w+(-\w+)*$/)]),
+    url: this.fb.nonNullable.control('', [
+      Validators.required,
+      Validators.pattern(/^[\p{L}\p{N}]+(-[\p{L}\p{N}]+)*$/u),
+    ]),
   })
 
   constructor(
@@ -32,8 +35,13 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
   private initAutomaticUrlGenerator(): void {
     this.form.controls.title.valueChanges
       .pipe(
+        // remove tildes
+        map((title) => title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')),
         tap((title) => {
-          const url = title.toLowerCase().split(/\W+/).join('-')
+          const url = title
+            .toLowerCase()
+            .split(/[\p{P}\p{Z}\p{S}]+/u)
+            .join('-')
           this.form.controls.url.setValue(url)
         }),
         takeUntil(this.destroy$)

@@ -9,13 +9,11 @@ import { MemberProfilePictureComponent } from '../../components/member-profile-p
   styleUrls: ['./member-id.component.scss'],
 })
 export class MemberIdComponent {
-  public member: Member
+  public member = <Member>this.route.snapshot.data['member']
   @ViewChild('picture', { static: true })
   public picture!: MemberProfilePictureComponent
 
-  constructor(private route: ActivatedRoute) {
-    this.member = <Member>this.route.snapshot.data['member']
-  }
+  constructor(private route: ActivatedRoute) {}
 
   updateImage() {
     this.picture.updateImage()

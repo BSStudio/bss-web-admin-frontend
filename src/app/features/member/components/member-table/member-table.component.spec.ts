@@ -3,8 +3,7 @@ import { MockBuilder, MockInstance, MockRender } from 'ng-mocks'
 import { MemberModule } from '../../member.module'
 import { MemberService } from '../../services/member.service'
 import { of } from 'rxjs'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberTableComponent', () => {
   const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)

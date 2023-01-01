@@ -460,7 +460,7 @@
       </trans-unit>
       <trans-unit id="8024915414207118910" datatype="html">
         <source>Video updated</source>
-        <target state="new">Video updated</target>
+        <target>Videó frissítve</target>
       </trans-unit>
       <trans-unit id="1911148809726157840" datatype="html">
         <source>Make sure everything is well formatted, and there are no duplicate ids</source>

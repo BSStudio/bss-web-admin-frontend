@@ -3,7 +3,7 @@
     <h3 ibmModalHeaderLabel>{{ video.title }}</h3>
     <h3 ibmModalHeaderHeading i18n>Add crew member to video</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+  <form ibmModalContent [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!positionInvalidText" [invalidText]="positionInvalidText">
       <ng-container i18n>Position</ng-container>
       <input ibmText formControlName="position" list="options" />

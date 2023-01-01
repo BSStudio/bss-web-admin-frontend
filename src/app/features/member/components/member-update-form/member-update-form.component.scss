@@ -5,29 +5,37 @@ form {
   grid-gap: $spacing-04;
   @media (min-width: 672px) {
     grid-template-areas:
-      "name url"
-      "role status"
+      "name nickname"
+      "url role"
       "description description"
+      "status joinedAt"
       "toggles toggles";
     ibm-label.name {
       grid-area: name;
     }
+    ibm-label.nickname {
+      grid-area: nickname;
+    }
     ibm-label.url {
       grid-area: url;
+    }
+    ibm-label.role {
+      grid-area: role;
     }
     ibm-select {
       grid-area: status;
     }
+    ibm-date-picker {
+      grid-area: joinedAt;
+    }
     ibm-label.description {
       grid-area: description;
-    }
-    ibm-toggle {
-      grid-area: archived;
     }
     div {
       grid-area: toggles;
     }
   }
+
   div {
     display: flex;
     align-items: flex-end;

@@ -1,11 +1,11 @@
-import { VideoService } from './video.service'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { MockBuilder, ngMocks } from 'ng-mocks'
 import { tap } from 'rxjs'
+import { VideoService } from './video.service'
 import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models'
 import { Pageable, PaginatedResponse, Sort } from '../../../shared/models'
 import { CrewMember } from '../../video-crew/models'
-import { SimpleMember } from '../../member/models/simple-member.model'
+import { SimpleMember } from '../../member/models'
 
 describe('VideoService', () => {
   ngMocks.faster()

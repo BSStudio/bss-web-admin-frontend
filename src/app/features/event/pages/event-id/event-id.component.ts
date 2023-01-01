@@ -22,11 +22,9 @@ import { DetailedEvent } from '../../models'
   `,
 })
 export class EventIdComponent {
-  public event: DetailedEvent
+  public event = <DetailedEvent>this.route.snapshot.data['event']
 
-  constructor(private route: ActivatedRoute) {
-    this.event = <DetailedEvent>this.route.snapshot.data['event']
-  }
+  constructor(private route: ActivatedRoute) {}
 
   setEvent(event: DetailedEvent) {
     this.event = event

@@ -1,10 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { FormBuilder, Validators } from '@angular/forms'
-import { CreateMember } from '../../models/create-member.model'
+import { CreateMember, Member } from '../../models'
 import { MemberService } from '../../services/member.service'
 import { filter, map, Subject, takeUntil, tap } from 'rxjs'
-import { Member } from '../../models/member.model'
 
 @Component({
   selector: 'app-member-create-modal',
@@ -15,7 +14,7 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
   private readonly destroy$ = new Subject<void>()
   public readonly form = this.fb.nonNullable.group({
     name: this.fb.nonNullable.control('', [Validators.required]),
-    url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^[a-z]+$/)]),
+    url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^[a-z0-9]+$/)]),
   })
 
   constructor(
@@ -33,9 +32,12 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
   private initAutomaticUrlGenerator() {
     this.form.controls.name.valueChanges
       .pipe(
+        // remove tildes
+        map((name) => name.normalize('NFD').replace(/[\u0300-\u036f]/g, '')),
         map((name) => name.toLowerCase().split(' ')),
         // wait for family and given name to be present && given name length to be more than 1
         filter((nameParts) => nameParts.length > 1 && nameParts[nameParts.length - 1].length > 0),
+        filter(() => this.form.controls.url.pristine),
         tap(([familyName, ...givenNameParts]) => {
           const givenNameFirstChar = givenNameParts[givenNameParts.length - 1][0]
           this.form.controls.url.setValue(`${givenNameFirstChar}${familyName}`)

@@ -3,6 +3,10 @@
     <ng-container i18n>Name</ng-container>
     <input ibmText formControlName="name" />
   </ibm-label>
+  <ibm-label class="nickname">
+    <ng-container i18n>Nickname</ng-container>
+    <input ibmText formControlName="nickname" />
+  </ibm-label>
   <ibm-label class="url">
     <ng-container i18n>URL</ng-container>
     <input ibmText formControlName="url" />
@@ -11,13 +15,21 @@
     <ng-container i18n>Role</ng-container>
     <input ibmText formControlName="role" />
   </ibm-label>
-  <ibm-select formControlName="status" label="Status" i18n-label>
-    <option *ngFor="let status of statuses" [value]="status">{{ status | memberStatus }}</option>
-  </ibm-select>
   <ibm-label class="description">
     <ng-container i18n>Description</ng-container>
     <textarea ibmTextArea formControlName="description"></textarea>
   </ibm-label>
+  <ibm-select formControlName="status" label="Status" i18n-label>
+    <option *ngFor="let status of statuses" [value]="status">{{ status | memberStatus }}</option>
+  </ibm-select>
+  <ibm-date-picker
+    label="Joined at:"
+    i18n-label
+    dateFormat="Y-m-d"
+    [flatpickrOptions]="flatpickrOptions"
+    placeholder="YYYY-MM-dd"
+    formControlName="joinedAt"
+  ></ibm-date-picker>
   <div>
     <ibm-toggle
       label="Archived"
