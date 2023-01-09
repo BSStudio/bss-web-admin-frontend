@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
   browser-tools: circleci/browser-tools@1.4.0
+  docker: circleci/docker@2.2.0
 jobs:
   lint:
     docker:
@@ -37,9 +38,36 @@ jobs:
           name: Store covarage report
           path: ~/project/coverage/bss-web
 workflows:
-  version: 2
-  all:
+  Build app:
     jobs:
-      - lint
-      - build
-      - test
+      - lint:
+          name: Lint
+      - build:
+          name: Build
+      - test:
+          name: Unit test
+      - docker/hadolint:
+          name: Docker lint
+      - docker/publish:
+          name: Docker build
+          image: bsstudio/bss-web-admin-frontend
+          registry: ghcr.io
+          tag: latest
+          use-buildkit: true
+          use-docker-credentials-store: true
+      - docker/publish:
+          name: Docker publish
+          image: bsstudio/bss-web-admin-frontend
+          registry: ghcr.io
+          tag: latest
+          use-buildkit: true
+          use-docker-credentials-store: true
+          requires:
+            - Lint
+            - Build
+            - Unit test
+            - Docker lint
+            - Docker build
+          filters:
+            branches:
+              only: "main"
