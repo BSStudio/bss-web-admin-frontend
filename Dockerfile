@@ -13,6 +13,7 @@ RUN npm run build
 
 FROM nginx:1.23.3-alpine
 COPY --from=build /home/node/app/dist/bss-web-admin-frontend /usr/share/nginx/html
+COPY ./nginx/templates  /etc/nginx/templates
 
 LABEL org.opencontainers.image.source="https://github.com/BSStudio/bss-web-admin-frontend"
 LABEL org.opencontainers.image.description="BSS Web admin frontend"
