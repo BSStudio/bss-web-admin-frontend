@@ -50,6 +50,7 @@ workflows:
           name: Docker lint
       - docker/publish:
           name: Docker build
+          deploy: false
           image: bsstudio/bss-web-admin-frontend
           registry: ghcr.io
           tag: latest
@@ -57,6 +58,7 @@ workflows:
           use-docker-credentials-store: true
       - docker/publish:
           name: Docker publish
+          deploy: true
           image: bsstudio/bss-web-admin-frontend
           registry: ghcr.io
           tag: latest
