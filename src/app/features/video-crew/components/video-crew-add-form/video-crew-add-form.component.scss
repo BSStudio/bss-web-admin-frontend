@@ -1,0 +1,17 @@
+@import "@carbon/elements/scss/layout/layout";
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-03;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  input {
+    flex: fit-content;
+  }
+
+  ibm-combo-box {
+    flex: fit-content;
+  }
+}

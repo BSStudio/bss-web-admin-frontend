@@ -6,6 +6,7 @@ import {
   FileUploaderModule,
   IconModule,
   InlineLoadingModule,
+  ListModule,
   ModalModule,
   NFormsModule,
   NotificationModule,
@@ -39,6 +40,7 @@ import { SharedModule } from '../../shared/shared.module'
     VideoCrewModule,
     SharedModule,
     InlineLoadingModule,
+    ListModule,
   ],
   declarations: [
     VideoIndexComponent,

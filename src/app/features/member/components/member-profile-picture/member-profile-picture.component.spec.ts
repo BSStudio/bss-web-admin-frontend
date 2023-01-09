@@ -4,7 +4,17 @@ import { MemberModule } from '../../member.module'
 import { Member, MemberStatus } from '../../models'
 
 describe('MemberProfilePictureComponent', () => {
-  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true)
+  const member = new Member(
+    'id',
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    true
+  )
   const date = new Date(2022, 1, 1)
   beforeEach(() => {
     jasmine.clock().install()

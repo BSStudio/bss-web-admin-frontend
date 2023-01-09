@@ -13,16 +13,16 @@ import {
   TableModule,
   TableToolbarContent,
 } from 'carbon-components-angular'
-import { VideoCrewAddModalComponent } from '../video-crew-add-modal/video-crew-add-modal.component'
+import { VideoCrewAddFormComponent } from '../video-crew-add-form/video-crew-add-form.component'
 import { CrewMember } from '../../models'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { of } from 'rxjs'
 import { VideoCrewRemoveButtonComponent } from '../video-crew-remove-button/video-crew-remove-button.component'
-import { SimpleMember } from '../../../member/models/simple-member.model'
+import { SimpleMember } from '../../../member/models'
 
 describe('VideoCrewTableComponent', () => {
   beforeEach(() => MockBuilder([VideoCrewTableComponent, TableModule], VideoCrewModule))
-  const member = new SimpleMember('id', 'name')
+  const member = new SimpleMember('id', 'name', 'nickname')
   const crewMember = new CrewMember('memberId', 'position', member)
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
 
@@ -90,7 +90,7 @@ describe('VideoCrewTableComponent', () => {
     const modalService = ngMocks.findInstance(ModalService)
 
     expect(modalService.create).toHaveBeenCalledOnceWith({
-      component: VideoCrewAddModalComponent,
+      component: VideoCrewAddFormComponent,
       inputs: { video: detailedVideo },
     })
   })

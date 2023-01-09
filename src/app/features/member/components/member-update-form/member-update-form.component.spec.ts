@@ -6,7 +6,17 @@ import { Member, MemberStatus } from '../../models'
 
 describe('MemberUpdateFormComponent', () => {
   beforeEach(() => MockBuilder([MemberUpdateFormComponent, FormBuilder], MemberModule))
-  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const member = new Member(
+    'id',
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
 
   it('should create', () => {
     const fixture = MockRender(MemberUpdateFormComponent, { member })

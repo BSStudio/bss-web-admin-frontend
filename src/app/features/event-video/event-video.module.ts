@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { EventVideoAddModalComponent } from './components/event-video-add-modal/event-video-add-modal.component'
+import { EventVideoAddFormComponent } from './components/event-video-add-form/event-video-add-form.component'
 import { EventVideoTableComponent } from './components/event-video-table/event-video-table.component'
 import { EventVideoRemoveButtonComponent } from './components/event-video-remove-button/event-video-remove-button.component'
 import {
@@ -28,7 +28,7 @@ import { SharedModule } from '../../shared/shared.module'
     ComboBoxModule,
     SharedModule,
   ],
-  declarations: [EventVideoAddModalComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
-  exports: [EventVideoAddModalComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
+  declarations: [EventVideoAddFormComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
+  exports: [EventVideoAddFormComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
 })
 export class EventVideoModule {}

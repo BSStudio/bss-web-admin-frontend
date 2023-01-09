@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { DetailedEvent } from '../../models'
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-video-id',
@@ -16,7 +17,6 @@ import { DetailedEvent } from '../../models'
       <app-event-update-form [event]="event" (update)="setEvent($event)"></app-event-update-form>
     </section>
     <section id="event-videos">
-      <h2 i18n>Manage event videos</h2>
       <app-event-video-table [event]="event" (update)="setEvent($event)"></app-event-video-table>
     </section>
   `,
@@ -24,9 +24,12 @@ import { DetailedEvent } from '../../models'
 export class EventIdComponent {
   public event = <DetailedEvent>this.route.snapshot.data['event']
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle(this.event.title)
+  }
 
   setEvent(event: DetailedEvent) {
     this.event = event
+    this.title.setTitle(this.event.title)
   }
 }

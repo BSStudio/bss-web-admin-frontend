@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Member } from '../../models/member.model'
+import { Title } from '@angular/platform-browser'
+import { Member } from '../../models'
 import { MemberProfilePictureComponent } from '../../components/member-profile-picture/member-profile-picture.component'
 
 @Component({
@@ -13,7 +14,9 @@ export class MemberIdComponent {
   @ViewChild('picture', { static: true })
   public picture!: MemberProfilePictureComponent
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle(this.member.name)
+  }
 
   updateImage() {
     this.picture.updateImage()
@@ -21,5 +24,6 @@ export class MemberIdComponent {
 
   setMember(member: Member) {
     this.member = member
+    this.title.setTitle(this.member.name)
   }
 }

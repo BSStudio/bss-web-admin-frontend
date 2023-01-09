@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core'
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core'
 import { concatMap, from, map, Subject, takeUntil, tap, toArray } from 'rxjs'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { MemberService } from '../../../member/services/member.service'
 import { DetailedVideo } from '../../../video/models'
-import { BaseModal, ListItem } from 'carbon-components-angular'
+import { ListItem } from 'carbon-components-angular'
 import { FormBuilder, Validators } from '@angular/forms'
 import { DetailedCrewMember } from '../../models'
 
@@ -12,13 +12,13 @@ interface MemberListItem extends ListItem {
 }
 
 @Component({
-  selector: 'app-video-crew-add-modal',
-  templateUrl: './video-crew-add-modal.component.html',
-  styleUrls: ['./video-crew-add-modal.component.scss'],
+  selector: 'app-video-crew-add-form',
+  templateUrl: './video-crew-add-form.component.html',
+  styleUrls: ['./video-crew-add-form.component.scss'],
 })
-export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnDestroy {
-  @Output()
-  public update = new EventEmitter<DetailedVideo>()
+export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
+  @Input() public video!: DetailedVideo
+  @Output() public update = new EventEmitter<DetailedVideo>()
 
   private readonly destroy$ = new Subject<void>()
   public positions: string[] = []
@@ -29,26 +29,11 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
     member: this.fb.control<MemberListItem | null>(null, [Validators.required]),
   })
 
-  constructor(
-    private fb: FormBuilder,
-    private service: VideoCrewService,
-    private memberService: MemberService,
-    @Inject('video') public video: DetailedVideo
-  ) {
-    super()
-  }
+  constructor(private fb: FormBuilder, private service: VideoCrewService, private memberService: MemberService) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     this.updatePositions()
     this.updateMembers()
-  }
-
-  get positionInvalidText(): string {
-    const { position } = this.form.controls
-    if (position.touched && position.errors && position.errors['required']) {
-      return $localize`Required field`
-    }
-    return ''
   }
 
   private updatePositions() {
@@ -88,7 +73,7 @@ export class VideoCrewAddModalComponent extends BaseModal implements OnInit, OnD
       .pipe(
         tap((video) => {
           this.update.emit(video)
-          this.closeModal()
+          this.form.reset()
         }),
         takeUntil(this.destroy$)
       )

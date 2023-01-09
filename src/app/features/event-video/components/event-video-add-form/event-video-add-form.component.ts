@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core'
-import { BaseModal, ListItem } from 'carbon-components-angular'
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core'
+import { ListItem } from 'carbon-components-angular'
 import { FormBuilder } from '@angular/forms'
 import { DetailedEvent } from '../../../event/models'
 import { VideoService } from '../../../video/services/video.service'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { map, Subject, takeUntil, tap } from 'rxjs'
 import { EventVideoService } from '../../services/event-video.service'
 import { Video } from '../../../video/models'
 
@@ -13,14 +13,14 @@ interface VideoListItem extends ListItem {
 
 @Component({
   selector: 'app-event-video-add-modal-component',
-  templateUrl: './event-video-add-modal.component.html',
-  styleUrls: ['./event-video-add-modal.component.scss'],
+  templateUrl: './event-video-add-form.component.html',
+  styleUrls: ['./event-video-add-form.component.scss'],
 })
-export class EventVideoAddModalComponent extends BaseModal implements OnInit, OnDestroy {
-  @Output()
-  public update = new EventEmitter<DetailedEvent>()
+export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
+  @Input() public event!: DetailedEvent
+  @Output() public update = new EventEmitter<DetailedEvent>()
   private readonly destroy$ = new Subject<void>()
-  public videos: { selected: boolean; content: string; id: string }[] = []
+  public videos: VideoListItem[] = []
   public readonly form = this.fb.nonNullable.group({
     videoId: this.fb.nonNullable.control<VideoListItem>({ id: '', selected: false, content: '' }),
   })
@@ -28,10 +28,17 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
   constructor(
     private fb: FormBuilder,
     private videoService: VideoService,
-    private eventVideoService: EventVideoService,
-    @Inject('event') public event: DetailedEvent
-  ) {
-    super()
+    private eventVideoService: EventVideoService
+  ) {}
+
+  ngOnChanges() {
+    this.videoService
+      .getAllVideos()
+      .pipe(
+        map((videos) => this.updateVideos(videos)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
   }
 
   onSubmit() {
@@ -41,8 +48,8 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
         .addVideoToEvent({ eventId: this.event.id, videoId })
         .pipe(
           tap((event) => {
-            this.closeModal()
             this.update.emit(event)
+            this.form.reset()
           }),
           takeUntil(this.destroy$)
         )
@@ -50,20 +57,10 @@ export class EventVideoAddModalComponent extends BaseModal implements OnInit, On
     }
   }
 
-  ngOnInit() {
-    this.videoService
-      .getAllVideos()
-      .pipe(
-        tap((videos) => this.updateVideos(videos)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe()
-  }
-
   private updateVideos(videos: Video[]) {
     this.videos = videos
       .filter(({ id }) => !this.event.videos.some((video) => video.id === id))
-      .map((video) => ({ selected: false, content: video.title, id: video.id }))
+      .map((video): VideoListItem => ({ selected: false, content: video.title, id: video.id }))
   }
 
   ngOnDestroy() {

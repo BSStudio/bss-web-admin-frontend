@@ -1,15 +1,14 @@
 <ibm-table-container>
-  <ibm-table-toolbar-content>
-    <button ibmButton="primary" (click)="showAddModal()">
-      <ng-container i18n>Add new crew member</ng-container>
-      <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
-    </button>
-  </ibm-table-toolbar-content>
-  <ibm-table [model]="table" [sortable]="false" [striped]="false" [showSelectionColumn]="false" size="sh">
-    <tr>
-      <td colspan="2" i18n>Add a crew to the video</td>
-    </tr>
-  </ibm-table>
+  <ibm-table-header>
+    <h4 ibmTableHeaderTitle i18n>Crew</h4>
+    <span i18n>To add crew members define a position and select a member</span>
+  </ibm-table-header>
+  <ibm-table-toolbar>
+    <ibm-table-toolbar-content style="height: auto">
+      <app-video-crew-add-form [video]="video" (update)="updateVideo($event)"></app-video-crew-add-form>
+    </ibm-table-toolbar-content>
+  </ibm-table-toolbar>
+  <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="false" size="sh"> </ibm-table>
 </ibm-table-container>
 <ng-template #removeCrewMemberCell let-crewMember="data">
   <app-video-crew-remove-button [crewMember]="crewMember" (update)="updateVideo($event)"></app-video-crew-remove-button>

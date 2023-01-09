@@ -1,6 +1,5 @@
 import {
   Component,
-  ComponentRef,
   EventEmitter,
   Input,
   OnChanges,
@@ -12,10 +11,9 @@ import {
   ViewChild,
 } from '@angular/core'
 import { DetailedEvent } from '../../../event/models'
-import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
+import { TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Video } from '../../../video/models'
-import { EventVideoAddModalComponent } from '../event-video-add-modal/event-video-add-modal.component'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { Subject } from 'rxjs'
 import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
 
 @Component({
@@ -23,18 +21,14 @@ import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
   templateUrl: './event-video-table.component.html',
 })
 export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
-  @Input()
-  public event!: DetailedEvent
-  @Output()
-  public update = new EventEmitter<DetailedEvent>()
-  @ViewChild('removeButtonCell', { static: true })
-  public removeButtonCell!: TemplateRef<any>
-  @ViewChild('navigateCell', { static: true })
-  public navigateCell!: TemplateRef<any>
+  @Input() public event!: DetailedEvent
+  @Output() public update = new EventEmitter<DetailedEvent>()
+  @ViewChild('removeButtonCell', { static: true }) public removeButtonCell!: TemplateRef<any>
+  @ViewChild('navigateCell', { static: true }) public navigateCell!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
   public readonly table = new TableModel()
 
-  constructor(private modalService: ModalService, private booleanPipe: BooleanPipe) {}
+  constructor(private booleanPipe: BooleanPipe) {}
 
   ngOnInit(): void {
     this.initHeaders()
@@ -44,19 +38,6 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
     if (changes['event']) {
       this.updateTable()
     }
-  }
-
-  showAddModal() {
-    const componentRef: ComponentRef<EventVideoAddModalComponent> = this.modalService.create({
-      component: EventVideoAddModalComponent,
-      inputs: { event: this.event },
-    })
-    componentRef.instance.update
-      .pipe(
-        tap((event) => this.updateEvent(event)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe()
   }
 
   updateEvent(event: DetailedEvent) {
@@ -80,11 +61,14 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
 
   private initHeaders() {
     this.table.header = [
-      new TableHeaderItem({ data: $localize`Title` }),
+      new TableHeaderItem({
+        data: $localize`Title`,
+        compare: (a: TableItem, b: TableItem) => (<Video>a.data).title.localeCompare((<Video>b.data).title),
+      }),
       new TableHeaderItem({ data: $localize`Url` }),
       new TableHeaderItem({ data: $localize`Uploaded at` }),
       new TableHeaderItem({ data: $localize`Visible` }),
-      new TableHeaderItem({ style: { padding: 0, width: 0 } }),
+      new TableHeaderItem({ style: { padding: 0, width: 0 }, sortable: false }),
     ]
   }
 

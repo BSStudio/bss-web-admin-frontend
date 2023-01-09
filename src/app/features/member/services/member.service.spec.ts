@@ -9,9 +9,28 @@ describe('MemberService', () => {
   beforeAll(() => MockBuilder([MemberService, HttpClientTestingModule]))
 
   const id = 'id'
-  const member = new Member(id, 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const member = new Member(
+    id,
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
   const createMember = new CreateMember('url', 'name')
-  const updateMember = new UpdateMember('url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const updateMember = new UpdateMember(
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
 
   it('should get all members', (done) => {
     const service = ngMocks.findInstance(MemberService)

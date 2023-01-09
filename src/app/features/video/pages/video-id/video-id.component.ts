@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { Title } from '@angular/platform-browser'
 import { DetailedVideo } from '../../models'
 
 @Component({
@@ -10,9 +11,12 @@ import { DetailedVideo } from '../../models'
 export class VideoIdComponent {
   public video = <DetailedVideo>this.route.snapshot.data['video']
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle(this.video.title)
+  }
 
   setVideo(video: DetailedVideo) {
     this.video = video
+    this.title.setTitle(this.video.title)
   }
 }

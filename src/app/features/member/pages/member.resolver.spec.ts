@@ -34,7 +34,17 @@ describe('EventResolver', () => {
     // DataService has been replaced with a mock copy,
     // let's set a custom value we will assert later on.
     const memberId = 'memberId'
-    const member = new Member(memberId, 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+    const member = new Member(
+      memberId,
+      'url',
+      'name',
+      'nickname',
+      'description',
+      'joinedAt',
+      'role',
+      MemberStatus.ALUMNI,
+      false
+    )
     dataService.getMember = () => of(member)
 
     // Let's switch to the route with the resolver.

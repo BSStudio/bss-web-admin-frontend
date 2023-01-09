@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ibm-combo-box formControlName="videoId" placeholder="Video" i18n-placeholder [items]="videos" theme="light">
+    <ibm-dropdown-list></ibm-dropdown-list>
+  </ibm-combo-box>
+  <button ibmButton="primary" size="field" (click)="onSubmit()" [disabled]="form.pristine">
+    <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+    <span i18n>Add video</span>
+  </button>
+</form>

@@ -1,0 +1,31 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input
+    ibmText
+    size="md"
+    theme="light"
+    formControlName="position"
+    placeholder="Position"
+    i18n-placeholder
+    list="options"
+    [invalid]="form.controls.position.invalid && form.controls.position.touched"
+  />
+  <datalist id="options">
+    <option *ngFor="let position of positions" [value]="position"></option>
+  </datalist>
+  <ibm-combo-box
+    size="md"
+    formControlName="member"
+    theme="light"
+    type="single"
+    placeholder="Member name"
+    i18n-placeholder
+    [items]="members"
+    [invalid]="form.controls.member.invalid && form.controls.member.touched"
+  >
+    <ibm-dropdown-list></ibm-dropdown-list>
+  </ibm-combo-box>
+  <button ibmButton="primary" size="field" type="submit" [disabled]="form.pristine">
+    <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+    <span i18n>Add crew member</span>
+  </button>
+</form>

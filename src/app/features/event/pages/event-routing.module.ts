@@ -5,8 +5,12 @@ import { NgModule } from '@angular/core'
 import { EventResolver } from './event.resolver'
 
 const routes: Routes = [
-  { path: '', component: EventIndexComponent },
-  { path: ':eventId', resolve: { event: EventResolver }, component: EventIdComponent },
+  { path: '', component: EventIndexComponent, title: $localize`BSS Web | Events` },
+  {
+    path: ':eventId',
+    resolve: { event: EventResolver },
+    component: EventIdComponent,
+  },
 ]
 
 @NgModule({

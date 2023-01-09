@@ -12,7 +12,17 @@ import { MemberUpdateFormComponent } from '../../components/member-update-form/m
 import { Member, MemberStatus } from '../../models'
 
 describe('MemberIdComponent', () => {
-  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const member = new Member(
+    'id',
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
   const fakeRoute = {
     snapshot: {
       data: {
@@ -68,6 +78,7 @@ describe('MemberIdComponent', () => {
         'id',
         'url',
         'name',
+        'nickname',
         'desc',
         '2023-01-01',
         'role',

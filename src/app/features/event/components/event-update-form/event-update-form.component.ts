@@ -21,9 +21,13 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     url: this.fb.nonNullable.control('', [Validators.required]),
     title: this.fb.nonNullable.control('', [Validators.required]),
     description: this.fb.nonNullable.control(''),
-    date: this.fb.nonNullable.control('', [Validators.required]),
+    date: this.fb.nonNullable.control<string>(new Date().toISOString().split('T')[0], [Validators.required]),
     visible: this.fb.nonNullable.control(false, [Validators.required]),
   })
+
+  log(a: any) {
+    console.log(a)
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -46,14 +50,10 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   submit() {
-    if (this.form.pristine) {
-      return
-    }
     this.form.markAllAsTouched()
+    console.log(this.form.getRawValue())
     if (this.form.valid) {
-      const { date, ...updateEvent } = this.form.getRawValue()
-      const dateTime = new Date(date).toISOString().split('T')[0] // todo fix parsing
-      this.updateEvent({ date: dateTime, ...updateEvent })
+      this.updateEvent(this.form.getRawValue())
     }
   }
 

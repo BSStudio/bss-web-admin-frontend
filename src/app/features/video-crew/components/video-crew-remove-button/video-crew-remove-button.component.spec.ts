@@ -10,14 +10,13 @@ import {
   ModalService,
   NotificationService,
 } from 'carbon-components-angular'
-import { SimpleMember } from '../../../member/models/simple-member.model'
+import { SimpleMember } from '../../../member/models'
 import { VideoCrewService } from '../../services/video-crew.service'
 import { of, throwError } from 'rxjs'
 import { DetailedVideo } from '../../../video/models'
-import Spy = jasmine.Spy
 
 describe('VideoCrewRemoveButtonComponent', () => {
-  const member = new SimpleMember('id', 'name')
+  const member = new SimpleMember('id', 'name', 'nickname')
   const crewMember = new CrewMember('position', 'videoId', member)
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
   beforeEach(() => MockBuilder(VideoCrewRemoveButtonComponent, VideoCrewModule))

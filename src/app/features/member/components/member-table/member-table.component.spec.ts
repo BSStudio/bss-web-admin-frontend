@@ -6,7 +6,17 @@ import { of } from 'rxjs'
 import { Member, MemberStatus } from '../../models'
 
 describe('MemberTableComponent', () => {
-  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const member = new Member(
+    'id',
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
 
   beforeEach(() => MockBuilder(MemberTableComponent, MemberModule))
 
