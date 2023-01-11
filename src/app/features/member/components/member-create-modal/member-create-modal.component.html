@@ -2,7 +2,7 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 ibmModalHeaderHeading i18n>Add new member</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form ibmModalContent id="create-member-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!nameInvalidText" [invalidText]="nameInvalidText">
       <ng-container i18n>Name</ng-container>
       <input ibmText formControlName="name" i18n-placeholder placeholder="John Doe" [attr.modal-primary-focus]="true" />
@@ -13,7 +13,7 @@
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button ibmButton="primary" i18n (click)="onSubmit()">Add member</button>
+    <button ibmButton="primary" type="submit" form="create-member-form" i18n>Add member</button>
     <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>

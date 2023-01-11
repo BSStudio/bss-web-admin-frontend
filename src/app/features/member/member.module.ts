@@ -6,6 +6,7 @@ import {
   FileUploaderModule,
   GridModule,
   IconModule,
+  InlineLoadingModule,
   ModalModule,
   NFormsModule,
   NotificationModule,
@@ -40,6 +41,7 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     FileUploaderModule,
     NgOptimizedImage,
     DatePickerModule,
+    InlineLoadingModule,
   ],
   declarations: [
     MemberIndexComponent,

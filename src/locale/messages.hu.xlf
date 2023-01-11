@@ -94,8 +94,8 @@
         <source>Remove</source>
         <target>Eltávolítás</target>
       </trans-unit>
-      <trans-unit id="4703848376604347254" datatype="html">
-        <source>Profile picture</source>
+      <trans-unit id="4441150343154486103" datatype="html">
+        <source>Profile picture upload</source>
         <target state="new">Profil kép URL</target>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
@@ -129,10 +129,6 @@
       <trans-unit id="7306118999544619776" datatype="html">
         <source>Are you sure you want to remove this member?</source>
         <target>Biztosan törölni szeretnéd őt?</target>
-      </trans-unit>
-      <trans-unit id="3713504010399348091" datatype="html">
-        <source>Error removing member <x id="PH" equiv-text="this.member.name"/></source>
-        <target>Hiba történt <x id="PH" equiv-text="this.member.name"/> törlése közben</target>
       </trans-unit>
       <trans-unit id="2777623198411668878" datatype="html">
         <source>Member manager</source>
@@ -234,10 +230,6 @@
         <source>Error updating event</source>
         <target state="new">Error updating event</target>
       </trans-unit>
-      <trans-unit id="630732744892969365" datatype="html">
-        <source>Add video to event</source>
-        <target state="new">Add video to event</target>
-      </trans-unit>
       <trans-unit id="4425253027739928982" datatype="html">
         <source>Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</source>
         <target state="new">Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</target>
@@ -250,17 +242,9 @@
         <source>Metadata</source>
         <target>Meta adatok</target>
       </trans-unit>
-      <trans-unit id="3595107845551842320" datatype="html">
-        <source>Manage event videos</source>
-        <target state="new">Manage event videos</target>
-      </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
         <target state="new"><x id="INTERPOLATION" equiv-text="{{ member.name }}"/> profil képe</target>
-      </trans-unit>
-      <trans-unit id="969237518420234961" datatype="html">
-        <source>Add crew member to video</source>
-        <target state="new">Add crew member to video</target>
       </trans-unit>
       <trans-unit id="1172866303261737245" datatype="html">
         <source>Position</source>
@@ -269,10 +253,6 @@
       <trans-unit id="7950142186229964867" datatype="html">
         <source>Add crew member</source>
         <target state="new">Add crew member</target>
-      </trans-unit>
-      <trans-unit id="1053173058581960289" datatype="html">
-        <source>Add new crew member</source>
-        <target state="new">Add new crew member</target>
       </trans-unit>
       <trans-unit id="8029725364859660359" datatype="html">
         <source> Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.member.name }}"/>&apos;s <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> position from the video </source>
@@ -285,10 +265,6 @@
       <trans-unit id="8598886608217248074" datatype="html">
         <source>URL:</source>
         <target>URL:</target>
-      </trans-unit>
-      <trans-unit id="4021752662928002901" datatype="html">
-        <source>Update</source>
-        <target>Frissítés</target>
       </trans-unit>
       <trans-unit id="6341579314680269534" datatype="html">
         <source>Error updating</source>
@@ -326,10 +302,6 @@
         <source>Close</source>
         <target state="new">Close</target>
       </trans-unit>
-      <trans-unit id="4416290763660062288" datatype="html">
-        <source/>
-        <target state="new"/>
-      </trans-unit>
       <trans-unit id="1293054139849691764" datatype="html">
         <source>Error removing video</source>
         <target state="new">Error removing video</target>
@@ -337,10 +309,6 @@
       <trans-unit id="2375149812897946334" datatype="html">
         <source>Uploaded at</source>
         <target state="new">Uploaded at</target>
-      </trans-unit>
-      <trans-unit id="1928503252421516797" datatype="html">
-        <source>Add videos to this event</source>
-        <target state="new">Add videos to this event</target>
       </trans-unit>
       <trans-unit id="8150334626126059435" datatype="html">
         <source>Are you sure you want to remove this member&apos;s position from the crew?</source>
@@ -362,9 +330,9 @@
         <source>Does not match url pattern: <x id="PH" equiv-text="url.errors[&apos;pattern&apos;].requiredPattern"/></source>
         <target state="new">Does not match url pattern: <x id="PH" equiv-text="url.errors[&apos;pattern&apos;].requiredPattern"/></target>
       </trans-unit>
-      <trans-unit id="5406591600792037085" datatype="html">
-        <source>The video will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></source>
-        <target state="new">The video will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></target>
+      <trans-unit id="4652884663023755405" datatype="html">
+        <source>The event will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></source>
+        <target state="new">The event will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></target>
       </trans-unit>
       <trans-unit id="2539690595291689195" datatype="html">
         <source>Server error: title and url must be unique</source>
@@ -426,10 +394,6 @@
         <source>Make sure title/url is unique</source>
         <target state="new">Make sure title/url is unique</target>
       </trans-unit>
-      <trans-unit id="593456483576089262" datatype="html">
-        <source>To add a new position to the list enter the name of the new position, then press enter</source>
-        <target state="new">To add a new position to the list enter the name of the new position, then press enter</target>
-      </trans-unit>
       <trans-unit id="3944193087956808215" datatype="html">
         <source>Remove crew member position from video</source>
         <target state="new">Remove crew member position from video</target>
@@ -469,6 +433,94 @@
       <trans-unit id="7644661590696525657" datatype="html">
         <source>Inspect video</source>
         <target state="new">Inspect video</target>
+      </trans-unit>
+      <trans-unit id="7381501325776764189" datatype="html">
+        <source>Report issue</source>
+        <target state="new">Report issue</target>
+      </trans-unit>
+      <trans-unit id="6549265851868599441" datatype="html">
+        <source>Video</source>
+        <target state="new">Video</target>
+      </trans-unit>
+      <trans-unit id="4357097804287754856" datatype="html">
+        <source>Assigned videos</source>
+        <target state="new">Assigned videos</target>
+      </trans-unit>
+      <trans-unit id="47488134068573562" datatype="html">
+        <source>To add a video select one in the drop down list and press the button</source>
+        <target state="new">To add a video select one in the drop down list and press the button</target>
+      </trans-unit>
+      <trans-unit id="7807158530747623261" datatype="html">
+        <source>BSS Web | Events</source>
+        <target state="new">BSS Web | Events</target>
+      </trans-unit>
+      <trans-unit id="8689264711567749855" datatype="html">
+        <source>Add a description, and upload a profile picture</source>
+        <target state="new">Add a description, and upload a profile picture</target>
+      </trans-unit>
+      <trans-unit id="6111305706249141341" datatype="html">
+        <source>Member created</source>
+        <target state="new">Member created</target>
+      </trans-unit>
+      <trans-unit id="7321715262426693561" datatype="html">
+        <source>Member removed</source>
+        <target state="new">Member removed</target>
+      </trans-unit>
+      <trans-unit id="4770884191289740213" datatype="html">
+        <source>Member is associated with one or more videos. Try archiving or remove positions</source>
+        <target state="new">Member is associated with one or more videos. Try archiving or remove positions</target>
+      </trans-unit>
+      <trans-unit id="8266501956997099419" datatype="html">
+        <source>Error removing member</source>
+        <target state="new">Error removing member</target>
+      </trans-unit>
+      <trans-unit id="5506569422969383542" datatype="html">
+        <source>Nickname</source>
+        <target state="new">Nickname</target>
+      </trans-unit>
+      <trans-unit id="811716195996156260" datatype="html">
+        <source>Joined at:</source>
+        <target state="new">Joined at:</target>
+      </trans-unit>
+      <trans-unit id="6283350637136715888" datatype="html">
+        <source>BSS Web | member</source>
+        <target state="new">BSS Web | member</target>
+      </trans-unit>
+      <trans-unit id="9152120454999610500" datatype="html">
+        <source>Member name</source>
+        <target state="new">Member name</target>
+      </trans-unit>
+      <trans-unit id="3851387355166670029" datatype="html">
+        <source>To add crew members define a position and select a member</source>
+        <target state="new">To add crew members define a position and select a member</target>
+      </trans-unit>
+      <trans-unit id="2521282359227780676" datatype="html">
+        <source>Remove crew members first</source>
+        <target state="new">Remove crew members first</target>
+      </trans-unit>
+      <trans-unit id="9089304224941361665" datatype="html">
+        <source>Error removing</source>
+        <target state="new">Error removing</target>
+      </trans-unit>
+      <trans-unit id="8753972762505333564" datatype="html">
+        <source> If the video is not available to be previewed. Make sure all the files were uploaded to the following location: </source>
+        <target state="new"> If the video is not available to be previewed. Make sure all the files were uploaded to the following location: </target>
+      </trans-unit>
+      <trans-unit id="4117654863831126778" datatype="html">
+        <source><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/video/<x id="INTERPOLATION" equiv-text="{{ video.id }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></source>
+        <target state="new"><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/video/<x id="INTERPOLATION" equiv-text="{{ video.id }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="4102687588551446278" datatype="html">
+        <source><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/v/<x id="INTERPOLATION" equiv-text="{{ video.url }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></source>
+        <target state="new"><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/v/<x id="INTERPOLATION" equiv-text="{{ video.url }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="3876476327980794295" datatype="html">
+        <source>If you see the default video thumbnail consider uploading one first before publishing</source>
+        <target state="new">If you see the default video thumbnail consider uploading one first before publishing</target>
+      </trans-unit>
+      <trans-unit id="629731825785289671" datatype="html">
+        <source>BSS Web | Videos</source>
+        <target state="new">BSS Web | Videos</target>
       </trans-unit>
     </body>
   </file>

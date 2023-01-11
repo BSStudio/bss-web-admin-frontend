@@ -5,7 +5,7 @@ import { MemberIdComponent } from './member-id/member-id.component'
 import { MemberResolver } from './member.resolver'
 
 const routes: Routes = [
-  { path: '', component: MemberIndexComponent, title: $localize`BSS Web | member` },
+  { path: '', component: MemberIndexComponent, title: $localize`BSS Web | Members` },
   { path: ':memberId', resolve: { member: MemberResolver }, component: MemberIdComponent },
 ]
 

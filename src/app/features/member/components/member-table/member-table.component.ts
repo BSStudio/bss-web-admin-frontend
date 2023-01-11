@@ -15,6 +15,7 @@ import { Router } from '@angular/router'
 export class MemberTableComponent implements OnInit, OnDestroy {
   public readonly table = new TableModel()
   public searchValue = ''
+  public loading = true
   private readonly destroy$ = new Subject<void>()
 
   constructor(
@@ -32,10 +33,14 @@ export class MemberTableComponent implements OnInit, OnDestroy {
   }
 
   getMembers() {
+    this.loading = true
     this.service
       .getMembers()
       .pipe(
-        tap((members) => this.updateTable(members)),
+        tap({
+          next: (members) => this.updateTable(members),
+          complete: () => (this.loading = false),
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe()
