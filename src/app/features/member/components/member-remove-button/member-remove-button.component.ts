@@ -8,7 +8,7 @@ import { MemberService } from '../../services/member.service'
 @Component({
   selector: 'app-member-remove-button[member]',
   template: `
-    <button ibmButton="danger" size="field" (click)="showRemoveModal()">
+    <button ibmButton="danger--tertiary" size="field" (click)="showRemoveModal()">
       <span i18n>Remove</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     </button>

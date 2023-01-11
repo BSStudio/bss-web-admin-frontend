@@ -22,7 +22,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
     name: this.fb.nonNullable.control('', [Validators.required]),
     nickname: this.fb.nonNullable.control(''),
     description: this.fb.nonNullable.control(''),
-    joinedAt: this.fb.nonNullable.control('', [Validators.required]),
+    joinedAt: this.fb.nonNullable.control<Date[]>([new Date()], [Validators.required]),
     role: this.fb.nonNullable.control(''),
     status: this.fb.nonNullable.control(MemberStatus.MEMBER_CANDIDATE_CANDIDATE, [Validators.required]),
     archived: this.fb.nonNullable.control(false, [Validators.required]),
@@ -36,8 +36,8 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['member']) {
-      const { id, ...modifiableValues } = this.member
-      this.form.patchValue(modifiableValues)
+      const { id, joinedAt, ...modifiableValues } = this.member
+      this.form.patchValue({ joinedAt: [new Date(joinedAt)], ...modifiableValues })
       this.form.markAsPristine()
     }
   }
@@ -45,8 +45,10 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
   submit() {
     this.form.markAllAsTouched()
     if (this.form.valid) {
+      const { joinedAt, ...rest } = this.form.getRawValue()
+      const formatDate = new Date(joinedAt[0]).toISOString()
       this.service
-        .updateMember(this.member.id, this.form.getRawValue())
+        .updateMember(this.member.id, { joinedAt: formatDate, ...rest })
         .pipe(
           tap({
             next: (member) => {
