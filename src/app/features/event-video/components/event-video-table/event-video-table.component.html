@@ -3,7 +3,17 @@
     <h4 ibmTableHeaderTitle i18n>Assigned videos</h4>
     <span i18n>To add a video select one in the drop down list and press the button</span>
   </ibm-table-header>
-  <ibm-table-toolbar>
+  <ibm-table-toolbar [model]="table">
+    <ibm-table-toolbar-actions>
+      <button ibmButton="primary" (click)="changeVisibilityTo(true)">
+        <ng-container i18n>Reveal selected</ng-container>
+        <svg ibmIcon="view" size="16" class="bx--btn__icon"></svg>
+      </button>
+      <button ibmButton="primary" (click)="changeVisibilityTo(false)">
+        <ng-container i18n>Hide selected</ng-container>
+        <svg ibmIcon="view--off--filled" size="16" class="bx--btn__icon"></svg>
+      </button>
+    </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content style="height: auto">
       <app-event-video-add-modal-component
         [event]="event"
@@ -11,7 +21,7 @@
       ></app-event-video-add-modal-component>
     </ibm-table-toolbar-content>
   </ibm-table-toolbar>
-  <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="false" size="sh"> </ibm-table>
+  <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="true" size="sh"> </ibm-table>
 </ibm-table-container>
 <ng-template #navigateCell let-video="data">
   <a [routerLink]="['/video', video.id]">{{ video.title }}</a>
