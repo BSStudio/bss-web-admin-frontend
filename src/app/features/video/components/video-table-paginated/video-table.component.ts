@@ -95,7 +95,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       .subscribe()
   }
 
-  get selectedIds() {
+  private get selectedIds() {
     return this.table.rowsSelected
       .map((selected, index) => ({ selected, index }))
       .filter(({ selected }) => selected)
