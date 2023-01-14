@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { FormBuilder, Validators } from '@angular/forms'
 import { CreateMember, Member } from '../../models'
@@ -11,6 +11,7 @@ import { filter, map, Subject, takeUntil, tap } from 'rxjs'
   styleUrls: ['./member-create-modal.component.scss'],
 })
 export class MemberCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @ViewChild('toastContent', { static: true }) public toastContent!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
   public readonly form = this.fb.nonNullable.group({
     name: this.fb.nonNullable.control('', [Validators.required]),
@@ -104,15 +105,11 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
     this.notificationService.showToast({
       type: 'success',
       title: $localize`Member created`,
-      links: [
-        {
-          text: member.name,
-          href: `/member/${member.id}`,
-        },
-      ],
+      links: [{ text: member.name, href: `/member/${member.id}` }],
       caption,
       message: caption,
       smart: true,
+      template: this.toastContent,
     })
   }
 

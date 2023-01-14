@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { EventService } from '../../services/event.service'
@@ -11,6 +11,7 @@ import { map, Subject, takeUntil, tap } from 'rxjs'
   styleUrls: ['./event-create-modal.component.scss'],
 })
 export class EventCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @ViewChild('toastContent', { static: true }) public toastContent!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
   public readonly form = this.fb.group({
     title: this.fb.nonNullable.control('', [Validators.required]),
@@ -110,6 +111,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
       caption: message,
       message,
       smart: true,
+      template: this.toastContent,
     })
   }
 

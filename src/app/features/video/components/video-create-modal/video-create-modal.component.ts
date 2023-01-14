@@ -1,5 +1,5 @@
 import { VideoService } from '../../services/video.service'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { FormBuilder, Validators } from '@angular/forms'
 import { CreateVideo, Video } from '../../models'
@@ -11,6 +11,7 @@ import { map, Subject, takeUntil, tap } from 'rxjs'
   styleUrls: ['./video-create-modal.component.scss'],
 })
 export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @ViewChild('toastContent', { static: true }) public toastContent!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
   public readonly form = this.fb.nonNullable.group({
     title: this.fb.nonNullable.control('', [Validators.required]),
@@ -100,15 +101,11 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
     this.notificationService.showToast({
       type: 'success',
       title: $localize`Video created`,
-      links: [
-        {
-          text: video.title,
-          href: `/video/${video.id}`,
-        },
-      ],
+      links: [{ text: video.title, href: `/video/${video.id}` }],
       caption,
       message: caption,
       smart: true,
+      template: this.toastContent,
     })
   }
 

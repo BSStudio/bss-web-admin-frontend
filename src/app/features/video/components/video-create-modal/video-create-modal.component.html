@@ -2,7 +2,7 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form ibmModalContent id="create-video-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!titleInvalidText" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
       <input
@@ -19,7 +19,10 @@
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button i18n ibmButton="primary" (click)="onSubmit()">Add video</button>
+    <button i18n ibmButton="primary" type="submit" form="create-video-form">Add video</button>
     <button i18n ibmButton="secondary" (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>
+<ng-template #toastContent let-data>
+  <app-toast-content-routed [toast]="data"></app-toast-content-routed>
+</ng-template>

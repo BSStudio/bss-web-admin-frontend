@@ -17,3 +17,6 @@
     <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>
+<ng-template #toastContent let-data>
+  <app-toast-content-routed [toast]="data"></app-toast-content-routed>
+</ng-template>

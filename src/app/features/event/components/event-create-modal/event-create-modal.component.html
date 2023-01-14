@@ -2,7 +2,7 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 ibmModalHeaderHeading i18n>Add new event</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="form">
+  <form ibmModalContent id="create-event-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
     <ibm-label [invalid]="!!titleInvalidText" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
       <input
@@ -11,22 +11,18 @@
         placeholder="Simonyi Conference 2022"
         i18n-placeholder
         [attr.modal-primary-focus]="true"
-        (keyup.enter)="onSubmit()"
       />
     </ibm-label>
     <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>URL</ng-container>
-      <input
-        ibmText
-        formControlName="url"
-        placeholder="simonyi-conference-2022"
-        i18n-placeholder
-        (keyup.enter)="onSubmit()"
-      />
+      <input ibmText formControlName="url" placeholder="simonyi-conference-2022" i18n-placeholder />
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button ibmButton="primary" i18n (click)="onSubmit()">Add event</button>
+    <button ibmButton="primary" i18n type="submit" form="create-event-form">Add event</button>
     <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>
+<ng-template #toastContent let-data>
+  <app-toast-content-routed [toast]="data"></app-toast-content-routed>
+</ng-template>
