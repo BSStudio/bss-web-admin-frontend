@@ -18,7 +18,6 @@
     placeholder="YYYY-MM-dd"
     formControlName="date"
     [flatpickrOptions]="flatpickrOptions"
-    (ngModelChange)="log($event)"
   ></ibm-date-picker>
   <ibm-toggle formControlName="visible" label="Visible" i18n-label></ibm-toggle>
   <button ibmButton="primary" type="submit" [disabled]="form.pristine">
