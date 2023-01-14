@@ -6,9 +6,14 @@
     "bss-web-admin-frontend": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "en",
+        "sourceLocale": {
+          "code": "en",
+        },
         "locales": {
-          "hu": "src/locale/messages.hu.xlf"
+          "hu": {
+            "baseHref": "",
+            "translation": "src/locale/messages.hu.xlf"
+          }
         }
       },
       "schematics": {
