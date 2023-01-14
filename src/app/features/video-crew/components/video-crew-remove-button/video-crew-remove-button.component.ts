@@ -9,7 +9,7 @@ import { AlertModalType, ModalButtonType, ModalService, NotificationService } fr
   selector: 'app-video-crew-remove-button[crewMember]',
   template: `
     <button
-      ibmButton="danger"
+      ibmButton="danger--ghost"
       size="field"
       [iconOnly]="true"
       [hasAssistiveText]="true"

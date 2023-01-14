@@ -8,7 +8,7 @@ import { Event } from '../../models'
 @Component({
   selector: 'app-event-remove-button[event]',
   template: `
-    <button ibmButton="danger" size="field" (click)="showRemoveModal()">
+    <button ibmButton="danger--tertiary" size="field" (click)="showRemoveModal()">
       <span i18n>Remove</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     </button>
@@ -33,8 +33,8 @@ export class EventRemoveButtonComponent implements OnDestroy {
       size: 'xs',
       content: $localize`Are you sure you want to remove this event?`,
       buttons: [
-        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeEvent() },
-        { type: ModalButtonType.secondary, text: 'Close' },
+        { type: ModalButtonType.secondary, text: $localize`Close` },
+        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeEvent() },
       ],
     })
   }

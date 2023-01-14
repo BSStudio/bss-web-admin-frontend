@@ -9,7 +9,7 @@ import { Video } from '../../../video/models'
   selector: 'app-event-video-remove-button',
   template: `
     <button
-      ibmButton="danger"
+      ibmButton="danger--ghost"
       size="field"
       [iconOnly]="true"
       [hasAssistiveText]="true"

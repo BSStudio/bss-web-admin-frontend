@@ -8,7 +8,7 @@ import { VideoService } from '../../services/video.service'
 @Component({
   selector: 'app-video-remove-button',
   template: `
-    <button ibmButton="danger" (click)="showConfirmModal()">
+    <button ibmButton="danger--tertiary" (click)="showConfirmModal()">
       <span i18n>Remove</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     </button>

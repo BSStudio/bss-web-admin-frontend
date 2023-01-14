@@ -33,8 +33,8 @@ export class MemberRemoveButtonComponent implements OnDestroy {
       size: 'xs',
       content: $localize`Are you sure you want to remove this member?`,
       buttons: [
-        { type: ModalButtonType.secondary, text: 'Close' },
-        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeMember() },
+        { type: ModalButtonType.secondary, text: $localize`Close` },
+        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeMember() },
       ],
     })
   }
