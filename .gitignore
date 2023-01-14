@@ -47,3 +47,6 @@ Thumbs.db
 
 # stryker temp files
 .stryker-tmp
+
+# ignore proxy file
+/src/proxy.conf.json
