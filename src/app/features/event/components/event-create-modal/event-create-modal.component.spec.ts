@@ -94,11 +94,13 @@ describe('EventCreateModalComponent', () => {
     })
   })
 
-  xit('should submit successfully', () => {
+  it('should submit successfully', () => {
     const title = 'title'
     const url = 'url'
     const event = new Event('id', url, title, 'description', 'date', true)
-    MockInstance(EventService, 'createEvent', jasmine.createSpy().and.returnValue(of(event)))
+    MockInstance(EventService, (instance) =>
+      ngMocks.stub(instance, { createEvent: jasmine.createSpy().and.returnValue(of(event)) })
+    )
     MockRender(EventCreateModalComponent, { open: true, close })
 
     const [titleInput, urlInput] = ngMocks.findAll('input')
@@ -146,7 +148,7 @@ describe('EventCreateModalComponent', () => {
     expect(ngMocks.findInstance(EventService).createEvent).not.toHaveBeenCalled()
   })
 
-  xit('should submit with error returning', () => {
+  it('should submit with error returning', () => {
     const title = 'title'
     const url = 'url'
     const error = new Error('error')
