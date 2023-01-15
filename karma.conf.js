@@ -31,11 +31,12 @@ module.exports = function (config) {
       useBrowserName: false,
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/bss-web'),
+      dir: require('path').join(__dirname, './coverage/bss-web-admin-frontend'),
       subdir: '.',
       reporters: [
         { type: 'html' },
-        { type: 'text-summary' }
+        { type: 'text-summary' },
+        { type: 'lcov' }
       ]
     },
     reporters: ['progress', 'kjhtml'],

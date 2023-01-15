@@ -3,49 +3,29 @@ orbs:
   node: circleci/node@5.0.3
   browser-tools: circleci/browser-tools@1.4.0
   docker: circleci/docker@2.2.0
-jobs:
-  lint:
-    docker:
-      - image: cimg/node:18.12.1
-    steps:
-      - checkout
-      - node/install-packages:
-          include-branch-in-cache-key: false
-      - run: npm run lint
-  build:
-    working_directory: ~/project
-    docker:
-      - image: cimg/node:18.12.1
-    steps:
-      - checkout
-      - node/install-packages:
-          include-branch-in-cache-key: false
-      - run: npm run build
-  test:
-    working_directory: ~/project
-    docker:
-      - image: cimg/node:18.12.1-browsers
-    steps:
-      - checkout
-      - browser-tools/install-chrome
-      - node/install-packages:
-          include-branch-in-cache-key: false
-      - run: npm run test -- --no-watch --no-progress --reporters=junit,coverage
-      - store_test_results:
-          name: Store test results
-          path: ~/project/reports
-      - store_artifacts:
-          name: Store covarage report
-          path: ~/project/coverage/bss-web
+  codecov: codecov/codecov@3.2.4
 workflows:
   Build app:
     jobs:
-      - lint:
+      - node/run:
+          npm-run: lint
           name: Lint
-      - build:
+      - node/run:
           name: Build
-      - test:
+          npm-run: build
+      - node/test:
           name: Unit test
+          pre-steps:
+            - browser-tools/install-chrome
+          override-ci-command: npm link @angular/cli && npm test -- --no-watch --code-coverage --reporters=coverage,junit,progress,kjhtml
+          post-steps:
+            - codecov/upload
+            - store_test_results:
+                name: Store test results
+                path: ~/project/reports
+            - store_artifacts:
+                name: Store coverage report
+                path: ~/project/coverage
       - docker/hadolint:
           name: Docker lint
       - docker/publish:

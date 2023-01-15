@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { DetailedEvent } from '../../models'
-import {Title} from "@angular/platform-browser";
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-video-id',
