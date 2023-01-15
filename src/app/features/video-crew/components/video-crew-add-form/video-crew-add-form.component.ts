@@ -18,7 +18,7 @@ interface MemberListItem extends ListItem {
 })
 export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
   @Input() public video!: DetailedVideo
-  @Output() public update = new EventEmitter<DetailedVideo>()
+  @Output() private update = new EventEmitter<DetailedVideo>()
 
   private readonly destroy$ = new Subject<void>()
   public positions: string[] = []

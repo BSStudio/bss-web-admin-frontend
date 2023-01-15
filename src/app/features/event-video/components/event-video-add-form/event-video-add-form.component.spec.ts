@@ -1,5 +1,5 @@
 import { EventVideoAddFormComponent } from './event-video-add-form.component'
-import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks'
+import { MockBuilder, MockInstance, MockRender } from 'ng-mocks'
 import { EMPTY } from 'rxjs'
 import { VideoService } from '../../../video/services/video.service'
 import { DetailedEvent } from '../../../event/models'
@@ -16,12 +16,8 @@ describe('EventVideoAddModalComponent', () => {
   )
 
   it('should create', () => {
-    MockInstance(VideoService, (instance) =>
-      ngMocks.stub(instance, {
-        getAllVideos: () => EMPTY,
-      })
-    )
-    const fixture = MockRender(EventVideoAddFormComponent)
-    expect(fixture.point.componentInstance.event).toBe(detailedEvent)
+    MockInstance(VideoService, 'getAllVideos', () => EMPTY)
+    const fixture = MockRender(EventVideoAddFormComponent, { event: detailedEvent })
+    expect(fixture.point.componentInstance.event).toEqual(detailedEvent)
   })
 })

@@ -23,7 +23,7 @@ describe('MemberRemoveButtonComponent', () => {
     expect(fixture.componentInstance.member).toEqual(member)
 
     const button = ngMocks.find('button')
-    const buttonDirective = ngMocks.findInstance(button, Button)
+    ngMocks.findInstance(button, Button)
 
     const span = ngMocks.find(button, 'span')
     expect(ngMocks.formatText(span)).toBe('Remove')

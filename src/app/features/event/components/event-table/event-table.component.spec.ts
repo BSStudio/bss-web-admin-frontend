@@ -126,7 +126,7 @@ describe('EventTableComponent', () => {
     const table = ngMocks.findInstance(Table)
 
     expect(table.model).toEqual(fixture.point.componentInstance.table)
-    expect(table.sortable).toBeFalse()
+    expect(table.sortable).toBeTrue()
     expect(table.showSelectionColumn).toBeFalse()
     expect(table.striped).toBeFalse()
     expect(table.size).toBe('sh')

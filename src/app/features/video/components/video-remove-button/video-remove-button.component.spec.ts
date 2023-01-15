@@ -25,7 +25,7 @@ describe('VideoRemoveButtonComponent', () => {
     expect(fixture.componentInstance.video).toEqual(detailedVideo)
 
     const button = ngMocks.findInstance(Button)
-    expect(button.ibmButton).toBe('danger')
+    expect(button.ibmButton).toBe('danger--tertiary')
 
     const buttonText = ngMocks.find<HTMLSpanElement>('span')
     expect(buttonText.nativeElement.innerHTML).toBe('Remove')
@@ -39,7 +39,7 @@ describe('VideoRemoveButtonComponent', () => {
   })
 
   it('should show a remove modal on click', () => {
-    const fixture = MockRender(VideoRemoveButtonComponent, {
+    MockRender(VideoRemoveButtonComponent, {
       video: detailedVideo,
     })
 

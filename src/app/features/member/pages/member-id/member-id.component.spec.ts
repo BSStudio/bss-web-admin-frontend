@@ -127,7 +127,7 @@ describe('MemberIdComponent', () => {
 
     it('should update picture', () => {
       const update = new EventEmitter<void>()
-      MockInstance(MemberProfilePictureUploadComponent, (instance) => ngMocks.stub(instance, { update }))
+      MockInstance(MemberProfilePictureUploadComponent, 'update', update)
       const fixture = MockRender(MemberIdComponent)
 
       const section = ngMocks.find('section#profile-picture')

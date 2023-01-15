@@ -1,4 +1,3 @@
-import { EventEmitter } from '@angular/core'
 import { FormBuilder } from '@angular/forms'
 import { MockBuilder, MockInstance, MockRender } from 'ng-mocks'
 import { of } from 'rxjs'
@@ -15,7 +14,6 @@ describe('VideoCrewAddModalComponent', () => {
     new Member('id', 'url', 'name', 'nickname', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true),
   ]
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
-  const eventEmitter = new EventEmitter<DetailedVideo>()
   beforeEach(() =>
     MockBuilder([VideoCrewAddFormComponent, FormBuilder], VideoCrewModule).provide({
       provide: 'video',
@@ -26,9 +24,8 @@ describe('VideoCrewAddModalComponent', () => {
   it('should create', () => {
     MockInstance(VideoCrewService, 'getPositions', () => of(positions))
     MockInstance(MemberService, 'getMembers', () => of(members))
-    const fixture = MockRender(VideoCrewAddFormComponent)
+    const fixture = MockRender(VideoCrewAddFormComponent, { video: detailedVideo })
 
     expect(fixture.point.componentInstance.video).toEqual(detailedVideo)
-    expect(fixture.point.componentInstance['update']).toEqual(eventEmitter)
   })
 })

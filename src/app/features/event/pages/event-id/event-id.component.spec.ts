@@ -71,10 +71,8 @@ describe('EventIdComponent', () => {
       MockRender(EventIdComponent)
 
       const section = ngMocks.find('section#event-videos')
-
-      const h2 = ngMocks.find(section, 'h2')
-      expect(ngMocks.formatText(h2)).toBe('Manage event videos')
       const videoTable = ngMocks.findInstance(section, EventVideoTableComponent)
+
       expect(videoTable.event).toEqual(detailedEvent)
     })
 

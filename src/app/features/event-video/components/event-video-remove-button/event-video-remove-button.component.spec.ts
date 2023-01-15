@@ -24,7 +24,7 @@ describe('EventVideoRemoveButtonComponent', () => {
 
     const removeButton = ngMocks.find('button')
     const removeButtonDirective = ngMocks.findInstance(removeButton, Button)
-    expect(removeButtonDirective.ibmButton).toBe('danger')
+    expect(removeButtonDirective.ibmButton).toBe('danger--ghost')
     expect(removeButtonDirective.size).toBe('field')
     expect(removeButtonDirective.iconOnly).toBeTrue()
     expect(removeButtonDirective.assistiveTextAlignment).toBe('end')

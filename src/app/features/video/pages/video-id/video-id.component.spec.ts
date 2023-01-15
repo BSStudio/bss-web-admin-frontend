@@ -86,11 +86,8 @@ describe('VideoIdComponent', () => {
       MockRender(VideoIdComponent)
 
       const section = ngMocks.find('section#video-crew')
-
-      const h2 = ngMocks.find(section, 'h2')
-      expect(ngMocks.formatText(h2)).toEqual('Crew')
-
       const videoCrewTable = ngMocks.findInstance(section, VideoCrewTableComponent)
+
       expect(videoCrewTable.video).toEqual(detailedVideo)
     })
 

@@ -1,22 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
-
 import { ToastContentRoutedComponent } from './toast-content-routed.component'
+import { MockBuilder, MockRender } from 'ng-mocks'
+import { SharedModule } from '../../shared.module'
+import { ToastContent } from 'carbon-components-angular'
 
-describe('NotificationContentRoutedComponent', () => {
-  let component: ToastContentRoutedComponent
-  let fixture: ComponentFixture<ToastContentRoutedComponent>
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ToastContentRoutedComponent],
-    }).compileComponents()
-
-    fixture = TestBed.createComponent(ToastContentRoutedComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
+describe('ToastContentRoutedComponent', () => {
+  beforeEach(() => MockBuilder(ToastContentRoutedComponent, SharedModule))
 
   it('should create', () => {
-    expect(component).toBeTruthy()
+    const toast: ToastContent = {
+      type: 'success',
+      title: 'title',
+      subtitle: 'subtitle',
+      links: [
+        { text: 'text0', href: 'href0' },
+        { text: 'text1', href: 'href1' },
+      ],
+      caption: 'caption',
+    }
+    const fixture = MockRender(ToastContentRoutedComponent, { toast })
+
+    expect(fixture.point.componentInstance.toast).toEqual(toast)
   })
 })

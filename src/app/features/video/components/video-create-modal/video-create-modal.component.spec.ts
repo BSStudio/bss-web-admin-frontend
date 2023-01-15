@@ -3,7 +3,6 @@ import { VideoCreateModalComponent } from './video-create-modal.component'
 import { VideoModule } from '../../video.module'
 import { FormGroupDirective, ReactiveFormsModule } from '@angular/forms'
 import {
-  BaseModal,
   Button,
   Modal,
   ModalContent,
