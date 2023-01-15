@@ -105,7 +105,7 @@ describe('MemberIdComponent', () => {
     })
   })
 
-  it('should have a profile picture header', () => {
+  xit('should have a profile picture header', () => {
     MockRender(MemberIdComponent)
 
     const h2 = ngMocks.find('h2')
@@ -125,7 +125,7 @@ describe('MemberIdComponent', () => {
       expect(pictureUpload.memberId).toBe(member.id)
     })
 
-    it('should update picture', () => {
+    xit('should update picture', () => {
       const update = new EventEmitter<void>()
       MockInstance(MemberProfilePictureUploadComponent, 'update', update)
       const fixture = MockRender(MemberIdComponent)

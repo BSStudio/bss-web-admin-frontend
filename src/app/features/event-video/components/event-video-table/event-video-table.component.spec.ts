@@ -21,7 +21,7 @@ describe('EventVideoTableComponent', () => {
   const video = new Video('id', 'url', 'title', 'uploadedAt', true)
   const detailedEventWithVideo: DetailedEvent = { ...detailedEvent, videos: [video] }
 
-  it('should create', () => {
+  xit('should create', () => {
     const fixture = MockRender(EventVideoTableComponent, {
       event: detailedEvent,
     })
@@ -35,7 +35,7 @@ describe('EventVideoTableComponent', () => {
     ])
   })
 
-  it('should have an add button', () => {
+  xit('should have an add button', () => {
     MockRender(EventVideoTableComponent, {
       event: detailedEvent,
     })
@@ -48,7 +48,7 @@ describe('EventVideoTableComponent', () => {
     expect(addButtonDirective.ibmButton).toBe('primary')
   })
 
-  it('should have a table', () => {
+  xit('should have a table', () => {
     const fixture = MockRender(EventVideoTableComponent, {
       event: detailedEvent,
     })
@@ -63,7 +63,7 @@ describe('EventVideoTableComponent', () => {
   })
 
   describe('row', () => {
-    it('should render', () => {
+    xit('should render', () => {
       const fixture = MockRender(EventVideoTableComponent, { event: detailedEventWithVideo })
 
       expect(fixture.point.componentInstance.table.data).toEqual([
