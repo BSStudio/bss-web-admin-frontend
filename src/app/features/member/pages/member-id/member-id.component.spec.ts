@@ -105,7 +105,7 @@ describe('MemberIdComponent', () => {
     })
   })
 
-  xit('should have a profile picture header', () => {
+  it('should have a profile picture header', () => {
     MockRender(MemberIdComponent)
 
     const h2 = ngMocks.find('h2')
