@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy } from '@angular/core'
 import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
 import { DetailedVideo } from '../../models'
 import { Router } from '@angular/router'
 import { VideoService } from '../../services/video.service'
@@ -43,12 +43,13 @@ export class VideoRemoveButtonComponent implements OnDestroy {
     this.service
       .removeVideo(this.video.id)
       .pipe(
-        tap({
-          next: () => {
-            this.successNotification()
-            this.router.navigate(['video']).then()
-          },
-          error: (err) => this.errorNotification(err),
+        tap(() => {
+          this.successNotification()
+          this.router.navigate(['video']).then()
+        }),
+        catchError((err) => {
+          this.errorNotification(err)
+          return EMPTY
         }),
         takeUntil(this.destroy$)
       )

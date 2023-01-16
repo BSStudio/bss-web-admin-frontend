@@ -3,9 +3,6 @@ import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks'
 import { VideoCrewModule } from '../../video-crew.module'
 import { DetailedVideo } from '../../../video/models'
 import {
-  Button,
-  IconDirective,
-  ModalService,
   Table,
   TableContainer,
   TableHeaderItem,
@@ -19,6 +16,7 @@ import { VideoCrewService } from '../../services/video-crew.service'
 import { of } from 'rxjs'
 import { VideoCrewRemoveButtonComponent } from '../video-crew-remove-button/video-crew-remove-button.component'
 import { SimpleMember } from '../../../member/models'
+import { EventEmitter } from '@angular/core'
 
 describe('VideoCrewTableComponent', () => {
   beforeEach(() => MockBuilder([VideoCrewTableComponent, TableModule], VideoCrewModule))
@@ -31,38 +29,20 @@ describe('VideoCrewTableComponent', () => {
 
     expect(fixture.point.componentInstance.video).toEqual(detailedVideo)
     expect(fixture.point.componentInstance.table.header).toEqual([
-      new TableHeaderItem({ data: 'Position' }),
       new TableHeaderItem({ data: 'Member' }),
-      new TableHeaderItem({ style: { padding: 0, width: 0 } }),
+      new TableHeaderItem({ data: 'Position' }),
+      new TableHeaderItem({ style: { padding: 0, width: 0 }, sortable: false }),
     ])
     expect(fixture.point.componentInstance.table.data).toEqual([
       [
-        new TableItem({ data: crewMember.position }),
         new TableItem({ data: crewMember.member.name }),
+        new TableItem({ data: crewMember.position }),
         new TableItem({
           data: crewMember,
           template: fixture.point.componentInstance['removeCrewMemberCell'],
         }),
       ],
     ])
-  })
-
-  it('should have a toolbar with add button', () => {
-    MockRender(VideoCrewTableComponent, { video: detailedVideo })
-
-    const tableContainer = ngMocks.find(TableContainer)
-    const tableToolbarContent = ngMocks.find(tableContainer, TableToolbarContent)
-    const button = ngMocks.find(tableToolbarContent, 'button')
-
-    expect(ngMocks.formatText(button)).toEqual('Add new crew member')
-    const buttonDirective = ngMocks.findInstance(button, Button)
-
-    expect(buttonDirective.ibmButton).toEqual('primary')
-    const svg = ngMocks.find(button, 'svg.bx--btn__icon')
-    const icon = ngMocks.findInstance(svg, IconDirective)
-
-    expect(icon.ibmIcon).toBe('add')
-    expect(icon.size).toBe('16')
   })
 
   it('should have a table', () => {
@@ -72,27 +52,31 @@ describe('VideoCrewTableComponent', () => {
     const table = ngMocks.findInstance(tableContainer, Table)
 
     expect(table.model).toEqual(fixture.point.componentInstance.table)
-    expect(table.sortable).toBeFalse()
+    expect(table.sortable).toBeTrue()
     expect(table.striped).toBeFalse()
     expect(table.showSelectionColumn).toBeFalse()
     expect(table.size).toBe('sh')
   })
 
-  it('should render a modal on add', () => {
+  it('should have an add form', () => {
     MockRender(VideoCrewTableComponent, { video: detailedVideo })
 
     const tableContainer = ngMocks.find(TableContainer)
     const tableToolbarContent = ngMocks.find(tableContainer, TableToolbarContent)
-    const button = ngMocks.find(tableToolbarContent, 'button')
+    const addForm = ngMocks.find(tableToolbarContent, VideoCrewAddFormComponent)
 
-    ngMocks.click(button)
+    expect(addForm.componentInstance.video).toEqual(detailedVideo)
+  })
 
-    const modalService = ngMocks.findInstance(ModalService)
+  it('should update on add an add form', () => {
+    const update = new EventEmitter<DetailedVideo>()
+    MockInstance(VideoCrewAddFormComponent, 'update', update)
+    const fixture = MockRender(VideoCrewTableComponent, { video: detailedVideo })
+    const updatedVideo: DetailedVideo = { ...detailedVideo, crew: [crewMember, crewMember] }
 
-    expect(modalService.create).toHaveBeenCalledOnceWith({
-      component: VideoCrewAddFormComponent,
-      inputs: { video: detailedVideo },
-    })
+    update.emit(updatedVideo)
+
+    expect(fixture.point.componentInstance.video).toEqual(updatedVideo)
   })
 
   it('should have rows', () => {

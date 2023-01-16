@@ -69,12 +69,13 @@ describe('EventVideoTableComponent', () => {
       expect(fixture.point.componentInstance.table.data).toEqual([
         [
           new TableItem({
-            title: video.title,
+            title: video.id,
             data: video,
             template: fixture.point.componentInstance.navigateCell,
           }),
           new TableItem({ title: video.title, data: video.url }),
           new TableItem({ title: video.title, data: video.uploadedAt }),
+          new TableItem({ title: video.title, data: 'true' }),
           new TableItem({
             title: video.title,
             data: video,

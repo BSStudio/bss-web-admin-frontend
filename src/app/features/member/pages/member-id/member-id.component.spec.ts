@@ -108,7 +108,7 @@ describe('MemberIdComponent', () => {
   it('should have a profile picture header', () => {
     MockRender(MemberIdComponent)
 
-    const h2 = ngMocks.find('h2')
+    const h2 = ngMocks.find('*:not(section) > h2')
     expect(ngMocks.formatText(h2)).toBe('Profile picture upload')
   })
 
