@@ -20,7 +20,7 @@ jobs:
           name: Store test results
           path: ~/project/reports
       - store_artifacts:
-          name: Store coverage report
+          name: Store test html report
           path: ~/project/coverage
 workflows:
   Build app:
