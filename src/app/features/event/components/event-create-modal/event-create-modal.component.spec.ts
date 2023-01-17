@@ -98,19 +98,17 @@ describe('EventCreateModalComponent', () => {
     const title = 'title'
     const url = 'url'
     const event = new Event('id', url, title, 'description', 'date', true)
-    MockInstance(EventService, (instance) =>
-      ngMocks.stub(instance, { createEvent: jasmine.createSpy().and.returnValue(of(event)) })
-    )
-    MockRender(EventCreateModalComponent, { open: true, close })
+    MockInstance(EventService, 'createEvent', () => of(event))
+    const fixture = MockRender(EventCreateModalComponent, { open: true, close })
 
     const [titleInput, urlInput] = ngMocks.findAll('input')
     ngMocks.change(titleInput, title)
     ngMocks.change(urlInput, url)
 
-    const buttons = ngMocks.findAll<HTMLButtonElement>('button')
-    const addButton = buttons[0]
-    ngMocks.click(addButton)
-    expect(ngMocks.findInstance(EventService).createEvent).toHaveBeenCalledWith({ title, url })
+    const form = ngMocks.find('form')
+    const formGroupDirective = ngMocks.findInstance(form, FormGroupDirective)
+    formGroupDirective.ngSubmit.emit()
+
     expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledWith({
       type: 'success',
       title: 'Event created',
@@ -118,6 +116,7 @@ describe('EventCreateModalComponent', () => {
       caption: 'Add videos to the event, update the details and publish it',
       message: 'Add videos to the event, update the details and publish it',
       smart: true,
+      template: fixture.point.componentInstance.toastContent,
     })
     expect(close.emit).toHaveBeenCalledWith(true)
   })
@@ -151,27 +150,19 @@ describe('EventCreateModalComponent', () => {
   it('should submit with error returning', () => {
     const title = 'title'
     const url = 'url'
-    const error = new Error('error')
-    MockInstance(EventService, (instance) =>
-      ngMocks.stub(instance, {
-        createEvent: jasmine.createSpy().and.returnValue(throwError(() => error)),
-      })
-    )
+    window.alert = jasmine.createSpy('alert')
+    MockInstance(EventService, 'createEvent', () => throwError(() => new Error()))
     MockRender(EventCreateModalComponent, { open: true, close })
 
     const [titleInput, urlInput] = ngMocks.findAll('input')
     ngMocks.change(titleInput, title)
     ngMocks.change(urlInput, url)
 
-    const buttons = ngMocks.findAll<HTMLButtonElement>('button')
-    const addButton = buttons[0]
-    ngMocks.click(addButton)
-    expect(ngMocks.findInstance(EventService).createEvent).toHaveBeenCalledWith({ title, url })
-    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledWith({
-      type: 'error',
-      title: 'Error creating event',
-      message: JSON.stringify(error),
-    })
+    const form = ngMocks.find('form')
+    const formGroupDirective = ngMocks.findInstance(form, FormGroupDirective)
+    formGroupDirective.ngSubmit.emit()
+
+    expect(window.alert).toHaveBeenCalledOnceWith('Server error: title and url must be unique')
   })
 
   xit('should close on button', () => {

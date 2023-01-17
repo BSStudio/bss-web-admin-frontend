@@ -15,10 +15,10 @@
       </button>
     </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content style="height: auto">
-      <app-event-video-add-modal-component
+      <app-event-video-add-form-component
         [event]="event"
         (update)="updateEvent($event)"
-      ></app-event-video-add-modal-component>
+      ></app-event-video-add-form-component>
     </ibm-table-toolbar-content>
   </ibm-table-toolbar>
   <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="true" size="sh"> </ibm-table>

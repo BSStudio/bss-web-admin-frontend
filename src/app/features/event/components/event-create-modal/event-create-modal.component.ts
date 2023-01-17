@@ -3,7 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { BaseModal, NotificationService } from 'carbon-components-angular'
 import { EventService } from '../../services/event.service'
 import { CreateEvent, Event } from '../../models'
-import { map, Subject, takeUntil, tap } from 'rxjs'
+import { catchError, EMPTY, map, Subject, takeUntil, tap } from 'rxjs'
+import { removeTildes } from '../../../../core/util/remove-tildes'
 
 @Component({
   selector: 'app-event-create-modal',
@@ -36,8 +37,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
   private initAutomaticUrlGenerator(): void {
     this.form.controls.title.valueChanges
       .pipe(
-        // remove tildes
-        map((title) => title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')),
+        map(removeTildes),
         tap((title) => {
           const url = title
             .toLowerCase()
@@ -90,12 +90,13 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
     this.service
       .createEvent(createEvent)
       .pipe(
-        tap({
-          next: (event) => {
-            this.onSuccessNotification(event)
-            this.close.emit(true)
-          },
-          error: () => window.alert($localize`Server error: title and url must be unique`),
+        tap((event) => {
+          this.onSuccessNotification(event)
+          this.close.emit(true)
+        }),
+        catchError(() => {
+          window.alert($localize`Server error: title and url must be unique`)
+          return EMPTY
         }),
         takeUntil(this.destroy$)
       )

@@ -12,7 +12,7 @@ interface VideoListItem extends ListItem {
 }
 
 @Component({
-  selector: 'app-event-video-add-modal-component',
+  selector: 'app-event-video-add-form-component',
   templateUrl: './event-video-add-form.component.html',
   styleUrls: ['./event-video-add-form.component.scss'],
 })
