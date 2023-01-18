@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy } from '@angular/core'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { Router } from '@angular/router'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
-import { EventService } from '../../services/event.service'
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
 import { Event } from '../../models'
+import { EventActionsService } from '../../actions/event.actions.service'
 
 @Component({
   selector: 'app-event-remove-button[event]',
@@ -18,12 +18,7 @@ export class EventRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
   @Input() event!: Event
 
-  constructor(
-    private service: EventService,
-    private router: Router,
-    private modalService: ModalService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private service: EventActionsService, private router: Router, private modalService: ModalService) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -41,39 +36,12 @@ export class EventRemoveButtonComponent implements OnDestroy {
 
   removeEvent() {
     this.service
-      .deleteEvent(this.event.id)
+      .deleteEvent(this.event)
       .pipe(
-        tap({
-          next: () => {
-            this.successNotification()
-            this.router.navigate(['event']).then()
-          },
-          error: (error) => this.errorNotification(error),
-        }),
+        tap(() => this.router.navigate(['event']).then()),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  private successNotification() {
-    this.notificationService.showNotification({
-      type: 'success',
-      title: $localize`Event was removed`,
-      message: this.event.title,
-      smart: true,
-    })
-  }
-
-  private errorNotification(error: unknown) {
-    const caption = $localize`Make sure videos are removed from the event`
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error removing event`,
-      subtitle: this.event.title,
-      caption: caption,
-      message: caption,
-      smart: true,
-    })
   }
 
   ngOnDestroy(): void {

@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core'
-import { DetailedEvent, Event, UpdateEvent } from '../../models'
+import { DetailedEvent, UpdateEvent } from '../../models'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { EventService } from '../../services/event.service'
-import { NotificationService } from 'carbon-components-angular'
 import { flatpickrOptions } from 'src/app/core/util/flatpickr-options'
+import { EventActionsService } from '../../actions/event.actions.service'
 
 @Component({
   selector: 'app-event-update-form[event]',
@@ -25,11 +24,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     visible: this.fb.nonNullable.control(false, [Validators.required]),
   })
 
-  constructor(
-    private fb: FormBuilder,
-    private service: EventService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private fb: FormBuilder, private service: EventActionsService) {}
 
   ngOnInit(): void {
     this.update.pipe(
@@ -60,40 +55,10 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     this.service
       .updateEvent(this.event.id, updateEvent)
       .pipe(
-        tap({
-          next: (event) => {
-            this.successNotification(event)
-            this.update.emit(event)
-          },
-          error: (err) => this.errorNotification(err),
-        }),
+        tap((event) => this.update.emit(event)),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  private successNotification(event: Event) {
-    const caption = $localize`Changes were saved`
-    this.notificationService.showToast({
-      type: 'success',
-      title: $localize`Event updated`,
-      subtitle: event.title,
-      caption,
-      message: caption,
-      smart: true,
-    })
-  }
-
-  private errorNotification(err: unknown) {
-    const caption = $localize`Make sure title/url is unique`
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error updating event`,
-      subtitle: this.event.title,
-      caption,
-      message: caption,
-      smart: true,
-    })
   }
 
   ngOnDestroy() {
