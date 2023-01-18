@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { Subject, takeUntil, tap } from 'rxjs'
-import { NotificationService } from 'carbon-components-angular'
 import { Member, MemberStatus } from '../../models'
-import { MemberService } from '../../services/member.service'
 import { flatpickrOptions } from '../../../../core/util/flatpickr-options'
+import { MemberActionsService } from '../../actions/member.actions.service'
 
 @Component({
   selector: 'app-member-update-form[member]',
@@ -28,11 +27,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
     archived: this.fb.nonNullable.control(false, [Validators.required]),
   })
 
-  constructor(
-    private fb: FormBuilder,
-    private service: MemberService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private fb: FormBuilder, private service: MemberActionsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['member']) {
@@ -50,31 +45,11 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
       this.service
         .updateMember(this.member.id, { joinedAt: formatDate, ...rest })
         .pipe(
-          tap({
-            next: (member) => {
-              this.update.emit(member)
-              this.onSuccessToast(member)
-            },
-            error: (err) => this.onErrorToast(err),
-          }),
+          tap((member) => this.update.emit(member)),
           takeUntil(this.destroy$)
         )
         .subscribe()
     }
-  }
-
-  onSuccessToast(member: Member) {
-    this.notificationService.showToast({
-      type: 'success',
-      title: $localize`Profile updated`,
-      subtitle: member.name,
-      caption: $localize`Changes were saved`,
-      duration: 3000,
-    })
-  }
-
-  private onErrorToast(err: unknown) {
-    this.notificationService.showToast({ type: 'error', title: '' })
   }
 
   ngOnDestroy(): void {

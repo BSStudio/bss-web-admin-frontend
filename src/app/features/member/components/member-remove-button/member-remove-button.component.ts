@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { Member } from '../../models'
-import { MemberService } from '../../services/member.service'
+import { MemberActionsService } from '../../actions/member.actions.service'
 
 @Component({
   selector: 'app-member-remove-button[member]',
@@ -18,12 +18,7 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
   @Input() member!: Member
 
-  constructor(
-    private service: MemberService,
-    private router: Router,
-    private modalService: ModalService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private service: MemberActionsService, private router: Router, private modalService: ModalService) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -41,39 +36,12 @@ export class MemberRemoveButtonComponent implements OnDestroy {
 
   removeMember() {
     this.service
-      .deleteMember(this.member.id)
+      .deleteMember(this.member)
       .pipe(
-        tap({
-          next: async () => {
-            this.successNotification()
-            await this.router.navigate(['member'])
-          },
-          error: (error) => this.errorNotification(error),
-        }),
+        tap(async () => await this.router.navigate(['member'])),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  private successNotification() {
-    this.notificationService.showNotification({
-      type: 'success',
-      title: $localize`Member removed`,
-      message: this.member.name,
-      smart: true,
-    })
-  }
-
-  private errorNotification(error: unknown) {
-    const caption = $localize`Member is associated with one or more videos. Try archiving or remove positions`
-    this.notificationService.showNotification({
-      type: 'error',
-      title: $localize`Error removing member`,
-      subtitle: this.member.name,
-      caption: caption,
-      message: caption,
-      smart: true,
-    })
   }
 
   ngOnDestroy(): void {
