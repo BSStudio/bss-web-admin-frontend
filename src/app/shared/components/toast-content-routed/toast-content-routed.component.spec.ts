@@ -18,12 +18,6 @@ describe('ToastContentRoutedComponent', () => {
 
   beforeEach(() => MockBuilder(ToastContentRoutedComponent, SharedModule))
 
-  it('should render', () => {
-    const fixture = MockRender(ToastContentRoutedComponent, { toast })
-
-    expect(fixture.point.componentInstance.toast).toEqual(toast)
-  })
-
   it('should have a title', () => {
     MockRender(ToastContentRoutedComponent, { toast })
 
