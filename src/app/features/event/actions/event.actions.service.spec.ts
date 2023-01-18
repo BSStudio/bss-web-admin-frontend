@@ -50,7 +50,10 @@ describe('EventActionsService', () => {
     MockInstance(EventService, 'updateEvent', () => of(detailedEvent))
     const underTest = ngMocks.findInstance(EventActionsService)
 
-    underTest.updateEvent(event.id, updateEvent).subscribe(() => done())
+    underTest.updateEvent(event.id, updateEvent).subscribe((actual) => {
+      expect(actual).toEqual(detailedEvent)
+      done()
+    })
 
     const notification = ngMocks.findInstance(NotificationService)
     expect(notification.showToast).toHaveBeenCalledOnceWith({

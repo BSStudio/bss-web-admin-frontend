@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { DetailedEvent } from '../../../event/models'
-import { EventVideoService } from '../../services/event-video.service'
 import { Video } from '../../../video/models'
+import { EventVideoActionsService } from '../../actions/event-video.actions.service'
 
 @Component({
   selector: 'app-event-video-remove-button',
@@ -31,11 +31,7 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
   public update = new EventEmitter<DetailedEvent>()
   private readonly destroy$ = new Subject<void>()
 
-  constructor(
-    private modalService: ModalService,
-    private eventVideoService: EventVideoService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private modalService: ModalService, private eventVideoService: EventVideoActionsService) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -57,38 +53,12 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
 
   removeEventVideo() {
     this.eventVideoService
-      .removeVideoFromEvent({ eventId: this.event.id, videoId: this.video.id })
+      .removeVideoFromEvent(this.event, this.video)
       .pipe(
-        tap({
-          next: (event) => {
-            this.successNotification(event)
-            this.update.emit(event)
-          },
-          error: (err) => this.errorNotification(err),
-        }),
+        tap((event) => this.update.emit(event)),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  successNotification(event: DetailedEvent) {
-    const caption = $localize`Video remain published`
-    this.notificationService.showToast({
-      type: 'success',
-      title: $localize`Video was removed from event`,
-      subtitle: this.video.title,
-      caption,
-      message: caption,
-      smart: true,
-    })
-  }
-
-  errorNotification(error: unknown) {
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error removing video`,
-      content: JSON.stringify(error),
-    })
   }
 
   ngOnDestroy() {

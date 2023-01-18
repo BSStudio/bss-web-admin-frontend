@@ -3,9 +3,9 @@ import { ListItem } from 'carbon-components-angular'
 import { FormBuilder } from '@angular/forms'
 import { DetailedEvent } from '../../../event/models'
 import { VideoService } from '../../../video/services/video.service'
-import { map, Subject, takeUntil, tap } from 'rxjs'
-import { EventVideoService } from '../../services/event-video.service'
+import { Subject, takeUntil, tap } from 'rxjs'
 import { Video } from '../../../video/models'
+import { EventVideoActionsService } from '../../actions/event-video.actions.service'
 
 interface VideoListItem extends ListItem {
   id: string
@@ -28,17 +28,11 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private videoService: VideoService,
-    private eventVideoService: EventVideoService
+    private eventVideoService: EventVideoActionsService
   ) {}
 
   ngOnChanges() {
-    this.videoService
-      .getAllVideos()
-      .pipe(
-        map((videos) => this.updateVideos(videos)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe()
+    this.videoService.getAllVideos().pipe(tap(this.updateVideos), takeUntil(this.destroy$)).subscribe()
   }
 
   onSubmit() {
