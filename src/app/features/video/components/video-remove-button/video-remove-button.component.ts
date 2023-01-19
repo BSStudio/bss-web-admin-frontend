@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
+import { Subject, takeUntil, tap } from 'rxjs'
 import { DetailedVideo } from '../../models'
 import { Router } from '@angular/router'
-import { VideoService } from '../../services/video.service'
+import { VideoActionsService } from '../../actions/video.actions.service'
 
 @Component({
   selector: 'app-video-remove-button',
@@ -18,12 +18,7 @@ export class VideoRemoveButtonComponent implements OnDestroy {
   private destroy$ = new Subject<void>()
   @Input() public video!: DetailedVideo
 
-  constructor(
-    private router: Router,
-    private service: VideoService,
-    private modalService: ModalService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private router: Router, private service: VideoActionsService, private modalService: ModalService) {}
 
   public showConfirmModal() {
     this.modalService.show({
@@ -41,40 +36,12 @@ export class VideoRemoveButtonComponent implements OnDestroy {
 
   private removeVideo() {
     this.service
-      .removeVideo(this.video.id)
+      .removeVideo(this.video)
       .pipe(
-        tap(() => {
-          this.successNotification()
-          this.router.navigate(['video']).then()
-        }),
-        catchError((err) => {
-          this.errorNotification(err)
-          return EMPTY
-        }),
+        tap(() => this.router.navigate(['video']).then()),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  private successNotification() {
-    this.notificationService.showNotification({
-      type: 'success',
-      title: $localize`Video was removed`,
-      message: this.video.title,
-      smart: true,
-    })
-  }
-
-  private errorNotification(error: unknown) {
-    const caption = $localize`Remove crew members first`
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error removing`,
-      subtitle: this.video.title,
-      caption,
-      message: caption,
-      smart: true,
-    })
   }
 
   ngOnDestroy() {

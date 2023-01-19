@@ -11,14 +11,13 @@ describe('VideoService', () => {
   ngMocks.faster()
   beforeAll(() => MockBuilder([VideoService, HttpClientTestingModule]))
 
-  const videoId = 'videoId'
   const createVideo = new CreateVideo('url', 'title')
-  const video = new Video(videoId, 'url', 'title', 'uploadedAt', true)
-  const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
-  const member = new SimpleMember('id', 'name', 'nickname')
-  const crewMember = new CrewMember('position', 'memberId', member)
-  const detailedVideo = new DetailedVideo(videoId, 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
-  const sort = new Sort(false, false, true)
+    const video = new Video('videoId', 'url', 'title', 'uploadedAt', true)
+    const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
+    const member = new SimpleMember('id', 'name', 'nickname')
+    const crewMember = new CrewMember('position', 'memberId', member)
+    const detailedVideo = new DetailedVideo('videoId', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
+    const sort = new Sort(false, false, true)
   const pageable = new Pageable(sort, 3, 2, 10, true, false)
   const paginatedResponse = new PaginatedResponse<Video>(
     [video],
@@ -157,12 +156,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .getVideo(videoId)
+      .getVideo(video.id)
       .pipe(tap((actual) => expect(actual).toEqual(detailedVideo)))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })
@@ -185,7 +184,7 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     const visible = true
-    const videoIds = [videoId]
+    const videoIds = [video.id]
     service
       .changeVisibility(videoIds, visible)
       .pipe(tap((actual) => expect(actual).toEqual(videoIds)))
@@ -206,7 +205,7 @@ describe('VideoService', () => {
     const service = ngMocks.findInstance(VideoService)
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
-    const videoIds = [videoId]
+    const videoIds = [video.id]
     service
       .changeVisibility(videoIds)
       .pipe(tap((actual) => expect(actual).toEqual(videoIds)))
@@ -228,12 +227,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .updateVideo(videoId, updateVideo)
+      .updateVideo(video.id, updateVideo)
       .pipe(tap((actual) => expect(actual).toEqual(detailedVideo)))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'PUT' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'PUT' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })
@@ -243,12 +242,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .removeVideo(videoId)
+      .removeVideo(video.id)
       .pipe(tap(() => expect().nothing()))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'DELETE' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'DELETE' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })

@@ -2,21 +2,18 @@ import { VideoRemoveButtonComponent } from './video-remove-button.component'
 import { MockBuilder, MockInstance, MockRender, ngMocks } from 'ng-mocks'
 import { VideoModule } from '../../video.module'
 import {
-  AlertModalData,
   AlertModalType,
   Button,
   IconDirective,
   IconModule,
-  ModalButton,
   ModalButtonType,
   ModalService,
-  NotificationService,
 } from 'carbon-components-angular'
 import { DetailedVideo } from '../../models'
-import { VideoService } from '../../services/video.service'
 import { Router } from '@angular/router'
-import { of, throwError } from 'rxjs'
+import { of } from 'rxjs'
 import { fakeAsync, tick } from '@angular/core/testing'
+import { VideoActionsService } from '../../actions/video.actions.service'
 
 describe('VideoRemoveButtonComponent', () => {
   beforeEach(() => MockBuilder(VideoRemoveButtonComponent, [VideoModule, IconModule]))
@@ -48,8 +45,7 @@ describe('VideoRemoveButtonComponent', () => {
     ngMocks.click('button')
 
     const modalService = ngMocks.findInstance(ModalService)
-    const videoService = ngMocks.findInstance(VideoService)
-    const modalData: AlertModalData = {
+    expect(modalService.show).toHaveBeenCalledOnceWith({
       type: AlertModalType.danger,
       label: detailedVideo.title,
       title: 'Remove video',
@@ -57,52 +53,23 @@ describe('VideoRemoveButtonComponent', () => {
       content: 'Are you sure you want to remove this video?',
       buttons: [
         { type: ModalButtonType.secondary, text: 'Close' },
-        { type: ModalButtonType.danger, text: 'Remove', click: jasmine.any(Function) } as unknown as ModalButton,
+        { type: ModalButtonType.danger, text: 'Remove', click: jasmine.any(Function) },
       ],
-    }
-    expect(modalService.show).toHaveBeenCalledOnceWith(modalData)
-    expect(videoService.removeVideo).not.toHaveBeenCalled()
+    })
   })
 
   describe('on remove button press', () => {
     it('should navigate to videos and show success notification on success', fakeAsync(() => {
-      MockInstance(ModalService, 'show', ({ buttons }) => buttons?.[1]?.click?.())
-      MockInstance(VideoService, 'removeVideo', () => of(void 0))
       const navigate = jasmine.createSpy('navigate').and.resolveTo(true)
       MockInstance(Router, 'navigate', navigate)
-      MockRender(VideoRemoveButtonComponent, { video: detailedVideo })
-      const notificationService = ngMocks.findInstance(NotificationService)
-      const router = ngMocks.findInstance(Router)
-
-      ngMocks.click('button')
-      tick()
-
-      expect(router.navigate).toHaveBeenCalledOnceWith(['video'])
-      expect(notificationService.showNotification).toHaveBeenCalledOnceWith({
-        type: 'success',
-        title: 'Video was removed',
-        message: detailedVideo.title,
-        smart: true,
-      })
-    }))
-
-    it('should show error notification on error', fakeAsync(() => {
       MockInstance(ModalService, 'show', ({ buttons }) => buttons?.[1]?.click?.())
-      MockInstance(VideoService, 'removeVideo', (id) => throwError(() => new Error(id)))
+      MockInstance(VideoActionsService, 'removeVideo', () => of(void 0))
       MockRender(VideoRemoveButtonComponent, { video: detailedVideo })
-      const notificationService = ngMocks.findInstance(NotificationService)
 
       ngMocks.click('button')
       tick()
 
-      expect(notificationService.showToast).toHaveBeenCalledOnceWith({
-        type: 'error',
-        title: 'Error removing',
-        subtitle: detailedVideo.title,
-        caption: 'Remove crew members first',
-        message: 'Remove crew members first',
-        smart: true,
-      })
+      expect(navigate).toHaveBeenCalledOnceWith(['video'])
     }))
   })
 })

@@ -2,9 +2,8 @@ import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleCha
 import { FormBuilder, Validators } from '@angular/forms'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { DetailedVideo } from '../../models'
-import { NotificationService } from 'carbon-components-angular'
-import { VideoService } from '../../services/video.service'
 import { flatpickrOptions } from '../../../../core/util/flatpickr-options'
+import { VideoActionsService } from '../../actions/video.actions.service'
 
 @Component({
   selector: 'app-video-update-form',
@@ -21,66 +20,31 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
     url: this.fb.nonNullable.control('', { validators: [Validators.pattern(/^[\p{Alpha}\p{Number}\-]+$/u)] }),
     title: this.fb.nonNullable.control(''),
     description: this.fb.nonNullable.control(''),
-    uploadedAt: this.fb.nonNullable.control(''),
+    uploadedAt: this.fb.nonNullable.control(new Date()),
     visible: this.fb.nonNullable.control(false),
   })
 
-  constructor(
-    private fb: FormBuilder,
-    private service: VideoService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private fb: FormBuilder, private service: VideoActionsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['video']) {
-      this.form.patchValue(this.video)
+      const { uploadedAt: date, url, title, description, visible } = this.video
+      const uploadedAt = new Date(date)
+      this.form.patchValue({ uploadedAt, url, title, description, visible })
       this.form.markAsPristine()
     }
   }
 
   public updateVideo() {
     const { uploadedAt: date, ...rest } = this.form.getRawValue()
-    const uploadedAt = this.toLocalDate(date)
+    const uploadedAt = date.toISOString().split('T')[0]
     this.service
       .updateVideo(this.video.id, { uploadedAt, ...rest })
       .pipe(
-        tap({
-          next: (video) => {
-            this.successNotification(video)
-            this.update.emit(video)
-          },
-          error: (err) => this.errorNotification(err),
-        }),
+        tap((video) => this.update.emit(video)),
         takeUntil(this.destroy$)
       )
       .subscribe()
-  }
-
-  private successNotification(video: DetailedVideo) {
-    const caption = $localize`Changes were saved`
-    this.notificationService.showToast({
-      type: 'success',
-      title: $localize`Video updated`,
-      subtitle: video.title,
-      caption: caption,
-      message: caption,
-      smart: true,
-    })
-  }
-
-  private errorNotification(err: unknown) {
-    const caption = $localize`Make sure everything is well formatted, and there are no duplicate ids`
-    this.notificationService.showToast({
-      type: 'error',
-      title: $localize`Error updating`,
-      caption: caption,
-      message: caption,
-      smart: true,
-    })
-  }
-
-  public toLocalDate(date: string | Date) {
-    return new Date(date).toISOString().split('T')[0]
   }
 
   ngOnDestroy() {
