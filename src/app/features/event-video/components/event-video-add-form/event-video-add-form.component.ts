@@ -22,7 +22,7 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
   private readonly destroy$ = new Subject<void>()
   public videos: VideoListItem[] = []
   public readonly form = this.fb.nonNullable.group({
-    videoId: this.fb.nonNullable.control<VideoListItem>({ id: '', selected: false, content: '' }),
+    video: this.fb.nonNullable.control<VideoListItem>({ id: '', selected: false, content: '' }),
   })
 
   constructor(
@@ -32,14 +32,21 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
   ) {}
 
   ngOnChanges() {
-    this.videoService.getAllVideos().pipe(tap(this.updateVideos), takeUntil(this.destroy$)).subscribe()
+    this.videoService
+      .getAllVideos()
+      .pipe(
+        tap((videos) => this.updateVideos(videos)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
   }
 
   onSubmit() {
+    this.form.markAllAsTouched()
     if (this.form.valid) {
-      const videoId = this.form.getRawValue().videoId.id
+      const { video } = this.form.getRawValue()
       this.eventVideoService
-        .addVideoToEvent({ eventId: this.event.id, videoId })
+        .addVideoToEvent({ eventId: this.event.id, videoId: video.id })
         .pipe(
           tap((event) => {
             this.update.emit(event)
