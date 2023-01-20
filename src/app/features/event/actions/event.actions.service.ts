@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { EventService } from '../services/event.service'
 import { NotificationService } from 'carbon-components-angular'
 import { DetailedEvent, Event, UpdateEvent } from '../models'
-import { catchError, EMPTY, tap } from 'rxjs'
+import { tap } from 'rxjs'
 
 @Injectable()
 export class EventActionsService {
@@ -10,20 +10,18 @@ export class EventActionsService {
 
   deleteEvent(event: Event) {
     return this.service.deleteEvent(event.id).pipe(
-      tap(() => this.removeEventSuccessNotification(event)),
-      catchError(() => {
-        this.removeEventErrorNotification(event)
-        return EMPTY
+      tap({
+        next: () => this.removeEventSuccessNotification(event),
+        error: () => this.removeEventErrorNotification(event),
       })
     )
   }
 
   updateEvent(eventId: string, updateEvent: UpdateEvent) {
     return this.service.updateEvent(eventId, updateEvent).pipe(
-      tap((event) => this.updateEventSuccessNotification(event)),
-      catchError(() => {
-        this.updateEventErrorNotification(updateEvent)
-        return EMPTY
+      tap({
+        next: (event) => this.updateEventSuccessNotification(event),
+        error: () => this.updateEventErrorNotification(updateEvent),
       })
     )
   }

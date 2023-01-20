@@ -5,7 +5,7 @@ import { DetailedEvent } from '../../../event/models'
 import { VideoService } from '../../../video/services/video.service'
 import { Subject, takeUntil, tap } from 'rxjs'
 import { Video } from '../../../video/models'
-import { EventVideoActionsService } from '../../actions/event-video.actions.service'
+import { EventVideoService } from '../../services/event-video.service'
 
 interface VideoListItem extends ListItem {
   id: string
@@ -28,7 +28,7 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private videoService: VideoService,
-    private eventVideoService: EventVideoActionsService
+    private eventVideoService: EventVideoService
   ) {}
 
   ngOnChanges() {

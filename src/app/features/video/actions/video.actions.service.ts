@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { VideoService } from '../services/video.service'
 import { NotificationService } from 'carbon-components-angular'
 import { DetailedVideo, UpdateVideo } from '../models'
-import { catchError, EMPTY, tap } from 'rxjs'
+import { tap } from 'rxjs'
 
 @Injectable()
 export class VideoActionsService {
@@ -10,20 +10,18 @@ export class VideoActionsService {
 
   updateVideo(videoId: string, updateVideo: UpdateVideo) {
     return this.service.updateVideo(videoId, updateVideo).pipe(
-      tap((updatedVideo) => this.updateSuccessToast(updatedVideo)),
-      catchError((err) => {
-        this.updateErrorToast(err)
-        return EMPTY
+      tap({
+        next: (updatedVideo) => this.updateSuccessToast(updatedVideo),
+        error: (err) => this.updateErrorToast(err),
       })
     )
   }
 
   removeVideo(video: DetailedVideo) {
     return this.service.removeVideo(video.id).pipe(
-      tap(() => this.removeSuccessNotification(video)),
-      catchError((err) => {
-        this.removeErrorToast(err, video)
-        return EMPTY
+      tap({
+        next: () => this.removeSuccessNotification(video),
+        error: (err) => this.removeErrorToast(err, video),
       })
     )
   }

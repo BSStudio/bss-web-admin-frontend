@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core'
 import { EventVideoService } from '../services/event-video.service'
 import { NotificationService } from 'carbon-components-angular'
-import { EventVideo } from '../models'
 import { DetailedEvent } from '../../event/models'
-import { catchError, EMPTY, tap } from 'rxjs'
+import { tap } from 'rxjs'
 import { Video } from '../../video/models'
 
 @Injectable()
 export class EventVideoActionsService {
   constructor(private service: EventVideoService, private notification: NotificationService) {}
 
-  addVideoToEvent(eventVideo: EventVideo) {
-    return this.service.addVideoToEvent(eventVideo)
-  }
-
   removeVideoFromEvent(event: DetailedEvent, video: Video) {
     return this.service.removeVideoFromEvent({ eventId: event.id, videoId: video.id }).pipe(
-      tap((event) => this.removeSuccessNotification(event, video)),
-      catchError((err) => {
-        this.removeErrorNotification(err)
-        return EMPTY
+      tap({
+        next: (event) => this.removeSuccessNotification(event, video),
+        error: (err) => this.removeErrorNotification(err),
       })
     )
   }

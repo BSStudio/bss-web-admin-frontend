@@ -16,10 +16,12 @@ describe('VideoActionsService', () => {
 
   it('updateSuccessToast', (done) => {
     MockInstance(VideoService, 'updateVideo', () => of(detailedVideo))
+
     ngMocks
       .findInstance(VideoActionsService)
       .updateVideo(video.id, updateVideo)
       .subscribe(() => done())
+
     expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'success',
       title: 'Video updated',
@@ -31,10 +33,12 @@ describe('VideoActionsService', () => {
   })
   it('updateErrorToast', (done) => {
     MockInstance(VideoService, 'updateVideo', () => throwError(() => new Error()))
+
     ngMocks
       .findInstance(VideoActionsService)
       .updateVideo(video.id, updateVideo)
-      .subscribe({ complete: () => done() })
+      .subscribe({ error: () => done() })
+
     expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: 'Error updating',
@@ -45,10 +49,12 @@ describe('VideoActionsService', () => {
   })
   it('removeSuccessNotification', (done) => {
     MockInstance(VideoService, 'removeVideo', () => of(void 0))
+
     ngMocks
       .findInstance(VideoActionsService)
       .removeVideo(detailedVideo)
       .subscribe(() => done())
+
     expect(ngMocks.findInstance(NotificationService).showNotification).toHaveBeenCalledOnceWith({
       type: 'success',
       title: 'Video was removed',
@@ -58,10 +64,12 @@ describe('VideoActionsService', () => {
   })
   it('removeErrorToast', (done) => {
     MockInstance(VideoService, 'removeVideo', () => throwError(() => new Error()))
+
     ngMocks
       .findInstance(VideoActionsService)
       .removeVideo(detailedVideo)
-      .subscribe({ complete: () => done() })
+      .subscribe({ error: () => done() })
+
     expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: 'Error removing',

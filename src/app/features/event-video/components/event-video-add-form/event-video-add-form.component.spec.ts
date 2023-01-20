@@ -6,8 +6,8 @@ import { DetailedEvent } from '../../../event/models'
 import { FormBuilder, FormGroupDirective } from '@angular/forms'
 import { EventVideoModule } from '../../event-video.module'
 import { Video } from '../../../video/models'
-import { EventVideoActionsService } from '../../actions/event-video.actions.service'
 import { ComboBox } from 'carbon-components-angular'
+import { EventVideoService } from '../../services/event-video.service'
 
 describe('EventVideoAddFormComponent', () => {
   const video0 = new Video('0', 'url', 'title', '2022-01-01', true)
@@ -27,7 +27,7 @@ describe('EventVideoAddFormComponent', () => {
   it('should submit form ', (done) => {
     const updatedDetailedEvent = new DetailedEvent('id', 'url', 'title', 'description', 'date', true, [video0, video1])
     MockInstance(VideoService, 'getAllVideos', () => of([video0, video1]))
-    MockInstance(EventVideoActionsService, 'addVideoToEvent', () => of(updatedDetailedEvent))
+    MockInstance(EventVideoService, 'addVideoToEvent', () => of(updatedDetailedEvent))
     const { update, form, videos } = MockRender(EventVideoAddFormComponent, { event: detailedEvent }).point
       .componentInstance
 

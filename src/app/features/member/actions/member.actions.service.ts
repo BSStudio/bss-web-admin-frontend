@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { MemberService } from '../services/member.service'
 import { NotificationService } from 'carbon-components-angular'
 import { Member, UpdateMember } from '../models'
-import { catchError, EMPTY, tap } from 'rxjs'
+import { tap } from 'rxjs'
 
 @Injectable()
 export class MemberActionsService {
@@ -10,20 +10,18 @@ export class MemberActionsService {
 
   deleteMember(member: Member) {
     return this.service.deleteMember(member.id).pipe(
-      tap(() => this.deleteSuccessNotification(member)),
-      catchError((err) => {
-        this.deleteErrorToast(err, member)
-        return EMPTY
+      tap({
+        next: () => this.deleteSuccessNotification(member),
+        error: (err) => this.deleteErrorToast(err, member),
       })
     )
   }
 
   updateMember(memberId: string, updateMember: UpdateMember) {
     return this.service.updateMember(memberId, updateMember).pipe(
-      tap((member) => this.updateSuccessToast(member)),
-      catchError((err) => {
-        this.updateErrorToast(err)
-        return EMPTY
+      tap({
+        next: (member) => this.updateSuccessToast(member),
+        error: (err) => this.updateErrorToast(err),
       })
     )
   }
@@ -38,7 +36,7 @@ export class MemberActionsService {
   }
 
   private deleteErrorToast(error: unknown, member: Member) {
-    const caption = $localize`Member is associated with one or more videos. Try archiving or remove positions`
+    const caption = $localize`Member is associated with one or more videos. Try archiving member or remove their positions`
     this.notification.showToast({
       type: 'error',
       title: $localize`Error removing member`,

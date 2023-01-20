@@ -16,12 +16,13 @@ describe('EventActionsService', () => {
 
   it('removeEventSuccessNotification', (done) => {
     MockInstance(EventService, 'deleteEvent', () => of(void 0))
-    const underTest = ngMocks.findInstance(EventActionsService)
 
-    underTest.deleteEvent(event).subscribe(() => done())
+    ngMocks
+      .findInstance(EventActionsService)
+      .deleteEvent(event)
+      .subscribe(() => done())
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showNotification).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showNotification).toHaveBeenCalledOnceWith({
       type: 'success',
       title: $localize`Event was removed`,
       message: event.title,
@@ -31,12 +32,13 @@ describe('EventActionsService', () => {
 
   it('removeEventErrorNotification', (done) => {
     MockInstance(EventService, 'deleteEvent', () => throwError(() => new Error()))
-    const underTest = ngMocks.findInstance(EventActionsService)
 
-    underTest.deleteEvent(event).subscribe({ complete: () => done() })
+    ngMocks
+      .findInstance(EventActionsService)
+      .deleteEvent(event)
+      .subscribe({ error: () => done() })
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: $localize`Error removing event`,
       subtitle: event.title,
@@ -48,15 +50,16 @@ describe('EventActionsService', () => {
 
   it('updateEventSuccessNotification', (done) => {
     MockInstance(EventService, 'updateEvent', () => of(detailedEvent))
-    const underTest = ngMocks.findInstance(EventActionsService)
 
-    underTest.updateEvent(event.id, updateEvent).subscribe((actual) => {
-      expect(actual).toEqual(detailedEvent)
-      done()
-    })
+    ngMocks
+      .findInstance(EventActionsService)
+      .updateEvent(event.id, updateEvent)
+      .subscribe((actual) => {
+        expect(actual).toEqual(detailedEvent)
+        done()
+      })
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'success',
       title: 'Event updated',
       subtitle: event.title,
@@ -68,12 +71,13 @@ describe('EventActionsService', () => {
 
   it('updateEventErrorNotification', (done) => {
     MockInstance(EventService, 'updateEvent', () => throwError(() => new Error()))
-    const underTest = ngMocks.findInstance(EventActionsService)
 
-    underTest.updateEvent(event.id, updateEvent).subscribe({ complete: () => done() })
+    ngMocks
+      .findInstance(EventActionsService)
+      .updateEvent(event.id, updateEvent)
+      .subscribe({ error: () => done() })
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: $localize`Error updating event`,
       subtitle: updateEvent.title,

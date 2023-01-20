@@ -34,12 +34,13 @@ describe('MemberActionsService', () => {
 
   it('deleteSuccessNotification', (done) => {
     MockInstance(MemberService, 'deleteMember', () => of(void 0))
-    const underTest = ngMocks.findInstance(MemberActionsService)
 
-    underTest.deleteMember(member).subscribe(() => done())
+    ngMocks
+      .findInstance(MemberActionsService)
+      .deleteMember(member)
+      .subscribe(() => done())
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showNotification).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showNotification).toHaveBeenCalledOnceWith({
       type: 'success',
       title: 'Member removed',
       message: member.name,
@@ -49,29 +50,31 @@ describe('MemberActionsService', () => {
 
   it('deleteErrorToast', (done) => {
     MockInstance(MemberService, 'deleteMember', () => throwError(() => new Error()))
-    const underTest = ngMocks.findInstance(MemberActionsService)
 
-    underTest.deleteMember(member).subscribe({ complete: () => done() })
+    ngMocks
+      .findInstance(MemberActionsService)
+      .deleteMember(member)
+      .subscribe({ error: () => done() })
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: 'Error removing member',
       subtitle: member.name,
-      caption: `Member is associated with one or more videos. Try archiving or remove positions`,
-      message: `Member is associated with one or more videos. Try archiving or remove positions`,
+      caption: `Member is associated with one or more videos. Try archiving member or remove their positions`,
+      message: `Member is associated with one or more videos. Try archiving member or remove their positions`,
       smart: true,
     })
   })
 
   it('updateSuccessToast', (done) => {
     MockInstance(MemberService, 'updateMember', () => of(member))
-    const underTest = ngMocks.findInstance(MemberActionsService)
 
-    underTest.updateMember(member.id, updateMember).subscribe(() => done())
+    ngMocks
+      .findInstance(MemberActionsService)
+      .updateMember(member.id, updateMember)
+      .subscribe(() => done())
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'success',
       title: 'Profile updated',
       subtitle: member.name,
@@ -83,12 +86,13 @@ describe('MemberActionsService', () => {
 
   it('updateErrorToast', (done) => {
     MockInstance(MemberService, 'updateMember', () => throwError(() => new Error()))
-    const underTest = ngMocks.findInstance(MemberActionsService)
 
-    underTest.updateMember(member.id, updateMember).subscribe({ complete: () => done() })
+    ngMocks
+      .findInstance(MemberActionsService)
+      .updateMember(member.id, updateMember)
+      .subscribe({ error: () => done() })
 
-    const notification = ngMocks.findInstance(NotificationService)
-    expect(notification.showToast).toHaveBeenCalledOnceWith({
+    expect(ngMocks.findInstance(NotificationService).showToast).toHaveBeenCalledOnceWith({
       type: 'error',
       title: 'Error',
       caption: 'Check if member was assigned to a video',
