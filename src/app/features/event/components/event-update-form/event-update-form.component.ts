@@ -20,7 +20,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     url: this.fb.nonNullable.control('', [Validators.required]),
     title: this.fb.nonNullable.control('', [Validators.required]),
     description: this.fb.nonNullable.control(''),
-    date: this.fb.nonNullable.control<[string | Date]>([new Date()], [Validators.required]),
+    date: this.fb.nonNullable.control<Date[]>([new Date()], [Validators.required]),
     visible: this.fb.nonNullable.control(false, [Validators.required]),
   })
 
@@ -35,7 +35,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['event']) {
-      const date: [Date] = [new Date(this.event.date)]
+      const date = [new Date(this.event.date)]
       const formData = { ...this.event, date }
       this.form.patchValue(formData)
       this.form.markAsPristine()
@@ -46,7 +46,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     this.form.markAllAsTouched()
     if (this.form.valid) {
       const { date: dateArray, ...rest } = this.form.getRawValue()
-      const date = new Date(dateArray[0]).toISOString().split('T')[0]
+      const date = dateArray[0].toISOString().split('T')[0]
       this.updateEvent({ date, ...rest })
     }
   }

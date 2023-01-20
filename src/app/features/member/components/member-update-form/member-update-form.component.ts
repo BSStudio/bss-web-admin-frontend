@@ -41,7 +41,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
     this.form.markAllAsTouched()
     if (this.form.valid) {
       const { joinedAt, ...rest } = this.form.getRawValue()
-      const formatDate = new Date(joinedAt[0]).toISOString()
+      const formatDate = joinedAt[0].toISOString().split('T')[0]
       this.service
         .updateMember(this.member.id, { joinedAt: formatDate, ...rest })
         .pipe(

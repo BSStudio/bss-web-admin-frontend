@@ -20,7 +20,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
     url: this.fb.nonNullable.control('', { validators: [Validators.pattern(/^[\p{Alpha}\p{Number}\-]+$/u)] }),
     title: this.fb.nonNullable.control(''),
     description: this.fb.nonNullable.control(''),
-    uploadedAt: this.fb.nonNullable.control(new Date()),
+    uploadedAt: this.fb.nonNullable.control<Date[]>([new Date()]),
     visible: this.fb.nonNullable.control(false),
   })
 
@@ -29,7 +29,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['video']) {
       const { uploadedAt: date, url, title, description, visible } = this.video
-      const uploadedAt = new Date(date)
+      const uploadedAt = [new Date(date)]
       this.form.patchValue({ uploadedAt, url, title, description, visible })
       this.form.markAsPristine()
     }
@@ -37,7 +37,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
 
   public updateVideo() {
     const { uploadedAt: date, ...rest } = this.form.getRawValue()
-    const uploadedAt = date.toISOString().split('T')[0]
+    const uploadedAt = date[0].toISOString().split('T')[0]
     this.service
       .updateVideo(this.video.id, { uploadedAt, ...rest })
       .pipe(
