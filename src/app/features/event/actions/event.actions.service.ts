@@ -4,7 +4,7 @@ import { NotificationService } from 'carbon-components-angular'
 import { DetailedEvent, Event, UpdateEvent } from '../models'
 import { catchError, EMPTY, tap } from 'rxjs'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class EventActionsService {
   constructor(private service: EventService, private notification: NotificationService) {}
 

@@ -4,7 +4,7 @@ import { NotificationService } from 'carbon-components-angular'
 import { DetailedVideo, UpdateVideo } from '../models'
 import { catchError, EMPTY, tap } from 'rxjs'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class VideoActionsService {
   constructor(private service: VideoService, private notification: NotificationService) {}
 

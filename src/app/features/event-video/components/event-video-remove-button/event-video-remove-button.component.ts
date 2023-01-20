@@ -23,12 +23,9 @@ import { EventVideoActionsService } from '../../actions/event-video.actions.serv
   `,
 })
 export class EventVideoRemoveButtonComponent implements OnDestroy {
-  @Input()
-  public video!: Video
-  @Input()
-  public event!: DetailedEvent
-  @Output()
-  public update = new EventEmitter<DetailedEvent>()
+  @Input() public video!: Video
+  @Input() public event!: DetailedEvent
+  @Output() public update = new EventEmitter<DetailedEvent>()
   private readonly destroy$ = new Subject<void>()
 
   constructor(private modalService: ModalService, private eventVideoService: EventVideoActionsService) {}
@@ -42,11 +39,7 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
       content: $localize`Are you sure you want to remove this video?`,
       buttons: [
         { type: ModalButtonType.secondary, text: $localize`Close` },
-        {
-          type: ModalButtonType.danger,
-          text: $localize`Remove`,
-          click: () => this.removeEventVideo(),
-        },
+        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeEventVideo() },
       ],
     })
   }

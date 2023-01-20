@@ -24,6 +24,7 @@ import { MemberTableComponent } from './components/member-table/member-table.com
 import { MemberUpdateFormComponent } from './components/member-update-form/member-update-form.component'
 import { MemberProfilePictureComponent } from './components/member-profile-picture/member-profile-picture.component'
 import { MemberProfilePictureUploadComponent } from './components/member-profile-picture-upload/member-profile-picture-upload.component'
+import { MemberActionsService } from './actions/member.actions.service'
 
 @NgModule({
   imports: [
@@ -54,6 +55,6 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     MemberProfilePictureComponent,
     MemberProfilePictureUploadComponent,
   ],
-  providers: [MemberStatusPipe],
+  providers: [MemberStatusPipe, MemberActionsService],
 })
 export class MemberModule {}

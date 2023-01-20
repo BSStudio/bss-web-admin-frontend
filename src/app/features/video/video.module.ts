@@ -23,6 +23,7 @@ import { VideoCrewModule } from '../video-crew/video-crew.module'
 import { VideoCreateModalComponent } from './components/video-create-modal/video-create-modal.component'
 import { VideoTableComponent } from './components/video-table-paginated/video-table.component'
 import { SharedModule } from '../../shared/shared.module'
+import { VideoActionsService } from './actions/video.actions.service'
 
 @NgModule({
   imports: [
@@ -51,5 +52,6 @@ import { SharedModule } from '../../shared/shared.module'
     VideoTableComponent,
     VideoUpdateFormComponent,
   ],
+  providers: [VideoActionsService],
 })
 export class VideoModule {}

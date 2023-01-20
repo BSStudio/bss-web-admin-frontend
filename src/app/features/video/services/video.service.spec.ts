@@ -12,12 +12,12 @@ describe('VideoService', () => {
   beforeAll(() => MockBuilder([VideoService, HttpClientTestingModule]))
 
   const createVideo = new CreateVideo('url', 'title')
-    const video = new Video('videoId', 'url', 'title', 'uploadedAt', true)
-    const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
-    const member = new SimpleMember('id', 'name', 'nickname')
-    const crewMember = new CrewMember('position', 'memberId', member)
-    const detailedVideo = new DetailedVideo('videoId', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
-    const sort = new Sort(false, false, true)
+  const video = new Video('videoId', 'url', 'title', 'uploadedAt', true)
+  const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
+  const member = new SimpleMember('id', 'name', 'nickname')
+  const crewMember = new CrewMember('position', 'memberId', member)
+  const detailedVideo = new DetailedVideo('videoId', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
+  const sort = new Sort(false, false, true)
   const pageable = new Pageable(sort, 3, 2, 10, true, false)
   const paginatedResponse = new PaginatedResponse<Video>(
     [video],

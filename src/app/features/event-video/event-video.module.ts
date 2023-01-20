@@ -14,6 +14,7 @@ import {
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { SharedModule } from '../../shared/shared.module'
+import { EventVideoActionsService } from './actions/event-video.actions.service'
 
 @NgModule({
   imports: [
@@ -30,5 +31,6 @@ import { SharedModule } from '../../shared/shared.module'
   ],
   declarations: [EventVideoAddFormComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
   exports: [EventVideoAddFormComponent, EventVideoTableComponent, EventVideoRemoveButtonComponent],
+  providers: [EventVideoActionsService],
 })
 export class EventVideoModule {}

@@ -14,12 +14,7 @@ describe('VideoCrewAddModalComponent', () => {
     new Member('id', 'url', 'name', 'nickname', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true),
   ]
   const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
-  beforeEach(() =>
-    MockBuilder([VideoCrewAddFormComponent, FormBuilder], VideoCrewModule).provide({
-      provide: 'video',
-      useFactory: () => detailedVideo,
-    })
-  )
+  beforeEach(() => MockBuilder([VideoCrewAddFormComponent, FormBuilder], VideoCrewModule))
 
   it('should create', () => {
     MockInstance(VideoCrewService, 'getPositions', () => of(positions))

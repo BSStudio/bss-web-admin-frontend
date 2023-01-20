@@ -20,6 +20,7 @@ import { SharedModule } from '../../shared/shared.module'
 import { BreadcrumbComponent } from '../../shared/components/breadcrumb/breadcrumb.component'
 import { EventRemoveButtonComponent } from './components/event-remove-button/event-remove-button.component'
 import { EventVideoModule } from '../event-video/event-video.module'
+import { EventActionsService } from './actions/event.actions.service'
 
 @NgModule({
   imports: [
@@ -45,5 +46,6 @@ import { EventVideoModule } from '../event-video/event-video.module'
     EventUpdateFormComponent,
     EventRemoveButtonComponent,
   ],
+  providers: [EventActionsService],
 })
 export class EventModule {}

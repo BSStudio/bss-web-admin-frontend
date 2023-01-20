@@ -4,7 +4,7 @@ import { NotificationService } from 'carbon-components-angular'
 import { Member, UpdateMember } from '../models'
 import { catchError, EMPTY, tap } from 'rxjs'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MemberActionsService {
   constructor(private service: MemberService, private notification: NotificationService) {}
 

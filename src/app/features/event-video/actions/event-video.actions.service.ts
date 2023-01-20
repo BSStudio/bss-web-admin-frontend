@@ -6,7 +6,7 @@ import { DetailedEvent } from '../../event/models'
 import { catchError, EMPTY, tap } from 'rxjs'
 import { Video } from '../../video/models'
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class EventVideoActionsService {
   constructor(private service: EventVideoService, private notification: NotificationService) {}
 
