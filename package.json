@@ -21,7 +21,7 @@
     "@angular/router": "15.0.4",
     "@carbon/elements": "10.56.1",
     "carbon-components": "10.58.5",
-    "carbon-components-angular": "4.66.0",
+    "carbon-components-angular": "4.69.2",
     "hls.js": "1.2.9",
     "rxjs": "7.8.0",
     "tslib": "2.4.1",
