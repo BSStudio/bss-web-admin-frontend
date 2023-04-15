@@ -22,10 +22,10 @@
     "@carbon/elements": "10.56.1",
     "carbon-components": "10.58.5",
     "carbon-components-angular": "4.66.0",
-    "hls.js": "1.2.9",
+    "hls.js": "1.4.0",
     "rxjs": "7.8.0",
-    "tslib": "2.4.1",
-    "zone.js": "0.12.0"
+    "tslib": "2.5.0",
+    "zone.js": "0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "15.2.6",
@@ -37,17 +37,17 @@
     "@angular/cli": "15.2.6",
     "@angular/compiler-cli": "15.2.7",
     "@angular/localize": "15.2.7",
-    "@stryker-mutator/core": "6.3.1",
-    "@stryker-mutator/karma-runner": "6.3.1",
-    "@stryker-mutator/typescript-checker": "6.3.1",
+    "@stryker-mutator/core": "6.4.2",
+    "@stryker-mutator/karma-runner": "6.4.2",
+    "@stryker-mutator/typescript-checker": "6.4.2",
     "@types/jasmine": "4.3.1",
-    "@types/node": "18.11.17",
-    "@typescript-eslint/eslint-plugin": "5.46.1",
-    "@typescript-eslint/parser": "5.46.1",
-    "eslint": "8.30.0",
-    "eslint-config-prettier": "8.5.0",
+    "@types/node": "18.15.11",
+    "@typescript-eslint/eslint-plugin": "5.48.0",
+    "@typescript-eslint/parser": "5.58.0",
+    "eslint": "8.38.0",
+    "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
-    "jasmine-core": "4.5.0",
+    "jasmine-core": "4.6.0",
     "karma": "6.4.1",
     "karma-chrome-launcher": "3.1.1",
     "karma-coverage": "2.2.0",
@@ -56,7 +56,7 @@
     "karma-junit-reporter": "2.0.1",
     "ng-extract-i18n-merge": "2.7.0",
     "ng-mocks": "14.8.0",
-    "prettier": "2.8.1",
-    "typescript": "~4.8.4"
+    "prettier": "2.8.7",
+    "typescript": "~4.9.5"
   }
 }
