@@ -1,7 +1,7 @@
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
 import { VideoCreateModalComponent } from './video-create-modal.component'
 import { VideoModule } from '../../video.module'
-import { FormGroupDirective, ReactiveFormsModule } from '@angular/forms'
+import { FormBuilder, FormGroupDirective, ReactiveFormsModule } from '@angular/forms'
 import {
   Button,
   Modal,
@@ -13,7 +13,7 @@ import {
 } from 'carbon-components-angular'
 
 describe('VideoCreateModalComponent', () => {
-  beforeEach(() => MockBuilder([VideoCreateModalComponent, ModalModule, ReactiveFormsModule], VideoModule))
+  beforeEach(() => MockBuilder([VideoCreateModalComponent, ModalModule, ReactiveFormsModule, FormBuilder], VideoModule))
 
   it('should render', () => {
     const fixture = MockRender(VideoCreateModalComponent, { open: true })
