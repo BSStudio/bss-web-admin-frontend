@@ -1,12 +1,20 @@
 import { MemberProfilePictureComponent } from './member-profile-picture.component'
 import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
 import { MemberModule } from '../../member.module'
-import { Member } from '../../models/member.model'
-import { MemberStatus } from '../../models/member-status.model'
-import { NgOptimizedImage } from '@angular/common'
+import { Member, MemberStatus } from '../../models'
 
 describe('MemberProfilePictureComponent', () => {
-  const member = new Member('id', 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, true)
+  const member = new Member(
+    'id',
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    true
+  )
   const date = new Date(2022, 1, 1)
   beforeEach(() => {
     jasmine.clock().install()
@@ -18,6 +26,7 @@ describe('MemberProfilePictureComponent', () => {
   it('should create', () => {
     const fixture = MockRender(MemberProfilePictureComponent, {
       member,
+      showCaption: true,
     })
     expect(fixture.componentInstance.member).toEqual(member)
 
@@ -43,8 +52,7 @@ describe('MemberProfilePictureComponent', () => {
 
     const img = ngMocks.find('figure > picture > img')
     expect(img.nativeElement.alt).toEqual(`${member.name}'s profile picture`)
-    const optimizedImage = ngMocks.findInstance(NgOptimizedImage)
-    expect(optimizedImage.ngSrc).toBe('/assets/fallback.jpg')
+    expect(img.nativeElement.src).toMatch(/\/assets\/fallback\.jpg$/)
     const figcaption = ngMocks.find('figure > figcaption')
     expect(ngMocks.formatText(figcaption)).toBe(`${member.name}'s profile picture`)
   })

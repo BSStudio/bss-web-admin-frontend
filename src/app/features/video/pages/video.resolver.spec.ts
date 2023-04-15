@@ -1,4 +1,4 @@
-import { MockBuilder, MockRender, NG_MOCKS_GUARDS, ngMocks } from 'ng-mocks'
+import { MockBuilder, MockRender, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks'
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router'
 import { RouterTestingModule } from '@angular/router/testing'
 import { Location } from '@angular/common'
@@ -8,15 +8,24 @@ import { of } from 'rxjs'
 import { DetailedVideo } from '../models'
 import { fakeAsync, tick } from '@angular/core/testing'
 import { VideoIdComponent } from './video-id/video-id.component'
-import { FormBuilder } from '@angular/forms'
 import { VideoModule } from '../video.module'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
 
 describe('VideoResolver', () => {
   beforeEach(() =>
-    MockBuilder([VideoResolver, RouterModule, RouterTestingModule.withRoutes([]), FormBuilder], VideoModule)
+    MockBuilder(
+      [
+        VideoResolver,
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        HttpClientTestingModule,
+        NG_MOCKS_ROOT_PROVIDERS,
+      ],
+      VideoModule
+    )
   )
 
-  xit('should return video', fakeAsync(() => {
+  it('should return video', fakeAsync(() => {
     const fixture = MockRender(RouterOutlet, {})
     const router: Router = fixture.point.injector.get(Router)
     const location: Location = fixture.point.injector.get(Location)
@@ -45,6 +54,6 @@ describe('VideoResolver', () => {
     const route: ActivatedRoute = el.injector.get(ActivatedRoute)
 
     // Now we can assert that it has expected data.
-    expect(route.snapshot.data).toEqual(detailedVideo)
+    expect(route.snapshot.data['video']).toEqual(detailedVideo)
   }))
 })

@@ -11,7 +11,7 @@
       </button>
     </ibm-table-toolbar-actions>
     <ibm-table-toolbar-content>
-      <button ibmButton="secondary" [iconOnly]="true">
+      <button ibmButton="secondary" [disabled]="loading" [iconOnly]="true" [hasAssistiveText]="true">
         <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getVideos()"></svg>
         <span i18n class="bx--assistive-text">Refresh</span>
       </button>
@@ -28,10 +28,11 @@
     [showSelectionColumn]="true"
     [striped]="false"
     (rowClick)="onRowClick($event)"
+    (sort)="sort($event)"
   >
     <tbody>
       <tr>
-        <td i18n colspan="5">No videos</td>
+        <td colspan="5"><ibm-inline-loading loadingText="Loading" i18n-loadingText></ibm-inline-loading></td>
       </tr>
     </tbody>
   </ibm-table>

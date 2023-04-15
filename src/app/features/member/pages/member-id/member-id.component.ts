@@ -1,7 +1,7 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Member } from '../../models/member.model'
-import { Subject } from 'rxjs'
+import { Title } from '@angular/platform-browser'
+import { Member } from '../../models'
 import { MemberProfilePictureComponent } from '../../components/member-profile-picture/member-profile-picture.component'
 
 @Component({
@@ -9,14 +9,13 @@ import { MemberProfilePictureComponent } from '../../components/member-profile-p
   templateUrl: './member-id.component.html',
   styleUrls: ['./member-id.component.scss'],
 })
-export class MemberIdComponent implements OnDestroy {
-  public member: Member
-  private readonly destroy$ = new Subject<void>()
+export class MemberIdComponent {
+  public member = <Member>this.route.snapshot.data['member']
   @ViewChild('picture', { static: true })
   public picture!: MemberProfilePictureComponent
 
-  constructor(private route: ActivatedRoute) {
-    this.member = <Member>this.route.snapshot.data['member']
+  constructor(private route: ActivatedRoute, private title: Title) {
+    this.title.setTitle(this.member.name)
   }
 
   updateImage() {
@@ -25,10 +24,6 @@ export class MemberIdComponent implements OnDestroy {
 
   setMember(member: Member) {
     this.member = member
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next()
-    this.destroy$.unsubscribe()
+    this.title.setTitle(this.member.name)
   }
 }

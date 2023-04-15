@@ -1,21 +1,22 @@
 import { Component, Inject, LOCALE_ID, OnDestroy, OnInit } from '@angular/core'
-import { VideoService } from '../../services/video.service'
-import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
 import { Router } from '@angular/router'
+import { formatDate } from '@angular/common'
+import { ModalService, TableHeaderItem, TableItem, TableModel } from 'carbon-components-angular'
+import { Subject, takeUntil, tap } from 'rxjs'
+import { VideoService } from '../../services/video.service'
 import { VideoCreateModalComponent } from '../video-create-modal/video-create-modal.component'
 import { Video } from '../../models'
 import { BooleanPipe } from '../../../../shared/pipes/boolean.pipe'
-import { formatDate } from '@angular/common'
-import { Subject, takeUntil, tap } from 'rxjs'
-import { PaginatedResponse } from '../../../../shared/models'
+import { PaginatedResponse, SortRequest } from '../../../../shared/models'
 
 @Component({
   selector: 'app-video-table',
   templateUrl: './video-table.component.html',
 })
 export class VideoTableComponent implements OnInit, OnDestroy {
-  readonly table = new TableModel()
   private readonly destroy$ = new Subject<void>()
+  public readonly table = new TableModel()
+  public loading = true
 
   constructor(
     private service: VideoService,
@@ -27,6 +28,15 @@ export class VideoTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initHeaders()
+    this.table.pageLength = 50
+    this.getVideos()
+  }
+
+  sort(index: number) {
+    if (this.table.header[index].sorted) {
+      this.table.header[index].ascending = this.table.header[index].descending
+    }
+    this.table.sort(index)
     this.getVideos()
   }
 
@@ -40,17 +50,24 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     await this.router.navigate(['video', id])
   }
 
-  getVideos() {
-    this.table.isLoading = true
-    return this.service
-      .getVideos(this.table.currentPage - 1, this.table.pageLength)
+  getVideos(): void {
+    this.loading = true
+    this.service
+      .getVideos({ page: this.table.currentPage - 1, size: this.table.pageLength, sort: this.sortRequest })
       .pipe(
-        tap((paginatedVideos) => this.updateTable(paginatedVideos)),
+        tap({
+          next: (paginatedVideos) => this.updateTable(paginatedVideos),
+          complete: () => (this.loading = false),
+        }),
         takeUntil(this.destroy$)
       )
-      .subscribe({
-        complete: () => (this.table.isLoading = false),
-      })
+      .subscribe()
+  }
+
+  private get sortRequest(): SortRequest<Video>[] {
+    return this.table.header
+      .filter(({ sorted }) => sorted)
+      .map(({ metadata, ascending }) => ({ property: metadata, direction: ascending ? 'asc' : 'desc' }))
   }
 
   private updateTable(paginatedVideos: PaginatedResponse<Video>) {
@@ -78,7 +95,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       .subscribe()
   }
 
-  get selectedIds() {
+  private get selectedIds() {
     return this.table.rowsSelected
       .map((selected, index) => ({ selected, index }))
       .filter(({ selected }) => selected)
@@ -92,10 +109,16 @@ export class VideoTableComponent implements OnInit, OnDestroy {
 
   private initHeaders() {
     this.table.header = [
-      new TableHeaderItem({ data: $localize`Title` }),
-      new TableHeaderItem({ data: $localize`URL` }),
-      new TableHeaderItem({ data: $localize`Upload date` }),
-      new TableHeaderItem({ data: $localize`Visible` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'title', data: $localize`Title` }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'url', data: $localize`URL` }),
+      new TableHeaderItem({
+        compare: () => 0,
+        metadata: 'uploadedAt',
+        data: $localize`Upload date`,
+        sorted: true,
+        descending: true,
+      }),
+      new TableHeaderItem({ compare: () => 0, metadata: 'visible', data: $localize`Visible` }),
     ]
   }
 

@@ -1,38 +1,59 @@
 import { Location } from '@angular/common'
 import { RouterTestingModule } from '@angular/router/testing'
-import { MockBuilder, MockRender, ngMocks } from 'ng-mocks'
+import { MockBuilder, MockRender, NG_MOCKS_ROOT_PROVIDERS, ngMocks } from 'ng-mocks'
 import { ActivatedRoute, Router, RouterModule, RouterOutlet } from '@angular/router'
 import { EventResolver } from './event.resolver'
-import { DetailedEvent } from '../models'
-import { EventService } from '../services/event.service'
 import { of } from 'rxjs'
 import { fakeAsync, tick } from '@angular/core/testing'
-import { EventIdComponent } from './event-id/event-id.component'
 import { EventModule } from '../event.module'
+import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { EventService } from '../services/event.service'
+import { DetailedEvent } from '../models'
+import { EventIdComponent } from './event-id/event-id.component'
 
 describe('EventResolver', () => {
-  const eventId = 'eventId'
-  const detailedEvent = new DetailedEvent(eventId, 'url', 'title', 'description', 'date', true, [])
-  beforeEach(() => MockBuilder([EventResolver, RouterModule, RouterTestingModule.withRoutes([])], EventModule))
+  beforeEach(() =>
+    MockBuilder(
+      [
+        EventResolver,
+        RouterModule,
+        RouterTestingModule.withRoutes([]),
+        HttpClientTestingModule,
+        NG_MOCKS_ROOT_PROVIDERS,
+      ],
+      EventModule
+    )
+  )
 
-  xit('should return event', fakeAsync(() => {
+  it('should return event', fakeAsync(() => {
     const fixture = MockRender(RouterOutlet, {})
     const router: Router = fixture.point.injector.get(Router)
-    const location = fixture.point.injector.get(Location)
-    const eventService = fixture.point.injector.get(EventService)
-    eventService.getEvent = () => of(detailedEvent)
+    const location: Location = fixture.point.injector.get(Location)
+    const dataService: EventService = fixture.point.injector.get(EventService)
 
+    // DataService has been replaced with a mock copy,
+    // let's set a custom value we will assert later on.
+    const eventId = 'eventId'
+    const detailedEvent = new DetailedEvent(eventId, 'url', 'title', 'description', 'date', true, [])
+    dataService.getEvent = () => of(detailedEvent)
+
+    // Let's switch to the route with the resolver.
     location.go(`/${eventId}`)
 
+    // Now we can initialize navigation.
     if (fixture.ngZone) {
       fixture.ngZone.run(() => router.initialNavigation())
-      tick()
+      tick() // is needed for rendering of the current route.
     }
 
+    // Checking that we are on the right page.
     expect(location.path()).toEqual(`/${eventId}`)
 
+    // Let's extract ActivatedRoute of the current component.
     const el = ngMocks.find(EventIdComponent)
-    const route = el.injector.get(ActivatedRoute)
+    const route: ActivatedRoute = el.injector.get(ActivatedRoute)
+
+    // Now we can assert that it has expected data.
     expect(route.snapshot.data['event']).toEqual(detailedEvent)
   }))
 })

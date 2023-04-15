@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core'
 import { CommonModule, NgOptimizedImage } from '@angular/common'
 import { ReactiveFormsModule } from '@angular/forms'
 import {
-  BreadcrumbModule,
+  DatePickerModule,
   FileUploaderModule,
   GridModule,
   IconModule,
+  InlineLoadingModule,
   ModalModule,
   NFormsModule,
   NotificationModule,
@@ -23,13 +24,13 @@ import { MemberTableComponent } from './components/member-table/member-table.com
 import { MemberUpdateFormComponent } from './components/member-update-form/member-update-form.component'
 import { MemberProfilePictureComponent } from './components/member-profile-picture/member-profile-picture.component'
 import { MemberProfilePictureUploadComponent } from './components/member-profile-picture-upload/member-profile-picture-upload.component'
+import { MemberActionsService } from './actions/member.actions.service'
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MemberRoutingModule,
-    BreadcrumbModule,
     GridModule,
     IconModule,
     ModalModule,
@@ -40,6 +41,8 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     SharedModule,
     FileUploaderModule,
     NgOptimizedImage,
+    DatePickerModule,
+    InlineLoadingModule,
   ],
   declarations: [
     MemberIndexComponent,
@@ -52,6 +55,6 @@ import { MemberProfilePictureUploadComponent } from './components/member-profile
     MemberProfilePictureComponent,
     MemberProfilePictureUploadComponent,
   ],
-  providers: [MemberStatusPipe],
+  providers: [MemberStatusPipe, MemberActionsService],
 })
 export class MemberModule {}

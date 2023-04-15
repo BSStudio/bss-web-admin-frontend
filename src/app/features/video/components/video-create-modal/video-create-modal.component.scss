@@ -1,0 +1,14 @@
+@import "@carbon/elements/scss/layout/layout";
+
+ibm-modal {
+  form {
+    ibm-label {
+      margin-bottom: $spacing-04;
+    }
+  }
+  ibm-modal-footer {
+    button:first-of-type {
+      order: 1;
+    }
+  }
+}

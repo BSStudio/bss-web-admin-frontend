@@ -7,7 +7,7 @@
         (valueChange)="filterNodeNames($event)"
         (clear)="searchValue = ''"
       ></ibm-table-toolbar-search>
-      <button ibmButton="secondary" [iconOnly]="true">
+      <button ibmButton="secondary" [iconOnly]="true" [hasAssistiveText]="true" [disabled]="loading">
         <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getMembers()"></svg>
         <span i18n class="bx--assistive-text">Refresh</span>
       </button>
@@ -19,10 +19,14 @@
   </ibm-table-toolbar>
   <ibm-table
     [model]="table"
-    [sortable]="false"
+    [sortable]="true"
     [showSelectionColumn]="false"
     [striped]="false"
     (rowClick)="onRowClick($event)"
     size="sh"
-  ></ibm-table>
+  >
+    <tr>
+      <td colspan="5"><ibm-inline-loading loadingText="Loading" i18n-loadingText></ibm-inline-loading></td>
+    </tr>
+  </ibm-table>
 </ibm-table-container>

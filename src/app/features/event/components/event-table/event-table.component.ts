@@ -15,6 +15,7 @@ import { EventCreateModalComponent } from '../event-create-modal/event-create-mo
 export class EventTableComponent implements OnInit, OnDestroy {
   public readonly table = new TableModel()
   public searchValue = ''
+  public loading = true
   private readonly destroy$ = new Subject<void>()
 
   constructor(
@@ -32,10 +33,14 @@ export class EventTableComponent implements OnInit, OnDestroy {
   }
 
   getEvents() {
+    this.loading = true
     this.service
       .getEvents()
       .pipe(
-        tap((events) => this.updateTable(events)),
+        tap({
+          next: (events) => this.updateTable(events),
+          complete: () => (this.loading = false),
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe()
@@ -80,7 +85,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
     const title: string = this.table.row(index)[0].data
     const url: string = this.table.row(index)[1].data
     const searchValue = this.searchValue.toLowerCase()
-    return !title.toLowerCase().includes(searchValue) || !url.toLowerCase().includes(searchValue)
+    return !(title.toLowerCase().includes(searchValue) || url.toLowerCase().includes(searchValue))
   }
 
   ngOnDestroy(): void {

@@ -1,34 +1,48 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <ibm-label>
+  <ibm-label class="name">
     <ng-container i18n>Name</ng-container>
     <input ibmText formControlName="name" />
   </ibm-label>
-  <ibm-label>
+  <ibm-label class="nickname">
+    <ng-container i18n>Nickname</ng-container>
+    <input ibmText formControlName="nickname" />
+  </ibm-label>
+  <ibm-label class="url">
     <ng-container i18n>URL</ng-container>
     <input ibmText formControlName="url" />
   </ibm-label>
-  <ibm-label>
+  <ibm-label class="role">
     <ng-container i18n>Role</ng-container>
     <input ibmText formControlName="role" />
   </ibm-label>
-  <ibm-label>
+  <ibm-label class="description">
     <ng-container i18n>Description</ng-container>
     <textarea ibmTextArea formControlName="description"></textarea>
   </ibm-label>
   <ibm-select formControlName="status" label="Status" i18n-label>
     <option *ngFor="let status of statuses" [value]="status">{{ status | memberStatus }}</option>
   </ibm-select>
-  <ibm-toggle
-    label="Archived"
+  <ibm-date-picker
+    label="Joined at:"
     i18n-label
-    formControlName="archived"
-    offText="No"
-    i18n-offText
-    onText="Yes"
-    i18n-onText
-  ></ibm-toggle>
-  <button ibmButton="primary" type="submit">
-    <ng-container i18n>Save</ng-container>
-    <svg ibmIcon="save" size="16" class="bx--btn__icon"></svg>
-  </button>
+    dateFormat="Y-m-d"
+    [flatpickrOptions]="flatpickrOptions"
+    placeholder="YYYY-MM-dd"
+    formControlName="joinedAt"
+  ></ibm-date-picker>
+  <div>
+    <ibm-toggle
+      label="Archived"
+      i18n-label
+      formControlName="archived"
+      offText="No"
+      i18n-offText
+      onText="Yes"
+      i18n-onText
+    ></ibm-toggle>
+    <button ibmButton="primary" type="submit" [disabled]="form.pristine">
+      <ng-container i18n>Save</ng-container>
+      <svg ibmIcon="save" size="16" class="bx--btn__icon"></svg>
+    </button>
+  </div>
 </form>

@@ -2,19 +2,35 @@ import { MockBuilder, ngMocks } from 'ng-mocks'
 import { MemberService } from './member.service'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { tap } from 'rxjs'
-import { Member } from '../models/member.model'
-import { MemberStatus } from '../models/member-status.model'
-import { CreateMember } from '../models/create-member.model'
-import { UpdateMember } from '../models/update-member.model'
+import { CreateMember, Member, MemberStatus, UpdateMember } from '../models'
 
 describe('MemberService', () => {
   ngMocks.faster()
   beforeAll(() => MockBuilder([MemberService, HttpClientTestingModule]))
 
   const id = 'id'
-  const member = new Member(id, 'url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const member = new Member(
+    id,
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
   const createMember = new CreateMember('url', 'name')
-  const updateMember = new UpdateMember('url', 'name', 'description', 'joinedAt', 'role', MemberStatus.ALUMNI, false)
+  const updateMember = new UpdateMember(
+    'url',
+    'name',
+    'nickname',
+    'description',
+    'joinedAt',
+    'role',
+    MemberStatus.ALUMNI,
+    false
+  )
 
   it('should get all members', (done) => {
     const service = ngMocks.findInstance(MemberService)
@@ -84,12 +100,17 @@ describe('MemberService', () => {
 
     service
       .deleteMember(id)
-      .pipe(tap((actual) => expect(actual).toEqual(member)))
-      .subscribe({ complete: () => done() })
+      .pipe(
+        tap(() => {
+          expect().nothing()
+          done()
+        })
+      )
+      .subscribe()
 
     const req = httpMock.expectOne(`/api/v1/member/${id}`)
     expect(req.request.method).toBe('DELETE')
-    req.flush(member)
+    req.flush(null)
     httpMock.verify()
   })
 })

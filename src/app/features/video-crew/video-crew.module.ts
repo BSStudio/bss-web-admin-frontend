@@ -7,14 +7,16 @@ import {
   IconModule,
   ModalModule,
   NFormsModule,
+  NotificationModule,
   TableModule,
 } from 'carbon-components-angular'
 import { RouterModule } from '@angular/router'
-import { VideoCrewAddModalComponent } from './components/video-crew-add-modal/video-crew-add-modal.component'
+import { VideoCrewAddFormComponent } from './components/video-crew-add-form/video-crew-add-form.component'
 import { ReactiveFormsModule } from '@angular/forms'
+import { VideoCrewRemoveButtonComponent } from './components/video-crew-remove-button/video-crew-remove-button.component'
 
 @NgModule({
-  declarations: [VideoCrewTableComponent, VideoCrewAddModalComponent],
+  declarations: [VideoCrewTableComponent, VideoCrewAddFormComponent, VideoCrewRemoveButtonComponent],
   imports: [
     CommonModule,
     TableModule,
@@ -22,6 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms'
     RouterModule,
     IconModule,
     ModalModule,
+    NotificationModule,
     ReactiveFormsModule,
     NFormsModule,
     ComboBoxModule,

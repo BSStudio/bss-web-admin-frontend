@@ -1,0 +1,11 @@
+@import "@carbon/elements/scss/layout";
+
+section {
+  margin-bottom: $layout-02
+}
+
+section#event-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

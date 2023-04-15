@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule } from '@angular/forms'
 import {
-  BreadcrumbModule,
   DatePickerModule,
   FileUploaderModule,
   IconModule,
+  InlineLoadingModule,
+  ListModule,
   ModalModule,
   NFormsModule,
   NotificationModule,
@@ -22,12 +23,12 @@ import { VideoCrewModule } from '../video-crew/video-crew.module'
 import { VideoCreateModalComponent } from './components/video-create-modal/video-create-modal.component'
 import { VideoTableComponent } from './components/video-table-paginated/video-table.component'
 import { SharedModule } from '../../shared/shared.module'
+import { VideoActionsService } from './actions/video.actions.service'
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    BreadcrumbModule,
     DatePickerModule,
     FileUploaderModule,
     IconModule,
@@ -39,6 +40,8 @@ import { SharedModule } from '../../shared/shared.module'
     VideoRoutingModule,
     VideoCrewModule,
     SharedModule,
+    InlineLoadingModule,
+    ListModule,
   ],
   declarations: [
     VideoIndexComponent,
@@ -49,5 +52,6 @@ import { SharedModule } from '../../shared/shared.module'
     VideoTableComponent,
     VideoUpdateFormComponent,
   ],
+  providers: [VideoActionsService],
 })
 export class VideoModule {}

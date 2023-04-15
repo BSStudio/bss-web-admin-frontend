@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core'
 import { VideoResolver } from './video.resolver'
 
 const routes: Routes = [
-  { path: '', component: VideoIndexComponent },
+  { path: '', component: VideoIndexComponent, title: $localize`BSS Web | Videos` },
   { path: ':videoId', resolve: { video: VideoResolver }, component: VideoIdComponent },
 ]
 

@@ -2,7 +2,6 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "noUnusedLocals": true,
     "outDir": "./out-tsc/app"
   },
   "files": [

@@ -1,0 +1,34 @@
+@import "@carbon/elements/scss/layout";
+
+form {
+  display: grid;
+  grid-gap: $spacing-04;
+  @media (min-width: 672px) {
+    grid-template-areas:
+    "title url"
+    "description description"
+    "date visible"
+    "submit submit";
+    ibm-label.url {
+      grid-area: url;
+    }
+    ibm-label.title {
+      grid-area: title;
+    }
+    ibm-label.description {
+      grid-area: description;
+    }
+    ibm-toggle {
+      grid-area: visible;
+    }
+    ibm-date-picker {
+      grid-area: date;
+    }
+    button {
+      grid-area: submit;
+    }
+  }
+  button {
+    justify-self: start;
+  }
+}

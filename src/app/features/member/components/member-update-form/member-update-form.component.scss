@@ -2,8 +2,42 @@
 
 form {
   display: grid;
-  grid-gap: $spacing-03;
-  button {
-    justify-self: end;
+  grid-gap: $spacing-04;
+  @media (min-width: 672px) {
+    grid-template-areas:
+      "name nickname"
+      "url role"
+      "description description"
+      "status joinedAt"
+      "toggles toggles";
+    ibm-label.name {
+      grid-area: name;
+    }
+    ibm-label.nickname {
+      grid-area: nickname;
+    }
+    ibm-label.url {
+      grid-area: url;
+    }
+    ibm-label.role {
+      grid-area: role;
+    }
+    ibm-select {
+      grid-area: status;
+    }
+    ibm-date-picker {
+      grid-area: joinedAt;
+    }
+    ibm-label.description {
+      grid-area: description;
+    }
+    div {
+      grid-area: toggles;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: flex-end;
   }
 }

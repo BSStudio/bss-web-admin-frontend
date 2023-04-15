@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms'
 
 describe('VideoUpdateFormComponent', () => {
   beforeEach(() => MockBuilder([VideoUpdateFormComponent, FormBuilder], VideoModule))
-  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', 'uploadedAt', true, [])
+  const detailedVideo = new DetailedVideo('id', 'url', 'title', 'description', '2022-01-01', true, [])
 
   it('should create', () => {
     const fixture = MockRender(VideoUpdateFormComponent, { video: detailedVideo })

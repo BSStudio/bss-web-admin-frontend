@@ -11,6 +11,7 @@ import { NavigationItem } from 'carbon-components-angular'
         *ngIf="hasHamburger"
         [navigationItems]="navigationItems"
         class="bx--header__menu-toggle__hidden"
+        (click)="toggleHamburger()"
       ></ibm-sidenav>
     </ibm-header>
   `,

@@ -1,29 +1,82 @@
 import { VideoService } from '../../services/video.service'
-import { Component, OnDestroy } from '@angular/core'
-import { BaseModal } from 'carbon-components-angular'
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
-import { CreateVideo } from '../../models'
-import { Subject, takeUntil, tap } from 'rxjs'
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core'
+import { BaseModal, NotificationService } from 'carbon-components-angular'
+import { FormBuilder, Validators } from '@angular/forms'
+import { CreateVideo, Video } from '../../models'
+import { map, Subject, takeUntil, tap } from 'rxjs'
 
 @Component({
   selector: 'app-video-create-modal',
   templateUrl: './video-create-modal.component.html',
+  styleUrls: ['./video-create-modal.component.scss'],
 })
-export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
-  public readonly createVideoForm: FormGroup<{ title: FormControl<string>; url: FormControl<string> }>
+export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDestroy {
+  @ViewChild('toastContent', { static: true }) public toastContent!: TemplateRef<any>
   private readonly destroy$ = new Subject<void>()
+  public readonly form = this.fb.nonNullable.group({
+    title: this.fb.nonNullable.control('', [Validators.required]),
+    url: this.fb.nonNullable.control('', [Validators.required, Validators.pattern(/^\w+(-\w+)*$/)]),
+  })
 
-  constructor(private fb: FormBuilder, private videoService: VideoService) {
+  constructor(
+    private fb: FormBuilder,
+    private videoService: VideoService,
+    private notificationService: NotificationService
+  ) {
     super()
-    this.createVideoForm = this.fb.nonNullable.group<CreateVideo>({
-      title: '',
-      url: '',
-    })
+  }
+
+  ngOnInit(): void {
+    this.initAutomaticUrlGenerator()
+  }
+
+  private initAutomaticUrlGenerator(): void {
+    this.form.controls.title.valueChanges
+      .pipe(
+        // remove tildes
+        map((title) => title.normalize('NFD').replace(/[\u0300-\u036f]/g, '')),
+        tap((title) => {
+          const url = title.toLowerCase().split(/\W+/).join('-')
+          this.form.controls.url.setValue(url)
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe()
+  }
+
+  get titleInvalidText(): string {
+    const { title } = this.form.controls
+    if (title.touched && title.errors) {
+      if (title.errors['required']) {
+        return $localize`Field required`
+      }
+      return JSON.stringify(title.errors)
+    } else return ''
+  }
+
+  get urlInvalidText(): string {
+    const { url } = this.form.controls
+    if (url.touched && url.errors) {
+      if (url.errors['required']) {
+        return $localize`Field required`
+      }
+      if (url.errors['pattern']) {
+        return $localize`Does not match url pattern: ${url.errors['pattern'].requiredPattern}`
+      }
+      return JSON.stringify(url.errors)
+    } else return ''
+  }
+
+  get urlHelperText(): string {
+    const { url } = this.form.getRawValue()
+    const renderedUrl = url ? url : $localize`dorm-interview-series-cats`
+    return $localize`The video will have the following url: https://bsstudio/video/${renderedUrl}`
   }
 
   onSubmit() {
-    if (this.createVideoForm.valid) {
-      this.createVideo(this.createVideoForm.getRawValue())
+    this.form.markAllAsTouched()
+    if (this.form.valid) {
+      this.createVideo(this.form.getRawValue())
     }
   }
 
@@ -31,10 +84,29 @@ export class VideoCreateModalComponent extends BaseModal implements OnDestroy {
     this.videoService
       .createVideo(createVideo)
       .pipe(
-        tap(() => this.closeModal()),
+        tap({
+          next: (video) => {
+            this.closeModal()
+            this.onSuccessNotification(video)
+          },
+          error: () => window.alert($localize`Server error. Try a different title/url`),
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe()
+  }
+
+  private onSuccessNotification(video: Video) {
+    const caption = $localize`Update video details and publish it`
+    this.notificationService.showToast({
+      type: 'success',
+      title: $localize`Video created`,
+      links: [{ text: video.title, href: `/video/${video.id}` }],
+      caption,
+      message: caption,
+      smart: true,
+      template: this.toastContent,
+    })
   }
 
   ngOnDestroy(): void {

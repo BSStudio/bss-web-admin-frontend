@@ -1,0 +1,17 @@
+@import "@carbon/elements/scss/layout";
+
+div#video-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+section {
+  margin-bottom: $layout-02;
+
+  &#video-inspect {
+    video {
+      max-width: 100%;
+    }
+  }
+}

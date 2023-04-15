@@ -21,14 +21,13 @@ import { EventCreateModalComponent } from '../event-create-modal/event-create-mo
 import { Router } from '@angular/router'
 
 describe('EventTableComponent', () => {
-  const event = new Event('0', 'url', 'title', 'description', '2022-01-01', true)
-  beforeEach(() =>
-    MockBuilder([EventTableComponent, BooleanPipe], EventModule).mock(EventService, {
-      getEvents: jasmine.createSpy('getEvents').and.callFake(() => of([event])),
-    })
-  )
+  const event = new Event('id', 'url', 'title', 'description', '2022-01-01', true)
+  const getEvents = jasmine.createSpy('getEvents')
+  beforeEach(() => MockBuilder([EventTableComponent, BooleanPipe], EventModule).mock(EventService, { getEvents }))
+  afterEach(() => getEvents.calls.reset())
 
   it('should create', () => {
+    MockInstance(EventService, 'getEvents', () => of([event]))
     const fixture = MockRender(EventTableComponent)
 
     expect(fixture.point.componentInstance.searchValue).toBe('')
@@ -49,6 +48,7 @@ describe('EventTableComponent', () => {
   })
 
   it('should have a toolbar with search', () => {
+    MockInstance(EventService, 'getEvents', () => of([event]))
     const fixture = MockRender(EventTableComponent)
 
     const container = ngMocks.find(TableContainer)
@@ -63,6 +63,7 @@ describe('EventTableComponent', () => {
   })
 
   it('should have a toolbar with refresh button', () => {
+    getEvents.and.callFake(() => of([event]))
     MockRender(EventTableComponent)
 
     const container = ngMocks.find(TableContainer)
@@ -89,6 +90,7 @@ describe('EventTableComponent', () => {
   })
 
   it('should have a toolbar with an add button', () => {
+    getEvents.and.callFake(() => of([event]))
     MockInstance(ModalService, (instance) =>
       ngMocks.stub(instance, {
         create: jasmine
@@ -122,11 +124,12 @@ describe('EventTableComponent', () => {
   })
 
   it('should have a table', () => {
+    MockInstance(EventService, 'getEvents', () => of([event]))
     const fixture = MockRender(EventTableComponent)
     const table = ngMocks.findInstance(Table)
 
     expect(table.model).toEqual(fixture.point.componentInstance.table)
-    expect(table.sortable).toBeFalse()
+    expect(table.sortable).toBeTrue()
     expect(table.showSelectionColumn).toBeFalse()
     expect(table.striped).toBeFalse()
     expect(table.size).toBe('sh')

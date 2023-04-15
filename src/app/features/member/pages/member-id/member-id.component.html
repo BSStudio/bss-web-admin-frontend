@@ -1,22 +1,17 @@
-<app-breadcrumb
-  [title]="member.name"
-  [parentRoute]="['member']"
-  parentTitle="Members"
-  i18n-parentTitle
-></app-breadcrumb>
-<section class="title">
+<app-breadcrumb [title]="member.name" parentRoute="member" parentTitle="Members" i18n-parentTitle></app-breadcrumb>
+<section id="title">
   <h1 i18n>Update member</h1>
   <app-member-remove-button [member]="member"></app-member-remove-button>
 </section>
-<section class="profile-picture">
-  <h2 i18n>Profile picture</h2>
+<section id="details">
+  <h2 i18n>Details</h2>
+  <app-member-update-form [member]="member" (update)="setMember($event)"></app-member-update-form>
+</section>
+<h2 i18n>Profile picture upload</h2>
+<section id="picture">
   <app-member-profile-picture #picture [member]="member"></app-member-profile-picture>
   <app-member-profile-picture-upload
     [memberId]="member.id"
     (update)="updateImage()"
   ></app-member-profile-picture-upload>
-</section>
-<section class="details">
-  <h2 i18n>Details</h2>
-  <app-member-update-form [member]="member" (update)="setMember($event)"></app-member-update-form>
 </section>

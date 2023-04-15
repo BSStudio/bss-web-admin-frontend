@@ -32,14 +32,8 @@
       <trans-unit id="1731594811396701423" datatype="html">
         <source>John Doe</source>
       </trans-unit>
-      <trans-unit id="1246023011356978969" datatype="html">
-        <source>The member will have the following url: https://bsstudio/member/johnny-d</source>
-      </trans-unit>
       <trans-unit id="8308045076391224954" datatype="html">
         <source>Url</source>
-      </trans-unit>
-      <trans-unit id="8716821888418632612" datatype="html">
-        <source>johnny-d</source>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -83,8 +77,8 @@
       <trans-unit id="4814285799071780083" datatype="html">
         <source>Remove</source>
       </trans-unit>
-      <trans-unit id="4703848376604347254" datatype="html">
-        <source>Profile picture</source>
+      <trans-unit id="4441150343154486103" datatype="html">
+        <source>Profile picture upload</source>
       </trans-unit>
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
@@ -110,17 +104,11 @@
       <trans-unit id="7306118999544619776" datatype="html">
         <source>Are you sure you want to remove this member?</source>
       </trans-unit>
-      <trans-unit id="3713504010399348091" datatype="html">
-        <source>Error removing member <x id="PH" equiv-text="this.member.name"/></source>
-      </trans-unit>
       <trans-unit id="2777623198411668878" datatype="html">
         <source>Member manager</source>
       </trans-unit>
       <trans-unit id="3863898267470745518" datatype="html">
         <source>A short description will be added here</source>
-      </trans-unit>
-      <trans-unit id="3919953312898646404" datatype="html">
-        <source>Lorem ipsum</source>
       </trans-unit>
       <trans-unit id="1891104643962082116" datatype="html">
         <source>Update video</source>
@@ -149,9 +137,6 @@
       <trans-unit id="5498133127606647122" datatype="html">
         <source>Dorm interview series - Cats</source>
       </trans-unit>
-      <trans-unit id="5118348163556993736" datatype="html">
-        <source>The video will have the following url: https://bsstudio/video/dorm-interview-series-cats</source>
-      </trans-unit>
       <trans-unit id="1723757384684824664" datatype="html">
         <source>dorm-interview-series-cats</source>
       </trans-unit>
@@ -167,9 +152,6 @@
       <trans-unit id="1040754989546421230" datatype="html">
         <source>Add event</source>
       </trans-unit>
-      <trans-unit id="1053173058581960289" datatype="html">
-        <source>Add new crew member</source>
-      </trans-unit>
       <trans-unit id="1172866303261737245" datatype="html">
         <source>Position</source>
       </trans-unit>
@@ -180,10 +162,7 @@
         <source>Metadata</source>
       </trans-unit>
       <trans-unit id="3344087724968207557" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="me }}"/>&apos;s profile picture</source>
-      </trans-unit>
-      <trans-unit id="3595107845551842320" datatype="html">
-        <source>Manage event videos</source>
+        <source><x id="INTERPOLATION" equiv-text="{{ member.name }}"/>&apos;s profile picture</source>
       </trans-unit>
       <trans-unit id="3712758505200425308" datatype="html">
         <source>Visible</source>
@@ -191,14 +170,8 @@
       <trans-unit id="3973931101896534797" datatype="html">
         <source>Date</source>
       </trans-unit>
-      <trans-unit id="4021752662928002901" datatype="html">
-        <source>Update</source>
-      </trans-unit>
       <trans-unit id="4425253027739928982" datatype="html">
         <source>Remove <x id="INTERPOLATION" equiv-text="{{ video.title }}"/> from event</source>
-      </trans-unit>
-      <trans-unit id="4674214119910891625" datatype="html">
-        <source>No videos</source>
       </trans-unit>
       <trans-unit id="4777323515857731788" datatype="html">
         <source>Upload date</source>
@@ -206,17 +179,14 @@
       <trans-unit id="4930010726944575382" datatype="html">
         <source>Error updating event</source>
       </trans-unit>
-      <trans-unit id="5152944817268935045" datatype="html">
-        <source>Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.memberId }}"/> <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> from event</source>
+      <trans-unit id="8029725364859660359" datatype="html">
+        <source> Remove <x id="INTERPOLATION" equiv-text="{{ crewMember.member.name }}"/>&apos;s <x id="INTERPOLATION_1" equiv-text="{{ crewMember.position }}"/> position from the video </source>
       </trans-unit>
       <trans-unit id="5384144615229196930" datatype="html">
         <source>Crew</source>
       </trans-unit>
       <trans-unit id="5966471040474361086" datatype="html">
         <source>simonyi-conference-2022</source>
-      </trans-unit>
-      <trans-unit id="630732744892969365" datatype="html">
-        <source>Add video to event</source>
       </trans-unit>
       <trans-unit id="6341579314680269534" datatype="html">
         <source>Error updating</source>
@@ -226,9 +196,6 @@
       </trans-unit>
       <trans-unit id="7033014824731925315" datatype="html">
         <source>Remove video</source>
-      </trans-unit>
-      <trans-unit id="7033513850018265669" datatype="html">
-        <source>The event will have the following url: https://bsstudio/member/simonyi-conference-2022</source>
       </trans-unit>
       <trans-unit id="7179329981579178391" datatype="html">
         <source>Event updated</source>
@@ -242,9 +209,6 @@
       <trans-unit id="8049462487259928762" datatype="html">
         <source>Simonyi Conference 2022</source>
       </trans-unit>
-      <trans-unit id="969237518420234961" datatype="html">
-        <source>Add crew member to video</source>
-      </trans-unit>
       <trans-unit id="1977062148284014024" datatype="html">
         <source>Drop picture here or click to browse</source>
       </trans-unit>
@@ -254,14 +218,8 @@
       <trans-unit id="1293054139849691764" datatype="html">
         <source>Error removing video</source>
       </trans-unit>
-      <trans-unit id="2096235085899065051" datatype="html">
-        <source>Error creating event</source>
-      </trans-unit>
       <trans-unit id="2375149812897946334" datatype="html">
         <source>Uploaded at</source>
-      </trans-unit>
-      <trans-unit id="4416290763660062288" datatype="html">
-        <source/>
       </trans-unit>
       <trans-unit id="5858752999282328934" datatype="html">
         <source>Are you sure you want to remove this video?</source>
@@ -274,6 +232,165 @@
       </trans-unit>
       <trans-unit id="7819314041543176992" datatype="html">
         <source>Close</source>
+      </trans-unit>
+      <trans-unit id="7058184791033246035" datatype="html">
+        <source>The video will have the following url: https://bsstudio/video/<x id="PH" equiv-text="renderedUrl"/></source>
+      </trans-unit>
+      <trans-unit id="7619560701830330401" datatype="html">
+        <source>Loading</source>
+      </trans-unit>
+      <trans-unit id="8150334626126059435" datatype="html">
+        <source>Are you sure you want to remove this member&apos;s position from the crew?</source>
+      </trans-unit>
+      <trans-unit id="1373570771048277574" datatype="html">
+        <source>Error removing crew member</source>
+      </trans-unit>
+      <trans-unit id="1910655336974126682" datatype="html">
+        <source>Does not match url pattern: <x id="PH" equiv-text="url.errors[&apos;pattern&apos;].requiredPattern"/></source>
+      </trans-unit>
+      <trans-unit id="2539690595291689195" datatype="html">
+        <source>Server error: title and url must be unique</source>
+      </trans-unit>
+      <trans-unit id="2823619143649206462" datatype="html">
+        <source>jdoe</source>
+      </trans-unit>
+      <trans-unit id="4237645155961022288" datatype="html">
+        <source>Are you sure you want to remove this event?</source>
+      </trans-unit>
+      <trans-unit id="4747507986183232926" datatype="html">
+        <source>Server error. Try a different title/url</source>
+      </trans-unit>
+      <trans-unit id="4652884663023755405" datatype="html">
+        <source>The event will have the following url: https://bsstudio/event/<x id="PH" equiv-text="renderedUrl"/></source>
+      </trans-unit>
+      <trans-unit id="7472858286664394350" datatype="html">
+        <source>Server error: name and url must be unique</source>
+      </trans-unit>
+      <trans-unit id="7562874364108683655" datatype="html">
+        <source>The member will have the following url: https://bsstudio/member/<x id="PH" equiv-text="renderedUrl"/></source>
+      </trans-unit>
+      <trans-unit id="7897553137344337439" datatype="html">
+        <source>Field required</source>
+      </trans-unit>
+      <trans-unit id="8481819929327920451" datatype="html">
+        <source>Remove event</source>
+      </trans-unit>
+      <trans-unit id="1565037529819880344" datatype="html">
+        <source>Couldn&apos;t remove crew member position. Try refreshing the page</source>
+      </trans-unit>
+      <trans-unit id="1911148809726157840" datatype="html">
+        <source>Make sure everything is well formatted, and there are no duplicate ids</source>
+      </trans-unit>
+      <trans-unit id="1978588651572222759" datatype="html">
+        <source>Update video details and publish it</source>
+      </trans-unit>
+      <trans-unit id="2664969881959342172" datatype="html">
+        <source>Video was removed</source>
+      </trans-unit>
+      <trans-unit id="2740008066039678046" datatype="html">
+        <source>Make sure title/url is unique</source>
+      </trans-unit>
+      <trans-unit id="3086690256287604039" datatype="html">
+        <source>Event was removed</source>
+      </trans-unit>
+      <trans-unit id="3944193087956808215" datatype="html">
+        <source>Remove crew member position from video</source>
+      </trans-unit>
+      <trans-unit id="4360888701290170782" datatype="html">
+        <source>Crew member position was successfully removed</source>
+      </trans-unit>
+      <trans-unit id="4393305291386389644" datatype="html">
+        <source><x id="PH" equiv-text="this.crewMember.member.name"/>&apos;s <x id="PH_1" equiv-text="this.crewMember.position"/> position</source>
+      </trans-unit>
+      <trans-unit id="6058410738022694540" datatype="html">
+        <source>Error removing event</source>
+      </trans-unit>
+      <trans-unit id="6597693743876820216" datatype="html">
+        <source>Make sure videos are removed from the event</source>
+      </trans-unit>
+      <trans-unit id="6703307117952124334" datatype="html">
+        <source>Video created</source>
+      </trans-unit>
+      <trans-unit id="7644661590696525657" datatype="html">
+        <source>Inspect video</source>
+      </trans-unit>
+      <trans-unit id="8024915414207118910" datatype="html">
+        <source>Video updated</source>
+      </trans-unit>
+      <trans-unit id="81280081139439099" datatype="html">
+        <source>Video was removed from event</source>
+      </trans-unit>
+      <trans-unit id="8725036248932725431" datatype="html">
+        <source>Add videos to the event, update the details and publish it</source>
+      </trans-unit>
+      <trans-unit id="8791525131422494700" datatype="html">
+        <source>Video remain published</source>
+      </trans-unit>
+      <trans-unit id="2521282359227780676" datatype="html">
+        <source>Remove crew members first</source>
+      </trans-unit>
+      <trans-unit id="3851387355166670029" datatype="html">
+        <source>To add crew members define a position and select a member</source>
+      </trans-unit>
+      <trans-unit id="3876476327980794295" datatype="html">
+        <source>If you see the default video thumbnail consider uploading one first before publishing</source>
+      </trans-unit>
+      <trans-unit id="4102687588551446278" datatype="html">
+        <source><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/v/<x id="INTERPOLATION" equiv-text="{{ video.url }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="4117654863831126778" datatype="html">
+        <source><x id="START_TAG_CODE" ctype="x-code" equiv-text="&lt;code&gt;"/>&lt;coding-server-base-address&gt;/video/<x id="INTERPOLATION" equiv-text="{{ video.id }}"/><x id="CLOSE_TAG_CODE" ctype="x-code" equiv-text="&lt;/code&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="4357097804287754856" datatype="html">
+        <source>Assigned videos</source>
+      </trans-unit>
+      <trans-unit id="47488134068573562" datatype="html">
+        <source>To add a video select one in the drop down list and press the button</source>
+      </trans-unit>
+      <trans-unit id="4770884191289740213" datatype="html">
+        <source>Member is associated with one or more videos. Try archiving or remove positions</source>
+      </trans-unit>
+      <trans-unit id="5506569422969383542" datatype="html">
+        <source>Nickname</source>
+      </trans-unit>
+      <trans-unit id="6111305706249141341" datatype="html">
+        <source>Member created</source>
+      </trans-unit>
+      <trans-unit id="6283350637136715888" datatype="html">
+        <source>BSS Web | member</source>
+      </trans-unit>
+      <trans-unit id="629731825785289671" datatype="html">
+        <source>BSS Web | Videos</source>
+      </trans-unit>
+      <trans-unit id="6549265851868599441" datatype="html">
+        <source>Video</source>
+      </trans-unit>
+      <trans-unit id="7321715262426693561" datatype="html">
+        <source>Member removed</source>
+      </trans-unit>
+      <trans-unit id="7381501325776764189" datatype="html">
+        <source>Report issue</source>
+      </trans-unit>
+      <trans-unit id="7807158530747623261" datatype="html">
+        <source>BSS Web | Events</source>
+      </trans-unit>
+      <trans-unit id="811716195996156260" datatype="html">
+        <source>Joined at:</source>
+      </trans-unit>
+      <trans-unit id="8266501956997099419" datatype="html">
+        <source>Error removing member</source>
+      </trans-unit>
+      <trans-unit id="8689264711567749855" datatype="html">
+        <source>Add a description, and upload a profile picture</source>
+      </trans-unit>
+      <trans-unit id="8753972762505333564" datatype="html">
+        <source> If the video is not available to be previewed. Make sure all the files were uploaded to the following location: </source>
+      </trans-unit>
+      <trans-unit id="9089304224941361665" datatype="html">
+        <source>Error removing</source>
+      </trans-unit>
+      <trans-unit id="9152120454999610500" datatype="html">
+        <source>Member name</source>
       </trans-unit>
     </body>
   </file>

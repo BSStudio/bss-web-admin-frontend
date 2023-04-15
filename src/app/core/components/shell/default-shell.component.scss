@@ -1,10 +1,19 @@
 @import "@carbon/elements/scss/layout/layout";
-
-:host {
-  height: 100vh;
-}
+@import "@carbon/elements/scss/themes";
 
 main#app {
+  min-height: calc(100vh - $layout-04 - $fluid-spacing-03);
   margin-top: $layout-04;
   padding-top: $layout-01;
+  margin-bottom: $fluid-spacing-03;
+}
+
+footer {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  gap: $layout-01;
+  color: $text-05;
+  padding-bottom: $layout-01;
 }

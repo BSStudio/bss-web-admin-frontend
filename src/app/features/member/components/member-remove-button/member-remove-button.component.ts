@@ -1,14 +1,14 @@
 import { Component, Input, OnDestroy } from '@angular/core'
-import { AlertModalType, ModalButtonType, ModalService, NotificationService } from 'carbon-components-angular'
-import { catchError, EMPTY, Subject, takeUntil, tap } from 'rxjs'
-import { Member } from '../../models/member.model'
-import { MemberService } from '../../services/member.service'
 import { Router } from '@angular/router'
+import { AlertModalType, ModalButtonType, ModalService } from 'carbon-components-angular'
+import { Subject, takeUntil, tap } from 'rxjs'
+import { Member } from '../../models'
+import { MemberActionsService } from '../../actions/member.actions.service'
 
 @Component({
   selector: 'app-member-remove-button[member]',
   template: `
-    <button ibmButton="danger" size="field" (click)="showRemoveModal()">
+    <button ibmButton="danger--tertiary" size="field" (click)="showRemoveModal()">
       <span i18n>Remove</span>
       <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
     </button>
@@ -18,12 +18,7 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
   @Input() member!: Member
 
-  constructor(
-    private service: MemberService,
-    private router: Router,
-    private modalService: ModalService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private service: MemberActionsService, private router: Router, private modalService: ModalService) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -33,25 +28,17 @@ export class MemberRemoveButtonComponent implements OnDestroy {
       size: 'xs',
       content: $localize`Are you sure you want to remove this member?`,
       buttons: [
-        { type: ModalButtonType.secondary, text: 'Close' },
-        { type: ModalButtonType.danger, text: 'Remove', click: () => this.removeMember() },
+        { type: ModalButtonType.secondary, text: $localize`Close` },
+        { type: ModalButtonType.danger, text: $localize`Remove`, click: () => this.removeMember() },
       ],
     })
   }
 
   removeMember() {
     this.service
-      .deleteMember(this.member.id)
+      .deleteMember(this.member)
       .pipe(
         tap(async () => await this.router.navigate(['member'])),
-        catchError((error) => {
-          this.notificationService.showNotification({
-            type: 'error',
-            title: $localize`Error removing member ${this.member.name}`,
-            caption: error.toString(),
-          })
-          return EMPTY
-        }),
         takeUntil(this.destroy$)
       )
       .subscribe()

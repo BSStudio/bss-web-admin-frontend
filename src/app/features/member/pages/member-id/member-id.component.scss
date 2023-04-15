@@ -1,29 +1,11 @@
 @import "@carbon/elements/scss/layout";
 
-:host {
-  display: grid;
-  grid-column-gap: $spacing-06;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-   "breadcrumb breadcrumb"
-   "title      title"
-   "details    picture";
+section#title {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
 
-  app-breadcrumb {
-    grid-area: breadcrumb
-  }
-
-  section.title {
-    grid-area: title;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  section.profile-picture {
-    grid-area: picture;
-  }
-
-  section.details {
-    grid-area: details;
-  }
+section {
+  margin-bottom: $layout-02;
 }

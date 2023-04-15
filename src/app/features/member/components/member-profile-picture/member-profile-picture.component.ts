@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { Member } from '../../models/member.model'
+import { Member } from '../../models'
 
 interface SourceSet {
   type: string
@@ -18,19 +18,21 @@ interface SourceSet {
           [media]="image.media"
           [srcset]="image.srcset + refreshParam"
         />
-        <img #img ngSrc="/assets/fallback.jpg" fill alt="{{ member.name }}'s profile picture" i18n-alt />
+        <img #img [src]="fallback" alt="{{ member.name }}'s profile picture" i18n-alt (error)="onError($event)" />
       </picture>
-      <figcaption>{{ img.alt }}</figcaption>
+      <figcaption *ngIf="showCaption">{{ img.alt }}</figcaption>
     </figure>
   `,
 })
 export class MemberProfilePictureComponent implements OnInit {
   private static FORMATS = ['avif', 'webp', 'jpeg']
   private static SIZES = ['xl', 'lg', 'md', 'sm']
+  public readonly fallback = '/assets/fallback.jpg'
   public sources: SourceSet[] = []
   public refreshParam = ''
 
   @Input() member!: Member
+  @Input() showCaption = false
 
   ngOnInit() {
     const basePath = `/media/assets/m/${this.member.id}`
@@ -42,6 +44,10 @@ export class MemberProfilePictureComponent implements OnInit {
         srcset: `${basePath}/${size}.${format}`,
       }))
     )
+  }
+
+  onError(event: ErrorEvent) {
+    this.sources[0].srcset = this.fallback
   }
 
   updateImage() {

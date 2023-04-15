@@ -2,21 +2,27 @@
   <ibm-modal-header (closeSelect)="closeModal()">
     <h3 i18n ibmModalHeaderHeading>Add new video</h3>
   </ibm-modal-header>
-  <form ibmModalContent [hasForm]="true" [formGroup]="createVideoForm">
-    <ibm-label>
+  <form ibmModalContent id="create-video-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ibm-label [invalid]="!!titleInvalidText" [invalidText]="titleInvalidText">
       <ng-container i18n>Title</ng-container>
-      <input i18n-placeholder ibmText formControlName="title" placeholder="Dorm interview series - Cats" />
+      <input
+        [attr.modal-primary-focus]="true"
+        i18n-placeholder
+        ibmText
+        formControlName="title"
+        placeholder="Dorm interview series - Cats"
+      />
     </ibm-label>
-    <ibm-label
-      i18n-helperText
-      helperText="The video will have the following url: https://bsstudio/video/dorm-interview-series-cats"
-    >
+    <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
       <input i18n-placeholder ibmText formControlName="url" placeholder="dorm-interview-series-cats" />
     </ibm-label>
   </form>
   <ibm-modal-footer>
-    <button i18n ibmButton="primary" (click)="onSubmit()" style="order: 1">Add video</button>
+    <button i18n ibmButton="primary" type="submit" form="create-video-form">Add video</button>
     <button i18n ibmButton="secondary" (click)="closeModal()">Cancel</button>
   </ibm-modal-footer>
 </ibm-modal>
+<ng-template #toastContent let-data>
+  <app-toast-content-routed [toast]="data"></app-toast-content-routed>
+</ng-template>

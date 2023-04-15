@@ -1,19 +1,22 @@
-import { VideoService } from './video.service'
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { MockBuilder, ngMocks } from 'ng-mocks'
 import { tap } from 'rxjs'
+import { VideoService } from './video.service'
 import { CreateVideo, DetailedVideo, UpdateVideo, Video } from '../models'
-import { Pageable, PaginatedResponse, Sort } from '../../../shared/models'
+import { Pageable, PageableRequest, PaginatedResponse, Sort, SortRequest } from '../../../shared/models'
+import { CrewMember } from '../../video-crew/models'
+import { SimpleMember } from '../../member/models'
 
 describe('VideoService', () => {
   ngMocks.faster()
   beforeAll(() => MockBuilder([VideoService, HttpClientTestingModule]))
 
-  const videoId = 'videoId'
   const createVideo = new CreateVideo('url', 'title')
-  const video = new Video(videoId, 'url', 'title', 'uploadedAt', true)
+  const video = new Video('videoId', 'url', 'title', 'uploadedAt', true)
   const updateVideo = new UpdateVideo('url', 'title', 'description', 'uploadedAt', true)
-  const detailedVideo = new DetailedVideo(videoId, 'url', 'title', 'description', 'uploadedAt', true, [])
+  const member = new SimpleMember('id', 'name', 'nickname')
+  const crewMember = new CrewMember('position', 'memberId', member)
+  const detailedVideo = new DetailedVideo('videoId', 'url', 'title', 'description', 'uploadedAt', true, [crewMember])
   const sort = new Sort(false, false, true)
   const pageable = new Pageable(sort, 3, 2, 10, true, false)
   const paginatedResponse = new PaginatedResponse<Video>(
@@ -43,25 +46,109 @@ describe('VideoService', () => {
     httpMock.verify()
   })
 
-  it('should get paginated videos', (done) => {
-    const service = ngMocks.findInstance(VideoService)
-    const httpMock = ngMocks.findInstance(HttpTestingController)
-    const page = 5
-    const size = 10
+  describe('should get paginated videos', () => {
+    const sort = new SortRequest<Video>('title', 'asc')
+    const pageableRequest = new PageableRequest<Video>(5, 10, [sort])
+    it('with all requestParams', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
 
-    service
-      .getVideos(page, size)
-      .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
-      .subscribe({ complete: () => done() })
+      service
+        .getVideos(pageableRequest)
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
 
-    httpMock
-      .expectOne(
-        (req) =>
-          req.method === 'GET' &&
-          req.urlWithParams === `/api/v1/video?${new URLSearchParams({ page: `${page}`, size: `${size}` })}`
-      )
-      .flush(paginatedResponse)
-    httpMock.verify()
+      httpMock
+        .expectOne(
+          (req) =>
+            req.method === 'GET' &&
+            req.urlWithParams ===
+              `/api/v1/video?page=${pageableRequest.page}&size=${pageableRequest.size}&sort=${sort.property},${sort.direction}`
+        )
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
+
+    it('with page requestParam', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
+
+      service
+        .getVideos({ page: pageableRequest.page })
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
+
+      httpMock
+        .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video?page=${pageableRequest.page}`)
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
+
+    it('with size requestParam', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
+
+      service
+        .getVideos({ size: pageableRequest.size })
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
+
+      httpMock
+        .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video?size=${pageableRequest.size}`)
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
+
+    it('with sort requestParam', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
+
+      service
+        .getVideos({ sort: [sort] })
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
+
+      httpMock
+        .expectOne(
+          (req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}`
+        )
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
+
+    it('with sort requestParam (only property)', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
+
+      service
+        .getVideos({ sort: [{ property: sort.property }] })
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
+
+      httpMock
+        .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video?sort=${sort.property}`)
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
+
+    it('with multiple sort requestParam (only property)', (done) => {
+      const service = ngMocks.findInstance(VideoService)
+      const httpMock = ngMocks.findInstance(HttpTestingController)
+
+      service
+        .getVideos({ sort: [sort, { property: sort.property }] })
+        .pipe(tap((actual) => expect(actual).toEqual(paginatedResponse)))
+        .subscribe({ complete: () => done() })
+
+      httpMock
+        .expectOne(
+          (req) =>
+            req.method === 'GET' &&
+            req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}&sort=${sort.property}`
+        )
+        .flush(paginatedResponse)
+      httpMock.verify()
+    })
   })
 
   it('should get a video', (done) => {
@@ -69,12 +156,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .getVideo(videoId)
+      .getVideo(video.id)
       .pipe(tap((actual) => expect(actual).toEqual(detailedVideo)))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })
@@ -97,7 +184,7 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     const visible = true
-    const videoIds = [videoId]
+    const videoIds = [video.id]
     service
       .changeVisibility(videoIds, visible)
       .pipe(tap((actual) => expect(actual).toEqual(videoIds)))
@@ -118,7 +205,7 @@ describe('VideoService', () => {
     const service = ngMocks.findInstance(VideoService)
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
-    const videoIds = [videoId]
+    const videoIds = [video.id]
     service
       .changeVisibility(videoIds)
       .pipe(tap((actual) => expect(actual).toEqual(videoIds)))
@@ -140,12 +227,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .updateVideo(videoId, updateVideo)
+      .updateVideo(video.id, updateVideo)
       .pipe(tap((actual) => expect(actual).toEqual(detailedVideo)))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'PUT' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'PUT' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })
@@ -155,12 +242,12 @@ describe('VideoService', () => {
     const httpMock = ngMocks.findInstance(HttpTestingController)
 
     service
-      .removeVideo(videoId)
+      .removeVideo(video.id)
       .pipe(tap(() => expect().nothing()))
       .subscribe({ complete: () => done() })
 
     httpMock
-      .expectOne((req) => req.method === 'DELETE' && req.urlWithParams === `/api/v1/video/${videoId}`)
+      .expectOne((req) => req.method === 'DELETE' && req.urlWithParams === `/api/v1/video/${video.id}`)
       .flush(detailedVideo)
     httpMock.verify()
   })

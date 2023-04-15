@@ -17,8 +17,13 @@ describe('VideoCrewService', () => {
 
     service
       .getPositions()
-      .pipe(tap((actual) => expect(actual).toEqual(['position1', 'position2'])))
-      .subscribe({ complete: () => done() })
+      .pipe(
+        tap((actual) => {
+          expect(actual).toEqual(['position1', 'position2'])
+          done()
+        })
+      )
+      .subscribe()
 
     const req = httpMock.expectOne('/api/v1/videoCrew/position')
     expect(req.request.method).toEqual('GET')
@@ -32,8 +37,13 @@ describe('VideoCrewService', () => {
 
     service
       .addVideoCrewMember(crew)
-      .pipe(tap((actual) => expect(actual).toEqual(video)))
-      .subscribe({ complete: () => done() })
+      .pipe(
+        tap((actual) => {
+          expect(actual).toEqual(video)
+          done()
+        })
+      )
+      .subscribe()
 
     const req = httpMock.expectOne(`/api/v1/videoCrew?${new URLSearchParams({ ...crew })}`)
     expect(req.request.method).toEqual('PUT')
@@ -48,8 +58,13 @@ describe('VideoCrewService', () => {
 
     service
       .removeVideoCrewMember(crew)
-      .pipe(tap((actual) => expect(actual).toEqual(video)))
-      .subscribe({ complete: () => done() })
+      .pipe(
+        tap((actual) => {
+          expect(actual).toEqual(video)
+          done()
+        })
+      )
+      .subscribe()
 
     const req = httpMock.expectOne(`/api/v1/videoCrew?${new URLSearchParams({ ...crew })}`)
     expect(req.request.method).toEqual('DELETE')

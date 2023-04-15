@@ -4,6 +4,7 @@ export class UpdateMember {
   constructor(
     public url: string,
     public name: string,
+    public nickname: string,
     public description: string,
     public joinedAt: string,
     public role: string,

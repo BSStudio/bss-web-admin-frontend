@@ -2,24 +2,9 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.3
   browser-tools: circleci/browser-tools@1.4.0
+  docker: circleci/docker@2.2.0
+  codecov: codecov/codecov@3.2.4
 jobs:
-  lint:
-    docker:
-      - image: cimg/node:18.12.1
-    steps:
-      - checkout
-      - node/install-packages:
-          include-branch-in-cache-key: false
-      - run: npm run lint
-  build:
-    working_directory: ~/project
-    docker:
-      - image: cimg/node:18.12.1
-    steps:
-      - checkout
-      - node/install-packages:
-          include-branch-in-cache-key: false
-      - run: npm run build
   test:
     working_directory: ~/project
     docker:
@@ -29,17 +14,49 @@ jobs:
       - browser-tools/install-chrome
       - node/install-packages:
           include-branch-in-cache-key: false
-      - run: npm run test -- --no-watch --no-progress --reporters=junit,coverage
+      - run: npm test -- --no-watch --code-coverage --reporters=coverage,junit,progress,kjhtml
+      - codecov/upload
       - store_test_results:
           name: Store test results
           path: ~/project/reports
       - store_artifacts:
-          name: Store covarage report
-          path: ~/project/coverage/bss-web
+          name: Store test html report
+          path: ~/project/coverage
 workflows:
-  version: 2
-  all:
+  Build app:
     jobs:
-      - lint
-      - build
-      - test
+      - node/run:
+          npm-run: lint
+          name: Lint
+      - node/run:
+          name: Build
+          npm-run: build
+      - test:
+          name: Unit test
+      - docker/hadolint:
+          name: Docker lint
+      - docker/publish:
+          name: Docker build
+          deploy: false
+          image: bsstudio/bss-web-admin-frontend
+          registry: ghcr.io
+          tag: latest
+          use-buildkit: true
+          use-docker-credentials-store: true
+      - docker/publish:
+          name: Docker publish
+          deploy: true
+          image: bsstudio/bss-web-admin-frontend
+          registry: ghcr.io
+          tag: latest
+          use-buildkit: true
+          use-docker-credentials-store: true
+          requires:
+            - Lint
+            - Build
+            - Unit test
+            - Docker lint
+            - Docker build
+          filters:
+            branches:
+              only: "main"
