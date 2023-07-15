@@ -39,7 +39,7 @@
     "@angular/localize": "15.2.7",
     "@stryker-mutator/core": "6.4.2",
     "@stryker-mutator/karma-runner": "6.4.2",
-    "@stryker-mutator/typescript-checker": "6.4.2",
+    "@stryker-mutator/typescript-checker": "7.1.1",
     "@types/jasmine": "4.3.1",
     "@types/node": "18.15.11",
     "@typescript-eslint/eslint-plugin": "5.48.0",
