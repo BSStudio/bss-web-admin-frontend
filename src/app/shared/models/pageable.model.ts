@@ -7,6 +7,6 @@ export class Pageable {
     public pageNumber: number,
     public pageSize: number,
     public paged: boolean,
-    public unpaged: boolean
+    public unpaged: boolean,
   ) {}
 }

@@ -33,7 +33,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private booleanPipe: BooleanPipe,
     private videoService: VideoService,
-    private eventService: EventService
+    private eventService: EventService,
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +71,7 @@ export class EventVideoTableComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(
         switchMap(() => this.eventService.getEvent(this.event.id)),
         tap((event) => this.updateEvent(event)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

@@ -19,7 +19,7 @@ describe('MemberActionsService', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
   const updateMember = new UpdateMember(
     'url',
@@ -29,7 +29,7 @@ describe('MemberActionsService', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
 
   it('deleteSuccessNotification', (done) => {

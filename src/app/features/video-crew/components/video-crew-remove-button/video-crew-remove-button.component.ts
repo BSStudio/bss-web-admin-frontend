@@ -33,7 +33,7 @@ export class VideoCrewRemoveButtonComponent implements OnDestroy {
   constructor(
     private modalService: ModalService,
     private service: VideoCrewService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   showConfirm() {
@@ -66,7 +66,7 @@ export class VideoCrewRemoveButtonComponent implements OnDestroy {
           },
           error: (err) => this.errorNotification(err),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

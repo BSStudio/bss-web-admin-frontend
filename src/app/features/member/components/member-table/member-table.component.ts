@@ -23,7 +23,7 @@ export class MemberTableComponent implements OnInit, OnDestroy {
     private service: MemberService,
     private modalService: ModalService,
     private memberStatusPipe: MemberStatusPipe,
-    private booleanPipe: BooleanPipe
+    private booleanPipe: BooleanPipe,
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class MemberTableComponent implements OnInit, OnDestroy {
           next: (members) => this.updateTable(members),
           complete: () => (this.loading = false),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

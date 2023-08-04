@@ -64,7 +64,7 @@ describe('VideoIdComponent', () => {
       MockInstance(VideoUpdateFormComponent, (instance) =>
         ngMocks.stub(instance, {
           update,
-        })
+        }),
       )
       const fixture = MockRender(VideoIdComponent)
 
@@ -96,7 +96,7 @@ describe('VideoIdComponent', () => {
       MockInstance(VideoCrewTableComponent, (instance) =>
         ngMocks.stub(instance, {
           update,
-        })
+        }),
       )
       const fixture = MockRender(VideoIdComponent)
 
@@ -127,7 +127,7 @@ describe('VideoIdComponent', () => {
 
       const videoPlayerDirective = ngMocks.findInstance(VideoPlayerDirective)
       expect(videoPlayerDirective.src).toBe(
-        'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8'
+        'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_16x9/bipbop_16x9_variant.m3u8',
       )
     })
   })

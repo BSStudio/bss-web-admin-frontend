@@ -25,7 +25,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
   constructor(
     private service: EventService,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super()
   }
@@ -45,7 +45,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
             .join('-')
           this.form.controls.url.setValue(url)
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -98,7 +98,7 @@ export class EventCreateModalComponent extends BaseModal implements OnInit, OnDe
           window.alert($localize`Server error: title and url must be unique`)
           return EMPTY
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

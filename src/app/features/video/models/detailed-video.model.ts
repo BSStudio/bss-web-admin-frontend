@@ -8,6 +8,6 @@ export class DetailedVideo {
     public description: string,
     public uploadedAt: string,
     public visible: boolean,
-    public crew: CrewMember[]
+    public crew: CrewMember[],
   ) {}
 }

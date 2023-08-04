@@ -6,14 +6,17 @@ import { tap } from 'rxjs'
 
 @Injectable()
 export class VideoActionsService {
-  constructor(private service: VideoService, private notification: NotificationService) {}
+  constructor(
+    private service: VideoService,
+    private notification: NotificationService,
+  ) {}
 
   updateVideo(videoId: string, updateVideo: UpdateVideo) {
     return this.service.updateVideo(videoId, updateVideo).pipe(
       tap({
         next: (updatedVideo) => this.updateSuccessToast(updatedVideo),
         error: (err) => this.updateErrorToast(err),
-      })
+      }),
     )
   }
 
@@ -22,7 +25,7 @@ export class VideoActionsService {
       tap({
         next: () => this.removeSuccessNotification(video),
         error: (err) => this.removeErrorToast(err, video),
-      })
+      }),
     )
   }
 

@@ -28,7 +28,7 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private videoService: VideoService,
-    private eventVideoService: EventVideoService
+    private eventVideoService: EventVideoService,
   ) {}
 
   ngOnChanges() {
@@ -36,7 +36,7 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
       .getAllVideos()
       .pipe(
         tap((videos) => this.updateVideos(videos)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -52,7 +52,7 @@ export class EventVideoAddFormComponent implements OnChanges, OnDestroy {
             this.update.emit(event)
             this.form.reset()
           }),
-          takeUntil(this.destroy$)
+          takeUntil(this.destroy$),
         )
         .subscribe()
     }

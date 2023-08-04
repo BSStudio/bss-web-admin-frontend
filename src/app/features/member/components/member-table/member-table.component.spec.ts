@@ -15,7 +15,7 @@ describe('MemberTableComponent', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
 
   beforeEach(() => MockBuilder(MemberTableComponent, MemberModule))

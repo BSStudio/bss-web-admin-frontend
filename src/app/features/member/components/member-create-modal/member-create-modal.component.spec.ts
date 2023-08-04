@@ -6,7 +6,7 @@ import { ModalModule } from 'carbon-components-angular'
 
 describe('MemberCreateModalComponent', () => {
   beforeEach(() =>
-    MockBuilder([MemberCreateModalComponent, ReactiveFormsModule, ModalModule, FormBuilder], [MemberModule])
+    MockBuilder([MemberCreateModalComponent, ReactiveFormsModule, ModalModule, FormBuilder], [MemberModule]),
   )
 
   it('should render', () => {

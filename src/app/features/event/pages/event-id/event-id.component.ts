@@ -24,7 +24,10 @@ import { Title } from '@angular/platform-browser'
 export class EventIdComponent {
   public event = <DetailedEvent>this.route.snapshot.data['event']
 
-  constructor(private route: ActivatedRoute, private title: Title) {
+  constructor(
+    private route: ActivatedRoute,
+    private title: Title,
+  ) {
     this.title.setTitle(this.event.title)
   }
 

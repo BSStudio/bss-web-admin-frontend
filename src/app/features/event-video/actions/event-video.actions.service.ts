@@ -7,14 +7,17 @@ import { Video } from '../../video/models'
 
 @Injectable()
 export class EventVideoActionsService {
-  constructor(private service: EventVideoService, private notification: NotificationService) {}
+  constructor(
+    private service: EventVideoService,
+    private notification: NotificationService,
+  ) {}
 
   removeVideoFromEvent(event: DetailedEvent, video: Video) {
     return this.service.removeVideoFromEvent({ eventId: event.id, videoId: video.id }).pipe(
       tap({
         next: (event) => this.removeSuccessNotification(event, video),
         error: (err) => this.removeErrorNotification(err),
-      })
+      }),
     )
   }
 

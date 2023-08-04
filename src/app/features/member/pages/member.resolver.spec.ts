@@ -21,8 +21,8 @@ describe('EventResolver', () => {
         HttpClientTestingModule,
         NG_MOCKS_ROOT_PROVIDERS,
       ],
-      MemberModule
-    )
+      MemberModule,
+    ),
   )
 
   it('should return member', fakeAsync(() => {
@@ -43,7 +43,7 @@ describe('EventResolver', () => {
       'joinedAt',
       'role',
       MemberStatus.ALUMNI,
-      false
+      false,
     )
     dataService.getMember = () => of(member)
 

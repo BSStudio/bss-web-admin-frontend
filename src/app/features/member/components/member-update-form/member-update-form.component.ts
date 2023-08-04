@@ -27,7 +27,10 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
     archived: this.fb.nonNullable.control(false, [Validators.required]),
   })
 
-  constructor(private fb: FormBuilder, private service: MemberActionsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: MemberActionsService,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['member']) {
@@ -46,7 +49,7 @@ export class MemberUpdateFormComponent implements OnChanges, OnDestroy {
         .updateMember(this.member.id, { joinedAt: formatDate, ...rest })
         .pipe(
           tap((member) => this.update.emit(member)),
-          takeUntil(this.destroy$)
+          takeUntil(this.destroy$),
         )
         .subscribe()
     }

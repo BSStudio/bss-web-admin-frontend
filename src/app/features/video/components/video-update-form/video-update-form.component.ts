@@ -24,7 +24,10 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
     visible: this.fb.nonNullable.control(false),
   })
 
-  constructor(private fb: FormBuilder, private service: VideoActionsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: VideoActionsService,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['video']) {
@@ -42,7 +45,7 @@ export class VideoUpdateFormComponent implements OnChanges, OnDestroy {
       .updateVideo(this.video.id, { uploadedAt, ...rest })
       .pipe(
         tap((video) => this.update.emit(video)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

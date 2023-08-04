@@ -14,7 +14,10 @@ export class MemberIdComponent {
   @ViewChild('picture', { static: true })
   public picture!: MemberProfilePictureComponent
 
-  constructor(private route: ActivatedRoute, private title: Title) {
+  constructor(
+    private route: ActivatedRoute,
+    private title: Title,
+  ) {
     this.title.setTitle(this.member.name)
   }
 

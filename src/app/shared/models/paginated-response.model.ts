@@ -13,6 +13,6 @@ export class PaginatedResponse<T> {
     public sort: Sort,
     public first: boolean,
     public numberOfElements: number,
-    public empty: boolean
+    public empty: boolean,
   ) {}
 }
