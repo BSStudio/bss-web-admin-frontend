@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router'
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { throwError } from 'rxjs'
 import { MemberService } from '../services/member.service'
 import { Member } from '../models/member.model'
 
 @Injectable({ providedIn: 'root' })
-export class MemberResolver implements Resolve<Member> {
+export class MemberResolver {
   constructor(private service: MemberService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
