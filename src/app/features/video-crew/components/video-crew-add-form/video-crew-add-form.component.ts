@@ -29,7 +29,11 @@ export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
     member: this.fb.control<MemberListItem | null>(null, [Validators.required]),
   })
 
-  constructor(private fb: FormBuilder, private service: VideoCrewService, private memberService: MemberService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: VideoCrewService,
+    private memberService: MemberService,
+  ) {}
 
   ngOnChanges() {
     this.updatePositions()
@@ -41,7 +45,7 @@ export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
       .getPositions()
       .pipe(
         tap((positions) => (this.positions = positions)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -54,7 +58,7 @@ export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
         map(({ id, name }): MemberListItem => ({ content: name, id, selected: false })),
         toArray(),
         tap((members) => (this.members = members)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -75,7 +79,7 @@ export class VideoCrewAddFormComponent implements OnChanges, OnDestroy {
           this.update.emit(video)
           this.form.reset()
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

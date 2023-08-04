@@ -13,7 +13,7 @@ describe('MemberProfilePictureComponent', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    true
+    true,
   )
   const date = new Date(2022, 1, 1)
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('MemberProfilePictureComponent', () => {
 
     const sources = ngMocks.findAll('figure > picture > source')
     expect(sources.map((src) => src.nativeElement.type)).toEqual(
-      Array.from(new Array(4), () => ['image/avif', 'image/webp', 'image/jpeg']).flatMap((a) => a)
+      Array.from(new Array(4), () => ['image/avif', 'image/webp', 'image/jpeg']).flatMap((a) => a),
     )
     expect(sources.map((src) => src.nativeElement.media)).toEqual(Array.from(new Array(12), () => ''))
     expect(sources.map((src) => src.nativeElement.srcset)).toEqual([

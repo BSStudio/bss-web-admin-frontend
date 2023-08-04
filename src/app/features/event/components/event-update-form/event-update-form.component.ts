@@ -24,12 +24,15 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
     visible: this.fb.nonNullable.control(false, [Validators.required]),
   })
 
-  constructor(private fb: FormBuilder, private service: EventActionsService) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: EventActionsService,
+  ) {}
 
   ngOnInit(): void {
     this.update.pipe(
       tap((event) => (this.event = event)),
-      takeUntil(this.destroy$)
+      takeUntil(this.destroy$),
     )
   }
 
@@ -56,7 +59,7 @@ export class EventUpdateFormComponent implements OnInit, OnChanges, OnDestroy {
       .updateEvent(this.event.id, updateEvent)
       .pipe(
         tap((event) => this.update.emit(event)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

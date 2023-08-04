@@ -23,7 +23,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: ModalService,
     private booleanPipe: BooleanPipe,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
           next: (paginatedVideos) => this.updateTable(paginatedVideos),
           complete: () => (this.loading = false),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -90,7 +90,7 @@ export class VideoTableComponent implements OnInit, OnDestroy {
       .changeVisibility(selected, visible)
       .pipe(
         tap(() => this.getVideos()),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

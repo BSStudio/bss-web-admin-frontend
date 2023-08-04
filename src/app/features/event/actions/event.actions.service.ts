@@ -6,14 +6,17 @@ import { tap } from 'rxjs'
 
 @Injectable()
 export class EventActionsService {
-  constructor(private service: EventService, private notification: NotificationService) {}
+  constructor(
+    private service: EventService,
+    private notification: NotificationService,
+  ) {}
 
   deleteEvent(event: Event) {
     return this.service.deleteEvent(event.id).pipe(
       tap({
         next: () => this.removeEventSuccessNotification(event),
         error: () => this.removeEventErrorNotification(event),
-      })
+      }),
     )
   }
 
@@ -22,7 +25,7 @@ export class EventActionsService {
       tap({
         next: (event) => this.updateEventSuccessNotification(event),
         error: () => this.updateEventErrorNotification(updateEvent),
-      })
+      }),
     )
   }
 

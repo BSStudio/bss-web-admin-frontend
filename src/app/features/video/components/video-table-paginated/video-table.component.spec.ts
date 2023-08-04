@@ -23,7 +23,7 @@ describe('VideoTableComponent', () => {
     sort,
     false,
     123,
-    false
+    false,
   )
 
   it('should render', () => {

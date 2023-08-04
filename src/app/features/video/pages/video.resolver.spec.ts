@@ -21,8 +21,8 @@ describe('VideoResolver', () => {
         HttpClientTestingModule,
         NG_MOCKS_ROOT_PROVIDERS,
       ],
-      VideoModule
-    )
+      VideoModule,
+    ),
   )
 
   it('should return video', fakeAsync(() => {

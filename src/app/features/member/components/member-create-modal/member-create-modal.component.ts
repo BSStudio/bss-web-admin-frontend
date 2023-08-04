@@ -21,7 +21,7 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
   constructor(
     private service: MemberService,
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super()
   }
@@ -43,7 +43,7 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
           const givenNameFirstChar = givenNameParts[givenNameParts.length - 1][0]
           this.form.controls.url.setValue(`${givenNameFirstChar}${familyName}`)
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -95,7 +95,7 @@ export class MemberCreateModalComponent extends BaseModal implements OnInit, OnD
           },
           error: () => window.alert($localize`Server error: name and url must be unique`),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

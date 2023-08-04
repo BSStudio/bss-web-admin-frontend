@@ -65,7 +65,7 @@ describe('EventCreateModalComponent', () => {
 
       // url input
       expect(urlLabel.componentInstance.helperText).toBe(
-        'The event will have the following url: https://bsstudio/event/simonyi-conference-2022'
+        'The event will have the following url: https://bsstudio/event/simonyi-conference-2022',
       )
       expect(ngMocks.formatText(urlLabel)).toBe('URL')
       const urlInput = ngMocks.find(urlLabel, 'input')

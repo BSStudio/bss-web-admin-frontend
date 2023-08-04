@@ -4,6 +4,6 @@ export class UpdateVideo {
     public title: string,
     public description: string,
     public uploadedAt: string,
-    public visible: boolean
+    public visible: boolean,
   ) {}
 }

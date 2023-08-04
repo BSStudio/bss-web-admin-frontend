@@ -21,8 +21,8 @@ describe('EventResolver', () => {
         HttpClientTestingModule,
         NG_MOCKS_ROOT_PROVIDERS,
       ],
-      EventModule
-    )
+      EventModule,
+    ),
   )
 
   it('should return event', fakeAsync(() => {

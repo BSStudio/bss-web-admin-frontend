@@ -28,7 +28,10 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
   @Output() public update = new EventEmitter<DetailedEvent>()
   private readonly destroy$ = new Subject<void>()
 
-  constructor(private modalService: ModalService, private eventVideoService: EventVideoActionsService) {}
+  constructor(
+    private modalService: ModalService,
+    private eventVideoService: EventVideoActionsService,
+  ) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -49,7 +52,7 @@ export class EventVideoRemoveButtonComponent implements OnDestroy {
       .removeVideoFromEvent(this.event, this.video)
       .pipe(
         tap((event) => this.update.emit(event)),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

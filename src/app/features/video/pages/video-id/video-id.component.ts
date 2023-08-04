@@ -11,7 +11,10 @@ import { DetailedVideo } from '../../models'
 export class VideoIdComponent {
   public video = <DetailedVideo>this.route.snapshot.data['video']
 
-  constructor(private route: ActivatedRoute, private title: Title) {
+  constructor(
+    private route: ActivatedRoute,
+    private title: Title,
+  ) {
     this.title.setTitle(this.video.title)
   }
 

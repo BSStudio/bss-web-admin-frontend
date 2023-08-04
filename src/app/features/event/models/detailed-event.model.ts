@@ -8,6 +8,6 @@ export class DetailedEvent {
     public description: string,
     public date: string,
     public visible: boolean,
-    public videos: Video[]
+    public videos: Video[],
   ) {}
 }
