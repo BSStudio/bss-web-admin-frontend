@@ -1,4 +1,4 @@
-FROM node:18.16.0-alpine3.16 as build
+FROM node:20.2.0-alpine3.16 as build
 
 USER node:node
 RUN mkdir /home/node/app && chown node:node /home/node/app
