@@ -25,7 +25,7 @@ describe('EventVideoService', () => {
         (req) =>
           req.method === 'POST' &&
           req.urlWithParams === `/api/v1/eventVideo?${new URLSearchParams({ ...eventVideo })}` &&
-          req.body === null
+          req.body === null,
       )
       .flush(detailedEvent)
     httpMock.verify()
@@ -45,7 +45,7 @@ describe('EventVideoService', () => {
         (req) =>
           req.method === 'DELETE' &&
           req.urlWithParams === `/api/v1/eventVideo?${new URLSearchParams({ ...eventVideo })}` &&
-          req.body === null
+          req.body === null,
       )
       .flush(detailedEvent)
     httpMock.verify()

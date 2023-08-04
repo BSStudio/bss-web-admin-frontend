@@ -23,7 +23,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: ModalService,
     private booleanPipe: BooleanPipe,
-    @Inject(LOCALE_ID) private locale: string
+    @Inject(LOCALE_ID) private locale: string,
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class EventTableComponent implements OnInit, OnDestroy {
           next: (events) => this.updateTable(events),
           complete: () => (this.loading = false),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

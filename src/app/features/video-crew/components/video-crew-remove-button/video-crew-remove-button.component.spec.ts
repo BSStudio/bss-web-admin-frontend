@@ -27,7 +27,7 @@ describe('VideoCrewRemoveButtonComponent', () => {
 
     const button = ngMocks.find('button')
     expect(ngMocks.formatText(button)).toBe(
-      `Remove ${crewMember.member.name}'s ${crewMember.position} position from the video`
+      `Remove ${crewMember.member.name}'s ${crewMember.position} position from the video`,
     )
     const buttonDirective = ngMocks.findInstance(button, Button)
 

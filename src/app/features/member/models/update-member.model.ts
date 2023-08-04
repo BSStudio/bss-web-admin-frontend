@@ -9,6 +9,6 @@ export class UpdateMember {
     public joinedAt: string,
     public role: string,
     public status: MemberStatus,
-    public archived: boolean
+    public archived: boolean,
   ) {}
 }

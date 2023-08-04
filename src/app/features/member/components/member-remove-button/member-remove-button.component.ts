@@ -18,7 +18,11 @@ export class MemberRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
   @Input() member!: Member
 
-  constructor(private service: MemberActionsService, private router: Router, private modalService: ModalService) {}
+  constructor(
+    private service: MemberActionsService,
+    private router: Router,
+    private modalService: ModalService,
+  ) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -39,7 +43,7 @@ export class MemberRemoveButtonComponent implements OnDestroy {
       .deleteMember(this.member)
       .pipe(
         tap(async () => await this.router.navigate(['member'])),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

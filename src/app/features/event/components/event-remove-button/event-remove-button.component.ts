@@ -18,7 +18,11 @@ export class EventRemoveButtonComponent implements OnDestroy {
   private readonly destroy$ = new Subject<void>()
   @Input() event!: Event
 
-  constructor(private service: EventActionsService, private router: Router, private modalService: ModalService) {}
+  constructor(
+    private service: EventActionsService,
+    private router: Router,
+    private modalService: ModalService,
+  ) {}
 
   showRemoveModal() {
     this.modalService.show({
@@ -39,7 +43,7 @@ export class EventRemoveButtonComponent implements OnDestroy {
       .deleteEvent(this.event)
       .pipe(
         tap(() => this.router.navigate(['event']).then()),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

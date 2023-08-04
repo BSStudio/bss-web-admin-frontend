@@ -42,7 +42,7 @@ export class MemberProfilePictureComponent implements OnInit {
         type: `image/${format}`,
         media: '',
         srcset: `${basePath}/${size}.${format}`,
-      }))
+      })),
     )
   }
 

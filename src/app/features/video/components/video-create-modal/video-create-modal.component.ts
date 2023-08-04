@@ -21,7 +21,7 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
   constructor(
     private fb: FormBuilder,
     private videoService: VideoService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super()
   }
@@ -39,7 +39,7 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
           const url = title.toLowerCase().split(/\W+/).join('-')
           this.form.controls.url.setValue(url)
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }
@@ -91,7 +91,7 @@ export class VideoCreateModalComponent extends BaseModal implements OnInit, OnDe
           },
           error: () => window.alert($localize`Server error. Try a different title/url`),
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

@@ -18,7 +18,11 @@ export class VideoRemoveButtonComponent implements OnDestroy {
   private destroy$ = new Subject<void>()
   @Input() public video!: DetailedVideo
 
-  constructor(private router: Router, private service: VideoActionsService, private modalService: ModalService) {}
+  constructor(
+    private router: Router,
+    private service: VideoActionsService,
+    private modalService: ModalService,
+  ) {}
 
   public showConfirmModal() {
     this.modalService.show({
@@ -39,7 +43,7 @@ export class VideoRemoveButtonComponent implements OnDestroy {
       .removeVideo(this.video)
       .pipe(
         tap(() => this.router.navigate(['video']).then()),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe()
   }

@@ -21,7 +21,7 @@ describe('MemberIdComponent', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
   const fakeRoute = {
     snapshot: {
@@ -83,7 +83,7 @@ describe('MemberIdComponent', () => {
         '2023-01-01',
         'role',
         MemberStatus.MEMBER_CANDIDATE,
-        true
+        true,
       )
       const update = new EventEmitter<Member>()
       MockInstance(MemberUpdateFormComponent, (instance) => ngMocks.stub(instance, { update }))

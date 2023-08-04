@@ -18,7 +18,7 @@ describe('MemberService', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
   const createMember = new CreateMember('url', 'name')
   const updateMember = new UpdateMember(
@@ -29,7 +29,7 @@ describe('MemberService', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
 
   it('should get all members', (done) => {
@@ -104,7 +104,7 @@ describe('MemberService', () => {
         tap(() => {
           expect().nothing()
           done()
-        })
+        }),
       )
       .subscribe()
 

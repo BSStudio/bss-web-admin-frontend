@@ -30,7 +30,7 @@ describe('VideoService', () => {
     sort,
     false,
     123,
-    false
+    false,
   )
 
   it('should get all videos', (done) => {
@@ -63,7 +63,7 @@ describe('VideoService', () => {
           (req) =>
             req.method === 'GET' &&
             req.urlWithParams ===
-              `/api/v1/video?page=${pageableRequest.page}&size=${pageableRequest.size}&sort=${sort.property},${sort.direction}`
+              `/api/v1/video?page=${pageableRequest.page}&size=${pageableRequest.size}&sort=${sort.property},${sort.direction}`,
         )
         .flush(paginatedResponse)
       httpMock.verify()
@@ -110,7 +110,8 @@ describe('VideoService', () => {
 
       httpMock
         .expectOne(
-          (req) => req.method === 'GET' && req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}`
+          (req) =>
+            req.method === 'GET' && req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}`,
         )
         .flush(paginatedResponse)
       httpMock.verify()
@@ -144,7 +145,7 @@ describe('VideoService', () => {
         .expectOne(
           (req) =>
             req.method === 'GET' &&
-            req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}&sort=${sort.property}`
+            req.urlWithParams === `/api/v1/video?sort=${sort.property},${sort.direction}&sort=${sort.property}`,
         )
         .flush(paginatedResponse)
       httpMock.verify()
@@ -195,7 +196,7 @@ describe('VideoService', () => {
         (req) =>
           req.method === 'PUT' &&
           req.urlWithParams ===
-            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${visible}` })}`
+            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${visible}` })}`,
       )
       .flush(videoIds)
     httpMock.verify()
@@ -216,7 +217,7 @@ describe('VideoService', () => {
         (req) =>
           req.method === 'PUT' &&
           req.urlWithParams ===
-            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${false}` })}`
+            `/api/v1/video/visible?${new URLSearchParams({ videoIds: `${videoIds}`, visible: `${false}` })}`,
       )
       .flush(videoIds)
     httpMock.verify()

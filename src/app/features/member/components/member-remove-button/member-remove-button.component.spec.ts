@@ -18,7 +18,7 @@ describe('MemberRemoveButtonComponent', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
 
   it('should have a button with an icon', () => {

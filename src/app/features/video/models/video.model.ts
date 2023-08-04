@@ -4,6 +4,6 @@ export class Video {
     public url: string,
     public title: string,
     public uploadedAt: string,
-    public visible: boolean
+    public visible: boolean,
   ) {}
 }

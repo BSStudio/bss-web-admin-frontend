@@ -21,7 +21,7 @@ describe('VideoCrewService', () => {
         tap((actual) => {
           expect(actual).toEqual(['position1', 'position2'])
           done()
-        })
+        }),
       )
       .subscribe()
 
@@ -41,7 +41,7 @@ describe('VideoCrewService', () => {
         tap((actual) => {
           expect(actual).toEqual(video)
           done()
-        })
+        }),
       )
       .subscribe()
 
@@ -62,7 +62,7 @@ describe('VideoCrewService', () => {
         tap((actual) => {
           expect(actual).toEqual(video)
           done()
-        })
+        }),
       )
       .subscribe()
 

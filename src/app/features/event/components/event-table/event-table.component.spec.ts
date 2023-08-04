@@ -96,7 +96,7 @@ describe('EventTableComponent', () => {
         create: jasmine
           .createSpy('create')
           .and.returnValue({ onDestroy: jasmine.createSpy('onDestroy').and.callFake((fn: Function) => fn()) }),
-      })
+      }),
     )
     MockRender(EventTableComponent)
 

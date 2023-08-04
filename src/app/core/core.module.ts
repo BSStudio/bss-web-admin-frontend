@@ -35,7 +35,10 @@ export class CoreModule {
     'CALENDAR.SHORTWEEKDAYS.SUNDAY': 'V',
   }
 
-  constructor(private iconService: IconService, private i18nService: I18n) {
+  constructor(
+    private iconService: IconService,
+    private i18nService: I18n,
+  ) {
     CoreModule.icons.forEach((icon) => this.iconService.register(icon))
     this.i18nService.setLocale('hu', CoreModule.translations)
   }

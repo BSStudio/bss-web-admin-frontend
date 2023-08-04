@@ -6,14 +6,17 @@ import { tap } from 'rxjs'
 
 @Injectable()
 export class MemberActionsService {
-  constructor(private service: MemberService, private notification: NotificationService) {}
+  constructor(
+    private service: MemberService,
+    private notification: NotificationService,
+  ) {}
 
   deleteMember(member: Member) {
     return this.service.deleteMember(member.id).pipe(
       tap({
         next: () => this.deleteSuccessNotification(member),
         error: (err) => this.deleteErrorToast(err, member),
-      })
+      }),
     )
   }
 
@@ -22,7 +25,7 @@ export class MemberActionsService {
       tap({
         next: (member) => this.updateSuccessToast(member),
         error: (err) => this.updateErrorToast(err),
-      })
+      }),
     )
   }
 

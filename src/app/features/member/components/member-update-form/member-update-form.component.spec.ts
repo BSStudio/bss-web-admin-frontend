@@ -15,7 +15,7 @@ describe('MemberUpdateFormComponent', () => {
     'joinedAt',
     'role',
     MemberStatus.ALUMNI,
-    false
+    false,
   )
 
   it('should create', () => {
