@@ -139,7 +139,6 @@
       }
     }
   },
-  "defaultProject": "bss-web-admin-frontend",
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
