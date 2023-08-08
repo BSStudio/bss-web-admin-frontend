@@ -1,37 +1,36 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
-  <ibm-label class="name">
+  <cds-label class="name">
     <ng-container i18n>Name</ng-container>
-    <input ibmText formControlName="name" />
-  </ibm-label>
-  <ibm-label class="nickname">
+    <input cdsText formControlName="name" />
+  </cds-label>
+  <cds-label class="nickname">
     <ng-container i18n>Nickname</ng-container>
-    <input ibmText formControlName="nickname" />
-  </ibm-label>
-  <ibm-label class="url">
+    <input cdsText formControlName="nickname" />
+  </cds-label>
+  <cds-label class="url">
     <ng-container i18n>URL</ng-container>
-    <input ibmText formControlName="url" />
-  </ibm-label>
-  <ibm-label class="role">
+    <input cdsText formControlName="url" />
+  </cds-label>
+  <cds-label class="role">
     <ng-container i18n>Role</ng-container>
-    <input ibmText formControlName="role" />
-  </ibm-label>
-  <ibm-label class="description">
+    <input cdsText formControlName="role" />
+  </cds-label>
+  <cds-label class="description">
     <ng-container i18n>Description</ng-container>
-    <textarea ibmTextArea formControlName="description"></textarea>
-  </ibm-label>
-  <ibm-select formControlName="status" label="Status" i18n-label>
+    <textarea cdsTextArea formControlName="description"></textarea>
+  </cds-label>
+  <cds-select formControlName="status" label="Status" i18n-label>
     <option *ngFor="let status of statuses" [value]="status">{{ status | memberStatus }}</option>
-  </ibm-select>
-  <ibm-date-picker
+  </cds-select>
+  <cds-date-picker
     label="Joined at:"
     i18n-label
     dateFormat="Y-m-d"
-    [flatpickrOptions]="flatpickrOptions"
     placeholder="YYYY-MM-dd"
     formControlName="joinedAt"
-  ></ibm-date-picker>
+  ></cds-date-picker>
   <div>
-    <ibm-toggle
+    <cds-toggle
       label="Archived"
       i18n-label
       formControlName="archived"
@@ -39,10 +38,10 @@
       i18n-offText
       onText="Yes"
       i18n-onText
-    ></ibm-toggle>
-    <button ibmButton="primary" type="submit" [disabled]="form.pristine">
+    ></cds-toggle>
+    <button cdsButton="primary" type="submit" [disabled]="form.pristine">
       <ng-container i18n>Save</ng-container>
-      <svg ibmIcon="save" size="16" class="bx--btn__icon"></svg>
+      <svg cdsIcon="save" size="16" class="cds--btn__icon"></svg>
     </button>
   </div>
 </form>

@@ -1,4 +1,4 @@
-<ibm-file-uploader
+<cds-file-uploader
   [drop]="true"
   [accept]="['image/*']"
   [(files)]="files"
@@ -8,5 +8,5 @@
   title="Profile picture"
   buttonText="Upload"
   buttonType="primary"
-></ibm-file-uploader>
-<button ibmButton="primary" [disabled]="!hasFile" (click)="upload()">Upload</button>
+></cds-file-uploader>
+<button cdsButton="primary" [disabled]="!hasFile" (click)="upload()">Upload</button>

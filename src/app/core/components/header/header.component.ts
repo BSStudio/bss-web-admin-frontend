@@ -4,16 +4,16 @@ import { NavigationItem } from 'carbon-components-angular'
 @Component({
   selector: 'app-header',
   template: `
-    <ibm-header brand="BSS" name="site-admin" [route]="['']" [useRouter]="true">
-      <ibm-hamburger class="bx--header__menu-toggle__hidden" (selected)="toggleHamburger()"></ibm-hamburger>
-      <ibm-header-navigation [navigationItems]="navigationItems"></ibm-header-navigation>
-      <ibm-sidenav
+    <cds-header brand="BSS" name="site-admin" [route]="['']" [useRouter]="true">
+      <cds-hamburger class="cds--header__menu-toggle__hidden" (selected)="toggleHamburger()"></cds-hamburger>
+      <cds-header-navigation [navigationItems]="navigationItems"></cds-header-navigation>
+      <cds-sidenav
         *ngIf="hasHamburger"
         [navigationItems]="navigationItems"
-        class="bx--header__menu-toggle__hidden"
+        class="cds--header__menu-toggle__hidden"
         (click)="toggleHamburger()"
-      ></ibm-sidenav>
-    </ibm-header>
+      ></cds-sidenav>
+    </cds-header>
   `,
 })
 export class HeaderComponent {

@@ -1,11 +1,10 @@
-@import "@carbon/elements/scss/layout/layout";
-@import "@carbon/elements/scss/themes";
+@use "@carbon/elements";
 
 main#app {
-  min-height: calc(100vh - $layout-04 - $fluid-spacing-03);
-  margin-top: $layout-04;
-  padding-top: $layout-01;
-  margin-bottom: $fluid-spacing-03;
+  min-height: calc(100vh - elements.$spacing-09 - elements.$fluid-spacing-03);
+  margin-top: elements.$spacing-09;
+  padding-top: elements.$spacing-05;
+  margin-bottom: elements.$fluid-spacing-03;
 }
 
 footer {
@@ -13,7 +12,7 @@ footer {
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
-  gap: $layout-01;
-  color: $text-05;
-  padding-bottom: $layout-01;
+  gap: elements.$spacing-05;
+  color: elements.$text-helper;
+  padding-bottom: elements.$spacing-05;
 }

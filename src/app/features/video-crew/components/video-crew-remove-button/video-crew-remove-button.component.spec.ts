@@ -31,15 +31,13 @@ describe('VideoCrewRemoveButtonComponent', () => {
     )
     const buttonDirective = ngMocks.findInstance(button, Button)
 
-    expect(buttonDirective.ibmButton).toBe('danger--ghost')
+    expect(buttonDirective.cdsButton).toBe('danger--ghost')
     expect(buttonDirective.size).toBe('field')
     expect(buttonDirective.iconOnly).toBeTrue()
-    expect(buttonDirective.assistiveTextAlignment).toBe('end')
-    expect(buttonDirective.assistiveTextPlacement).toBe('left')
-    const svg = ngMocks.find(button, 'svg.bx--btn__icon')
+    const svg = ngMocks.find(button, 'svg.cds--btn__icon')
     const icon = ngMocks.findInstance(svg, IconDirective)
 
-    expect(icon.ibmIcon).toBe('delete')
+    expect(icon.cdsIcon).toBe('delete')
     expect(icon.size).toBe('16')
   })
 

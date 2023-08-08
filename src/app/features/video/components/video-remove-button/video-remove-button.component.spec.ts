@@ -26,16 +26,16 @@ describe('VideoRemoveButtonComponent', () => {
     expect(fixture.componentInstance.video).toEqual(detailedVideo)
 
     const button = ngMocks.findInstance(Button)
-    expect(button.ibmButton).toBe('danger--tertiary')
+    expect(button.cdsButton).toBe('danger--tertiary')
 
     const buttonText = ngMocks.find<HTMLSpanElement>('span')
     expect(buttonText.nativeElement.innerHTML).toBe('Remove')
 
     const svgIcon = ngMocks.find('svg')
-    expect(Object.keys(svgIcon.classes)).toEqual(['bx--btn__icon'])
+    expect(Object.keys(svgIcon.classes)).toEqual(['cds--btn__icon'])
 
     const iconDirective = ngMocks.findInstance(svgIcon, IconDirective)
-    expect(iconDirective.ibmIcon).toBe('delete')
+    expect(iconDirective.cdsIcon).toBe('delete')
     expect(iconDirective.size).toBe('16')
   })
 

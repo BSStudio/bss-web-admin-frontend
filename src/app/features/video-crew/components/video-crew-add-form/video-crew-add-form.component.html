@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <input
-    ibmText
+    cdsText
     size="md"
     theme="light"
     formControlName="position"
@@ -12,7 +12,7 @@
   <datalist id="options">
     <option *ngFor="let position of positions" [value]="position"></option>
   </datalist>
-  <ibm-combo-box
+  <cds-combo-box
     size="md"
     formControlName="member"
     theme="light"
@@ -22,10 +22,10 @@
     [items]="members"
     [invalid]="form.controls.member.invalid && form.controls.member.touched"
   >
-    <ibm-dropdown-list></ibm-dropdown-list>
-  </ibm-combo-box>
-  <button ibmButton="primary" size="field" type="submit" [disabled]="form.pristine">
-    <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+    <cds-dropdown-list></cds-dropdown-list>
+  </cds-combo-box>
+  <button cdsButton="primary" size="lg" type="submit" [disabled]="form.pristine">
+    <svg cdsIcon="add" size="16" class="cds--btn__icon"></svg>
     <span i18n>Add crew member</span>
   </button>
 </form>

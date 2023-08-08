@@ -1,30 +1,30 @@
-<ibm-table-container>
-  <ibm-table-toolbar size="md" [model]="table">
-    <ibm-table-toolbar-actions>
-      <button ibmButton="primary" (click)="changeVisibilityTo(true)">
+<cds-table-container>
+  <cds-table-toolbar size="md" [model]="table">
+    <cds-table-toolbar-actions>
+      <button cdsButton="primary" (click)="changeVisibilityTo(true)">
         <ng-container i18n>Reveal selected</ng-container>
-        <svg ibmIcon="view" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="view" size="16" class="cds--btn__icon"></svg>
       </button>
-      <button ibmButton="primary" (click)="changeVisibilityTo(false)">
+      <button cdsButton="primary" (click)="changeVisibilityTo(false)">
         <ng-container i18n>Hide selected</ng-container>
-        <svg ibmIcon="view--off--filled" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="view--off--filled" size="16" class="cds--btn__icon"></svg>
       </button>
-    </ibm-table-toolbar-actions>
-    <ibm-table-toolbar-content>
-      <button ibmButton="secondary" [disabled]="loading" [iconOnly]="true" [hasAssistiveText]="true">
-        <svg ibmIcon="renew" size="16" class="bx--btn__icon" (click)="getVideos()"></svg>
-        <span i18n class="bx--assistive-text">Refresh</span>
+    </cds-table-toolbar-actions>
+    <cds-table-toolbar-content>
+      <button cdsButton="secondary" [disabled]="loading" [iconOnly]="true">
+        <svg cdsIcon="renew" size="16" class="cds--btn__icon" (click)="getVideos()"></svg>
+        <span i18n class="cds--assistive-text">Refresh</span>
       </button>
-      <button ibmButton="primary" (click)="showAddModal()">
+      <button cdsButton="primary" (click)="showAddModal()">
         <ng-container i18n>Add new video</ng-container>
-        <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="add" size="16" class="cds--btn__icon"></svg>
       </button>
-    </ibm-table-toolbar-content>
-  </ibm-table-toolbar>
-  <ibm-table
+    </cds-table-toolbar-content>
+  </cds-table-toolbar>
+  <cds-table
     [model]="table"
     [sortable]="true"
-    size="sh"
+    size="lg"
     [showSelectionColumn]="true"
     [striped]="false"
     (rowClick)="onRowClick($event)"
@@ -32,9 +32,9 @@
   >
     <tbody>
       <tr>
-        <td colspan="5"><ibm-inline-loading loadingText="Loading" i18n-loadingText></ibm-inline-loading></td>
+        <td colspan="5"><cds-inline-loading loadingText="Loading" i18n-loadingText></cds-inline-loading></td>
       </tr>
     </tbody>
-  </ibm-table>
-  <ibm-pagination [model]="table" (selectPage)="onPageSelect($event)"></ibm-pagination>
-</ibm-table-container>
+  </cds-table>
+  <cds-pagination [model]="table" (selectPage)="onPageSelect($event)"></cds-pagination>
+</cds-table-container>

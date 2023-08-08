@@ -72,16 +72,16 @@ describe('EventTableComponent', () => {
     const button = ngMocks.find(toolbarContent, 'button')
 
     const buttonDirective = ngMocks.findInstance(button, Button)
-    expect(buttonDirective.ibmButton).toBe('secondary')
+    expect(buttonDirective.cdsButton).toBe('secondary')
     expect(buttonDirective.iconOnly).toBeTrue()
     expect(buttonDirective.hasAssistiveText).toBeTrue()
 
-    const buttonText = ngMocks.find(button, 'span.bx--assistive-text')
+    const buttonText = ngMocks.find(button, 'span.cds--assistive-text')
     expect(ngMocks.formatText(buttonText)).toBe('Refresh')
 
-    const buttonIcon = ngMocks.find(button, 'svg.bx--btn__icon')
+    const buttonIcon = ngMocks.find(button, 'svg.cds--btn__icon')
     const iconDirective = ngMocks.findInstance(buttonIcon, IconDirective)
-    expect(iconDirective.ibmIcon).toBe('renew')
+    expect(iconDirective.cdsIcon).toBe('renew')
     expect(iconDirective.size).toBe('16')
 
     ngMocks.click(button)
@@ -106,13 +106,13 @@ describe('EventTableComponent', () => {
     const addButton = ngMocks.findAll(toolbarContent, 'button')[1]
 
     const buttonDirective = ngMocks.findInstance(addButton, Button)
-    expect(buttonDirective.ibmButton).toBe('primary')
+    expect(buttonDirective.cdsButton).toBe('primary')
 
     expect(ngMocks.formatText(addButton)).toBe('Add new event')
 
-    const buttonIcon = ngMocks.find(addButton, 'svg.bx--btn__icon')
+    const buttonIcon = ngMocks.find(addButton, 'svg.cds--btn__icon')
     const iconDirective = ngMocks.findInstance(buttonIcon, IconDirective)
-    expect(iconDirective.ibmIcon).toBe('add')
+    expect(iconDirective.cdsIcon).toBe('add')
     expect(iconDirective.size).toBe('16')
 
     ngMocks.click(addButton)

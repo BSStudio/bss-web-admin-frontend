@@ -1,9 +1,9 @@
-@import "@carbon/elements/scss/layout/layout";
+@use "@carbon/elements";
 
 form {
   display: grid;
-  grid-gap: $spacing-04;
-  margin-top: $layout-02;
+  grid-gap: elements.$spacing-04;
+  margin-top: elements.$spacing-06;
   @media (min-width: 672px) {
     grid-template-columns: repeat(2, 1fr);
     .wide {

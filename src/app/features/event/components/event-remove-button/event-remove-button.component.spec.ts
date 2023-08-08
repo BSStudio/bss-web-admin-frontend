@@ -17,7 +17,7 @@ describe('EventRemoveButtonComponent', () => {
 
     const button = ngMocks.find('button')
     const buttonDirective = ngMocks.findInstance(button, Button)
-    expect(buttonDirective.ibmButton).toBe('danger--tertiary')
+    expect(buttonDirective.cdsButton).toBe('danger--tertiary')
     expect(buttonDirective.size).toBe('field')
     expect(ngMocks.formatText(button)).toBe('Remove')
   })

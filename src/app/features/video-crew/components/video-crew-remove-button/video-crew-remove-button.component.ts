@@ -8,17 +8,9 @@ import { AlertModalType, ModalButtonType, ModalService, NotificationService } fr
 @Component({
   selector: 'app-video-crew-remove-button[crewMember]',
   template: `
-    <button
-      ibmButton="danger--ghost"
-      size="field"
-      [iconOnly]="true"
-      [hasAssistiveText]="true"
-      assistiveTextAlignment="end"
-      assistiveTextPlacement="left"
-      (click)="showConfirm()"
-    >
-      <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
-      <span i18n class="bx--assistive-text">
+    <button cdsButton="danger--ghost" size="lg" [iconOnly]="true" (click)="showConfirm()">
+      <svg cdsIcon="delete" size="16" class="cds--btn__icon"></svg>
+      <span i18n class="cds--assistive-text">
         Remove {{ crewMember.member.name }}'s {{ crewMember.position }} position from the video
       </span>
     </button>

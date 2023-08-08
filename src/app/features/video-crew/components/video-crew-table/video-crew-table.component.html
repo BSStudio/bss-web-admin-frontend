@@ -1,15 +1,15 @@
-<ibm-table-container>
-  <ibm-table-header>
-    <h4 ibmTableHeaderTitle i18n>Crew</h4>
+<cds-table-container>
+  <cds-table-header>
+    <h4 cdsTableHeaderTitle i18n>Crew</h4>
     <span i18n>To add crew members define a position and select a member</span>
-  </ibm-table-header>
-  <ibm-table-toolbar>
-    <ibm-table-toolbar-content style="height: auto">
+  </cds-table-header>
+  <cds-table-toolbar>
+    <cds-table-toolbar-content style="height: auto">
       <app-video-crew-add-form [video]="video" (update)="updateVideo($event)"></app-video-crew-add-form>
-    </ibm-table-toolbar-content>
-  </ibm-table-toolbar>
-  <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="false" size="sh"> </ibm-table>
-</ibm-table-container>
+    </cds-table-toolbar-content>
+  </cds-table-toolbar>
+  <cds-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="false" size="lg"> </cds-table>
+</cds-table-container>
 <ng-template #removeCrewMemberCell let-crewMember="data">
   <app-video-crew-remove-button [crewMember]="crewMember" (update)="updateVideo($event)"></app-video-crew-remove-button>
 </ng-template>

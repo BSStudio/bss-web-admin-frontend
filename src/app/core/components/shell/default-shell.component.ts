@@ -5,10 +5,10 @@ import { Component } from '@angular/core'
   styleUrls: ['./default-shell.component.scss'],
   template: `
     <app-header></app-header>
-    <main ibmGrid id="app">
+    <main cdsGrid id="app">
       <router-outlet></router-outlet>
     </main>
-    <footer ibmGrid>
+    <footer cdsGrid>
       <span>&copy; Copyright {{ year }} Budavári Schönherz Stúdió</span>
       <a href="https://github.com/BSStudio/bss-web-admin-frontend/issues" i18n>Report issue</a>
     </footer>

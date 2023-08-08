@@ -1,13 +1,13 @@
-@import "@carbon/elements/scss/layout/layout";
+@use "@carbon/elements";
 
-ibm-modal {
+cds-modal {
   form {
-    ibm-label {
-      margin-bottom: $spacing-04;
+    cds-label {
+      margin-bottom: elements.$spacing-04;
     }
   }
 
-  ibm-modal-footer {
+  cds-modal-footer {
     button:first-of-type {
       order: 1;
     }

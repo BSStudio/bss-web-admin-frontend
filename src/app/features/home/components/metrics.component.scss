@@ -1,10 +1,10 @@
-@import "@carbon/elements/scss/layout/layout";
+@use "@carbon/elements";
 
 :host {
   display: flex;
-  gap: $spacing-03;
+  gap: elements.$spacing-03;
   flex-wrap: wrap;
-  ibm-tile {
+  cds-tile {
     display: flex;
     flex-direction: column;
     place-content: center;

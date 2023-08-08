@@ -8,9 +8,9 @@ import { EventActionsService } from '../../actions/event.actions.service'
 @Component({
   selector: 'app-event-remove-button[event]',
   template: `
-    <button ibmButton="danger--tertiary" size="field" (click)="showRemoveModal()">
+    <button cdsButton="danger--tertiary" size="lg" (click)="showRemoveModal()">
       <span i18n>Remove</span>
-      <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
+      <svg cdsIcon="delete" size="16" class="cds--btn__icon"></svg>
     </button>
   `,
 })

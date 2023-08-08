@@ -25,7 +25,7 @@ describe('HeaderComponent', () => {
     expect(header.componentInstance.route).toEqual([''])
 
     const hamburger = ngMocks.find(header, Hamburger)
-    expect(hamburger.classes).toEqual({ 'bx--header__menu-toggle__hidden': true })
+    expect(hamburger.classes).toEqual({ 'cds--header__menu-toggle__hidden': true })
 
     const headerNavigation = ngMocks.find(header, HeaderNavigation)
     expect(headerNavigation.componentInstance.navigationItems).toEqual(navigationItems)
@@ -48,6 +48,6 @@ describe('HeaderComponent', () => {
 
     const sideNav = ngMocks.find(header, SideNav)
     expect(sideNav.componentInstance.navigationItems).toEqual(navigationItems)
-    expect(sideNav.classes).toEqual({ 'bx--header__menu-toggle__hidden': true })
+    expect(sideNav.classes).toEqual({ 'cds--header__menu-toggle__hidden': true })
   })
 })

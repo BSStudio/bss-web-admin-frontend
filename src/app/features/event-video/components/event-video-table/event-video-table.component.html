@@ -1,28 +1,28 @@
-<ibm-table-container>
-  <ibm-table-header>
-    <h4 ibmTableHeaderTitle i18n>Assigned videos</h4>
+<cds-table-container>
+  <cds-table-header>
+    <h4 cdsTableHeaderTitle i18n>Assigned videos</h4>
     <span i18n>To add a video select one in the drop down list and press the button</span>
-  </ibm-table-header>
-  <ibm-table-toolbar [model]="table">
-    <ibm-table-toolbar-actions>
-      <button ibmButton="primary" (click)="changeVisibilityTo(true)">
+  </cds-table-header>
+  <cds-table-toolbar [model]="table">
+    <cds-table-toolbar-actions>
+      <button cdsButton="primary" (click)="changeVisibilityTo(true)">
         <ng-container i18n>Reveal selected</ng-container>
-        <svg ibmIcon="view" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="view" size="16" class="cds--btn__icon"></svg>
       </button>
-      <button ibmButton="primary" (click)="changeVisibilityTo(false)">
+      <button cdsButton="primary" (click)="changeVisibilityTo(false)">
         <ng-container i18n>Hide selected</ng-container>
-        <svg ibmIcon="view--off--filled" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="view--off--filled" size="16" class="cds--btn__icon"></svg>
       </button>
-    </ibm-table-toolbar-actions>
-    <ibm-table-toolbar-content style="height: auto">
+    </cds-table-toolbar-actions>
+    <cds-table-toolbar-content style="height: auto">
       <app-event-video-add-form-component
         [event]="event"
         (update)="updateEvent($event)"
       ></app-event-video-add-form-component>
-    </ibm-table-toolbar-content>
-  </ibm-table-toolbar>
-  <ibm-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="true" size="sh"> </ibm-table>
-</ibm-table-container>
+    </cds-table-toolbar-content>
+  </cds-table-toolbar>
+  <cds-table [model]="table" [sortable]="true" [striped]="false" [showSelectionColumn]="true" size="lg"> </cds-table>
+</cds-table-container>
 <ng-template #navigateCell let-video="data">
   <a [routerLink]="['/video', video.id]">{{ video.title }}</a>
 </ng-template>

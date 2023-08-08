@@ -58,7 +58,7 @@ describe('VideoCreateModalComponent', () => {
     const addButtonDirective = ngMocks.findInstance(addButton, Button)
     const cancelButtonDirective = ngMocks.findInstance(cancelButton, Button)
 
-    expect(addButtonDirective.ibmButton).toBe('primary')
-    expect(cancelButtonDirective.ibmButton).toBe('secondary')
+    expect(addButtonDirective.cdsButton).toBe('primary')
+    expect(cancelButtonDirective.cdsButton).toBe('secondary')
   })
 })

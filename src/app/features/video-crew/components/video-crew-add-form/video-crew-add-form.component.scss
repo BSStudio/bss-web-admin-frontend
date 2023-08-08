@@ -1,9 +1,9 @@
-@import "@carbon/elements/scss/layout/layout";
+@use "@carbon/elements";
 
 form {
   display: flex;
   flex-wrap: wrap;
-  gap: $spacing-03;
+  gap: elements.$spacing-03;
   justify-content: flex-end;
   align-items: flex-start;
 
@@ -11,7 +11,7 @@ form {
     flex: fit-content;
   }
 
-  ibm-combo-box {
+  cds-combo-box {
     flex: fit-content;
   }
 }

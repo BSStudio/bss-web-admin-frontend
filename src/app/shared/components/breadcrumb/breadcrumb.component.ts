@@ -4,7 +4,7 @@ import { BreadcrumbItem, BreadcrumbModule } from 'carbon-components-angular'
 @Component({
   selector: 'app-breadcrumb',
   standalone: true,
-  template: ` <ibm-breadcrumb [noTrailingSlash]="true" [items]="items"></ibm-breadcrumb> `,
+  template: ` <cds-breadcrumb [noTrailingSlash]="true" [items]="items"></cds-breadcrumb> `,
   imports: [BreadcrumbModule],
 })
 export class BreadcrumbComponent implements OnChanges {

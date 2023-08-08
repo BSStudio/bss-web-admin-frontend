@@ -8,17 +8,9 @@ import { EventVideoActionsService } from '../../actions/event-video.actions.serv
 @Component({
   selector: 'app-event-video-remove-button',
   template: `
-    <button
-      ibmButton="danger--ghost"
-      size="field"
-      [iconOnly]="true"
-      [hasAssistiveText]="true"
-      assistiveTextAlignment="end"
-      assistiveTextPlacement="left"
-      (click)="showRemoveModal()"
-    >
-      <svg ibmIcon="delete" size="16" class="bx--btn__icon"></svg>
-      <span i18n class="bx--assistive-text">Remove {{ video.title }} from event</span>
+    <button cdsButton="danger--ghost" size="lg" [iconOnly]="true" (click)="showRemoveModal()">
+      <svg cdsIcon="delete" size="16" class="cds--btn__icon"></svg>
+      <span i18n class="cds--assistive-text">Remove {{ video.title }} from event</span>
     </button>
   `,
 })

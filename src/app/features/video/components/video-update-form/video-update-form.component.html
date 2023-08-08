@@ -1,24 +1,23 @@
 <form [formGroup]="form" (ngSubmit)="updateVideo()">
-  <ibm-label>
+  <cds-label>
     <ng-container i18n>Title:</ng-container>
-    <input ibmText formControlName="title" />
-  </ibm-label>
-  <ibm-label [invalid]="form.controls.url.invalid" [invalidText]="form.controls.url.errors | json">
+    <input cdsText formControlName="title" />
+  </cds-label>
+  <cds-label [invalid]="form.controls.url.invalid" [invalidText]="form.controls.url.errors | json">
     <ng-container i18n>URL:</ng-container>
-    <input ibmText formControlName="url" />
-  </ibm-label>
-  <ibm-label class="wide">
+    <input cdsText formControlName="url" />
+  </cds-label>
+  <cds-label class="wide">
     <ng-container i18n>Description:</ng-container>
-    <textarea ibmTextArea [rows]="5" formControlName="description"></textarea>
-  </ibm-label>
-  <ibm-date-picker
+    <textarea cdsTextArea [rows]="5" formControlName="description"></textarea>
+  </cds-label>
+  <cds-date-picker
     label="Uploaded at:"
     i18n-label
     dateFormat="Y-m-d"
-    [flatpickrOptions]="flatpickrOptions"
     placeholder="YYYY-MM-dd"
     formControlName="uploadedAt"
-  ></ibm-date-picker>
-  <ibm-toggle label="Visible" i18n-label formControlName="visible"></ibm-toggle>
-  <button i18n ibmButton="primary" type="submit" [disabled]="form.pristine">Save</button>
+  ></cds-date-picker>
+  <cds-toggle label="Visible" i18n-label formControlName="visible"></cds-toggle>
+  <button i18n cdsButton="primary" type="submit" [disabled]="form.pristine">Save</button>
 </form>

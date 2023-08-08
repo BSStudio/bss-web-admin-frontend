@@ -28,14 +28,14 @@ describe('MemberRemoveButtonComponent', () => {
     const button = ngMocks.find('button')
     const buttonDirective = ngMocks.findInstance(button, Button)
 
-    expect(buttonDirective.ibmButton).toBe('danger--tertiary')
+    expect(buttonDirective.cdsButton).toBe('danger--tertiary')
     expect(buttonDirective.size).toBe('field')
     const span = ngMocks.find(button, 'span')
     expect(ngMocks.formatText(span)).toBe('Remove')
 
-    const svg = ngMocks.find(button, 'svg.bx--btn__icon')
+    const svg = ngMocks.find(button, 'svg.cds--btn__icon')
     const icon = ngMocks.findInstance(svg, IconDirective)
-    expect(icon.ibmIcon).toBe('delete')
+    expect(icon.cdsIcon).toBe('delete')
     expect(icon.size).toBe('16')
   })
 

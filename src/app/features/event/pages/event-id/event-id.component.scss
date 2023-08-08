@@ -1,7 +1,7 @@
-@import "@carbon/elements/scss/layout";
+@use "@carbon/elements";
 
 section {
-  margin-bottom: $layout-02
+  margin-bottom: elements.$spacing-06
 }
 
 section#event-title {

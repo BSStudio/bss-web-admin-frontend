@@ -1,30 +1,24 @@
-<ibm-table-container>
-  <ibm-table-toolbar>
-    <ibm-table-toolbar-content>
-      <ibm-table-toolbar-search [expandable]="true" (valueChange)="filterRows($event)" (clear)="searchValue = ''">
-      </ibm-table-toolbar-search>
-      <button
-        ibmButton="secondary"
-        [iconOnly]="true"
-        [hasAssistiveText]="true"
-        [disabled]="loading"
-        (click)="getEvents()"
-      >
-        <svg ibmIcon="renew" size="16" class="bx--btn__icon"></svg>
-        <span i18n class="bx--assistive-text">Refresh</span>
+<cds-table-container>
+  <cds-table-toolbar>
+    <cds-table-toolbar-content>
+      <cds-table-toolbar-search [expandable]="true" (valueChange)="filterRows($event)" (clear)="searchValue = ''">
+      </cds-table-toolbar-search>
+      <button cdsButton="secondary" [iconOnly]="true" [disabled]="loading" (click)="getEvents()">
+        <svg cdsIcon="renew" size="16" class="cds--btn__icon"></svg>
+        <span i18n class="cds--assistive-text">Refresh</span>
       </button>
-      <button ibmButton="primary" (click)="showAddModal()">
+      <button cdsButton="primary" (click)="showAddModal()">
         <ng-container i18n>Add new event</ng-container>
-        <svg ibmIcon="add" size="16" class="bx--btn__icon"></svg>
+        <svg cdsIcon="add" size="16" class="cds--btn__icon"></svg>
       </button>
-    </ibm-table-toolbar-content>
-  </ibm-table-toolbar>
-  <ibm-table
+    </cds-table-toolbar-content>
+  </cds-table-toolbar>
+  <cds-table
     [model]="table"
     [sortable]="true"
     [showSelectionColumn]="false"
     [striped]="false"
     (rowClick)="onRowClick($event)"
-    size="sh"
-  ></ibm-table>
-</ibm-table-container>
+    size="lg"
+  ></cds-table>
+</cds-table-container>

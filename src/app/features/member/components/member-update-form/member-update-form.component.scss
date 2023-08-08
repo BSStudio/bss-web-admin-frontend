@@ -1,8 +1,8 @@
-@import "@carbon/elements/scss/layout";
+@use "@carbon/elements";
 
 form {
   display: grid;
-  grid-gap: $spacing-04;
+  grid-gap: elements.$spacing-04;
   @media (min-width: 672px) {
     grid-template-areas:
       "name nickname"
@@ -10,25 +10,25 @@ form {
       "description description"
       "status joinedAt"
       "toggles toggles";
-    ibm-label.name {
+    cds-label.name {
       grid-area: name;
     }
-    ibm-label.nickname {
+    cds-label.nickname {
       grid-area: nickname;
     }
-    ibm-label.url {
+    cds-label.url {
       grid-area: url;
     }
-    ibm-label.role {
+    cds-label.role {
       grid-area: role;
     }
-    ibm-select {
+    cds-select {
       grid-area: status;
     }
-    ibm-date-picker {
+    cds-date-picker {
       grid-area: joinedAt;
     }
-    ibm-label.description {
+    cds-label.description {
       grid-area: description;
     }
     div {

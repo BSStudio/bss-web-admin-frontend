@@ -1,22 +1,22 @@
-<ibm-modal [open]="open" (overlaySelected)="closeModal()">
-  <ibm-modal-header (closeSelect)="closeModal()">
-    <h3 ibmModalHeaderHeading i18n>Add new member</h3>
-  </ibm-modal-header>
-  <form ibmModalContent id="create-member-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ibm-label [invalid]="!!nameInvalidText" [invalidText]="nameInvalidText">
+<cds-modal [open]="open" (overlaySelected)="closeModal()">
+  <cds-modal-header (closeSelect)="closeModal()">
+    <h3 cdsModalHeaderHeading i18n>Add new member</h3>
+  </cds-modal-header>
+  <form cdsModalContent id="create-member-form" [hasForm]="true" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <cds-label [invalid]="!!nameInvalidText" [invalidText]="nameInvalidText">
       <ng-container i18n>Name</ng-container>
-      <input ibmText formControlName="name" i18n-placeholder placeholder="John Doe" [attr.modal-primary-focus]="true" />
-    </ibm-label>
-    <ibm-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
+      <input cdsText formControlName="name" i18n-placeholder placeholder="John Doe" [attr.modal-primary-focus]="true" />
+    </cds-label>
+    <cds-label [invalid]="!!urlInvalidText" [invalidText]="urlInvalidText" [helperText]="urlHelperText">
       <ng-container i18n>Url</ng-container>
-      <input ibmText formControlName="url" i18n-placeholder placeholder="jdoe" />
-    </ibm-label>
+      <input cdsText formControlName="url" i18n-placeholder placeholder="jdoe" />
+    </cds-label>
   </form>
-  <ibm-modal-footer>
-    <button ibmButton="primary" type="submit" form="create-member-form" i18n>Add member</button>
-    <button ibmButton="secondary" i18n (click)="closeModal()">Cancel</button>
-  </ibm-modal-footer>
-</ibm-modal>
+  <cds-modal-footer>
+    <button cdsButton="primary" type="submit" form="create-member-form" i18n>Add member</button>
+    <button cdsButton="secondary" i18n (click)="closeModal()">Cancel</button>
+  </cds-modal-footer>
+</cds-modal>
 <ng-template #toastContent let-data>
   <app-toast-content-routed [toast]="data"></app-toast-content-routed>
 </ng-template>
