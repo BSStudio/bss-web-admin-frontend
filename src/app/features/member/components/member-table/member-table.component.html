@@ -32,7 +32,10 @@
     size="lg"
   >
     <tr>
-      <td colspan="5"><cds-inline-loading loadingText="Loading" i18n-loadingText></cds-inline-loading></td>
+      <td colspan="5">
+        <cds-inline-loading *ngIf="loading" loadingText="Loading" i18n-loadingText></cds-inline-loading>
+        <ng-container *ngIf="!loading" i18n>No members have been added yet</ng-container>
+      </td>
     </tr>
   </cds-table>
 </cds-table-container>

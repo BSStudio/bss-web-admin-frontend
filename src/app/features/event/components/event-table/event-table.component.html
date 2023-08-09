@@ -26,5 +26,12 @@
     [striped]="false"
     (rowClick)="onRowClick($event)"
     size="lg"
-  ></cds-table>
+  >
+    <tr>
+      <td colspan="4">
+        <cds-inline-loading *ngIf="loading" loadingText="Loading" i18n-loadingText></cds-inline-loading>
+        <ng-container *ngIf="!loading" i18n>No events have been added yet</ng-container>
+      </td>
+    </tr>
+  </cds-table>
 </cds-table-container>
