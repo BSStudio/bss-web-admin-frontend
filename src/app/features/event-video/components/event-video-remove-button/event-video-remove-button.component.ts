@@ -8,10 +8,15 @@ import { EventVideoActionsService } from '../../actions/event-video.actions.serv
 @Component({
   selector: 'app-event-video-remove-button',
   template: `
-    <button cdsButton="danger--ghost" size="lg" [iconOnly]="true" (click)="showRemoveModal()">
+    <cds-icon-button
+      kind="danger--ghost"
+      size="lg"
+      description="Remove {{ video.title }} from event"
+      i18n-description
+      (click)="showRemoveModal()"
+    >
       <svg cdsIcon="delete" size="16" class="cds--btn__icon"></svg>
-      <span i18n class="cds--assistive-text">Remove {{ video.title }} from event</span>
-    </button>
+    </cds-icon-button>
   `,
 })
 export class EventVideoRemoveButtonComponent implements OnDestroy {

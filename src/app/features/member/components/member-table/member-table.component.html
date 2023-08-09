@@ -7,10 +7,16 @@
         (valueChange)="filterNodeNames($event)"
         (clear)="searchValue = ''"
       ></cds-table-toolbar-search>
-      <button cdsButton="secondary" [iconOnly]="true" [disabled]="loading">
-        <svg cdsIcon="renew" size="16" class="cds--btn__icon" (click)="getMembers()"></svg>
-        <span i18n class="cds--assistive-text">Refresh</span>
-      </button>
+      <cds-icon-button
+        kind="secondary"
+        align="top"
+        description="Refresh"
+        i18n-description
+        [disabled]="loading"
+        (click)="getMembers()"
+      >
+        <svg cdsIcon="renew" size="16" class="cds--btn__icon"></svg>
+      </cds-icon-button>
       <button cdsButton="primary" (click)="showAddModal()">
         <ng-container i18n>Add new member</ng-container>
         <svg cdsIcon="add" size="16" class="cds--btn__icon"></svg>

@@ -11,10 +11,16 @@
       </button>
     </cds-table-toolbar-actions>
     <cds-table-toolbar-content>
-      <button cdsButton="secondary" [disabled]="loading" [iconOnly]="true">
-        <svg cdsIcon="renew" size="16" class="cds--btn__icon" (click)="getVideos()"></svg>
-        <span i18n class="cds--assistive-text">Refresh</span>
-      </button>
+      <cds-icon-button
+        kind="secondary"
+        align="left"
+        description="Refresh"
+        i18n-description
+        [disabled]="loading"
+        (click)="getVideos()"
+      >
+        <svg cdsIcon="renew" size="16" class="cds--btn__icon"></svg>
+      </cds-icon-button>
       <button cdsButton="primary" (click)="showAddModal()">
         <ng-container i18n>Add new video</ng-container>
         <svg cdsIcon="add" size="16" class="cds--btn__icon"></svg>
@@ -32,7 +38,10 @@
   >
     <tbody>
       <tr>
-        <td colspan="5"><cds-inline-loading loadingText="Loading" i18n-loadingText></cds-inline-loading></td>
+        <td colspan="5">
+          <cds-inline-loading *ngIf="loading" loadingText="Loading" i18n-loadingText></cds-inline-loading>
+          <ng-container *ngIf="!loading" i18n>No videos have been added yet</ng-container>
+        </td>
       </tr>
     </tbody>
   </cds-table>

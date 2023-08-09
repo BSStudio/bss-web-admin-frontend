@@ -8,12 +8,15 @@ import { AlertModalType, ModalButtonType, ModalService, NotificationService } fr
 @Component({
   selector: 'app-video-crew-remove-button[crewMember]',
   template: `
-    <button cdsButton="danger--ghost" size="lg" [iconOnly]="true" (click)="showConfirm()">
+    <cds-icon-button
+      kind="danger--ghost"
+      size="lg"
+      description="Remove {{ crewMember.member.name }}'s {{ crewMember.position }} position from the video"
+      i18n-description
+      (click)="showConfirm()"
+    >
       <svg cdsIcon="delete" size="16" class="cds--btn__icon"></svg>
-      <span i18n class="cds--assistive-text">
-        Remove {{ crewMember.member.name }}'s {{ crewMember.position }} position from the video
-      </span>
-    </button>
+    </cds-icon-button>
   `,
 })
 export class VideoCrewRemoveButtonComponent implements OnDestroy {

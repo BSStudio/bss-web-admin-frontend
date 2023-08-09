@@ -27,8 +27,6 @@ describe('EventVideoRemoveButtonComponent', () => {
     expect(removeButtonDirective.cdsButton).toBe('danger--ghost')
     expect(removeButtonDirective.size).toBe('field')
     expect(removeButtonDirective.iconOnly).toBeTrue()
-    expect(removeButtonDirective.assistiveTextAlignment).toBe('end')
-    expect(removeButtonDirective.assistiveTextPlacement).toBe('left')
 
     const svg = ngMocks.find(removeButton, 'svg.cds--btn__icon')
 
