@@ -24,7 +24,7 @@
     "carbon-components-angular": "4.75.3",
     "hls.js": "1.4.10",
     "rxjs": "7.8.1",
-    "tslib": "2.6.1",
+    "tslib": "2.6.2",
     "zone.js": "0.13.1"
   },
   "devDependencies": {
