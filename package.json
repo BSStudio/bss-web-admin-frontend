@@ -18,7 +18,7 @@
     "@angular/forms": "15.2.9",
     "@angular/platform-browser": "15.2.9",
     "@angular/platform-browser-dynamic": "15.2.9",
-    "@angular/router": "15.2.9",
+    "@angular/router": "16.2.7",
     "@carbon/elements": "10.56.3",
     "carbon-components": "10.58.10",
     "carbon-components-angular": "4.75.6",
