@@ -19,13 +19,13 @@
     "@angular/platform-browser": "15.2.9",
     "@angular/platform-browser-dynamic": "15.2.9",
     "@angular/router": "15.2.9",
-    "@carbon/elements": "10.56.2",
-    "carbon-components": "10.58.8",
-    "carbon-components-angular": "4.75.3",
-    "hls.js": "1.4.10",
+    "@carbon/elements": "10.56.3",
+    "carbon-components": "10.58.10",
+    "carbon-components-angular": "4.75.6",
+    "hls.js": "1.4.12",
     "rxjs": "7.8.1",
-    "tslib": "2.6.1",
-    "zone.js": "0.13.1"
+    "tslib": "2.6.2",
+    "zone.js": "0.14.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "15.2.9",
@@ -37,11 +37,11 @@
     "@angular/cli": "15.2.9",
     "@angular/compiler-cli": "15.2.9",
     "@angular/localize": "15.2.9",
-    "@types/jasmine": "4.3.5",
-    "@types/node": "18.17.2",
+    "@types/jasmine": "4.3.6",
+    "@types/node": "18.18.3",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "eslint": "8.46.0",
+    "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-prettier": "5.0.0",
     "jasmine-core": "5.1.1",
@@ -51,9 +51,9 @@
     "karma-jasmine": "5.1.0",
     "karma-jasmine-html-reporter": "2.1.0",
     "karma-junit-reporter": "2.0.1",
-    "ng-extract-i18n-merge": "2.7.0",
+    "ng-extract-i18n-merge": "2.7.1",
     "ng-mocks": "14.11.0",
-    "prettier": "3.0.1",
+    "prettier": "3.0.3",
     "typescript": "~4.9.5"
   }
 }
