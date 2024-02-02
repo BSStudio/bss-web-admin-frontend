@@ -19,7 +19,7 @@
     "@angular/platform-browser": "15.2.9",
     "@angular/platform-browser-dynamic": "15.2.9",
     "@angular/router": "15.2.9",
-    "@carbon/elements": "10.56.3",
+    "@carbon/elements": "10.56.4",
     "carbon-components": "10.58.10",
     "carbon-components-angular": "4.75.6",
     "hls.js": "1.4.12",
