@@ -11,7 +11,7 @@ RUN npm clean-install $INSTALL_ARGS
 COPY --chown=node ./ ./
 RUN npm run build
 
-FROM nginx:1.25.2-alpine
+FROM nginx:1.25.4-alpine
 COPY --from=build /home/node/app/dist/bss-web-admin-frontend /usr/share/nginx/html
 COPY ./nginx/templates  /etc/nginx/templates
 
