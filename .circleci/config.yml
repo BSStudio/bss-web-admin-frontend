@@ -8,3 +8,6 @@ workflows:
       - node/run:
           name: Build
           npm-run: build
+      - node/run:
+          name: Lint
+          npm-run: lint
