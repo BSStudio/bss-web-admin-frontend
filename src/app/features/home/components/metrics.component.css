@@ -1,0 +1,11 @@
+
+:host {
+  display: flex;
+  gap: 3rem; /* todo use primeng variable */
+  flex-wrap: wrap;
+  ibm-tile {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+  }
+}
