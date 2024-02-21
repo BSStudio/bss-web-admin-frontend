@@ -3,6 +3,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "ng lint",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "npm: lint"
+    },
+    {
       "name": "ng build",
       "request": "launch",
       "type": "chrome",
